@@ -1,0 +1,57 @@
+import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
+import { faLockOpen } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Email, Lock } from "@mui/icons-material";
+import { Link } from "react-router-dom";
+
+const LoginForm = () => {
+    return (  
+    <div className="bg-slate-100 flex flex-col bg-white w-11/12 md:w-3/4 lg:w-1/3 text-left bg-white p-10 rounded-xl m-auto">
+    <div className="w-full flex items-center pb-5 justify-center "> 
+    <h2 className="text-base text-slate-400 ">Sign in with credentials</h2>
+    </div>
+
+
+    <form action=""> 
+        <div className="flex flex-col mt-2 pb-4">
+
+        <span class="flex shadow-md mb-5 text-xs">
+                <span class="bg-indigo-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l"><FontAwesomeIcon icon={faEnvelope} size="lg" /></span>
+                <input class="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none" size="lg" type="text" placeholder="User Name (or) Email"/>
+            </span>
+        </div>
+        <div className="flex flex-col mt-2  pb-4">
+        <span class="flex shadow-md mb-5 text-xs">
+                <span class="bg-indigo-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l"><FontAwesomeIcon size="lg" icon={faLockOpen} /></span>
+                <input class="field text-sm md:text-lg lg:text-lg text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none" type="password" placeholder="Password"/>
+            </span>
+        </div>
+        <div className="flex items-center justify-between mt-2">
+            {/* <p className="text-gray-500">Should contain atleast 8 characters</p> */}
+            <Link to='/forgot-password'><p className="text-slate-400  cursor-pointer">Forgot Password?</p></Link>
+        </div>
+        <div className="flex items-center justify-center mt-4">
+            <Link to="/signup" className="rounded-md text-indigo-500 py-2 px-4 w-2/3 md:w-1/3 lg:w-1/3  border-2 border-indigo-500 ">
+                <button 
+                    className="text-sm w-full h-full"
+                    onClick={()=>{
+                    }}
+                >
+                        Sign Up
+                </button>
+            </Link>
+            <Link to="/" className="rounded-md text-white py-2 ml-8 px-4 w-2/3 md:w-1/3 lg:w-1/3 bg-indigo-500">
+                <button 
+                    className="w-full h-full "
+                    onClick={()=>{
+                    }}
+                >
+                        Login
+                </button>
+            </Link>
+        </div>
+    </form>
+</div>);
+}
+ 
+export default LoginForm;
