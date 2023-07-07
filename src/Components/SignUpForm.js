@@ -1,7 +1,54 @@
 import { Apartment, AppRegistration, Email, LockOpen, Password, Person, PhoneAndroid } from "@mui/icons-material";
+import axios from "axios";
 import { Link } from "react-router-dom";
+import { baseUrl } from "../utils/baseurl";
+import { useState } from "react";
+import ConfirmDialog from "./ConfirmDialog";
 
 const SignUpForm = () => {
+    const [name,setName]=useState();
+    const [email1,setEmail1]=useState();
+    const [email2,setEmail2]=useState();
+    const [password,setPassword]=useState();
+    const [retypepassword,setRetypePassword]=useState();
+    const [acra_no,setAcra_no]=useState();
+    const [phone,setPhone]=useState();
+
+    const [open,setOpen]=useState(false);
+    const [modalText,setModalText]=useState("");
+    const [modalHeading,setModalHeading]=useState("SuccessFully Logged IN");
+    const confirmFunction=()=>{
+        alert("login")
+    }
+
+    const submit=async()=>{
+        const data={
+            name,
+            email1,email2,
+            password,
+            acra_no,
+            phone,
+        }
+      axios.post(`${baseUrl}/create-supplier`,data).then((res)=>{
+          if(res.data.status=="ok")
+          {
+
+            setModalHeading("Request sent success");
+            setModalText("Your application is being processed we will get back to you soon");
+            setOpen(true)
+            
+          }else{
+            setModalHeading("Request Failed");
+            setModalText("Couldn't complete your request");
+            setOpen(true)
+          }
+      }).catch((err)=>{
+        setModalHeading("Request Failed");
+        setModalText("Couldn't complete your request");
+        setOpen(true)
+        console.log(err);
+      })
+    }
   return (
     <div className="bg-slate-100 flex flex-col bg-white w-11/12 md:w-3/4 lg:w-1/3 text-left bg-white p-10 rounded-xl m-auto">
       <div className="w-full flex items-center pb-5 justify-center ">
@@ -15,7 +62,9 @@ const SignUpForm = () => {
               {" "}
               <Apartment/>
             </span>
-            <select  className="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none" data-te-select-init>
+            <select onChange={(e)=>{
+                setName(e.target.value)
+            }} className="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none" data-te-select-init>
  <option value="-1">---Choose Company ---</option>
   <option value="1">One</option>
   <option value="2">Two</option>
@@ -35,6 +84,8 @@ const SignUpForm = () => {
               <Person/>
             </span>
             <input
+            value={name}
+            onChange={(e)=>{setName(e.target.value)}}
               class="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none"
               type="text"
               placeholder="Supplier Name"
@@ -47,6 +98,10 @@ const SignUpForm = () => {
               <AppRegistration/>
             </span>
             <input
+            value={acra_no}
+            onChange={(e)=>{
+                setAcra_no(e.target.value)
+            }}
               class="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none"
               type="text"
               placeholder="Supplier ACRA / UN Reg. No"
@@ -59,6 +114,10 @@ const SignUpForm = () => {
               <Email/>
             </span>
             <input
+            value={email1}
+            onChange={(e)=>{
+                setEmail1(e.target.value)
+            }}
               class="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none"
               type="text"
               placeholder="Email address 1"
@@ -71,6 +130,10 @@ const SignUpForm = () => {
             <Email/>
             </span>
             <input
+            value={email2}
+            onChange={(e)=>{
+                setEmail2(e.target.value)
+            }}
               class="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none"
               type="text"
               placeholder="Email address 2"
@@ -83,6 +146,10 @@ const SignUpForm = () => {
               <PhoneAndroid/>
             </span>
             <input
+             value={phone}
+             onChange={(e)=>{
+                setPhone(e.target.value)
+             }}
               class="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none"
               type="text"
               placeholder="Phone Number"
@@ -95,6 +162,10 @@ const SignUpForm = () => {
             <LockOpen/>
             </span>
             <input
+            value={password}
+            onChange={(e)=>{
+                setPassword(e.target.value)
+            }}
               class="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none"
               type="text"
               placeholder="New Password"
@@ -108,6 +179,10 @@ const SignUpForm = () => {
 
             </span>
             <input
+            value={retypepassword}
+            onChange={(e)=>{
+                setRetypePassword(e.target.value)
+            }}
               class="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none"
               type="text"
               placeholder="Re-Type Password"
@@ -135,15 +210,24 @@ const SignUpForm = () => {
             </button>
           </Link> */}
           <Link
-            to="/"
+            to="#"
             className="rounded-md text-white py-2 ml-8 px-4 w-2/3 md:w-1/3 lg:w-1/3 bg-indigo-500"
           >
-            <button className="w-full h-full " onClick={() => {}}>
+            <button className="w-full h-full " onClick={() => {
+                submit()
+            }}>
               Sign Up
             </button>
           </Link>
         </div>
       </form>
+      <ConfirmDialog
+        open={open}
+        setOpen={setOpen}
+        modalHeading={modalHeading}
+        modalText={modalText}
+        confirmFunction={confirmFunction}
+      />
     </div>
   );
 };

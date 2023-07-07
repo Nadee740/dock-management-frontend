@@ -19,6 +19,13 @@ import ListAllCompanyPage from './Pages/Company/ListAllCompanyPage';
 import AddNewCompany from './Pages/Company/AddNewCompany';
 import ListAllAdminPage from './Pages/Admin/ListAllAdminPage';
 import AddAdminUser from './Pages/Admin/AddAdminUser';
+import AddNewSupplier from './Pages/Supplier/AddNewSupplier';
+import ListAllSecurityPage from './Pages/Security/ListAllSecurityPage';
+import AddNewSecurity from './Pages/Security/AddNewSecurity';
+import ListAllWareHousesPage from './Pages/WareHouse/ListAllWareHousePage';
+import AddNewWareHouse from './Pages/WareHouse/AddNewWareHouse';
+import { Dashboard } from '@mui/icons-material';
+import StatisticsPage from './Pages/Common/StatisticsPage';
 
 function App() {
 
@@ -37,6 +44,7 @@ function App() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/" element={<CommonHome/>}>
+        <Route path="/statistics" element={<StatisticsPage/>}/>
 
         <Route path="/dock-booking" element={<DockBooking/>}/>
         <Route path="/real-time-status" element={<RealTimeStatusPage iseditable={false}/>}/>
@@ -51,9 +59,20 @@ function App() {
         <Route path="/company/add" element={<AddNewCompany/>}/>
    
          
+        {/* Supplier Routes */}
+        <Route path="/supplier" element={<ListAllSuppliersPage iseditable={true}/>}/>
+        <Route path="/create-supplier" element={<AddNewSupplier/>}/>
 
-        <Route path="/supplier" element={<ListAllSuppliersPage iseditable={false}/>}/>
-        
+        {/* Security Routes */}
+        <Route path="/security" element={<ListAllSecurityPage iseditable={true}/>}/>
+        <Route path="/create-security" element={<AddNewSecurity/>}/>
+      
+      
+        {/* WareHouse Routes */}
+        <Route path="/warehouses" element={<ListAllWareHousesPage iseditable={true}/>}/>
+        <Route path="/create-warehouse" element={<AddNewWareHouse/>}/>
+
+        {/* Protected Routes */}
         {true && ( <Route path="admin" element={<AdminHome/>}>
         <Route index element={<AdminDashBoard/>} /> 
         <Route path='users/listCompanyAdminUsers' element={<ListAllAdminPage iseditable={true}/>} />

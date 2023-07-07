@@ -8,10 +8,9 @@ const ListAllAdmin = ({iseditable}) => {
     const datas=[{
 s_no:"1",
 name:"40 Footer",
-login_id:"ss00012",
-vehicle_type:"24 footer",
-vehicle_no:"8888",
-acra:"123455",
+role:"ss00012",
+emailaddress:"n@gmail.com",
+acra_un:"8888",
 createdon:"09/09/2002"
 
 }]
@@ -24,10 +23,10 @@ createdon:"09/09/2002"
       {iseditable&&    <div className="flex">
         <Link
         to="/admin/Users/addCompanyAdminUsers"
-          className=" flex items-center justify-center text-white p-3 w-36 ring-slate-200 bg-green-400 ring-2 rounded-xl outline-none"
+          className=" flex items-center justify-center text-white p-3 md:w-36 lg:w-36  ring-slate-200 bg-green-400 ring-2 rounded-xl outline-none"
         >
         <FontAwesomeIcon icon={faPlus} className="mr-1"></FontAwesomeIcon>
-         <p>Add New Record</p> 
+         <p>Add Record</p> 
         </Link>
       </div>}
    
@@ -57,9 +56,8 @@ createdon:"09/09/2002"
         <tr className="rounded-xl p-3 bg-primary text-center">
           <th className="p-3 text-sm text-slate-500">S. No</th>
           <th className="p-3 text-sm text-slate-500">NAME</th>
-          <th className="p-3 text-sm text-slate-500">LOGIN ID</th>
-          <th className="p-3 text-sm text-slate-500">VEHICLE TYPE</th>
-          <th className="p-3 text-sm text-slate-500">VEHICLE NO</th>
+          <th className="p-3 text-sm text-slate-500">ROle</th>
+          <th className="p-3 text-sm text-slate-500">Email Address</th>
           <th className="p-3 text-sm text-slate-500">ACRA / UN</th>
           <th className="p-3 text-sm text-slate-500">CREATED ON</th>
           {iseditable&&<th className="p-3 text-sm text-slate-500">ACTIONS</th>}
@@ -73,10 +71,9 @@ createdon:"09/09/2002"
           >
             <td className="p-3 text-blue-400">{data._no}</td>
             <td className="p-3">{data.name}</td>
-            <td className="p-3">{data.login_id}</td>
-            <td className="p-3">{data.vehicle_type}</td>
-            <td className="p-3">{data.vehicle_no}</td>
-            <td className="p-3">{data.acra}</td>
+            <td className="p-3">{data.role}</td>
+            <td className="p-3">{data.emailaddress}</td>
+            <td className="p-3">{data.acra_un}</td>
             <td className="p-3 text-red-700">{data.createdon}</td>
             {iseditable && (
               <td className="p-3 flex">

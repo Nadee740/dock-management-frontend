@@ -2,11 +2,15 @@ import { Email, Mail } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTruck, faTruckRampBox, faUser, faUserGroup } from "@fortawesome/free-solid-svg-icons";
-import TopNavBar from "../../Components/TopNavBar";
+import ConfirmDialog from "../../Components/ConfirmDialog";
+import { useState } from "react";
+
 
 const AdminDashBoard = () => {
+   
     return ( 
         <>
+      
         <div className='w-full admin-dashboard'>
         <div className="m-2 flex flex-row-reverse">
         <p className="text-1xl text-white">
@@ -70,6 +74,7 @@ const AdminDashBoard = () => {
         <div className="mb-20  md:m-20 lg:m-20 w-full md:w-5/6 lg:w-5/6 h-2/5 border-2 flex justify-center items-center bg-neutral-200 border-slate-200">
         <p className="1-xl text-slate-400">Content / Advertisement Comes Here</p></div>
         </div> 
+       
         </>
         
 );

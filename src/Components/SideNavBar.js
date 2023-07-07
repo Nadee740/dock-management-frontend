@@ -1,4 +1,5 @@
-import { faChartPie, faCheck, faClock, faPenToSquare, faPlus, faSquarePlus, faTruck, faTruckFast, faTv, faUserLock, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faBuilding, faCalendar } from "@fortawesome/free-regular-svg-icons";
+import { faBagShopping, faChartPie, faCheck, faClock, faPenToSquare, faPlus, faShip, faSquarePlus, faTimes, faTruck, faTruckFast, faTv, faUserAstronaut, faUserGroup, faUserLock, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -39,20 +40,23 @@ export default function SideNavBar() {
             </Link>
          </li>
          <li>
-            <button type="button" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+            <button type="button" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown1" data-collapse-toggle="dropdown1">
             <FontAwesomeIcon icon={faTruckFast} style={{color: "#6a3dbd",}} />
                   <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Todays Shipments</span>
                   <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </button>
-            <ul id="dropdown-example" class="hidden py-2 space-y-2">
-                  <li>
-                     <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Products</a>
+            <ul id="dropdown1" class="hidden py-2 space-y-2">
+            <li>
+                     <Link to="/vehicle-update" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"> <FontAwesomeIcon icon={faCheck} className="mr-2 text-indigo-500" />Past Shipments</Link>
                   </li>
                   <li>
-                     <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Billing</a>
+                     <Link to="/add-vehicle" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"><FontAwesomeIcon icon={faTimes} className="mr-2 text-green-500" /> Failed Shipments</Link>
                   </li>
                   <li>
-                     <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Invoice</a>
+                     <Link to="/add-vehicle" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"><FontAwesomeIcon icon={faClock} className="mr-2 text-orange-500" /> Tommorows Shipments</Link>
+                  </li>
+                  <li>
+                     <Link to="/add-vehicle" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"><FontAwesomeIcon icon={faCalendar} className="mr-2 text-blue-500" /> Upcoming Shipments</Link>
                   </li>
             </ul>
          </li>
@@ -84,20 +88,29 @@ export default function SideNavBar() {
             </ul>
          </li>
          <li>
-            <button type="button" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+            <button type="button" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown4" data-collapse-toggle="dropdown4">
             <FontAwesomeIcon icon={faUserLock} style={{color: "#5b3dc7",}} />
                   <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Manage</span>
                   <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </button>
-            <ul id="dropdown-example" class="hidden py-2 space-y-2">
-                  <li>
-                     <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Products</a>
+            <ul id="dropdown4" class="hidden py-2 space-y-2">
+            <li>
+                     <Link to="/company" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"> <FontAwesomeIcon icon={faBuilding} className="mr-2 text-indigo-500" />Update Company Details</Link>
                   </li>
                   <li>
-                     <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Billing</a>
+                     <Link to="/admin/users/listCompanyAdminUsers" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"> <FontAwesomeIcon icon={faUserAstronaut} className="mr-2 text-indigo-500" />Update Admin Details</Link>
                   </li>
                   <li>
-                     <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Invoice</a>
+                     <Link to="/admin/docks" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"> <FontAwesomeIcon icon={faShip} className="mr-2 text-indigo-500" />Update Dock Details</Link>
+                  </li>
+                  <li>
+                     <Link to="/supplier" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"> <FontAwesomeIcon icon={faUserGroup} className="mr-2 text-indigo-500" />Update Supplier Details</Link>
+                  </li>
+                  <li>
+                     <Link to="/security" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"> <FontAwesomeIcon icon={faUserLock} className="mr-2 text-indigo-500" />Update Security Details</Link>
+                  </li>
+                  <li>
+                     <Link to="/warehouses" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"> <FontAwesomeIcon icon={faBagShopping} className="mr-2 text-indigo-500" />Update Warehouse Details</Link>
                   </li>
             </ul>
          </li>
@@ -109,11 +122,11 @@ export default function SideNavBar() {
             </a>
          </li>
          <li>
-            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+            <Link to="/statistics" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
             <FontAwesomeIcon icon={faChartPie} style={{color: "#dcd618",}} />
                <span class="flex-1 ml-3 whitespace-nowrap">Status & Reports</span>
                <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
-            </a>
+            </Link>
          </li>
          {/* <li>
             <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">

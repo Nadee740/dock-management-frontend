@@ -2,38 +2,29 @@ import { Add, AddAlarm, Mail } from "@mui/icons-material";
 import { Button } from "bootstrap";
 import { Link } from "react-router-dom";
 
-const ListAllSuppliers = ({iseditable}) => {
+const ListAllSecurity = ({iseditable}) => {
     const datas=[{
 s_no:"1",
-name:"40 Footer",
-login_id:"ss00012",
-vehicle_type:"24 footer",
-vehicle_no:"8888",
-acra:"123455",
-createdon:"09/09/2002"
+name:"security",
+login_id:"ss000122@gmail.com",
+acrana:"124",
+building:"8888",
+createdon:"12/03/09",
 
 }]
   return (
     <>
       <div className="flex items-center justify-between w-4/12 p-4">
-        <h2 className="text-2xl font-medium">List of Suppliers</h2>
+        <h2 className="text-2xl font-medium">List of Security Check</h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       {iseditable&&    <div className="flex items-center justify-between w-4/12 p">
-        <button
-        onClick={(e)=>{
-
-        }}
-          className="p-3 w-36 ring-slate-200 bg-green-400 ring-2 rounded-xl outline-none"
-        >
-          Assign Group
-        </button>
         <Link
-          to="/create-supplier"
+          to="/create-security"
           className="p-3 w-36 ring-slate-200 bg-green-400 ring-2 rounded-xl outline-none"
         >
         <Add/>
-          Add Supplier
+          Add Record
         </Link>
       </div>}
    
@@ -62,11 +53,10 @@ createdon:"09/09/2002"
       <table className="w-11/12 relative table-auto">
         <tr className="rounded-xl p-3 bg-primary text-center">
           <th className="p-3 text-sm text-slate-500">S. No</th>
-          <th className="p-3 text-sm text-slate-500">NAME</th>
-          <th className="p-3 text-sm text-slate-500">LOGIN ID</th>
-          <th className="p-3 text-sm text-slate-500">VEHICLE TYPE</th>
-          <th className="p-3 text-sm text-slate-500">VEHICLE NO</th>
+          <th className="p-3 text-sm text-slate-500">USER NAME</th>
+          <th className="p-3 text-sm text-slate-500">EMAIL ADDRESS</th>
           <th className="p-3 text-sm text-slate-500">ACRA / UN</th>
+          <th className="p-3 text-sm text-slate-500">BUILDING</th>
           <th className="p-3 text-sm text-slate-500">CREATED ON</th>
           {iseditable&&<th className="p-3 text-sm text-slate-500">ACTIONS</th>}
         </tr>
@@ -77,13 +67,12 @@ createdon:"09/09/2002"
               "border-b text-center border-slate-200 border-solid hover:bg-gray-300"
             }
           >
-            <td className="p-3 text-blue-400">{data._no}</td>
+            <td className="p-3 text-blue-400">{data.s_no}</td>
             <td className="p-3">{data.name}</td>
             <td className="p-3">{data.login_id}</td>
-            <td className="p-3">{data.vehicle_type}</td>
-            <td className="p-3">{data.vehicle_no}</td>
-            <td className="p-3">{data.acra}</td>
-            <td className="p-3 text-red-700">{data.createdon}</td>
+            <td className="p-3">{data.acrana}</td>
+            <td className="p-3">{data.building}</td>
+            <td className="p-3">{data.createdon}</td>
             {iseditable&& <td className="p-3"> <button
           className=" bg-orange-500 text-white p-2 rounded-lg font-bold text-sm mr-5"
           onClick={() => {}}
@@ -110,4 +99,4 @@ createdon:"09/09/2002"
   );
 };
 
-export default ListAllSuppliers;
+export default ListAllSecurity;

@@ -1,31 +1,34 @@
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Mail } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
-const ListAllCompany = ({ iseditable }) => {
+const ListAllWareHouse = ({ iseditable }) => {
   const datas = [
     {
-      s_no: "1",
-      name: "40 Footer",
-      building_name: "ss00012",
-      building_address: "24 footer",
+      s_no: "SGX1234",
+      user_name: "40 Footer",
+      email_address: "Lim Kim",
+      acra_no: "77777777",
+      building: "NA",
+      created_on: "11/11/11",
     },
   ];
   return (
     <>
       <div className="flex items-center justify-between w-4/12 p-4">
-        <h2 className="text-2xl font-medium">List of Companies</h2>
+        <h2 className="text-2xl font-medium">List of Warehouse Details</h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       {iseditable && (
         <div className="flex items-center justify-between w-4/12 p">
           <Link
-          to="/company/add"
-            className="p-3 w-36 ring-slate-200 bg-green-400 ring-2 rounded-xl outline-none"
+            to="/create-warehouse"
+            className="flex p-3 max-w-42 ring-slate-200 bg-green-400 ring-2 rounded-xl outline-none"
           >
-          <p className="sm:text-md text-white">Add Company</p>
-            
+
+           <p className="text-white text-sm font-bold flex">Add Record</p> 
           </Link>
         </div>
       )}
@@ -58,12 +61,14 @@ const ListAllCompany = ({ iseditable }) => {
       </div>
       <table className="w-11/12 relative table-auto">
         <tr className="rounded-xl p-3 bg-primary text-center">
-          <th className="p-3 text-sm text-slate-500">S. No</th>
-          <th className="p-3 text-sm text-slate-500">COMPANY NAME</th>
-          <th className="p-3 text-sm text-slate-500"> BUILDING NAME</th>
-          <th className="p-3 text-sm text-slate-500">BUILDING ADDRESS</th>
+          <th className="p-3 text-sm text-slate-500">S . NO</th>
+          <th className="p-3 text-sm text-slate-500">User Name</th>
+          <th className="p-3 text-sm text-slate-500">Email Address 1</th>
+          <th className="p-3 text-sm text-slate-500">ACRA / UN</th>
+          <th className="p-3 text-sm text-slate-500">Building</th>
+          <th className="p-3 text-sm text-slate-500">CREATED ON</th>
           {iseditable && (
-            <th className="p-3 text-sm text-slate-500">ACTIONS</th>
+            <th className="p-3 text-sm text-slate-500">Actions</th>
           )}
         </tr>
         {datas.map((data, index) => (
@@ -73,23 +78,27 @@ const ListAllCompany = ({ iseditable }) => {
               "border-b text-center border-slate-200 border-solid hover:bg-gray-300"
             }
           >
-            <td className="p-3 text-blue-400">{data._no}</td>
-            <td className="p-3">{data.name}</td>
-            <td className="p-3">{data.building_name}</td>
-            <td className="p-3">{data.building_address}</td>
+            <td className="p-3 text-blue-400">{data.s_no}</td>
+            <td className="p-3">{data.user_name}</td>
+            <td className="p-3">{data.email_address}</td>
+            <td className="p-3">{data.acra_no}</td>
+            <td className="p-3">{data.building}</td>
+            <td className="p-3 text-red-700">{data.created_on}</td>
             {iseditable && (
-              <td className="p-3">
-                {" "}
+              <td className="flex">
                 <button
-                  className=" bg-orange-500 text-white p-2 rounded-lg font-bold text-sm mr-5"
+                  className="h-7 flex items-center bg-orange-500 text-white p-2 rounded-md text-md mr-5"
                   onClick={() => {}}
                 >
-                  <FontAwesomeIcon
-                    icon={faPenToSquare}
-                    className="mt-1 mr-1"
-                    size="sm"
-                  />
+                  <FontAwesomeIcon icon={faPenToSquare} className="mt-1 mr-1" size="sm"/>
                   Edit
+                </button>
+                <button
+                  className="h-7 flex items-center bg-red-500 text-white p-2 rounded-md text-md mr-5"
+                  onClick={() => {}}
+                >
+                 <FontAwesomeIcon icon={faXmark} className="mt-1 mr-1" size="sm"/>
+                  Delete
                 </button>
               </td>
             )}
@@ -100,4 +109,4 @@ const ListAllCompany = ({ iseditable }) => {
   );
 };
 
-export default ListAllCompany;
+export default ListAllWareHouse;

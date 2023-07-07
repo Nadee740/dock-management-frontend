@@ -1,33 +1,19 @@
 import { faUser } from "@fortawesome/free-regular-svg-icons";
-import { faCar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const AddAdminUserForm = () => {
+const AddNewWareHouseForm = () => {
   return (
     <>
       <div className="flex items-center justify-between  p-4">
         <h2 className="text-2xl font-medium">
           <FontAwesomeIcon icon={faUser} className="mr-5" />
-          Add Admin User
+          Add Warehouse Check
         </h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       <form>
         <div class="">
-          <div className="mb-2">
-            <label class="text-black dark:text-gray-200" for="Vechicletype">
-              Role
-            </label>
-            <select
-              id="Vechicletype"
-              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-            >
-              <option>---Choose Role ---</option>
-              <option>Administrator</option>
-              <option>Company</option>
-            </select>
-          </div>
-          <div className="mb-2">
+        <div className="mb-2">
             <label class="text-black dark:text-gray-200" for="Vechicletype">
               Company
             </label>
@@ -91,10 +77,10 @@ const AddAdminUserForm = () => {
 
           <div className="mb-2">
             <label class="text-blackdark:text-gray-200" for="name">
-              User Name
+              WareHouse Checker Name
             </label>
             <input
-              placeholder="User Name"
+              placeholder="WareHouse Checker Name"
               id="name"
               type="text"
               class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
@@ -151,8 +137,8 @@ const AddAdminUserForm = () => {
               ReType Password
             </label>
             <input
-              placeholder="repass"
-              id="phonenumber"
+              placeholder="ReType Password"
+              id="repass"
               type="password"
               class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
@@ -174,4 +160,4 @@ const AddAdminUserForm = () => {
   );
 };
 
-export default AddAdminUserForm;
+export default AddNewWareHouseForm;

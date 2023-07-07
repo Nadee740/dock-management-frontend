@@ -1,6 +1,6 @@
 import { Mail } from "@mui/icons-material";
 
-const ListRealTimeStatus = ({isEditable}) => {
+const ListRealTimeStatus = ({iseditable}) => {
     const datas=[{
 job_order_no:"1",
 booking_mode:"40 Footer",
@@ -18,7 +18,7 @@ status:"1"
         <h2 className="text-2xl font-medium">Real Time</h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-      {isEditable&&    <div className="flex items-center justify-between w-4/12 p">
+      {iseditable&&    <div className="flex items-center justify-between w-4/12 p">
         <button
           onChange={(e) => {}}
           className="p-3 w-36 ring-slate-200 bg-green-400 ring-2 rounded-xl outline-none"
@@ -60,7 +60,7 @@ status:"1"
           <th className="p-3 text-sm text-slate-500">Dock Type</th>
           <th className="p-3 text-sm text-slate-500">Booked Time</th>
           <th className="p-3 text-sm text-slate-500">Status</th>
-          {isEditable&&<th className="p-3 text-sm text-slate-500">Actual In/Out Time</th>}
+          {iseditable&&<th className="p-3 text-sm text-slate-500">Actual In/Out Time</th>}
         </tr>
         {datas.map((data, index) => (
           <tr
@@ -77,7 +77,7 @@ status:"1"
             <td className="p-3">{data.booked_time}</td>
             <td className="p-3 text-red-700">{data.actual_in_out}</td>
             <td className="p-3 text-red-700">{data.status}</td>
-            {isEditable&& <td className="p-3"> <button
+            {iseditable&& <td className="p-3"> <button
           className=" bg-orange-500 text-white p-2 rounded-lg font-bold text-sm mr-5"
           onClick={() => {}}
         >

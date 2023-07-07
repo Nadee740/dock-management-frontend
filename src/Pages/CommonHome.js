@@ -6,6 +6,7 @@ const CommonHome = () => {
 
     return ( 
         <div className='flex w-full flex-row bg-primary h-screen'>
+        
         <SideNavBar/>
             <Outlet/>
         </div>
