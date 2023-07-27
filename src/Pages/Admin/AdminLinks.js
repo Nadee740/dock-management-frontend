@@ -29,25 +29,25 @@ const AdminLinks=[{
      subLinks:[
         {
             title:"Past Shipments",
-            to:'/',
+            to:'/shipments-list',
             icon:faCheck,
             clasStyle:"mr-2 text-gray-700"
         },
         {
             title:"Failed Shipments",
-            to:'/',
+            to:'/shipments-list',
             icon:faTimes,
             clasStyle:"mr-2 text-green-500"
         },
         {
             title:"Tommorows Shipments",
-            to:'/',
+            to:'/shipments-list',
             icon:faClock,
             clasStyle:"mr-2 text-orange-500"
         },
         {
             title:"Upcoming Shipments",
-            to:'/',
+            to:'/shipments-list',
             icon:faCalendar,
             clasStyle:"mr-2 text-blue-500"
         }
@@ -113,7 +113,7 @@ const AdminLinks=[{
                     },
                     {
                         title:"Update Security Details",
-                        to:'/security',
+                        to:'/list-all-security',
                         icon:faUserLock,
                         clasStyle:"mr-2 text-indigo-500"
                     },

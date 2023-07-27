@@ -1,47 +1,13 @@
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faCheck, faPrint, faTruck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRef } from 'react';
-
 import QRCode from "react-qr-code";
-import { saveAs } from 'file-saver';
-import ReactPDF, { 
-    Page, Text, View, Document, StyleSheet   
-   } from '@react-pdf/renderer';
-import PdfDocument from "./PdfFormatConfirmation";
-import pdfjs from 'pdfjs-dist';
-import jsPDF from "jspdf";
+
+
 
 const ConfirmBooking=()=>{
-    const reportTemplateRef = useRef(null);
-
-    const MyDocument = () => (
-        <Document>
-          <Page size="A4" >
-            <View >
-              <Text>How To Create PDF File In React JS - Techsolutionstuff</Text>
-            </View>      
-          </Page>
-        </Document>
-      );
-    const downloadPdfDocument =async (rootElementId) => {
-        const doc = new jsPDF({
-			format: 'a4',
-			unit: 'px',
-		});
-
-		// Adding the fonts.
-		doc.setFont('Inter-Regular', 'normal');
-
-		doc.html(reportTemplateRef.current, {
-			async callback(doc) {
-				await doc.save('document');
-			},
-		});
-
-      }
     return(
-        <div id='booking-confirmed-page' ref={reportTemplateRef}>
+        <div id='booking-confirmed-page' >
         <div className="flex items-center justify-between w-4/12 p-4">
         <h2 className="text-2xl font-medium">Booking Confirmed</h2>
       </div>
@@ -68,7 +34,6 @@ const ConfirmBooking=()=>{
         <button
           className="flex w-28 bg-indigo-800 text-white p-2 rounded-lg text-sm mr-5"
           onClick={() => {
-            downloadPdfDocument("booking-confirmed-page")
           }}
         >
         <FontAwesomeIcon icon={faPrint } className="m-2"></FontAwesomeIcon>
