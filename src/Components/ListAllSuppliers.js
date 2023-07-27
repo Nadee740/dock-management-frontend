@@ -85,7 +85,7 @@ createdon:"09/09/2002"
             <td className="p-3">{data.acra}</td>
             <td className="p-3 text-red-700">{data.createdon}</td>
             {iseditable&& <td className="p-3"> <button
-          className=" bg-orange-500 text-white p-2 rounded-lg font-bold text-sm mr-5"
+          className="h-7 bg-orange-500 text-white p-2 rounded-lg font-bold text-sm mr-5"
           onClick={() => {}}
         >
             <Mail className="pr-1 pb-1"/>
@@ -94,7 +94,7 @@ createdon:"09/09/2002"
         </button>
         
         <button
-          className=" bg-green-400 text-white p-2 rounded-lg font-bold text-sm mr-5"
+          className="h-7 bg-green-400 text-white p-2 rounded-lg font-bold text-sm mr-5"
           onClick={() => {}}
         >
             <Mail className="pr-1 pb-0.5"/>

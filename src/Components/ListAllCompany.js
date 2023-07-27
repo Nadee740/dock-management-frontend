@@ -81,7 +81,7 @@ const ListAllCompany = ({ iseditable }) => {
               <td className="p-3">
                 {" "}
                 <button
-                  className=" bg-orange-500 text-white p-2 rounded-lg font-bold text-sm mr-5"
+                  className="h-7 bg-orange-500 text-white p-2 rounded-lg font-bold text-sm mr-5"
                   onClick={() => {}}
                 >
                   <FontAwesomeIcon

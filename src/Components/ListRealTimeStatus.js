@@ -78,7 +78,7 @@ status:"1"
             <td className="p-3 text-red-700">{data.actual_in_out}</td>
             <td className="p-3 text-red-700">{data.status}</td>
             {iseditable&& <td className="p-3"> <button
-          className=" bg-orange-500 text-white p-2 rounded-lg font-bold text-sm mr-5"
+          className="h-7 bg-orange-500 text-white p-2 rounded-lg font-bold text-sm mr-5"
           onClick={() => {}}
         >
             <Mail className="pr-1 pb-1"/>
@@ -87,7 +87,7 @@ status:"1"
         </button>
         
         <button
-          className=" bg-green-400 text-white p-2 rounded-lg font-bold text-sm mr-5"
+          className="h-7 bg-green-400 text-white p-2 rounded-lg font-bold text-sm mr-5"
           onClick={() => {}}
         >
             <Mail className="pr-1 pb-0.5"/>

@@ -31,8 +31,7 @@ const LoginForm = () => {
         if(res.data.status==="ok")
         {
             
-            setModalHeading("SuccessFully Logged IN");
-            setOpen(true)
+            window.location.href="/admin"
         }
         else{
             setModalHeading("Ooops Couldn`t Login");

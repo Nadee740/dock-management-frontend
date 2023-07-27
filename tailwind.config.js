@@ -7,5 +7,7 @@ module.exports =  {
     theme: {
       extend: {},
     },
-    plugins: [require('flowbite/plugin')],
+    plugins: [
+        require('autoprefixer'),
+        require('flowbite/plugin')],
   }

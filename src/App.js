@@ -26,12 +26,20 @@ import ListAllWareHousesPage from './Pages/WareHouse/ListAllWareHousePage';
 import AddNewWareHouse from './Pages/WareHouse/AddNewWareHouse';
 import { Dashboard } from '@mui/icons-material';
 import StatisticsPage from './Pages/Common/StatisticsPage';
+import SupplierHome from './Pages/Supplier/SupplierHome';
+import SupplierDashBoard from './Pages/Supplier/SupplierDashboard';
+import { useEffect } from 'react';
+import BookingConfirmPage from './Pages/Common/BookingConfirmPage';
 
 function App() {
 
-    const [user,setUser]=useState(null);
+    const [user,setUser]=useState({state:"admin"}); 
     const [loading,setLoading]=useState(false);
 
+    useEffect(()=>{
+     
+        setUser({state:"supplier"})
+    },[])
 
 
 
@@ -45,6 +53,7 @@ function App() {
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/" element={<CommonHome/>}>
         <Route path="/statistics" element={<StatisticsPage/>}/>
+        <Route path="/booking-confirm/:id" element={<BookingConfirmPage/>}/>
 
         <Route path="/dock-booking" element={<DockBooking/>}/>
         <Route path="/real-time-status" element={<RealTimeStatusPage iseditable={false}/>}/>
@@ -60,7 +69,7 @@ function App() {
    
          
         {/* Supplier Routes */}
-        <Route path="/supplier" element={<ListAllSuppliersPage iseditable={true}/>}/>
+        <Route path="/supplier-list" element={<ListAllSuppliersPage iseditable={true}/>}/>
         <Route path="/create-supplier" element={<AddNewSupplier/>}/>
 
         {/* Security Routes */}
@@ -73,7 +82,8 @@ function App() {
         <Route path="/create-warehouse" element={<AddNewWareHouse/>}/>
 
         {/* Protected Routes */}
-        {true && ( <Route path="admin" element={<AdminHome/>}>
+        {user.state=='admin' && (
+        <Route path="admin" element={<AdminHome/>}>
         <Route index element={<AdminDashBoard/>} /> 
         <Route path='users/listCompanyAdminUsers' element={<ListAllAdminPage iseditable={true}/>} />
         <Route path="Users/addCompanyAdminUsers" element={<AddAdminUser/>}/>
@@ -82,6 +92,14 @@ function App() {
         </Route>
         
         ) }
+
+
+        {user.state=='supplier' && (
+            <Route path='supplier' element={<SupplierHome/>}>
+            <Route index element={<SupplierDashBoard/>} /> 
+            </Route>
+            
+        )}
         </Route>
        
        

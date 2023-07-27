@@ -72,20 +72,20 @@ Status:"Closed"
             <td className="p-3">{data.Type}</td>
             <td className="p-3">{data.Price}</td>
             <td className="p-3 text-red-700">{data.Status}</td>
-            <td className="p-3"> <button
-          className=" bg-orange-500 text-white p-2 rounded-lg font-bold text-sm mr-5"
+            <td className="flex"> <button
+          className="h-7 flex items-center bg-orange-500 text-white p-2 rounded-md text-md mr-5"
           onClick={() => {}}
         >
-            <Mail className="pr-1 pb-1"/>
+            <Mail className="mt-1 mr-1" fontSize="sm"/>
          Edit
      
         </button>
         
         <button
-          className=" bg-green-400 text-white p-2 rounded-lg font-bold text-sm mr-5"
+          className="h-7 flex items-center bg-red-500 text-white p-2 rounded-md text-md mr-5"
           onClick={() => {}}
         >
-            <Mail className="pr-1 pb-0.5"/>
+            <Mail className="mt-1 mr-1" fontSize="sm"/>
          Open
      
         </button>
