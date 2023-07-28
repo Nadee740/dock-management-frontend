@@ -1,4 +1,5 @@
 import { Mail } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 const DockBooking = () => {
   return (
@@ -362,10 +363,12 @@ const DockBooking = () => {
 </div>
 
             <div class="flex mt-5 md:mt-5 lg:mt-5">
+            <Link to="/booking-confirm/1">
               <button class="bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
                 COnfirm & Proceed to Book
                 <Mail className="ml-5"/>
               </button>
+              </Link>
             </div>
           </form>
         </section>

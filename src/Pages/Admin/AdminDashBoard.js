@@ -60,7 +60,7 @@ const AdminDashBoard = () => {
 </Link>
 </div>
   <div class="b">
-  <Link to='/supplier' class="flex max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+  <Link to='/supplier-list' class="flex max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     <div className="w-1/2"> <h5 class="mb-2 text-2xl  font-bold   tracking-tight text-gray-900 dark:text-white">Manage Supplier</h5></div>
    <div className=" flex justify-end w-1/2"><FontAwesomeIcon icon={faUserGroup} size="2xl" style={{color: "#e85211",}} /></div>
 

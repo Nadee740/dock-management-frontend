@@ -9,5 +9,6 @@ module.exports =  {
     },
     plugins: [
         require('autoprefixer'),
-        require('flowbite/plugin')],
+        require('flowbite/plugin')
+    ],
   }

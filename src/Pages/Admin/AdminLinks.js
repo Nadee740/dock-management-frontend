@@ -77,7 +77,7 @@ const AdminLinks=[{
              subLinks:[
                 {
                     title:"Supplier Groups",
-                    to:'/#',
+                    to:'/supplier-list',
                     icon:faUser,
                     clasStyle:"mr-2"
                 },
