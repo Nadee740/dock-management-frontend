@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { AdminLinks } from "../Pages/Admin/AdminLinks";
 import { Link } from "react-router-dom";
 
-const NaVBarTest = ({UserLinks}) => {
+const SideNavBar = ({UserLinks}) => {
  
   const [activeIndex,setActiveIndex]=useState(0)
   const [isSubmenuVisible, setIsSubmenuVisible] = useState(false);
@@ -97,7 +97,7 @@ const NaVBarTest = ({UserLinks}) => {
           {link.subLinks.map((item,index)=>{
             return ( 
                 
-                <Link className="flex " to={item.to}>
+                <Link className="flex transition-transform transition-duration: 15000ms; " to={item.to}>
                 <FontAwesomeIcon className="p-2 mt-1" icon={item.icon}></FontAwesomeIcon>
                 <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
               {item.title}
@@ -129,4 +129,4 @@ const NaVBarTest = ({UserLinks}) => {
      );
 }
  
-export default NaVBarTest;
+export default SideNavBar;
