@@ -17,7 +17,7 @@ const AdminLinks=[{
 },
 {
     title:"Real Time Status",
-    to:"/dock-booking",
+    to:"/shipments-list",
     icon:faClock,
     color:"#24691b",
     subLinks:false
@@ -126,7 +126,7 @@ const AdminLinks=[{
                 ]},
                 {
                     title:"Approval Pending",
-                    to:"/dock-booking",
+                    to:"/shipments-list",
                     icon:faCheck,
                     color:"#72d123",
                     subLinks:false

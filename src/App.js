@@ -8,7 +8,7 @@ import SignUp from "./Pages/Signup";
 import CommonHome from "./Pages/CommonHome";
 import AdminHome from "./Pages/Admin/AdminHome";
 import AdminDashBoard from "./Pages/Admin/AdminDashBoard";
-import DockBooking from "./Pages/Admin/DockBooking";
+import DockBooking from "./Pages/Common/DockBooking";
 import ListAllDocksPage from "./Pages/Admin/ListAllDocksPage";
 import AddNewDock from "./Pages/Admin/AddNewDock";
 import ListAllSuppliersPage from "./Pages/Supplier/ListAllSuppliersPage";
@@ -34,6 +34,8 @@ import SecurityDashBoard from "./Pages/Security/SecuirtyDashboar";
 import ListAllVehiclesPage from "./Pages/Vehicle/ListOfVehicles";
 import ListAllShipmentsPage from "./Pages/Shipments/ListAllShipmentsPage";
 import HelpPage from "./Pages/Common/HelpPage";
+import ListAllSupplierGroupsPage from "./Pages/Supplier/SupplierGroupsPage";
+import AddNewSupplierGroups from "./Pages/Supplier/AddNewSupplierGroupsPage";
 
 function App() {
   const [user, setUser] = useState({ state: "admin" });
@@ -88,7 +90,13 @@ function App() {
                 path="/supplier-list"
                 element={<ListAllSuppliersPage iseditable={true} />}
               />
+                <Route
+                path="/supplier/groups"
+                exact
+                element={<ListAllSupplierGroupsPage iseditable={true} />}
+              />
               <Route path="/create-supplier" element={<AddNewSupplier />} />
+              <Route path="/supplier/groups/add" exact element={<AddNewSupplierGroups/>} />
 
               {/* Security Routes */}
               <Route
