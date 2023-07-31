@@ -56,9 +56,9 @@ const AddNewSupplierGroups = () => {
                       />
                       <label
                         for="vue-checkbox-list"
-                        class=" py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                        class=" py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                       >
-                         Dock Type {index + 1}
+                         Dock&nbsp;Type&nbsp;{index + 1}
                       </label>
                     </div>
                   );

@@ -3,14 +3,17 @@ import { faLockOpen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Email, Lock } from "@mui/icons-material";
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { baseUrl } from "../utils/baseurl";
 import ConfirmDialog from "./ConfirmDialog";
+import { UserContext } from "../Contexts/UserContexts";
 
 const LoginForm = () => {
   ///user-login
 
+
+  const {user,setUser,setLoading}=useContext(UserContext)
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [open,setOpen]=useState(false);
@@ -19,6 +22,7 @@ const LoginForm = () => {
   const confirmFunction=()=>{
       alert("login")
   }
+
   const submitData = async () => {
     const data = {
       email,
@@ -27,11 +31,11 @@ const LoginForm = () => {
     axios
       .post(`${baseUrl}/user-login`, data)
       .then((res) => {
-        // localStorage.setItem("EZTOken",res.data.token);
+      
         if(res.data.status==="ok")
-        {
-            
-            window.location.href="/admin"
+        {   localStorage.setItem("EZTOken",res.data.token);
+            setUser(res.data.data);
+            window.location.href="/"
         }
         else{
             setModalHeading("Ooops Couldn`t Login");

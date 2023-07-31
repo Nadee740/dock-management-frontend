@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Mail } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
-const ListAllAdmin = ({iseditable}) => {
+const ListAllAdmin = ({iseditable,adminData}) => {
     const datas=[{
 s_no:"1",
 name:"40 Footer",
@@ -16,14 +16,14 @@ createdon:"09/09/2002"
 }]
   return (
     <>
-      <div className="flex items-center justify-between w-4/12 p-4">
-        <h2 className="text-2xl font-medium">List of Admin Users</h2>
+      <div className="flex items-center justify-between p-4">
+        <h2 className="text-2xl font-medium">Admin Users</h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       {iseditable&&    <div className="flex">
         <Link
         to="/admin/Users/addCompanyAdminUsers"
-          className=" flex items-center justify-center text-white p-3 md:w-36 lg:w-36  ring-slate-200 bg-green-400 ring-2 rounded-xl outline-none"
+          className=" flex items-center justify-center text-white p-3 ring-slate-200 bg-green-400 ring-2 rounded-xl outline-none"
         >
         <FontAwesomeIcon icon={faPlus} className="mr-1"></FontAwesomeIcon>
          <p>Add Record</p> 
@@ -62,19 +62,19 @@ createdon:"09/09/2002"
           <th className="p-3 text-sm text-slate-500">CREATED ON</th>
           {iseditable&&<th className="p-3 text-sm text-slate-500">ACTIONS</th>}
         </tr>
-        {datas.map((data, index) => (
+        {adminData.map((data, index) => (
           <tr
             key={index}
             className={
               "border-b text-center border-slate-200 border-solid hover:bg-gray-300"
             }
           >
-            <td className="p-3 text-blue-400">{data._no}</td>
-            <td className="p-3">{data.name}</td>
-            <td className="p-3">{data.role}</td>
-            <td className="p-3">{data.emailaddress}</td>
-            <td className="p-3">{data.acra_un}</td>
-            <td className="p-3 text-red-700">{data.createdon}</td>
+            <td className="p-3 text-blue-400">{index+1}</td>
+            <td className="p-3">{data[1].name}</td>
+            <td className="p-3">Admin</td>
+            <td className="p-3">{data[1].email1}</td>
+            <td className="p-3">{data[1].acra_no}</td>
+            <td className="p-3 text-red-700">{'10-90-2020'}</td>
             {iseditable && (
               <td className="p-3 flex">
                 {" "}

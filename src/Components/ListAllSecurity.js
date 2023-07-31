@@ -1,20 +1,14 @@
+import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
+import { faPrint } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Add, AddAlarm, Mail } from "@mui/icons-material";
 import { Button } from "bootstrap";
 import { Link } from "react-router-dom";
 
-const ListAllSecurity = ({iseditable}) => {
-    const datas=[{
-s_no:"1",
-name:"security",
-login_id:"ss000122@gmail.com",
-acrana:"124",
-building:"8888",
-createdon:"12/03/09",
-
-}]
+const ListAllSecurity = ({iseditable,securityData}) => {
   return (
     <>
-      <div className="flex items-center justify-between w-4/12 p-4">
+      <div className="flex items-center justify-between p-4">
         <h2 className="text-2xl font-medium">List of Security Check</h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
@@ -24,7 +18,7 @@ createdon:"12/03/09",
           className="p-3 w-36 ring-slate-200 bg-green-400 ring-2 rounded-xl outline-none"
         >
         <Add/>
-          Add Record
+          Add Security
         </Link>
       </div>}
    
@@ -60,37 +54,37 @@ createdon:"12/03/09",
           <th className="p-3 text-sm text-slate-500">CREATED ON</th>
           {iseditable&&<th className="p-3 text-sm text-slate-500">ACTIONS</th>}
         </tr>
-        {datas.map((data, index) => (
+        {securityData.map((data, index) => (
           <tr
             key={index}
             className={
               "border-b text-center border-slate-200 border-solid hover:bg-gray-300"
             }
           >
-            <td className="p-3 text-blue-400">{data.s_no}</td>
-            <td className="p-3">{data.name}</td>
-            <td className="p-3">{data.login_id}</td>
-            <td className="p-3">{data.acrana}</td>
-            <td className="p-3">{data.building}</td>
-            <td className="p-3">{data.createdon}</td>
-            {iseditable&& <td className="p-3"> <button
-          className="h-7 bg-orange-500 text-white p-2 rounded-lg font-bold text-sm mr-5"
-          onClick={() => {}}
-        >
-            <Mail className="pr-1 pb-1"/>
-         Edit
-     
-        </button>
-        
-        <button
-          className="h-7 bg-green-400 text-white p-2 rounded-lg font-bold text-sm mr-5"
-          onClick={() => {}}
-        >
-            <Mail className="pr-1 pb-0.5"/>
-         Open
-     
-        </button>
-        </td>}
+            <td className="p-3 text-blue-400">{index+1}</td>
+            <td className="p-3">{data[1].name}</td>
+            <td className="p-3">{data[1].email1}</td>
+            <td className="p-3">{data[1].acra_no}</td>
+            <td className="p-3">data.building</td>
+            <td className="p-3">{'10-10-2020'}</td>
+            {iseditable&& (
+              <td className="flex">
+                <button
+                  className="h-7 flex items-center bg-orange-500 text-white p-2 rounded-md text-md mr-5"
+                  onClick={() => {}}
+                >
+                  <FontAwesomeIcon icon={faPenToSquare} className="mt-1 mr-1" size="sm"/>
+                  Edit
+                </button>
+                <button
+                  className="h-7 flex items-center bg-red-500 text-white p-2 rounded-md text-md mr-5"
+                  onClick={() => {}}
+                >
+                 <FontAwesomeIcon icon={faPrint} className="mt-1 mr-1" size="sm"/>
+                  Open
+                </button>
+              </td>
+            )}
            
           </tr>
         ))}
