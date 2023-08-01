@@ -20,7 +20,7 @@ const LoginForm = () => {
   const [modalText,setModalText]=useState("");
   const [modalHeading,setModalHeading]=useState("SuccessFully Logged IN");
   const confirmFunction=()=>{
-      alert("login")
+      
   }
 
   const submitData = async () => {

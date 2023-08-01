@@ -167,17 +167,48 @@ useEffect(()=>{
       console.log("errr");
     }
   })
-  .catch(function (error) {
-    setLoading(false);
-    console.log("FAILED!!! ", error);
-  });
+  .catch((err)=>{
+    console.log(err)
+  })
 },[dock_type_id])
 
-const submitForm=(e)=>{
-    e.preventDefault();
-    axios.post(`${baseUrl}/book/dock`,{
-        
+const submitForm=()=>{
+    
+    const data={
+      purchase_order_no:po_no,
+      do_no,
+      airway_bill_no,
+      bl_no,
+      delivery_company_id:company_id,
+      building_id,
+      dock_type_id,
+      dock_id,
+      booked_date:date,
+      timeslot:selectedtimeSlots[0],
+      vehicle_id
+
+    }
+    const token=localStorage.getItem("EZTOken")
+   
+    axios.post(`${baseUrl}/dock/book`,data,{
+      headers:{
+          'Authorization': `Bearer ${token}`
+      }
     })
+    .then((res)=>{
+      if(res.data.status==="ok"){
+        console.log(res.data)
+        alert('Booking Success');
+        window.location.href="/booking-confirm/1"
+      }
+      else{
+        alert("error")
+      }
+    })
+    .catch(function (error) {
+      
+      console.log("FAILED!!! ", error);
+    });
 
 }
 
@@ -191,7 +222,7 @@ const submitForm=(e)=>{
             </h2>
           </div>
           <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-          <form>
+          <form onSubmit={submitForm}>
             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
               <div>
                 <label class="flex text-black dark:text-gray-200" for="po_no">
@@ -261,14 +292,14 @@ const submitForm=(e)=>{
                   Company (Delivery To) <p className="pl-1 text-red-600">*</p>
                 </label>
                 <select onChange={(e)=>{
-                    setcompany_id(JSON.parse(e.target.value)._id)
+                    setcompany_id(JSON.parse(e.target.value).company._id)
                 }} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
                   <option value={-1}>---Choose Company---</option>
                   {
                     companyData.map((c,index)=>{
                       
                       return(
-                        <option value={JSON.stringify(c)}>{c.company_name}</option>
+                        <option value={JSON.stringify(c)}>{c.company.company_name}</option>
                       )
                     })
                   }
@@ -579,8 +610,10 @@ const submitForm=(e)=>{
 </div>
 
             <div class="flex mt-5 md:mt-5 lg:mt-5">
-            <Link to="/booking-confirm/1">
-              <button class="bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
+            <Link to="#">
+              <button class="bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
+             onClick={submitForm}
+              >
                 Confirm & Proceed to Book
                 <FontAwesomeIcon className="ml-2 text-green-500" icon={faCheckCircle}></FontAwesomeIcon>
               </button>
