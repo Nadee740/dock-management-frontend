@@ -294,11 +294,22 @@ useEffect(()=>{
                   Vehicle Number <p className="pl-1 text-red-600">*</p>
                 </label>
                 <select onChange={(e)=>{
-                    setVehicle_id(JSON.parse(e.target.value)._id)
-                    console.log(JSON.parse(e.target.value));
+                    console.log(e.target.value)
+                    if(e.target.value==-1 || e.target.value=="-1")
+                    {
+                        setVehicle_id(null);
+                        setDriver_name("");
+                        setVehicleType("");
+                        setDriver_nrif("");
+
+                    }
+                    else{
+                        setVehicle_id(JSON.parse(e.target.value)._id)
                     setVehicleType(JSON.parse(e.target.value).vehicle_type)
                     setDriver_name(JSON.parse(e.target.value).driver_name)
                     setDriver_nrif(JSON.parse(e.target.value).nric_no)
+                    }
+
                 }} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
                    <option value={-1}>--- Choose Vehicle Number ---</option>
                   {vehiclesData.map((v,index)=>{
