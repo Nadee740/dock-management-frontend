@@ -1,7 +1,22 @@
 import { Apartment, AppRegistration, Email, LockOpen, Password, Person, PhoneAndroid } from "@mui/icons-material";
+import axios from "axios";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const SignUpForm = () => {
+  const [name,setName]=useState("nnn")
+  const handleSubmit=async()=>{
+    
+      const formData = {name};
+   
+   
+      const response = await axios.post('http://localhost:8000/create-supplier', formData);
+      if(response.data.status=="ok")
+    alert("ok")
+    
+
+     
+  }
   return (
     <div className="bg-slate-100 flex flex-col bg-white w-11/12 md:w-3/4 lg:w-1/3 text-left bg-white p-10 rounded-xl m-auto">
       <div className="w-full flex items-center pb-5 justify-center ">
@@ -36,6 +51,10 @@ const SignUpForm = () => {
             </span>
             <input
               class="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none"
+              value={name}
+              onChange={(evt)=>{
+                setName(evt.target.value)
+              }}
               type="text"
               placeholder="Supplier Name"
             />
@@ -138,7 +157,7 @@ const SignUpForm = () => {
             to="/"
             className="rounded-md text-white py-2 ml-8 px-4 w-2/3 md:w-1/3 lg:w-1/3 bg-indigo-500"
           >
-            <button className="w-full h-full " onClick={() => {}}>
+            <button className="w-full h-full " onClick={() => {handleSubmit()}}>
               Sign Up
             </button>
           </Link>

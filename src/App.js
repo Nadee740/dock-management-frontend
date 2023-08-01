@@ -36,7 +36,9 @@ function App() {
         <Routes>
         <Route path="/login" element={<Login/>}/>
         <Route path="/signup" element={<SignUp/>}/>
-        <Route path="/" element={<CommonHome/>}>
+        {/* <Route path="/" element={<CommonHome/>}> */}
+        <Route path="/" element={<Login/>}>
+
 
         <Route path="/dock-booking" element={<DockBooking/>}/>
         <Route path="/real-time-status" element={<RealTimeStatusPage iseditable={false}/>}/>
