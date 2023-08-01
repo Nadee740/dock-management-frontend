@@ -2,11 +2,15 @@ import { Email, Mail } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTruck, faTruckRampBox, faUser, faUserGroup } from "@fortawesome/free-solid-svg-icons";
-import TopNavBar from "../../Components/TopNavBar";
+import ConfirmDialog from "../../Components/ConfirmDialog";
+import { useState } from "react";
+
 
 const AdminDashBoard = () => {
+   
     return ( 
         <>
+      
         <div className='w-full admin-dashboard'>
         <div className="m-2 flex flex-row-reverse">
         <p className="text-1xl text-white">
@@ -38,7 +42,7 @@ const AdminDashBoard = () => {
 </div>
 
         </div>
-        <div className='flex flex-row w-full w-full items-center pl-3 pt-1 justify-between'>
+        <div className='flex flex-row w-full w-full items-center pl-5 pt-1 justify-between'>
        
         <div class="mt-36 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
   <div class="">
@@ -56,7 +60,7 @@ const AdminDashBoard = () => {
 </Link>
 </div>
   <div class="b">
-  <Link to='/supplier' class="flex max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+  <Link to='/supplier-list' class="flex max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     <div className="w-1/2"> <h5 class="mb-2 text-2xl  font-bold   tracking-tight text-gray-900 dark:text-white">Manage Supplier</h5></div>
    <div className=" flex justify-end w-1/2"><FontAwesomeIcon icon={faUserGroup} size="2xl" style={{color: "#e85211",}} /></div>
 
@@ -67,9 +71,10 @@ const AdminDashBoard = () => {
 
 
         </div>
-        <div className="mb-20  md:m-20 lg:m-20 w-full md:w-5/6 lg:w-5/6 h-2/5 border-2 flex justify-center items-center bg-neutral-200 border-slate-200">
+        <div className="mt-8 m-2 md:m-20 lg:m-20 w-full md:w-5/6 lg:w-5/6 h-2/5 border-2 flex justify-center items-center bg-neutral-200 border-slate-200">
         <p className="1-xl text-slate-400">Content / Advertisement Comes Here</p></div>
         </div> 
+       
         </>
         
 );

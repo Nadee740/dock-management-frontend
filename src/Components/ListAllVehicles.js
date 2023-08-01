@@ -2,6 +2,7 @@ import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Mail } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 const ListAllVehicles = ({ iseditable }) => {
   const datas = [
@@ -13,6 +14,46 @@ const ListAllVehicles = ({ iseditable }) => {
       drivers_fin: "NA",
       created_by: "111111",
     },
+    {
+        vehicles_no: "SGX1234",
+        vehicle_type: "40 Footer",
+        driver_name: "Lim Kim",
+        driver_no: "77777777",
+        drivers_fin: "NA",
+        created_by: "111111",
+      },
+      {
+        vehicles_no: "SGX1234",
+        vehicle_type: "40 Footer",
+        driver_name: "Lim Kim",
+        driver_no: "77777777",
+        drivers_fin: "NA",
+        created_by: "111111",
+      },
+      {
+        vehicles_no: "SGX1234",
+        vehicle_type: "40 Footer",
+        driver_name: "Lim Kim",
+        driver_no: "77777777",
+        drivers_fin: "NA",
+        created_by: "111111",
+      },
+      {
+        vehicles_no: "SGX1234",
+        vehicle_type: "40 Footer",
+        driver_name: "Lim Kim",
+        driver_no: "77777777",
+        drivers_fin: "NA",
+        created_by: "111111",
+      },
+      {
+        vehicles_no: "SGX1234",
+        vehicle_type: "40 Footer",
+        driver_name: "Lim Kim",
+        driver_no: "77777777",
+        drivers_fin: "NA",
+        created_by: "111111",
+      },
   ];
   return (
     <>
@@ -21,14 +62,14 @@ const ListAllVehicles = ({ iseditable }) => {
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       {iseditable && (
-        <div className="flex items-center justify-between w-4/12 p">
-          <button
-            onChange={(e) => {}}
+        <div className="flex items-center justify-between  p">
+          <Link
+          to="/add-vehicle"
             className="flex p-3 max-w-42 ring-slate-200 bg-green-400 ring-2 rounded-xl outline-none"
           >
 
            <p className="text-white text-sm font-bold flex">Add Vehicles</p> 
-          </button>
+          </Link>
         </div>
       )}
 

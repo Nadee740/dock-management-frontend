@@ -1,73 +1,193 @@
 import { Mail } from "@mui/icons-material";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../Contexts/UserContexts";
+import { baseUrl } from "../utils/baseurl";
+import axios from "axios";
+import ConfirmDialog from "./ConfirmDialog";
+import AlertDialog from "./AlertDialogue";
+import { Link } from "react-router-dom";
 
 const AddNewDockForm = () => {
+    const {setLoading}=useContext(UserContext)
+    const [open1,setOpen1]=useState(false);
+    const [open2,setOpen2]=useState(false);
+    const [modalHeading,setModalHeading]=useState("");
+    const [modalText,setModalText]=useState("")
+
+    const [dock_number,setDock_number]=useState();
+    const [building,setBuilding]=useState(-1);
+    const [mode,setMode]=useState();
+    const [dock_type,setDockType]=useState();
+    const [price,setPrice]=useState();
+    const [list_Buildings,setList_buildings]=useState([]);
+
+    useEffect(()=>{
+    setLoading(true);
+        const token = localStorage.getItem("EZTOken");
+        axios
+      .get(`${baseUrl}/get-buildings`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(function (response) {
+        
+
+        console.log("success", response, "response.data");
+        if (response.data != "") {
+          console.log(response.data);
+          setList_buildings(response.data.data);
+          setLoading(false);
+        
+        } else {
+          setList_buildings(null);
+          console.log("errr");
+        }
+      })
+      .catch(function (error) {
+        setLoading(false);
+        console.log("FAILED!!! ", error);
+      });
+
+    },[])
+
+    const SubmitButton=(e)=>{
+        e.preventDefault();
+       
+        if(building ===-1 || mode===-1 || dock_type===-1)
+        {
+            setModalHeading("Please Choose All Fields");
+            setOpen1(true);
+
+        }
+        else{
+            setOpen2(true);
+            setModalHeading("Alert")
+            setModalText("Are You Sure You Want To Add The Dock ");
+        }
+    
+    }
+
+    const submitData=async()=>{
+        setLoading(true)
+        const data = {
+            dock_number,building,mode,dock_type,price
+          };
+          const token=localStorage.getItem("EZTOken")
+          axios.post(`${baseUrl}/add-docks`,data,{
+            headers:{
+                'Authorization': `Bearer ${token}`
+            }
+          })
+          .then((res) => {
+            if(res.data.status=="ok")
+            {
+               setModalHeading("Dock Added Successfully")
+               setModalText("")
+               setDock_number("")
+               setPrice("")
+               setOpen1(true)
+
+        
+            }
+            else{
+                setModalHeading("Something Went wrong ");
+                setModalText("Something Went wrong.Please Try again after sometime");
+                setOpen1(true);
+    
+            }
+       
+           setLoading(false)
+          }).catch((err)=>{
+            console.log(err)
+          })
+    }
+
     return ( <>
          <div className="flex items-center justify-between  p-4">
         <h2 className="text-2xl font-medium"><Mail className="pb-1" size='lg'></Mail> Add New Dock</h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-      <form>
+      <form onSubmit={SubmitButton}>
         <div class="">
+        <div className="mb-2">
+            <label class="text-black dark:text-gray-200" for="Vechicletype">
+              Building Name
+            </label>
+            <select
+            onChange={(e)=>{
+                setBuilding(e.target.value)
+            }}
+              id="Vechicletype"
+              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+            >
+              <option value={-1}>---Choose Building ---</option>
+            {
+                list_Buildings.map((b,index)=>{
+                    return <option value={b.building_name}>{b.building_name}</option>
+                })
+            }
+            </select>
+          </div>
             <div>
-                <label class="text-black dark:text-gray-200" for="username">Username</label>
-                <input id="username" type="text" class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring border-2 border-slate-400"/>
+                <label class="text-black dark:text-gray-200" for="dockno">Dock No</label>
+                <input value={dock_number} onChange={(e)=>{
+                    setDock_number(e.target.value)
+                }} placeholder="Dock No" id="dockno" type="text" class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring border-2 border-slate-400"/>
             </div>
 
             <div>
-                <label class="text-blackdark:text-gray-200" for="emailAddress">Email Address</label>
-                <input id="emailAddress" type="email" class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"/>
+                <label class="text-blackdark:text-gray-200" for="price">Price ($)</label>
+                <input 
+                value={price}
+                onChange={(e)=>{
+                    setPrice(e.target.value)
+                }}  placeholder="Price" id="price" type="number" class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"/>
             </div>
-
             <div>
-                <label class="text-black dark:text-gray-200" for="password">Password</label>
-                <input id="password" type="password" class="border-black-200 block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"/>
-            </div>
-
-     
-
-            <div>
-                <label class="text-white dark:text-gray-200" for="passwordConfirmation">Select</label>
-                <select class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                    <option>Surabaya</option>
-                    <option>Jakarta</option>
-                    <option>Tangerang</option>
-                    <option>Bandung</option>
+                <label class="text-white dark:text-gray-200" for="mode">Mode</label>
+                <select onChange={(e)=>{
+                    setMode(e.target.value)
+                }} id="mode" class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
+                    <option value={-1}>--- Choose Mode ---</option>
+                    <option value={"Normal"}>Normal</option>
                 </select>
             </div>
-         
             <div>
-                <label class="text-white dark:text-gray-200" for="passwordConfirmation">Text Area</label>
-                <textarea id="textarea" type="textarea" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"></textarea>
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-white">
-                Image
-              </label>
-              <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                <div class="space-y-1 text-center">
-                  <svg class="mx-auto h-12 w-12 text-white" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                  <div class="flex text-sm text-gray-600">
-                    <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
-                      <span class="">Upload a file</span>
-                      <input id="file-upload" name="file-upload" type="file" class="sr-only"/>
-                    </label>
-                    <p class="pl-1 text-white">or drag and drop</p>
-                  </div>
-                  <p class="text-xs text-white">
-                    PNG, JPG, GIF up to 10MB
-                  </p>
-                </div>
-              </div>
+                <label class="text-white dark:text-gray-200" for="mode">Dock Type</label>
+                <select onChange={(e)=>{
+                    setDockType(e.target.value)
+                }} id="mode" class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
+                    <option value={-1}>--- Choose Dock Type ---</option>
+                    <option value={"Dry"}>Dry</option>
+                    <option value={"Refrigerated"}>Refrigerated</option>
+                    <option value={"Facility"}>Facility</option>
+                    <option value={"Parking"}>Parking</option>
+                    <option value={"Pork Bay"}>Pork Bay</option>
+                    <option value={"Non-Halal"}>Non-Halal</option>
+
+                </select>
             </div>
         </div>
 
         <div class="flex justify-end mt-6">
-            <button class="mr-6 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-green-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">Submit</button>
-            <button class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">Cancel</button>
+            <button type="submit" class="mr-6 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-green-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">Submit</button>
+            <button type="button" class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600"><Link to="/"> Cancel</Link> </button>
         </div>
     </form>
+    <AlertDialog
+        open={open1}
+        setOpen={setOpen1}
+        modalHeading={modalHeading}
+        modalText={modalText}
+      />
+      <ConfirmDialog
+        open={open2}
+        setOpen={setOpen2}
+        modalHeading={modalHeading}
+        modalText={modalText}
+        confirmFunction={submitData}
+      />
     </> );
 }
  
