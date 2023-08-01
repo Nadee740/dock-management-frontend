@@ -173,6 +173,13 @@ useEffect(()=>{
   });
 },[dock_type_id])
 
+const submitForm=(e)=>{
+    e.preventDefault();
+    axios.post(`${baseUrl}/book/dock`,{
+        
+    })
+
+}
 
   return (
     <div className="w-full admin-dashboard">
