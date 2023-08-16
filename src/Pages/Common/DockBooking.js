@@ -1,4 +1,3 @@
-import { Mail, Password } from "@mui/icons-material";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../Contexts/UserContexts";
@@ -6,9 +5,10 @@ import axios from "axios";
 import { baseUrl } from "../../utils/baseurl";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faEdit } from "@fortawesome/free-regular-svg-icons";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faBackward, faCheck } from "@fortawesome/free-solid-svg-icons";
 
-const DockBooking = () => {
+const DockBooking = ({bookingDetail}) => {
+    const [step,setStep]=useState(0);
     const {setLoading}=useContext(UserContext)
     
     const times=["00:00 ","00:30 ","01:00 ","01:30 ","02:00 ","02:30 ","03:00 ","03:30 ","04:00 ","04:30 ","05:00 ","05:30 "]
@@ -63,6 +63,7 @@ const DockBooking = () => {
           setCompanyData(null);
           console.log("errr");
         }
+        setLoading(false)
       })
       .catch(function (error) {
         setLoading(false);
@@ -90,6 +91,7 @@ const DockBooking = () => {
           setBuildingData(null);
           console.log("errr");
         }
+        setLoading(false)
       })
       .catch(function (error) {
         setLoading(false);
@@ -115,6 +117,7 @@ const DockBooking = () => {
       setVehiclesData(null);
       console.log("errr");
     }
+    setLoading(false)
   })
   .catch(function (error) {
     setLoading(false);
@@ -140,6 +143,7 @@ useEffect(()=>{
       setDocktypedata(null);
       console.log("errr");
     }
+    setLoading(false)
   })
   .catch(function (error) {
     setLoading(false);
@@ -172,8 +176,8 @@ useEffect(()=>{
   })
 },[dock_type_id])
 
-const submitForm=()=>{
-    
+const submitForm=(e)=>{
+    e.preventDefault();
     const data={
       purchase_order_no:po_no,
       do_no,
@@ -198,8 +202,7 @@ const submitForm=()=>{
     .then((res)=>{
       if(res.data.status==="ok"){
         console.log(res.data)
-        alert('Booking Success');
-        window.location.href="/booking-confirm/1"
+        window.location.href="/booking-confirm/"+res.data.data._id
       }
       else{
         alert("error")
@@ -210,20 +213,67 @@ const submitForm=()=>{
       console.log("FAILED!!! ", error);
     });
 
+
 }
 
   return (
     <div className="w-full admin-dashboard">
       <div className="flex flex-row w-full w-full items-center p-3 justify-between">
+      
         <section class="h-max text-black w-5/6 p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800 mt-20">
+
+
           <div className="flex items-center justify-between  p-4 ">
             <h2 className="text-2xl font-medium">
              <FontAwesomeIcon icon={faEdit}/> Add New Booking
             </h2>
           </div>
           <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-          <form onSubmit={submitForm}>
-            <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+                  
+<ol class="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base">
+    <li onClick={()=>{
+        if(step>0)
+        setStep(0)
+    }} class="flex md:w-full items-center text-blue-600 dark:text-blue-500 sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+        <span class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
+        {step>=1?<svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+            </svg>:<span class="mr-2">1</span>}
+            Bill  <span class="hidden sm:inline-flex sm:ml-2">Information</span>
+        </span>
+    </li>
+    <li onClick={()=>{
+        if(step>1)
+        setStep(1)
+    }} class="text-blue-600 flex md:w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+        <span class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
+           
+            {step>=2?<svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+            </svg>:<span class="mr-2">2</span>}
+            Dock <span class="hidden sm:inline-flex sm:ml-2">Info</span>
+        </span>
+    </li>
+    <li onClick={()=>{
+        if(step>2)
+        setStep(2)
+    }} class="text-blue-600 flex items-center">
+    <span class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
+           
+           {step>=3?<svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+               <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+           </svg>:<span class="mr-2">3</span>}
+       </span>
+        Confirmation
+    </li>
+</ol>
+          { step==0 && 
+        <form onSubmit={(e)=>{
+            e.preventDefault();
+            setStep(1);
+        }}>
+          <div>
+           <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
               <div>
                 <label class="flex text-black dark:text-gray-200" for="po_no">
                 P.O No / W.O No <p className="ml-2 text-red-500">*</p>
@@ -291,10 +341,12 @@ const submitForm=()=>{
                 >
                   Company (Delivery To) <p className="pl-1 text-red-600">*</p>
                 </label>
-                <select onChange={(e)=>{
+                <select 
+                required
+                onChange={(e)=>{
                     setcompany_id(JSON.parse(e.target.value).company._id)
                 }} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                  <option value={-1}>---Choose Company---</option>
+                  <option value="">---Choose Company---</option>
                   {
                     companyData.map((c,index)=>{
                       
@@ -313,10 +365,12 @@ const submitForm=()=>{
                 >
                   Building Name<p className="pl-1 text-red-600">*</p>
                 </label>
-                <select onChange={(e)=>{
+                <select 
+                required
+                onChange={(e)=>{
                     setBUilding_id(JSON.parse(e.target.value)._id)
                 }} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                  <option value={-1}>---Choose Building---</option>
+                  <option value="">---Choose Building---</option>
                   {buildingData.map((b,index)=>{
                     return ( <option value={JSON.stringify(b)}>{b.building_name}</option>)
                   })}
@@ -331,9 +385,11 @@ const submitForm=()=>{
                 >
                   Vehicle Number <p className="pl-1 text-red-600">*</p>
                 </label>
-                <select onChange={(e)=>{
+                <select 
+                required
+                onChange={(e)=>{
                     console.log(e.target.value)
-                    if(e.target.value==-1 || e.target.value=="-1")
+                    if(e.target.value==-1 || e.target.value=="-1" || e.target.value=="")
                     {
                         setVehicle_id(null);
                         setDriver_name("");
@@ -349,7 +405,7 @@ const submitForm=()=>{
                     }
 
                 }} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                   <option value={-1}>--- Choose Vehicle Number ---</option>
+                   <option value="">--- Choose Vehicle Number ---</option>
                   {vehiclesData.map((v,index)=>{
                    
                    return <option value={JSON.stringify(v)}>{v.vehicle_no}</option>
@@ -433,17 +489,33 @@ const submitForm=()=>{
                   </div>
                 </div>
               </div>
-
-              {/* <div>
-                <label class="text-white dark:text-gray-200" for="passwordConfirmation">Date</label>
-                <input id="date" type="date" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"/>
-            </div> */}
-              {/* <div>
-                <label class="text-white dark:text-gray-200" for="passwordConfirmation">Text Area</label>
-                <textarea id="textarea" type="textarea" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"></textarea>
-            </div> */}
+              
             </div>
-            <div className="m-3 px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+            
+            <div class="flex mt-5 md:mt-5 lg:mt-5">
+              <button 
+              type="submit"
+              class="bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
+              >
+                Next Step
+                <FontAwesomeIcon className="ml-2 text-green-500" icon={faCheckCircle}></FontAwesomeIcon>
+              </button>
+             
+            </div>
+            
+            </div>
+            </form>
+            }
+           {step==1 && 
+            <form onSubmit={(e)=>{
+                e.preventDefault();
+                if(selectedtimeSlots.length>0)
+                setStep(2);
+                else
+                alert("please choose time slot")
+
+            }}>
+           <div className="m-3 px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
               <div class=" grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2 px-6 pt-5 pb-6 ">
                 <div>
                   <label
@@ -452,10 +524,13 @@ const submitForm=()=>{
                   >
                     Dock Type <p className="pl-1 text-red-600">*</p>
                   </label>
-                  <select onChange={(e)=>{
+                  <select
+                  required
+                   onChange={(e)=>{
+                    if(e.target.value!="")
                     setDock_type_id(e.target.value)
                   }} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                    <option>---Dock Type ---</option>
+                    <option value="">---Dock Type ---</option>
                     {
                         docktypes.map((d,index)=>{
                            return(<option value={d._id}>{d.dock_type}</option>)  
@@ -471,11 +546,12 @@ const submitForm=()=>{
                     Select Dock<p className="pl-1 text-red-600">*</p>
                   </label>
                   { <select 
+                  required
                   disabled={dock_type_id==null ||vehicle_id==null ||company_id==null || building_id==null ||po_no==null ||po_no==''}
                   onChange={(e)=>{
                     set_dock_id(e.target.value)
                   }} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                    <option>--- Select Dock ---</option>
+                    <option value="">--- Select Dock ---</option>
                     {
                         dockSData.map((d,index)=>{
                             return (<option value={d._id}>{d.dock_number}</option>)
@@ -508,11 +584,13 @@ const submitForm=()=>{
                   >
                     Book for multiple days<p className="pl-1 text-red-600">*</p>
                   </label>
-                  <select onChange={(e)=>{
+                  <select
+                  required
+                   onChange={(e)=>{
                     console.log(Array.from(Array(parseInt(e.target.value)).keys()))
                     setBookforMultipleDays(e.target.value)
                   }} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                    <option value={1} >Single Day</option>
+                    <option value="" >Single Day</option>
                     {[2,3,4,5,6,7,8].map((data,index)=>{
                         return <option value={data}>{data}&nbsp; Day</option>
                     })
@@ -551,11 +629,40 @@ const submitForm=()=>{
                   );
                 })}
               </div>}
-            
-            </div>
+            <div className=" w-full grid grid-cols-2 text-center items-center ">
 
-               {selectedtimeSlots.length>0 &&<>
-                <div className="flex items-center justify-between  p-4 ">
+             <div class="flex mt-5 m-5 md:mt-5 lg:mt-5">
+              <button 
+              onClick={()=>{
+                setStep(0);
+              }}
+              type="button"
+              class="bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
+              >
+                Previous Step
+                <FontAwesomeIcon className="ml-2 text-green-500" icon={faBackward}></FontAwesomeIcon>
+              </button>
+             
+            </div>
+            <div class="flex m-5  mt-5 md:mt-5 lg:mt-5">
+              <button 
+              type="submit"
+              class="bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
+              >
+                Next Step
+                <FontAwesomeIcon className="ml-2 text-green-500" icon={faCheckCircle}></FontAwesomeIcon>
+              </button>
+             
+            </div> 
+            </div>
+            </div>
+            </form>
+            }
+           
+          {selectedtimeSlots.length>0 &&<>
+          {step==2&&<>
+            <form onSubmit={submitForm}>
+            <div className="flex items-center justify-between  p-4 ">
             <h2 className="text-2xl font-medium text-blue-600">
              Booking Summary
             </h2>
@@ -609,19 +716,38 @@ const submitForm=()=>{
     </table>
 </div>
 
-            <div class="flex mt-5 md:mt-5 lg:mt-5">
-            <Link to="#">
-              <button class="bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
-             onClick={submitForm}
+<div className=" w-full grid grid-cols-2 text-center items-center ">
+
+<div class="flex flex mt-5 md:mt-5 lg:mt-5">
+ <button 
+ onClick={()=>{
+   setStep(0);
+ }}
+ type="button"
+ class="bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
+ >
+   Previous Step
+   <FontAwesomeIcon className="ml-2 text-green-500" icon={faBackward}></FontAwesomeIcon>
+ </button>
+
+</div>
+<div class="flex mt-5 md:mt-5 lg:mt-5">
+              <button 
+              type="submit"
+              class="bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
               >
-                Confirm & Proceed to Book
+                Confirm Booking
                 <FontAwesomeIcon className="ml-2 text-green-500" icon={faCheckCircle}></FontAwesomeIcon>
               </button>
-              </Link>
+             
             </div>
+</div>
+            
+            </form>
+          </> }
+               
                </>}
         
-          </form>
         </section>
       </div>
     </div>

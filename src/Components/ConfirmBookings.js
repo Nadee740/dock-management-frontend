@@ -5,7 +5,7 @@ import QRCode from "react-qr-code";
 
 
 
-const ConfirmBooking=()=>{
+const ConfirmBooking=({bookingDetails})=>{
     return(
         <div id='booking-confirmed-page' >
         <div className="flex items-center justify-between w-4/12 p-4">
@@ -15,7 +15,7 @@ const ConfirmBooking=()=>{
    
    
       <div className="flex text-xl items-center pl-3 w-full py-2">
-       <p className="text-md">Your Job Order No : SATS20230994.</p>
+       <p className="text-md">Your Job Order No : ${bookingDetails}</p>
       </div>
       <div className="flex items-center pl-3 w-full py-2">
        <p className="text-xl font-bold text-green-400">Success ! Your bookings is confirmed . </p>

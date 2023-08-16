@@ -23,7 +23,6 @@ import ListAllSecurityPage from "./Pages/Security/ListAllSecurityPage";
 import AddNewSecurity from "./Pages/Security/AddNewSecurity";
 import ListAllWareHousesPage from "./Pages/WareHouse/ListAllWareHousePage";
 import AddNewWareHouse from "./Pages/WareHouse/AddNewWareHouse";
-import { Dashboard } from "@mui/icons-material";
 import StatisticsPage from "./Pages/Common/StatisticsPage";
 import SupplierHome from "./Pages/Supplier/SupplierHome";
 import SupplierDashBoard from "./Pages/Supplier/SupplierDashboard";
@@ -45,6 +44,7 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    // setUser({user})
     const token = localStorage.getItem("EZTOken");
     axios
       .get(`${baseUrl}/user/me`, {
@@ -60,6 +60,7 @@ function App() {
           console.log(response.data);
           setUser(response.data.user);
         } else {
+            
           setUser(null);
           console.log("errr");
         }
@@ -76,7 +77,8 @@ function App() {
         {/* <SideNavBar/> */}
         <BrowserRouter>
           <Routes>
-          {user==null && <> <Route path="/" element={<Login />} />
+          {user==null && <>
+           <Route path="/" element={<Login/>} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             
