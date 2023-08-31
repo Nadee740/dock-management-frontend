@@ -6,7 +6,7 @@ import { baseUrl } from "../../utils/baseurl";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faEdit } from "@fortawesome/free-regular-svg-icons";
 import { faBackward, faCheck } from "@fortawesome/free-solid-svg-icons";
-
+import CryptoJS from 'crypto-js'
 const DockBooking = ({bookingDetail}) => {
     const [step,setStep]=useState(0);
     const {setLoading}=useContext(UserContext)
@@ -43,6 +43,19 @@ const DockBooking = ({bookingDetail}) => {
         var mins = bits[0]*60 + +bits[1] + +minsAdd;
         return z(mins%(24*60)/60 | 0) + ':' + z(mins%60);
       }
+      const dateConverter = (inputdate) => {
+        const date = new Date(inputdate);
+        let month = (date.getMonth() + 1).toString();
+        let day = date.getDate().toString();
+        let year = date.getFullYear();
+        if (month.length < 2) {
+          month = "0" + month;
+        }
+        if (day.length < 2) {
+          day = "0" + day;
+        }
+        return [year, month, day].join("-");
+      };
 
       useEffect(()=>{
         setLoading(true);
@@ -58,6 +71,7 @@ const DockBooking = ({bookingDetail}) => {
         console.log("success", response, "response.data");
         if (response.data != "") {
           console.log(response.data);
+          console.log(response.data)
           setCompanyData(response.data.data);
         } else {
           setCompanyData(null);
@@ -176,8 +190,23 @@ useEffect(()=>{
   })
 },[dock_type_id])
 
+function encrypt(data, key) {
+    let encJson = CryptoJS.AES.encrypt(JSON.stringify(data), key).toString();
+    return CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(encJson));
+  }
+  
+
 const submitForm=(e)=>{
     e.preventDefault();
+    const booked_dates=[];
+    let i=0;
+    while(i<bookforMultipleDays){
+        const value = new Date(date)
+        value.setDate(value.getDate() + i)
+        booked_dates.push( dateConverter(value));
+        i++;
+    }
+    console.log(booked_dates);
     const data={
       purchase_order_no:po_no,
       do_no,
@@ -187,29 +216,31 @@ const submitForm=(e)=>{
       building_id,
       dock_type_id,
       dock_id,
-      booked_date:date,
-      timeslot:selectedtimeSlots[0],
+      booked_dates:booked_dates,
+      timeslots:selectedtimeSlots,
       vehicle_id
 
     }
     const token=localStorage.getItem("EZTOken")
-   
-    axios.post(`${baseUrl}/dock/book`,data,{
+    axios.post(`${baseUrl}/dock/book/multiple`,data,{
       headers:{
           'Authorization': `Bearer ${token}`
       }
     })
     .then((res)=>{
       if(res.data.status==="ok"){
-        console.log(res.data)
-        window.location.href="/booking-confirm/"+res.data.data._id
+        const val=JSON.stringify(res.data);
+        // const encodeddata= encrypt(res.data,"keyvalue");
+        sessionStorage.setItem("bookingdata",val);
+        const id=val.data[0].data._id;
+        const _id=encrypt(id,"keyvalue");
+        window.location.href="/booking-confirm/"+_id;
       }
       else{
-        alert("error")
+        alert("error");
       }
     })
     .catch(function (error) {
-      
       console.log("FAILED!!! ", error);
     });
 
@@ -344,14 +375,15 @@ const submitForm=(e)=>{
                 <select 
                 required
                 onChange={(e)=>{
-                    setcompany_id(JSON.parse(e.target.value).company._id)
+                    setcompany_id(JSON.parse(e.target.value)._id)
                 }} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
                   <option value="">---Choose Company---</option>
                   {
-                    companyData.map((c,index)=>{
-                      
+                    companyData && companyData.map((c,index)=>{
+                        
+                      console.log(c)
                       return(
-                        <option value={JSON.stringify(c)}>{c.company.company_name}</option>
+                        <option value={JSON.stringify(c)}>{c.company_name}</option>
                       )
                     })
                   }
@@ -587,7 +619,7 @@ const submitForm=(e)=>{
                   <select
                   required
                    onChange={(e)=>{
-                    console.log(Array.from(Array(parseInt(e.target.value)).keys()))
+                    // console.log(Array.from(Array(parseInt(e.target.value)).keys()))
                     setBookforMultipleDays(e.target.value)
                   }} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
                     <option value="" >Single Day</option>
@@ -716,27 +748,27 @@ const submitForm=(e)=>{
     </table>
 </div>
 
-<div className=" w-full grid grid-cols-2 text-center items-center ">
+<div className=" w-full flex items-center justify-center text-center items-center ">
 
-<div class="flex flex mt-5 md:mt-5 lg:mt-5">
+<div class="m-2 flex mt-5 md:mt-5 lg:mt-5">
  <button 
  onClick={()=>{
    setStep(0);
  }}
  type="button"
- class="bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
+ class="bg-green-400 px-2  md:px-6 lg:px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
  >
-   Previous Step
+   Previous
    <FontAwesomeIcon className="ml-2 text-green-500" icon={faBackward}></FontAwesomeIcon>
  </button>
 
 </div>
-<div class="flex mt-5 md:mt-5 lg:mt-5">
+<div class="m-2 flex mt-5 md:mt-5 lg:mt-5">
               <button 
               type="submit"
-              class="bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
+              class="bg-green-400 px-2 md:px-6 lg:px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
               >
-                Confirm Booking
+                Confirm 
                 <FontAwesomeIcon className="ml-2 text-green-500" icon={faCheckCircle}></FontAwesomeIcon>
               </button>
              

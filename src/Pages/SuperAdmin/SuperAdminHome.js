@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-const AdminHome = () => {
+const SuperAdminHome = () => {
     return ( 
         <div className='flex w-full flex-row bg-primary h-screen'>
         {/* <div className='w-3/12 '>
@@ -11,4 +11,4 @@ const AdminHome = () => {
      );
 }
  
-export default AdminHome;
+export default SuperAdminHome;

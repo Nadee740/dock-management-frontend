@@ -1,4 +1,3 @@
-import { Email, Mail } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -19,7 +18,7 @@ import BooktheViewingComponent from "../../Components/BooktheViewingComponent";
 import { UserContext } from "../../Contexts/UserContexts";
 import axios from "axios";
 import { baseUrl } from "../../utils/baseurl";
-const AdminDashBoard = () => {
+const SuperAdminDashBoard = () => {
     const {setLoading}=useContext(UserContext)
     const [subscriptionTypes,setSubscriptionTypes]=useState([]);
     useEffect(()=>{
@@ -28,12 +27,19 @@ const AdminDashBoard = () => {
 
         axios.get(`${baseUrl}/subscription/get/types`)
         .then((res) => {
+
             if(res.data.status=="ok")
-            setSubscriptionTypes(res.data.data);
+            {
+                setSubscriptionTypes(res.data.data);
+                setLoading(false)
+            }
+        
+        
         else 
         throw new Error(res.data.msg)
         })
         .catch((err) => {
+            setLoading(true);
             console.log(err)
 
         });
@@ -42,7 +48,7 @@ const AdminDashBoard = () => {
     <>
       <div className="w-full admin-dashboard">
         <div className="m-2 flex flex-row-reverse">
-          <p className="text-1xl text-white">Nadeem</p>
+          <p className="text-1xl text-white">Nadeem super Admin</p>
           <FontAwesomeIcon
             id="avatarButton"
             type="button"
@@ -104,13 +110,13 @@ const AdminDashBoard = () => {
           <div class="mt-36 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div class="">
               <Link
-                to="/dock-booking"
+                to="/superadmin/manage/subscriptions"
                 class="flex max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
               >
                 <div className="w-1/2">
                   {" "}
                   <h5 class="mb-2 text-2xl  font-bold tracking-tight text-gray-900 dark:text-white">
-                    New Dock Booking
+                    Manage Subscription
                   </h5>
                 </div>
                 <div className=" flex justify-end w-1/2">
@@ -355,4 +361,4 @@ const AdminDashBoard = () => {
   );
 };
 
-export default AdminDashBoard;
+export default SuperAdminDashBoard;

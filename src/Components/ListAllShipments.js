@@ -4,54 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Mail } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
-const ListAllShipments = ({ iseditable }) => {
-  const datas = [
-    {
-      job_order_no: "SGX1234",
-      supplier_name: "40 Footer",
-      Vehicle_no: "Lim Kim",
-      dock: "77777777",
-      alloted_date: "NA",
-      alloted_time: "111111",
-      status: false,
-    },
-    {
-        job_order_no: "SGX1234",
-        supplier_name: "40 Footer",
-        Vehicle_no: "Lim Kim",
-        dock: "77777777",
-        alloted_date: "NA",
-        alloted_time: "111111",
-        status: true,
-      },
-      {
-        job_order_no: "SGX1234",
-        supplier_name: "40 Footer",
-        Vehicle_no: "Lim Kim",
-        dock: "77777777",
-        alloted_date: "NA",
-        alloted_time: "111111",
-        status: false,
-      },
-      {
-        job_order_no: "SGX1234",
-        supplier_name: "40 Footer",
-        Vehicle_no: "Lim Kim",
-        dock: "77777777",
-        alloted_date: "NA",
-        alloted_time: "111111",
-        status: true,
-      },
-      {
-        job_order_no: "SGX1234",
-        supplier_name: "40 Footer",
-        Vehicle_no: "Lim Kim",
-        dock: "77777777",
-        alloted_date: "NA",
-        alloted_time: "111111",
-        status: false,
-      },
-  ];
+const ListAllShipments = ({ iseditable,todayShipments }) => {
   return (
     <>
       <div className="flex items-center justify-between p-4">
@@ -109,7 +62,7 @@ const ListAllShipments = ({ iseditable }) => {
             <th className="p-3 text-sm text-slate-500">Actions</th>
           )}
         </tr>
-        {datas.map((data, index) => (
+        {todayShipments.map((data, index) => (
           <tr
             key={index}
             className={
@@ -117,12 +70,12 @@ const ListAllShipments = ({ iseditable }) => {
             }
           >
             <td className="p-3 text-blue-400">{data.job_order_no}</td>
-            <td className="p-3">{data.supplier_name}</td>
-            <td className="p-3">{data.Vehicle_no}</td>
-            <td className="p-3">{data.dock}</td>
-            <td className="p-3">{data.alloted_date}</td>
-            <td className="p-3 text-red-700">{data.alloted_time}</td>
-            <td className="p-3 text-red-700">{data.status?(  
+            <td className="p-3">{data.user_id.name}</td>
+            <td className="p-3">{data.vehicle_id.vehicle_no}</td>
+            <td className="p-3">{data.dock_id.dock_number}</td>
+            <td className="p-3">{data.booked_date}</td>
+            <td className="p-3 text-red-700">{data.timeslot}</td>
+            <td className="p-3 text-red-700">{data.status!="0"?(  
                 <button
                   className="h-7 w-24 flex items-center bg-green-500 text-white p-2 rounded-md mr-5"
                   onClick={() => {}}
@@ -133,7 +86,6 @@ const ListAllShipments = ({ iseditable }) => {
                   className="h-7 w-24 flex items-center bg-orange-500 text-white p-2 rounded-md  "
                   onClick={() => {}}
                 >
-
                 <p className="text-sm font-semibold">Not&nbsp;Arrived</p>
                 </button>)}</td>
             {true && (

@@ -6,6 +6,7 @@ import { SupplierLinks } from "./Supplier/SupplierLinks";
 import { SecurityLinks } from "./Security/SecurityLinks";
 import SideNavBar from "../Components/SideNavBar";
 import AdminDashBoard from "./Admin/AdminDashBoard";
+import { SuperAdminLinks } from "./SuperAdmin/SuperAdminLinks";
 const CommonHome = () => {
     const {user}=useContext(UserContext)
 
@@ -15,6 +16,7 @@ const CommonHome = () => {
         {user.userType=="supplier" && <SideNavBar UserLinks={SupplierLinks}/>}
         {user.userType=="admin" && <SideNavBar UserLinks={AdminLinks}/>}
         {user.userType=="security" && <SideNavBar UserLinks={SecurityLinks}/>}
+        {user.userType=="superadmin" && <SideNavBar UserLinks={SuperAdminLinks}/>}
        
             <Outlet/>
         </div>

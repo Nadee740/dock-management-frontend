@@ -38,6 +38,10 @@ import AddNewSupplierGroups from "./Pages/Supplier/AddNewSupplierGroupsPage";
 import BackdropLoading from "./Components/BackDropLoading";
 import axios from "axios";
 import { baseUrl } from "./utils/baseurl";
+import LandingPage from "./Pages/LandingPage";
+import SuperAdminDashBoard from "./Pages/SuperAdmin/SuperAdminDashboard";
+import SuperAdminHome from "./Pages/SuperAdmin/SuperAdminHome";
+import ManageSubsriptionPage from "./Pages/SuperAdmin/ManageSubscriptionPage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -78,7 +82,7 @@ function App() {
         <BrowserRouter>
           <Routes>
           {user==null && <>
-           <Route path="/" element={<Login/>} />
+           <Route path="/" element={<LandingPage/>} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             
@@ -156,6 +160,30 @@ function App() {
                 />
 
                 {/* Protected Routes */}
+                {
+                    user.userType=="superadmin" &&(
+                        <>
+                        <Route path="/" element={<SuperAdminDashBoard/>}></Route>
+                  <Route path="superadmin" element={<SuperAdminHome/>}>
+                    <Route index element={<SuperAdminDashBoard/>} />
+                    <Route
+                      path="manage/subscriptions"
+                      element={<ManageSubsriptionPage />}
+                    />
+                    <Route
+                      path="users/listCompanyAdminUsers"
+                      element={<ListAllAdminPage iseditable={true} />}
+                    />
+                    <Route
+                      path="Users/addCompanyAdminUsers"
+                      element={<AddAdminUser />}
+                    />
+                    
+                  </Route>
+
+                        </>
+                    )
+                }
                 { user.userType==="admin"&& (
                     <>
                     <Route path="/" element={<AdminDashBoard/>}></Route>
