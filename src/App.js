@@ -60,9 +60,9 @@ function App() {
       .then(function (response) {
         setLoading(false);
 
-        console.log("success", response, "response.data");
+       console.log("success", response, "response.data");
         if (response.data != "") {
-          console.log(response.data);
+         console.log(response.data);
           setUser(response.data.user);
         } else {
             
