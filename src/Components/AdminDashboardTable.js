@@ -1,6 +1,6 @@
 const AdminDashBoardTable = () => {
   return (
-    <section class="container px-4 mx-auto">
+    <section class="container px-11 mx-auto">
       <div class="sm:flex sm:items-center sm:justify-between">
         <div>
           <div class="flex items-center gap-x-3">

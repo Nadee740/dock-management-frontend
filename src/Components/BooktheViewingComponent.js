@@ -1,23 +1,89 @@
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import Slider from "react-slick";
+
+
+
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { useEffect, useRef } from "react";
 
 const BooktheViewingComponent = () => {
-    return (
-        <div class="calendar">
+ 
+const days=[
+  'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'
+]
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    //className: "center",
+    speed: 500,
+    centerPadding: "6px",
+    slidesToShow: 3, 
+    slidesToScroll: 1,
+    centerMode: true, 
+	initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+      {
+        breakpoint: 900,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+        },
+      }
+    ]
+   
+  };
+  
+  const sliderStyle = {
+    width: '70vw', 
+    height: '100px', 
+  
+  };
+
+  
+  return (
+    <div className="calender" >
+<div className="days-slider" style={sliderStyle}>
+      
+      <Slider {...settings}>
+       
+        {days.map((day,index)=>(
+          <div className="bg-purple-500 flex items-center pl-1 w-full py-2" >
+            <h3 >{day}
+              </h3>
+          </div>
+        ))}
+      </Slider>
+    </div>
+ 
   <div class="days">
     <div class="day mon">
-      <div class="date">
+      {/* <div class="date">
         <p class="date-num">9</p>
         <br/>
         <p class="date-day">Mon</p>
-      </div>
+      </div> */}
 
     </div>
     <div class="day tues">
-      <div class="date">
+      {/* <div class="date">
         <p class="date-num">12</p>
         <p class="date-day">Tues</p>
-      </div>
+      </div> */}
       <div class="events">
         <div class="event start-10 end-12 corp-fi">
         <div class="flex">
@@ -48,10 +114,10 @@ const BooktheViewingComponent = () => {
       </div>
     </div>
     <div class="day wed">
-      <div class="date">
+      {/* <div class="date">
         <p class="date-num">11</p>
         <p class="date-day">Wed</p>
-      </div>
+      </div> */}
       <div class="events">
         <div class="event start-10 end-12 corp-fi">
         <div class="flex">
@@ -92,10 +158,10 @@ const BooktheViewingComponent = () => {
       </div> */}
     </div>
     <div class="day thurs">
-      <div class="date">
+      {/* <div class="date">
         <p class="date-num">12</p>
         <p class="date-day">Thurs</p>
-      </div>
+      </div> */}
       {/* <div class="events">
         <div class="event start-10 end-12 corp-fi">
           <p class="title">Corporate Finance</p>
@@ -108,16 +174,20 @@ const BooktheViewingComponent = () => {
       </div> */}
     </div>
     <div class="day fri">
-      <div class="date">
+      {/* <div class="date">
         <p class="date-num">13</p>
         <p class="date-day">Fri</p>
-      </div>
+      </div> */}
       {/* <div class="events">
       </div> */}
     </div>
   </div>
-</div>
-    );
-}
+  
+    </div>
+  );
+};
+// export default DaysSlider;
+  
+ 
  
 export default BooktheViewingComponent;
