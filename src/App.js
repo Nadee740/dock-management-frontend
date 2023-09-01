@@ -43,13 +43,16 @@ import SuperAdminDashBoard from "./Pages/SuperAdmin/SuperAdminDashboard";
 import SuperAdminHome from "./Pages/SuperAdmin/SuperAdminHome";
 import ManageSubsriptionPage from "./Pages/SuperAdmin/ManageSubscriptionPage";
 import ListAllSubscribedAdminPage from "./Pages/SuperAdmin/ListAllSubscribedAdminPage";       
-
+import Page404 from './Pages/PageNotFound'
 function App() {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [authenticating,setAuthenticating]=useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // setUser({user})
+    setAuthenticating(true)
+    setLoading(true)
     const token = localStorage.getItem("EZTOken");
     axios
       .get(`${baseUrl}/user/me`, {
@@ -58,19 +61,17 @@ function App() {
         },
       })
       .then(function (response) {
-        setLoading(false);
-
-        console.log("success", response, "response.data");
+         console.log("success", response, "response.data");
         if (response.data != "") {
-          console.log(response.data);
           setUser(response.data.user);
+          setAuthenticating(false)
+          setLoading(false);
         } else {
-            
-          setUser(null);
-          console.log("errr");
+            throw new Error("somethin went wrong")
         }
       })
       .catch(function (error) {
+        setAuthenticating(false)
         setLoading(false);
         console.log("FAILED!!! ", error);
       });
@@ -227,6 +228,7 @@ function App() {
                 } */}
               </Route>
             )}
+           {authenticating==false && <Route path="*" element={<Page404/>}/>} 
           </Routes>
         </BrowserRouter>
         <BackdropLoading />

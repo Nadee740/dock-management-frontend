@@ -29,11 +29,16 @@ const AdminDashBoard = () => {
         axios.get(`${baseUrl}/subscription/get/types`)
         .then((res) => {
             if(res.data.status=="ok")
-            setSubscriptionTypes(res.data.data);
+            {
+                setSubscriptionTypes(res.data.data);
+                setLoading(false);
+            }
+          
         else 
         throw new Error(res.data.msg)
         })
         .catch((err) => {
+            setLoading(false);
             console.log(err)
 
         });
@@ -42,7 +47,7 @@ const AdminDashBoard = () => {
     <>
       <div className="w-full admin-dashboard">
         <div className="m-2 flex flex-row-reverse">
-          <p className="text-1xl text-white">Nadeem</p>
+          <p className="text-1xl text-white">Nadeem Admin</p>
           <FontAwesomeIcon
             id="avatarButton"
             type="button"
@@ -163,6 +168,9 @@ const AdminDashBoard = () => {
               </Link>
             </div>
           </div>
+        </div>
+        <div class="bg-[#F4F5FA] p-10 m-6 rounded-xl overflow-x-scroll">
+            <BooktheViewingComponent/>
         </div>
         <div className="m-16"> 
         <AdminDashBoardCharts/>
@@ -341,9 +349,7 @@ const AdminDashBoard = () => {
           <AdminDashBoardTable/>
         </div>
         <div class="m-6 ">
-        <div class="bg-[#F4F5FA] p-10 rounded-xl overflow-x-scroll">
-            <BooktheViewingComponent/>
-        </div>
+      
         </div>
         <div className="mt-8 m-2 md:m-20 lg:m-20 lg-mb-32 w-full md:w-5/6 lg:w-5/6 h-2/5 border-2 flex justify-center items-center bg-neutral-200 border-slate-200">
           <p className="1-xl text-slate-400">

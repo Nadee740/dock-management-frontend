@@ -19,7 +19,7 @@ const BooktheViewingComponent = () => {
         <p class="date-day">Tues</p>
       </div>
       <div class="events">
-        <div class="event start-10 end-12 corp-fi">
+        <div class="event start-9 end-10 corp-fi">
         <div class="flex">
             <div class="flex bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
               <div class="relative flex flex-col min-w-0 mb-2 break-words bg-white shadow-soft-xl rounded-2xl bg-clip-border">
@@ -80,40 +80,7 @@ const BooktheViewingComponent = () => {
         </div>
 
       </div>
-      {/* <div class="events">
-        <div class="event start-12 end-1 writing">
-          <p class="title">Writing Seminar</p>
-          <p class="time">11 AM - 12 PM</p>
-        </div>
-        <div class="event start-2 end-5 securities">
-          <p class="title">Securities Regulation</p>
-          <p class="time">2 PM - 5 PM</p>
-        </div>
-      </div> */}
-    </div>
-    <div class="day thurs">
-      <div class="date">
-        <p class="date-num">12</p>
-        <p class="date-day">Thurs</p>
-      </div>
-      {/* <div class="events">
-        <div class="event start-10 end-12 corp-fi">
-          <p class="title">Corporate Finance</p>
-          <p class="time">10 AM - 12 PM</p>
-        </div>
-        <div class="event start-1 end-4 ent-law">
-          <p class="title">Entertainment Law</p>
-          <p class="time">1PM - 4PM</p>
-        </div>
-      </div> */}
-    </div>
-    <div class="day fri">
-      <div class="date">
-        <p class="date-num">13</p>
-        <p class="date-day">Fri</p>
-      </div>
-      {/* <div class="events">
-      </div> */}
+
     </div>
   </div>
 </div>
