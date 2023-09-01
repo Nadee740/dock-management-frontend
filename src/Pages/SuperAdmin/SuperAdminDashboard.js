@@ -130,13 +130,13 @@ const SuperAdminDashBoard = () => {
             </div>
             <div class="">
               <Link
-                to="/vehicle"
+                to="superadmin/users/list/subscribed/AdminUsers"
                 class="flex max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
               >
                 <div className="w-1/2">
                   {" "}
                   <h5 class="mb-2 text-2xl  font-bold  tracking-tight text-gray-900 dark:text-white">
-                    Manage Vehicles
+                    Manage Subcribers
                   </h5>
                 </div>
                 <div className=" flex justify-end w-1/2">

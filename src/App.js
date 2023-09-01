@@ -42,6 +42,7 @@ import LandingPage from "./Pages/LandingPage";
 import SuperAdminDashBoard from "./Pages/SuperAdmin/SuperAdminDashboard";
 import SuperAdminHome from "./Pages/SuperAdmin/SuperAdminHome";
 import ManageSubsriptionPage from "./Pages/SuperAdmin/ManageSubscriptionPage";
+import ListAllSubscribedAdminPage from "./Pages/SuperAdmin/ListAllSubscribedAdminPage";       
 
 function App() {
   const [user, setUser] = useState(null);
@@ -171,8 +172,9 @@ function App() {
                       element={<ManageSubsriptionPage />}
                     />
                     <Route
-                      path="users/listCompanyAdminUsers"
-                      element={<ListAllAdminPage iseditable={true} />}
+                      path="users/list/subscribed/AdminUsers"
+                      element={<ListAllSubscribedAdminPage
+                       iseditable={true} />}
                     />
                     <Route
                       path="Users/addCompanyAdminUsers"
