@@ -1,89 +1,53 @@
-import { faCoins } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from "react";
 
 const BooktheViewingComponent = () => {
+    const texts = [
+        'Text 1', 'Text 2', 'Text 3', 'Text 4', 'Text 5',
+        'Text 6', 'Text 7', 'Text 8', 'Text 9', 'Text 10',
+        'Text 11', 'Text 12', 'Text 13', 'Text 14', 'Text 15',
+        'Text 16', 'Text 17', 'Text 18', 'Text 19', 'Text 20'
+      ];
+      
+const itemsPerPage = 5;
+const [currentIndex, setCurrentIndex] = useState(0);
+
+const handlePrev = () => {
+  setCurrentIndex((prevIndex) => (prevIndex === 0 ? texts.length - 1 : prevIndex - 1));
+};
+
+const handleNext = () => {
+  setCurrentIndex((prevIndex) => (prevIndex === texts.length - 1 ? 0 : prevIndex + 1));
+};
     return (
-        <div class="calendar">
-  <div class="days">
-    <div class="day mon">
-      <div class="date">
-        <p class="date-num">9</p>
-        <br/>
-        <p class="date-day">Mon</p>
-      </div>
-
-    </div>
-    <div class="day tues">
-      <div class="date">
-        <p class="date-num">12</p>
-        <p class="date-day">Tues</p>
-      </div>
-      <div class="events">
-        <div class="event start-9 end-10 corp-fi">
-        <div class="flex">
-            <div class="flex bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-              <div class="relative flex flex-col min-w-0 mb-2 break-words bg-white shadow-soft-xl rounded-2xl bg-clip-border">
-                <div class="flex-auto p-4">
-                  <div class="flex flex-wrap -mx-2">
-                    <div class="flex-none w-full max-w-full px-3">
-                      <div c>
-                        <p class="flex mb-0 font-sans font-semibold leading-normal text-sm">
-                         09:00-10:00
-                        </p>
-                        <h5 class="flex mb-0 text-sm">
-                          Dock&nbsp;number
-                          {/* <span class="leading-normal text-sm font-weight-bolder text-lime-500">
-                            Book
-                          </span> */}
-                        </h5>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="book-view-app">
+        <button className="prev-button" onClick={handlePrev}>
+          Previous
+        </button>
+        <button className="next-button" onClick={handleNext}>
+          Next
+        </button>
+        <div className="text-slider">
+          {texts.map((text, index) => (
+            <AnimatePresence key={index}>
+              {index === currentIndex && (
+                <motion.div
+                  className="text-container"
+                  initial={{ x: 100, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  exit={{ x: -100, opacity: 0 }}
+                  transition={{ type: 'tween', duration: 0.5 }}
+                >
+                  <h1>{text}</h1>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          ))}
         </div>
-
+     
       </div>
-    </div>
-    <div class="day wed">
-      <div class="date">
-        <p class="date-num">11</p>
-        <p class="date-day">Wed</p>
-      </div>
-      <div class="events">
-        <div class="event start-10 end-12 corp-fi">
-        <div class="flex">
-            <div class="flex bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-              <div class="relative flex flex-col min-w-0 mb-2 break-words bg-white shadow-soft-xl rounded-2xl bg-clip-border">
-                <div class="flex-auto p-4">
-                  <div class="flex flex-wrap -mx-2">
-                    <div class="flex-none w-full max-w-full px-3">
-                      <div c>
-                        <p class="flex mb-0 font-sans font-semibold leading-normal text-sm">
-                         09:00-10:00
-                        </p>
-                        <h5 class="flex mb-0 text-sm">
-                          Dock&nbsp;number
-                          {/* <span class="leading-normal text-sm font-weight-bolder text-lime-500">
-                            Book
-                          </span> */}
-                        </h5>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-</div>
+  
+  
     );
 }
  

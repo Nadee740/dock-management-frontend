@@ -169,9 +169,9 @@ const AdminDashBoard = () => {
             </div>
           </div>
         </div>
-        <div class="bg-[#F4F5FA] p-10 m-6 rounded-xl overflow-x-scroll">
+        {/* <div class="bg-[#F4F5FA] m-6 rounded-xl overflow-hidden">
             <BooktheViewingComponent/>
-        </div>
+        </div> */}
         <div className="m-16"> 
         <AdminDashBoardCharts/>
         </div>
@@ -342,9 +342,7 @@ const AdminDashBoard = () => {
             </div>
           </div>
         </div>
-        <div >
-            <SubscriptionAdminDashboard subscriptionTypes={subscriptionTypes}/>
-        </div>
+      
         <div className="mt-4">
           <AdminDashBoardTable/>
         </div>

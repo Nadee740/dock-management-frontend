@@ -48,7 +48,7 @@ const ListAllAdmin = ({iseditable,adminData}) => {
         <tr className="rounded-xl p-3 bg-primary text-center">
           <th className="p-3 text-sm text-slate-500">S. No</th>
           <th className="p-3 text-sm text-slate-500">NAME</th>
-          <th className="p-3 text-sm text-slate-500">ROle</th>
+          <th className="p-3 text-sm text-slate-500">Role</th>
           <th className="p-3 text-sm text-slate-500">Email Address</th>
           <th className="p-3 text-sm text-slate-500">ACRA / UN</th>
           <th className="p-3 text-sm text-slate-500">CREATED ON</th>
@@ -62,10 +62,10 @@ const ListAllAdmin = ({iseditable,adminData}) => {
             }
           >
             <td className="p-3 text-blue-400">{index+1}</td>
-            <td className="p-3">{data[1].name}</td>
+            <td className="p-3">{data.admin_id.name}</td>
             <td className="p-3">Admin</td>
-            <td className="p-3">{data[1].email1}</td>
-            <td className="p-3">{data[1].acra_no}</td>
+            <td className="p-3">{data.admin_id.email1}</td>
+            <td className="p-3">{data.admin_id.acra_no}</td>
             <td className="p-3 text-red-700">{'10-90-2020'}</td>
             {iseditable && (
               <td className="p-3 flex">
