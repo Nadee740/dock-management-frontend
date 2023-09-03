@@ -46,6 +46,7 @@ import ListAllSubscribedAdminPage from "./Pages/SuperAdmin/ListAllSubscribedAdmi
 import Page404 from './Pages/PageNotFound'
 function App() {
   const [user, setUser] = useState(null);
+  const [Token,setToken]=useState(null);
   const [authenticating,setAuthenticating]=useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -64,6 +65,7 @@ function App() {
          console.log("success", response, "response.data");
         if (response.data != "") {
           setUser(response.data.user);
+          setToken(token);
           setAuthenticating(false)
           setLoading(false);
         } else {
@@ -79,7 +81,7 @@ function App() {
 
   return (
     <div className="App">
-      <UserContext.Provider value={{ user, setUser, loading, setLoading }}>
+      <UserContext.Provider value={{ user, setUser,Token,setToken, loading, setLoading }}>
         {/* <SideNavBar/> */}
         <BrowserRouter>
           <Routes>

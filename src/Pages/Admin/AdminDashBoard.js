@@ -20,8 +20,9 @@ import { UserContext } from "../../Contexts/UserContexts";
 import axios from "axios";
 import { baseUrl } from "../../utils/baseurl";
 const AdminDashBoard = () => {
-    const {setLoading}=useContext(UserContext)
+    const {setLoading,Token}=useContext(UserContext)
     const [subscriptionTypes,setSubscriptionTypes]=useState([]);
+    const [shipments,setShipments]=useState();
     useEffect(()=>{
         setLoading(true);
         
@@ -31,6 +32,30 @@ const AdminDashBoard = () => {
             if(res.data.status=="ok")
             {
                 setSubscriptionTypes(res.data.data);
+                setLoading(false);
+            }
+          
+        else 
+        throw new Error(res.data.msg)
+        })
+        .catch((err) => {
+            setLoading(false);
+            console.log(err)
+
+        });
+    },[])
+    useEffect(()=>{
+        setLoading(true);
+         axios.get(`${baseUrl}/dock/current/bookings`,{
+            headers: {
+              Authorization: `Bearer ${Token}`,
+            },
+          })
+        .then((res) => {
+            if(res.data.status=="ok")
+            {   
+                
+                setShipments(res.data.data);
                 setLoading(false);
             }
           
@@ -172,9 +197,9 @@ const AdminDashBoard = () => {
         {/* <div class="bg-[#F4F5FA] m-6 rounded-xl overflow-hidden">
             <BooktheViewingComponent/>
         </div> */}
-        <div className="m-16"> 
+        {/* <div className="m-16"> 
         <AdminDashBoardCharts/>
-        </div>
+        </div> */}
 
         <div className="m-16 flex flex-row grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4">
            
@@ -308,7 +333,7 @@ const AdminDashBoard = () => {
             </div>
           </div>
         </div>
-        <div className="w-1/2 m-10">
+        {/* <div className="w-1/2 m-10">
           <div class="relative shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col min-w-0 break-words bg-white shadow-soft-xl rounded-2xl bg-clip-border">
             <div class="flex-auto p-4">
               <div class="flex flex-wrap -mx-3">
@@ -341,10 +366,10 @@ const AdminDashBoard = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       
         <div className="mt-4">
-          <AdminDashBoardTable/>
+         {shipments && <AdminDashBoardTable shipments={shipments}/>} 
         </div>
         <div class="m-6 ">
       
