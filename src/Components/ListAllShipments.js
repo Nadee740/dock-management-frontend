@@ -91,13 +91,13 @@ const ListAllShipments = ({ iseditable,todayShipments }) => {
                 </button>)}</td>
             {true && (
               <td className="flex">
-                <button
+                {/* <button
                   className="h-7 flex items-center bg-orange-500 text-white p-2 rounded-md text-md mr-5"
                   onClick={() => {}}
                 >
                   <FontAwesomeIcon icon={faPenToSquare} className="mt-1 mr-1" size="sm"/>
                   Edit
-                </button>
+                </button> */}
                 <button
                   className="h-7 flex items-center bg-red-500 text-white p-2 rounded-md text-md mr-5"
                   onClick={() => {}}

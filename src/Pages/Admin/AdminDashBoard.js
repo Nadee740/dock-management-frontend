@@ -194,9 +194,9 @@ const AdminDashBoard = () => {
             </div>
           </div>
         </div>
-        {/* <div class="bg-[#F4F5FA] m-6 rounded-xl overflow-hidden">
+        <div class="bg-[#F4F5FA] m-6 rounded-xl overflow-hidden">
             <BooktheViewingComponent/>
-        </div> */}
+        </div>
         {/* <div className="m-16"> 
         <AdminDashBoardCharts/>
         </div> */}
