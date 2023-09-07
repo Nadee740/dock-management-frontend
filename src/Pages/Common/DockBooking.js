@@ -187,21 +187,26 @@ const submitForm=(e)=>{
       building_id,
       dock_type_id,
       dock_id,
-      booked_date:date,
-      timeslot:selectedtimeSlots[0],
+      booked_dates:date,
+      timeslots:selectedtimeSlots,
       vehicle_id
 
     }
+    
     const token=localStorage.getItem("EZTOken")
    
-    axios.post(`${baseUrl}/dock/book`,data,{
+    axios.post(`${baseUrl}/dock/book/multiple`,data,{
       headers:{
           'Authorization': `Bearer ${token}`
       }
     })
     .then((res)=>{
+       console.log(res.data)
       if(res.data.status==="ok"){
         console.log(res.data)
+        const jsonString = JSON.stringify(res.data.data);
+
+        sessionStorage.setItem("bookingdata", jsonString);
         window.location.href="/booking-confirm/"+res.data.data._id
       }
       else{
@@ -344,14 +349,14 @@ const submitForm=(e)=>{
                 <select 
                 required
                 onChange={(e)=>{
-                    setcompany_id(JSON.parse(e.target.value).company._id)
+                    setcompany_id(JSON.parse(e.target.value)._id)
                 }} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
                   <option value="">---Choose Company---</option>
                   {
                     companyData.map((c,index)=>{
                       
                       return(
-                        <option value={JSON.stringify(c)}>{c.company.company_name}</option>
+                        <option value={JSON.stringify(c)}>{c.company_name}</option>
                       )
                     })
                   }
@@ -590,7 +595,7 @@ const submitForm=(e)=>{
                     console.log(Array.from(Array(parseInt(e.target.value)).keys()))
                     setBookforMultipleDays(e.target.value)
                   }} class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                    <option value="" >Single Day</option>
+                    <option value={1} >Single Day</option>
                     {[2,3,4,5,6,7,8].map((data,index)=>{
                         return <option value={data}>{data}&nbsp; Day</option>
                     })
@@ -599,7 +604,7 @@ const submitForm=(e)=>{
                   </select>
                 </div>
               </div>
-              {date && dock_type_id && dock_id && <div class="w-2/3 m-1 grid grid-cols-1 gap-2 mt-4 sm:grid-cols-5  ">
+              {date && dock_type_id && dock_id && <div class="w-2/3 m++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-1 grid grid-cols-1 gap-2 mt-4 sm:grid-cols-5  ">
                 {times.map((element, index) => {
                   
                   return (
