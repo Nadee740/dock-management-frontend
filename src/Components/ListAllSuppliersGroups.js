@@ -5,7 +5,7 @@ import { Mail } from "@mui/icons-material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const ListAllSupplierGroups = ({ iseditable }) => {
+const ListAllSupplierGroups = ({suppliergrpData,iseditable }) => {
    
   const datas = [
 
@@ -15,28 +15,8 @@ const ListAllSupplierGroups = ({ iseditable }) => {
         alloted_time: ["10:30","10:30","10:30","10:30","10:30","10:30"],
         dock_types: ["aaa","bbb","ccc","aaa","bbb","ccc","aaa","bbb","ccc"],
         single_qr_multi_entry: false,
-      },
-      {
-        group_name: "SGX1234",
-        building_name: "40 Footer",
-        alloted_time: ["10:30","10:30","10:30","10:30","10:30","10:30"],
-        dock_types: ["aaa","bbb","ccc","aaa","bbb","ccc","aaa","bbb","ccc"],
-        single_qr_multi_entry: false,
-      },
-      {
-        group_name: "SGX1234",
-        building_name: "40 Footer",
-        alloted_time: ["10:30","10:30","10:30","10:30","10:30","10:30"],
-        dock_types: ["aaa","bbb","ccc","aaa","bbb","ccc","aaa","bbb","ccc"],
-        single_qr_multi_entry: false,
-      },
-      {
-        group_name: "SGX1234",
-        building_name: "40 Footer",
-        alloted_time: ["10:30","10:30","10:30","10:30","10:30","10:30"],
-        dock_types: ["aaa","bbb","ccc","aaa","bbb","ccc","aaa","bbb","ccc"],
-        single_qr_multi_entry: false,
-      },
+      }
+     
  
   ];
   return (
@@ -95,7 +75,7 @@ const ListAllSupplierGroups = ({ iseditable }) => {
             <th className="p-3 text-sm text-slate-500">ACTIONS</th>
           )}
         </tr>
-        {datas.map((data, index) => (
+        {suppliergrpData.map((data, index) => (
           <tr
             key={index}
             className={
@@ -104,12 +84,12 @@ const ListAllSupplierGroups = ({ iseditable }) => {
           >
             <td className="p-3 text-blue-400">{index+1}</td>
             <td className="p-3">{data.group_name}</td>
-            <td className="p-3">{data.building_name}</td>
-            <td className="p-3">{data.alloted_time.map((time,index)=>{
+            <td className="p-3">{data.building_id.building_name}</td> 
+            <td className="p-3">{data.timeAlloted.map((time,index)=>{
                 return (<>{time}{(index+1)%5==0?(<br/>):(",")}</>)
             })}</td>
-            <td className="p-3">{data.dock_types.map((type,index)=>{
-                return (<>{type}{(index+1)%3==0?(<br/>):(",")}</>)
+             <td className="p-3">{data.dock_type.map((type,index)=>{
+                return (<>{type.dock_type}{(index+1)%3==0?(<br/>):(",")}</>)
             })}</td>
             <td className="p-3 text-red-700">{data.single_qr_multi_entry?"Allowed":"Not Allowed"}</td>
             {true && (

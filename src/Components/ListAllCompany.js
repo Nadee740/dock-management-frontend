@@ -67,7 +67,7 @@ const ListAllCompany = ({ iseditable,companyDetails }) => {
           >
             <td className="p-3 text-blue-400">{index+1}</td>
             <td className="p-3">{data.company_name}</td>
-            <td className="p-3">{data.building_name}</td>
+            <td className="p-3">{data.building_id.building_name}</td>
             <td className="p-3">{data.building_address}</td>
             {iseditable && (
               <td className="flex">

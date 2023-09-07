@@ -178,11 +178,11 @@ const ListAllSuppliers = ({suppliersData,iseditable}) => {
             }
           >
             <td className="p-3 text-blue-400">{index+1}</td>
-            <td className="p-3">{"supplier" +index+1}</td>
-            <td className="p-3">{data[0].supplier_reg_no}</td>
+            <td className="p-3">{data.supplier.supplier_id.name}</td>
+            <td className="p-3">{data.supplier.supplier_id.email1}</td>
             <td className="p-3">data.vehicle_type</td>
             <td className="p-3">data.vehicle_no</td>
-            <td className="p-3">{data[0].group}</td>
+            <td className="p-3">{data.supplier.supplier_id.acra_no}</td>
             <td className="p-3 text-red-700">{'18-09-2002'}</td>
             {iseditable&&  <td className="flex">
                 <button

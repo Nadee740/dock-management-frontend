@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Mail } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
-const ListAllVehicles = ({ iseditable }) => {
+const ListAllVehicles = ({vehicleData, iseditable }) => {
   const datas = [
     {
       vehicles_no: "SGX1234",
@@ -111,19 +111,19 @@ const ListAllVehicles = ({ iseditable }) => {
             <th className="p-3 text-sm text-slate-500">Actions</th>
           )}
         </tr>
-        {datas.map((data, index) => (
+        {vehicleData.map((data, index) => (
           <tr
             key={index}
             className={
               "border-b text-center border-slate-200 border-solid hover:bg-gray-300"
             }
           >
-            <td className="p-3 text-blue-400">{data.vehicles_no}</td>
+            <td className="p-3 text-blue-400">{data.vehicle_no}</td>
             <td className="p-3">{data.vehicle_type}</td>
             <td className="p-3">{data.driver_name}</td>
             <td className="p-3">{data.driver_no}</td>
-            <td className="p-3">{data.drivers_fin}</td>
-            <td className="p-3 text-red-700">{data.created_by}</td>
+            <td className="p-3">{data.nric_no}</td>
+            {/* <td className="p-3 text-red-700">{data.supplier_id.name}</td> */}
             {iseditable && (
               <td className="flex">
                 <button

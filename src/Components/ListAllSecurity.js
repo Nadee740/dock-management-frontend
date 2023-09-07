@@ -62,10 +62,10 @@ const ListAllSecurity = ({iseditable,securityData}) => {
             }
           >
             <td className="p-3 text-blue-400">{index+1}</td>
-            <td className="p-3">{data[1].name}</td>
-            <td className="p-3">{data[1].email1}</td>
-            <td className="p-3">{data[1].acra_no}</td>
-            <td className="p-3">data.building</td>
+            <td className="p-3">{data.security_id.name}</td>
+            <td className="p-3">{data.security_id.email1}</td>
+            <td className="p-3">{data.security_id.acra_no}</td>
+            <td className="p-3">{data.building.building_name}</td>
             <td className="p-3">{'10-10-2020'}</td>
             {iseditable&& (
               <td className="flex">

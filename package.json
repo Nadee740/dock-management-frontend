@@ -43,7 +43,6 @@
     "react-slick": "^0.29.0",
     "sass": "^1.64.1",
     "slick-carousel": "^1.8.1",
-    "swiper": "^10.2.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

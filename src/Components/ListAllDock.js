@@ -66,9 +66,9 @@ Status:"Closed"
             }
           >
             <td className="p-3 text-blue-400">{index+1}</td>
-            <td className="p-3">{data.building}</td>
+            <td className="p-3">{data.building_id.building_name}</td>
             <td className="p-3">{data.mode}</td>
-            <td className="p-3">{data.dock_type}</td>
+            <td className="p-3">{data.dock_type_id.dock_type}</td>
             <td className="p-3">{data.price}</td>
             <td className="p-3 text-red-700">{data.status}</td>
             <td className="flex"> <button
