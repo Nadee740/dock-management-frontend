@@ -11,8 +11,8 @@ import { UserContext } from "../Contexts/UserContexts";
 import axios from "axios";
 import { baseUrl } from "../utils/baseurl";
 
-const BooktheViewingSliderComponent=()=>{
-    
+const BooktheViewingSliderComponent=({dockStatus,building})=>{
+    console.log(building)
 
 
     
@@ -77,7 +77,7 @@ const BooktheViewingSliderComponent=()=>{
         <div className="" >
     <div className="flex items-center justify-center w-full m-2">
         <h2 className="font-bold text-2xl" >
-            Catering Building 1
+        {building.building_name}
         </h2>
     </div>
     <div className="m-2 flex justify-center overflow-x-scroll">
@@ -97,42 +97,21 @@ const BooktheViewingSliderComponent=()=>{
             </div>
             </div>
     </li>
-    <li>
+    {dockStatus.map((dockstatus,index)=>(
+      <li>
     <div className="m-2 flex bg-blue border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" >
         <div class="flex-auto p-4">
                   <div class="flex flex-wrap -mx-2">
                     <div class="flex-none w-full max-w-full px-3">
-            <h3 >Dock 1 
+            <h3 >{dockstatus.dock.dock_number}
               </h3>
           </div>
           </div>
             </div>
             </div> 
     </li>
-    <li>
-    <div className="m-2 flex bg-blue border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" >
-        <div class="flex-auto p-4">
-                  <div class="flex flex-wrap -mx-2">
-                    <div class="flex-none w-full max-w-full px-3">
-            <h3 >Dock 2
-              </h3>
-          </div>
-          </div>
-            </div>
-            </div> 
-    </li>
-    <li>
-    <div className="m-2 flex bg-blue border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" >
-        <div class="flex-auto p-4">
-                  <div class="flex flex-wrap -mx-2">
-                    <div class="flex-none w-full max-w-full px-3">
-            <h3 >Dock 1 
-              </h3>
-          </div>
-          </div>
-            </div>
-            </div> 
-    </li>
+    ))}
+    
   </ul>
   </div>
   <div class="col-span-5 md:col-span-5 ">
@@ -140,48 +119,33 @@ const BooktheViewingSliderComponent=()=>{
       
       <Slider {...settings}>
        
-        {timeSlots.map((day,index)=>(
+        {timeSlots.map((time,index)=>(
           <div>
               <div className="m-2 flex bg-blue border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" >
         <div class="flex-auto p-4">
                   <div class="flex flex-wrap -mx-2">
                     <div class="flex-none w-full max-w-full px-3">
-            <h3 >{day}
+            <h3 >{time}
               </h3>
           </div>
           </div>
             </div>
             </div>
-          <div className=" m-2 flex bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" >
+            {dockStatus.map((dockstatus,ind)=>(
+              <div className=" m-2 flex bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" >
         <div class="flex-auto p-4">
                   <div class="flex flex-wrap -mx-2">
                     <div class="flex-none w-full max-w-full px-3">
-          <h3 >Available
-            </h3>
+          {dockstatus.timeslot.includes(time)?<h3>Available</h3>:<h3>Booked</h3>}
+          
             </div>
             </div>
             </div>
         </div>
-        <div className="m-2 flex bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" >
-        <div class="flex-auto p-4">
-                  <div class="flex flex-wrap -mx-2">
-                    <div class="flex-none w-full max-w-full px-3">
-          <h3 >Available
-            </h3>
-            </div>
-            </div>
-            </div>
-        </div>
-        <div className="m-2 flex bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" >
-        <div class="flex-auto p-4">
-                  <div class="flex flex-wrap -mx-2">
-                    <div class="flex-none w-full max-w-full px-3">
-          <h3 class="flex mb-0 text-l">Available
-            </h3>
-            </div>
-            </div>
-            </div>
-        </div>
+            ))}
+          
+        
+        
           </div>
          
         ))}
@@ -212,14 +176,21 @@ function dateFormater(inputDate) {
   }
 
 const BooktheViewingComponent = ({buildings}) => {
+   console.log(buildings)
     const {setLoading,Token}=useContext(UserContext);
     const date=new Date();
-    const [building_id,setBuilding_id]=useState();
+    const [selectedBuilding,setBuilding]=useState(buildings[0]);
     const [dockStatus,setDockStatus]=useState();
     const today=dateFormater(date);
+   
+   
     useEffect(()=>{
+    if(buildings.length>0){
+      console.log("huu")
+      setBuilding(buildings[0])
+      setLoading(true)
        axios
-      .get(`${baseUrl}/dock/available/date=${today}&&building_id=${building_id}`, {
+      .get(`${baseUrl}/dock/available/building?date=${today}&&building_id=${selectedBuilding._id}`, {
         headers: {
           Authorization: `Bearer ${Token}`,
         },
@@ -230,6 +201,7 @@ const BooktheViewingComponent = ({buildings}) => {
           setDockStatus(response.data.data)
           setLoading(false);
         } else {
+          setDockStatus("")
             throw new Error("somethin went wrong")
         }
       })
@@ -237,21 +209,33 @@ const BooktheViewingComponent = ({buildings}) => {
         setLoading(false);
         console.log("FAILED!!! ", error);
       });
-
-    })
+    }
+    },[])
     return(
         <div className="" >
         <div className="m-2 w-1/2"> 
         <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
-<select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-  <option selected>Choose a Building</option>
-  <option value="US">United States</option>
-  <option value="CA">Canada</option>
-  <option value="FR">France</option>
-  <option value="DE">Germany</option>
-</select>
+{buildings && <select id="countries" 
+ onChange={(e)=>{
+  
+  setBuilding(JSON.parse(e.target.value))
+}}
+class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+  
+  
+  {buildings.map((building,index)=>(
+    <>
+    {index==0?
+    <option selected value={JSON.stringify(building)}>{building.building_name}</option>:
+      <option value={JSON.stringify(building)}>{building.building_name}</option>}
+    
+    </>
+     
+  ))}
+</select>}
+
 </div>
-        <BooktheViewingSliderComponent/>
+       {buildings.length>0 && dockStatus && <BooktheViewingSliderComponent dockStatus={dockStatus} building={selectedBuilding}/>} 
         
  </div>
 )

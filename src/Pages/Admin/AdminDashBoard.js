@@ -23,7 +23,7 @@ const AdminDashBoard = () => {
     const {setLoading,Token}=useContext(UserContext)
     const [subscriptionTypes,setSubscriptionTypes]=useState([]);
     const [shipments,setShipments]=useState();
-    const [buildings,setBuildings]=useState([]);
+    const [buildings,setBuildings]=useState(null);
     useEffect(()=>{
         setLoading(true);
         axios.get(`${baseUrl}/subscription/get/types`)
@@ -51,7 +51,7 @@ const AdminDashBoard = () => {
         .then((res) => {
             if(res.data.status=="ok")
             {
-                console.log(res.data.data)
+              console.log(res.data.data);
                 setBuildings(res.data.data);
                 setLoading(false);
             }
@@ -60,6 +60,7 @@ const AdminDashBoard = () => {
         throw new Error(res.data.msg)
         })
         .catch((err) => {
+            setBuildings([])
             setLoading(false);
             console.log(err)
 
@@ -89,6 +90,7 @@ const AdminDashBoard = () => {
 
         });
     },[])
+
   return (
     <>
       <div className="w-full admin-dashboard">
@@ -216,13 +218,13 @@ const AdminDashBoard = () => {
           </div>
         </div>
         <div class="bg-[#F4F5FA] m-6 rounded-xl overflow-hidden">
-            <BooktheViewingComponent/>
+           {buildings && <BooktheViewingComponent buildings={buildings}/>} 
         </div>
         {/* <div className="m-16"> 
         <AdminDashBoardCharts/>
         </div> */}
 
-        <div className="m-16 flex flex-row grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        {/* <div className="m-16 flex flex-row grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4">
            
           <div class="flex">
             <div class="flex p-2 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
@@ -353,7 +355,7 @@ const AdminDashBoard = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         {/* <div className="w-1/2 m-10">
           <div class="relative shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col min-w-0 break-words bg-white shadow-soft-xl rounded-2xl bg-clip-border">
             <div class="flex-auto p-4">
