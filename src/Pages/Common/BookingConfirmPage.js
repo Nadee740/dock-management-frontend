@@ -6,24 +6,14 @@ import { baseUrl } from "../../utils/baseurl";
 import { json, useParams } from "react-router-dom";
 import CryptoJS  from "crypto-js";
 const BookingConfirmPage=()=>{
-
-    function decrypt(data, key) {
-        let decData = CryptoJS.enc.Base64.parse(data).toString(CryptoJS.enc.Utf8);
-        return CryptoJS.AES.decrypt(decData, key).toString(CryptoJS.enc.Utf8);
-      }
-
-    const { id } = useParams()
-  
-
     const {setLoading}=useContext(UserContext);
     const [bookingDetails,setBookingDetails]=useState([]);
     const [companyDetails,setCompanyDetails]=useState([]);
     const [dockDetails,setDockDetails]=useState();
     const [building,setBulding]=useState();
     const [dockTypeDetails,setDockTypeDetails]=useState();
- 
-   
-       useEffect(()=>{
+    
+    useEffect(()=>{
         setLoading(true);
         const val=sessionStorage.getItem("bookingdata");
         const v=JSON.parse(val);
