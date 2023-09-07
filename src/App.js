@@ -44,6 +44,8 @@ import SuperAdminHome from "./Pages/SuperAdmin/SuperAdminHome";
 import ManageSubsriptionPage from "./Pages/SuperAdmin/ManageSubscriptionPage";
 import ListAllSubscribedAdminPage from "./Pages/SuperAdmin/ListAllSubscribedAdminPage";       
 import Page404 from './Pages/PageNotFound'
+import WareHouseDashBoard from "./Pages/WareHouse/WarehouseDashboard";
+import WareHouseHome from "./Pages/WareHouse/WarehouseHomePage";
 function App() {
   const [user, setUser] = useState(null);
   const [Token,setToken]=useState(null);
@@ -65,6 +67,7 @@ function App() {
          console.log("success", response, "response.data");
         if (response.data != "") {
           setUser(response.data.user);
+          console.log(response.data.user)
           setToken(token);
           setAuthenticating(false)
           setLoading(false);
@@ -89,6 +92,7 @@ function App() {
            <Route path="/" element={<LandingPage/>} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+           
             
             </>
             }
@@ -221,13 +225,25 @@ function App() {
                     <>
                     <Route index element={<SecurityDashBoard />} />
                   <Route path="security" element={<SecurityHome />}>
+             
                     <Route index element={<SecurityDashBoard />} />
                   </Route>
+                  
                   </>
                 )}
-                {/* {
-                    user.Type=="warehouse"
-                } */}
+                {
+                    user.userType=="warehouse"&&(
+                      <>
+                      <Route index element={<WareHouseDashBoard />} />
+                    <Route path="warehouse" element={<WareHouseHome />}>
+               
+                      <Route index element={<WareHouseDashBoard />} />
+                    </Route>
+                    
+                    </>
+                    )
+                }
+                   
               </Route>
             )}
            {authenticating==false && <Route path="*" element={<Page404/>}/>} 
