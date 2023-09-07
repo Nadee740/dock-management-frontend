@@ -1,15 +1,16 @@
-const AdminDashBoardTable = () => {
+const AdminDashBoardTable = ({shipments}) => {
+    console.log(shipments)
   return (
     <section class="container px-11 mx-auto">
       <div class="sm:flex sm:items-center sm:justify-between">
         <div>
           <div class="flex items-center gap-x-3">
             <h2 class="text-lg font-medium text-gray-800 dark:text-white">
-              Todays Orders
+              Todays Shipments
             </h2>
 
             <span class="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">
-              240 Orders
+              {shipments.length}  Shipments
             </span>
           </div>
 
@@ -49,7 +50,7 @@ const AdminDashBoardTable = () => {
       </div>
 
       <div class="mt-6 md:flex md:items-center md:justify-between">
-        <div class="inline-flex overflow-hidden bg-white border divide-x rounded-lg dark:bg-gray-900 rtl:flex-row-reverse dark:border-gray-700 dark:divide-gray-700">
+        {/* <div class="inline-flex overflow-hidden bg-white border divide-x rounded-lg dark:bg-gray-900 rtl:flex-row-reverse dark:border-gray-700 dark:divide-gray-700">
           <button class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 bg-gray-100 sm:text-sm dark:bg-gray-800 dark:text-gray-300">
             View all
           </button>
@@ -61,7 +62,7 @@ const AdminDashBoardTable = () => {
           <button class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">
             Type 2
           </button>
-        </div>
+        </div> */}
 
         <div class="relative flex items-center mt-4 md:mt-0">
           <span class="absolute">
@@ -165,25 +166,27 @@ const AdminDashBoardTable = () => {
                   </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-                  <tr>
+                  {shipments.map((shipment,index)=>{
+                    return (
+                        <tr>
                     <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
                       <div>
                         <h2 class="font-medium text-gray-800 dark:text-white ">
-                          Catalog
+                          {shipment.delivery_company_id.company_name}
                         </h2>
-                        <p class="text-sm font-normal text-gray-600 dark:text-gray-400">
-                          catalogapp.io
-                        </p>
+                        {/* <p class="text-sm font-normal text-gray-600 dark:text-gray-400">
+                          {shipment.status}
+                        </p> */}
                       </div>
                     </td>
                     <td class="px-12 py-4 text-sm font-medium whitespace-nowrap">
                       <div class="inline px-3 py-1 text-sm font-normal rounded-full text-emerald-500 gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
-                        Customer
+                      {shipment.status}
                       </div>
                     </td>
                     <td class="px-4 py-4 text-sm whitespace-nowrap">
                       <div>
-                        <h4 class="text-gray-700 dark:text-gray-200">10-11</h4>
+                        <h4 class="text-gray-700 dark:text-gray-200">{shipment.timeslot}</h4>
                         <p class="text-gray-500 dark:text-gray-400">
                           booked slot
                         </p>
@@ -191,7 +194,7 @@ const AdminDashBoardTable = () => {
                     </td>
                     <td class="px-4 py-4 text-sm whitespace-nowrap">
                       <div class="flex items-center">
-                        <p>#24567899</p>
+                        <p>{shipment.timeslot}</p>
                       </div>
                     </td>
 
@@ -220,235 +223,11 @@ const AdminDashBoardTable = () => {
                       </button>
                     </td>
                   </tr>
+                    )
+                  })}
+              
 
-                  <tr>
-                    <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                      <div>
-                        <h2 class="font-medium text-gray-800 dark:text-white ">
-                          Sisyphus
-                        </h2>
-                        <p class="text-sm font-normal text-gray-600 dark:text-gray-400">
-                          sisyphus.com
-                        </p>
-                      </div>
-                    </td>
-                    <td class="px-12 py-4 text-sm font-medium whitespace-nowrap">
-                      <div class="inline px-3 py-1 text-sm font-normal rounded-full text-emerald-500 gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
-                        Customer
-                      </div>
-                    </td>
-                    <td class="px-4 py-4 text-sm whitespace-nowrap">
-                      <div>
-                        <h4 class="text-gray-700 dark:text-gray-200">
-                          10-12
-                        </h4>
-                        <p class="text-gray-500 dark:text-gray-400">
-                          booked
-                        </p>
-                      </div>
-                    </td>
-                    <td class="px-4 py-4 text-sm whitespace-nowrap">
-                      <div class="flex items-center">
-                        <p>#124444</p>
-                      </div>
-                    </td>
-
-                    <td class="px-4 py-4 text-sm whitespace-nowrap">
-                      <div class="w-48 h-1.5 bg-blue-200 overflow-hidden rounded-full">
-                        <div class="bg-blue-500 w-11/12 h-1.5"></div>
-                      </div>
-                    </td>
-
-                    <td class="px-4 py-4 text-sm whitespace-nowrap">
-                      <button class="px-1 py-1 text-gray-500 transition-colors duration-200 rounded-lg dark:text-gray-300 hover:bg-gray-100">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke-width="1.5"
-                          stroke="currentColor"
-                          class="w-6 h-6"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
-                          />
-                        </svg>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                      <div>
-                        <h2 class="font-medium text-gray-800 dark:text-white ">
-                          Sisyphus
-                        </h2>
-                        <p class="text-sm font-normal text-gray-600 dark:text-gray-400">
-                          sisyphus.com
-                        </p>
-                      </div>
-                    </td>
-                    <td class="px-12 py-4 text-sm font-medium whitespace-nowrap">
-                      <div class="inline px-3 py-1 text-sm font-normal rounded-full text-emerald-500 gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
-                        Customer
-                      </div>
-                    </td>
-                    <td class="px-4 py-4 text-sm whitespace-nowrap">
-                      <div>
-                        <h4 class="text-gray-700 dark:text-gray-200">
-                          10-12
-                        </h4>
-                        <p class="text-gray-500 dark:text-gray-400">
-                          booked
-                        </p>
-                      </div>
-                    </td>
-                    <td class="px-4 py-4 text-sm whitespace-nowrap">
-                      <div class="flex items-center">
-                        <p>#124444</p>
-                      </div>
-                    </td>
-
-                    <td class="px-4 py-4 text-sm whitespace-nowrap">
-                      <div class="w-48 h-1.5 bg-blue-200 overflow-hidden rounded-full">
-                        <div class="bg-blue-500 w-11/12 h-1.5"></div>
-                      </div>
-                    </td>
-
-                    <td class="px-4 py-4 text-sm whitespace-nowrap">
-                      <button class="px-1 py-1 text-gray-500 transition-colors duration-200 rounded-lg dark:text-gray-300 hover:bg-gray-100">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke-width="1.5"
-                          stroke="currentColor"
-                          class="w-6 h-6"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
-                          />
-                        </svg>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                      <div>
-                        <h2 class="font-medium text-gray-800 dark:text-white ">
-                          Sisyphus
-                        </h2>
-                        <p class="text-sm font-normal text-gray-600 dark:text-gray-400">
-                          sisyphus.com
-                        </p>
-                      </div>
-                    </td>
-                    <td class="px-12 py-4 text-sm font-medium whitespace-nowrap">
-                      <div class="inline px-3 py-1 text-sm font-normal rounded-full text-emerald-500 gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
-                        Customer
-                      </div>
-                    </td>
-                    <td class="px-4 py-4 text-sm whitespace-nowrap">
-                      <div>
-                        <h4 class="text-gray-700 dark:text-gray-200">
-                          10-12
-                        </h4>
-                        <p class="text-gray-500 dark:text-gray-400">
-                          booked
-                        </p>
-                      </div>
-                    </td>
-                    <td class="px-4 py-4 text-sm whitespace-nowrap">
-                      <div class="flex items-center">
-                        <p>#124444</p>
-                      </div>
-                    </td>
-
-                    <td class="px-4 py-4 text-sm whitespace-nowrap">
-                      <div class="w-48 h-1.5 bg-blue-200 overflow-hidden rounded-full">
-                        <div class="bg-blue-500 w-11/12 h-1.5"></div>
-                      </div>
-                    </td>
-
-                    <td class="px-4 py-4 text-sm whitespace-nowrap">
-                      <button class="px-1 py-1 text-gray-500 transition-colors duration-200 rounded-lg dark:text-gray-300 hover:bg-gray-100">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke-width="1.5"
-                          stroke="currentColor"
-                          class="w-6 h-6"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
-                          />
-                        </svg>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                      <div>
-                        <h2 class="font-medium text-gray-800 dark:text-white ">
-                          Sisyphus
-                        </h2>
-                        <p class="text-sm font-normal text-gray-600 dark:text-gray-400">
-                          sisyphus.com
-                        </p>
-                      </div>
-                    </td>
-                    <td class="px-12 py-4 text-sm font-medium whitespace-nowrap">
-                      <div class="inline px-3 py-1 text-sm font-normal rounded-full text-emerald-500 gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
-                        Customer
-                      </div>
-                    </td>
-                    <td class="px-4 py-4 text-sm whitespace-nowrap">
-                      <div>
-                        <h4 class="text-gray-700 dark:text-gray-200">
-                          10-12
-                        </h4>
-                        <p class="text-gray-500 dark:text-gray-400">
-                          booked
-                        </p>
-                      </div>
-                    </td>
-                    <td class="px-4 py-4 text-sm whitespace-nowrap">
-                      <div class="flex items-center">
-                        <p>#124444</p>
-                      </div>
-                    </td>
-
-                    <td class="px-4 py-4 text-sm whitespace-nowrap">
-                      <div class="w-48 h-1.5 bg-blue-200 overflow-hidden rounded-full">
-                        <div class="bg-blue-500 w-11/12 h-1.5"></div>
-                      </div>
-                    </td>
-
-                    <td class="px-4 py-4 text-sm whitespace-nowrap">
-                      <button class="px-1 py-1 text-gray-500 transition-colors duration-200 rounded-lg dark:text-gray-300 hover:bg-gray-100">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke-width="1.5"
-                          stroke="currentColor"
-                          class="w-6 h-6"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
-                          />
-                        </svg>
-                      </button>
-                    </td>
-                  </tr>
+         
                 </tbody>
               </table>
             </div>

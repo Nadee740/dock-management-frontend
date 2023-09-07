@@ -12,16 +12,19 @@ const LandingPage = () => {
     const [subscriptionTypes,setSubscriptionTypes]=useState([]);
     useEffect(()=>{
         setLoading(true);
-        
-
         axios.get(`${baseUrl}/subscription/get/types`)
         .then((res) => {
             if(res.data.status=="ok")
+            {
             setSubscriptionTypes(res.data.data);
+            setLoading(false);
+            }
+            
         else 
         throw new Error(res.data.msg)
         })
         .catch((err) => {
+            // setLoading(false);
             console.log(err)
 
         });

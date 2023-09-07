@@ -5,6 +5,7 @@ import { Mail } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 const ListAllShipments = ({ iseditable,todayShipments }) => {
+    console.log(todayShipments)
   return (
     <>
       <div className="flex items-center justify-between p-4">

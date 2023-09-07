@@ -23,7 +23,7 @@ const SecurityDashBoard = () => {
     useEffect(()=>{
         setLoading(true);
         const token = localStorage.getItem("EZTOken");
-        axios.get(`${baseUrl}/dock/current/booking`, {headers: {
+        axios.get(`${baseUrl}/dock/current/booking/users`, {headers: {
             Authorization: `Bearer ${token}`,
           }},)
         .then((res) => {

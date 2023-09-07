@@ -5,15 +5,7 @@ import { Mail } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 const ListAllAdmin = ({iseditable,adminData}) => {
-    const datas=[{
-s_no:"1",
-name:"40 Footer",
-role:"ss00012",
-emailaddress:"n@gmail.com",
-acra_un:"8888",
-createdon:"09/09/2002"
 
-}]
   return (
     <>
       <div className="flex items-center justify-between p-4">
