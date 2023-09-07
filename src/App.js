@@ -51,6 +51,7 @@ function App() {
   const [Token,setToken]=useState(null);
   const [authenticating,setAuthenticating]=useState(false);
   const [loading, setLoading] = useState(false);
+  const [accountDetails,setAccountDetails]=useState(null);
 
   useEffect(() => {
     setUser({
@@ -77,10 +78,10 @@ setToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGM0ZTJjOWM3ZDBlNWZjM
     //     },
     //   })
     //   .then(function (response) {
-    //      console.log("success", response, "response.data");
     //     if (response.data != "") {
     //         console.log(response.data)
     //       setUser(response.data.user);
+    //       setAccountDetails(response.data.data)
     //       setToken(token);
     //       setAuthenticating(false)
     //       setLoading(false);
@@ -97,7 +98,7 @@ setToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGM0ZTJjOWM3ZDBlNWZjM
 
   return (
     <div className="App">
-      <UserContext.Provider value={{ user, setUser,Token,setToken, loading, setLoading }}>
+      <UserContext.Provider value={{ user,setUser,accountDetails,Token,setToken, loading, setLoading }}>
         {/* <SideNavBar/> */}
         <BrowserRouter>
           <Routes>

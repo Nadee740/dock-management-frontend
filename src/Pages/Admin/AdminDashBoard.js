@@ -23,15 +23,36 @@ const AdminDashBoard = () => {
     const {setLoading,Token}=useContext(UserContext)
     const [subscriptionTypes,setSubscriptionTypes]=useState([]);
     const [shipments,setShipments]=useState();
+    const [buildings,setBuildings]=useState([]);
     useEffect(()=>{
         setLoading(true);
-        
-
         axios.get(`${baseUrl}/subscription/get/types`)
         .then((res) => {
             if(res.data.status=="ok")
             {
                 setSubscriptionTypes(res.data.data);
+                setLoading(false);
+            }
+          
+        else 
+        throw new Error(res.data.msg)
+        })
+        .catch((err) => {
+            setLoading(false);
+            console.log(err)
+
+        });
+    },[])
+    useEffect(()=>{
+        setLoading(true);
+        axios.get(`${baseUrl}/get-buildings`,{headers: {
+                  Authorization: `Bearer ${Token}`,
+                }})
+        .then((res) => {
+            if(res.data.status=="ok")
+            {
+                console.log(res.data.data)
+                setBuildings(res.data.data);
                 setLoading(false);
             }
           
