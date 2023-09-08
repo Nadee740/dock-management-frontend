@@ -1,5 +1,4 @@
 const AdminDashBoardTable = ({shipments}) => {
-    console.log(shipments)
   return (
     <section class="container px-11 mx-auto">
       <div class="sm:flex sm:items-center sm:justify-between">

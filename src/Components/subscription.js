@@ -1,5 +1,6 @@
 import { faCheck, faMailReply, faVoicemail } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 
 const SubscriptionAdminDashboard = ({subscriptionTypes}) => {
     return (  
@@ -49,9 +50,9 @@ const SubscriptionAdminDashboard = ({subscriptionTypes}) => {
                             </ul>
                         </div>
 
-                        <button class="bg-[#F4F5FA] px-4 py-3 rounded-full  border border-[#F0F0F6] shadow-xl mt-4">
-                            Add to Cart
-                        </button>
+                        <Link to="/request/subscription" class="bg-[#F4F5FA] px-4 py-3 rounded-full  border border-[#F0F0F6] shadow-xl mt-4">
+                            Contact for Details
+                        </Link>
                     </div>
                 </div>
                         )
