@@ -4,8 +4,14 @@ import { Link } from "react-router-dom";
 import { baseUrl } from "../utils/baseurl";
 import { useState } from "react";
 import ConfirmDialog from "./ConfirmDialog";
-
-const SignUpForm = () => {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBuilding, faEdit } from "@fortawesome/free-regular-svg-icons";
+import { faPassport } from "@fortawesome/free-solid-svg-icons";
+const SignUpForm = ({buildings}) => {
+    const [buildingName,setBuildingName]=useState();
+    const [buildingAddress,setBuildingAddress]=useState();
+    const [companyName,setCompanyName]=useState();
+    const [subscriptionPin,setSubscriptionPin]=useState();
     const [name,setName]=useState();
     const [email1,setEmail1]=useState();
     const [email2,setEmail2]=useState();
@@ -29,17 +35,16 @@ const SignUpForm = () => {
             acra_no,
             phone,
         }
-      axios.post(`${baseUrl}/create-supplier`,data).then((res)=>{
+    axios.post(`${baseUrl}/create-admin`,data).then((res)=>{
           if(res.data.status=="ok")
           {
-
-            setModalHeading("Request sent success");
-            setModalText("Your application is being processed we will get back to you soon");
+            setModalHeading("Sign up success");
+            setModalText("Your Account has been created succesfully");
             setOpen(true)
             
           }else{
             setModalHeading("Request Failed");
-            setModalText("Couldn't complete your request");
+            setModalText("You dont have an active subscription to create account with us");
             setOpen(true)
           }
       }).catch((err)=>{
@@ -62,20 +67,71 @@ const SignUpForm = () => {
               {" "}
               <Apartment/>
             </span>
-            <select onChange={(e)=>{
-                setName(e.target.value)
+            <select 
+            required
+            onChange={(e)=>{
+                setCompanyName(e.target.value)
             }} className="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none" data-te-select-init>
- <option value="-1">---Choose Company ---</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
-  <option value="4">Four</option>
-  <option value="5">Five</option>
-  <option value="6">Six</option>
-  <option value="7">Seven</option>
-  <option value="8">Eight</option>
-</select>
+            <option value="">--- Choose Building ---</option>
+           {buildings.map((data,index)=>(
+            <option value={data.Company_Name}>{data.Company_Name}</option>
+           ))}
+            </select>
 
+          </span>
+        </div>
+        <div className="flex flex-col mt-2 ">
+          <span class="flex shadow-md mb-5 text-xs">
+            <span class="bg-indigo-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">
+              <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
+            </span>
+            <input
+            value={buildingName}
+           
+              class="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none"
+             
+              onChange={(evt)=>{
+                setBuildingName(evt.target.value)
+              }}
+              type="text"
+              placeholder="Building Name"
+            />
+          </span>
+        </div>
+        <div className="flex flex-col mt-2 ">
+          <span class="flex shadow-md mb-5 text-xs">
+            <span class="bg-indigo-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">
+            <FontAwesomeIcon icon={faBuilding}></FontAwesomeIcon>
+            </span>
+            <input
+            value={buildingAddress}
+           
+              class="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none"
+             
+              onChange={(evt)=>{
+                setBuildingAddress(evt.target.value)
+              }}
+              type="text"
+              placeholder="Building Address"
+            />
+          </span>
+        </div>
+        <div className="flex flex-col mt-2 ">
+          <span class="flex shadow-md mb-5 text-xs">
+            <span class="bg-indigo-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">
+            <FontAwesomeIcon icon={faPassport}></FontAwesomeIcon>
+            </span>
+            <input
+            value={subscriptionPin}
+           
+              class="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none"
+             
+              onChange={(evt)=>{
+                setSubscriptionPin(evt.target.value)
+              }}
+              type="text"
+              placeholder="Subscription Pin"
+            />
           </span>
         </div>
         <div className="flex flex-col mt-2 ">
