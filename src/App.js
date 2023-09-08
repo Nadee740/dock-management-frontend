@@ -48,6 +48,7 @@ import WareHouseDashBoard from "./Pages/WareHouse/WarehouseDashboard";
 import WareHouseHome from "./Pages/WareHouse/WarehouseHomePage";
 import SubscriptionRequestPage from "./Pages/SendSubscriptionRequest";
 import ListAllSubscribtionRequestPage from "./Pages/SuperAdmin/ListAllSubscriptionRequestPage";
+import ChangeSubscriptionRequestStatusPage from "./Pages/SuperAdmin/ChangeSubscriptionStatusPage";
 function App() {
   const [user, setUser] = useState(null);
   const [Token,setToken]=useState(null);
@@ -107,6 +108,8 @@ function App() {
           {user==null && <>
            <Route path="/" element={<LandingPage/>} />
            <Route path="/request/subscription" element={<SubscriptionRequestPage/>} />
+           <Route path="/change/subscription/status/:id" element={<ChangeSubscriptionRequestStatusPage/>} />
+
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
            
