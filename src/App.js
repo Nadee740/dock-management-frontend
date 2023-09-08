@@ -46,6 +46,8 @@ import ListAllSubscribedAdminPage from "./Pages/SuperAdmin/ListAllSubscribedAdmi
 import Page404 from './Pages/PageNotFound'
 import WareHouseDashBoard from "./Pages/WareHouse/WarehouseDashboard";
 import WareHouseHome from "./Pages/WareHouse/WarehouseHomePage";
+import SubscriptionRequestPage from "./Pages/SendSubscriptionRequest";
+import ListAllSubscribtionRequestPage from "./Pages/SuperAdmin/ListAllSubscriptionRequestPage";
 function App() {
   const [user, setUser] = useState(null);
   const [Token,setToken]=useState(null);
@@ -54,46 +56,46 @@ function App() {
   const [accountDetails,setAccountDetails]=useState(null);
 
   useEffect(() => {
-    setUser({
-    "_id": "64c4e2c9c7d0e5fc17b300d4",
-    "name": "Nadeem Haris",
-    "email1": "nadeemblayparambil@gmail.com",
-    "email2": "nadeemblayparambil@gmail.com",
-    "acra_no": "12",
-    "userType": "supplier",
-    "phone": "89299292",
-    "isVerified": true,
-    "createdAt": "2023-07-29T09:58:33.450Z",
-    "updatedAt": "2023-09-07T09:14:59.912Z",
-    "__v": 22})
-setToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGM0ZTJjOWM3ZDBlNWZjMTdiMzAwZDQiLCJpYXQiOjE2OTQwNzgwOTl9.8jn8WA3R2FT67nREBTNW78NXL5GZNMYYiLIBnJ_mZcg")
+//     setUser({
+//     "_id": "64c4e2c9c7d0e5fc17b300d4",
+//     "name": "Nadeem Haris",
+//     "email1": "nadeemblayparambil@gmail.com",
+//     "email2": "nadeemblayparambil@gmail.com",
+//     "acra_no": "12",
+//     "userType": "supplier",
+//     "phone": "89299292",
+//     "isVerified": true,
+//     "createdAt": "2023-07-29T09:58:33.450Z",
+//     "updatedAt": "2023-09-07T09:14:59.912Z",
+//     "__v": 22})
+// setToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGM0ZTJjOWM3ZDBlNWZjMTdiMzAwZDQiLCJpYXQiOjE2OTQwNzgwOTl9.8jn8WA3R2FT67nREBTNW78NXL5GZNMYYiLIBnJ_mZcg")
 
-    // setAuthenticating(true)
-    // setLoading(true)
-    // const token = localStorage.getItem("EZTOken");
-    // axios
-    //   .get(`${baseUrl}/user/me`, {
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //   })
-    //   .then(function (response) {
-    //     if (response.data != "") {
-    //         console.log(response.data)
-    //       setUser(response.data.user);
-    //       setAccountDetails(response.data.data)
-    //       setToken(token);
-    //       setAuthenticating(false)
-    //       setLoading(false);
-    //     } else {
-    //         throw new Error("somethin went wrong")
-    //     }
-    //   })
-    //   .catch(function (error) {
-    //     setAuthenticating(false)
-    //     setLoading(false);
-    //     console.log("FAILED!!! ", error);
-    //   });
+    setAuthenticating(true)
+    setLoading(true)
+    const token = localStorage.getItem("EZTOken");
+    axios
+      .get(`${baseUrl}/user/me`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(function (response) {
+        if (response.data != "") {
+            console.log(response.data)
+          setUser(response.data.user);
+          setAccountDetails(response.data.data)
+          setToken(token);
+          setAuthenticating(false)
+          setLoading(false);
+        } else {
+            throw new Error("somethin went wrong")
+        }
+      })
+      .catch(function (error) {
+        setAuthenticating(false)
+        setLoading(false);
+        console.log("FAILED!!! ", error);
+      });
   }, []);
 
   return (
@@ -104,6 +106,7 @@ setToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGM0ZTJjOWM3ZDBlNWZjM
           <Routes>
           {user==null && <>
            <Route path="/" element={<LandingPage/>} />
+           <Route path="/request/subscription" element={<SubscriptionRequestPage/>} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
            
@@ -185,12 +188,16 @@ setToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGM0ZTJjOWM3ZDBlNWZjM
                 {
                     user.userType=="superadmin" &&(
                         <>
-                        <Route path="/" element={<SuperAdminDashBoard/>}></Route>
+                 <Route path="/" element={<SuperAdminDashBoard/>}></Route>
                   <Route path="superadmin" element={<SuperAdminHome/>}>
                     <Route index element={<SuperAdminDashBoard/>} />
                     <Route
                       path="manage/subscriptions"
                       element={<ManageSubsriptionPage />}
+                    />
+                    <Route
+                      path="list/request/subscriptions"
+                      element={<ListAllSubscribtionRequestPage iseditable={true}/>}
                     />
                     <Route
                       path="users/list/subscribed/AdminUsers"

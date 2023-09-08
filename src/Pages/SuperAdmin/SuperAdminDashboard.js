@@ -150,13 +150,13 @@ const SuperAdminDashBoard = () => {
             </div>
             <div class="b">
               <Link
-                to="/supplier-list"
+                to="/superadmin/list/request/subscriptions"
                 class="flex max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
               >
                 <div className="w-1/2">
                   {" "}
                   <h5 class="mb-2 text-2xl  font-bold   tracking-tight text-gray-900 dark:text-white">
-                    Manage Supplier
+                    Subscription Request
                   </h5>
                 </div>
                 <div className=" flex justify-end w-1/2">
@@ -340,22 +340,13 @@ const SuperAdminDashBoard = () => {
             </div>
           </div>
         </div>
-        <div >
+        {/* <div >
             <SubscriptionAdminDashboard subscriptionTypes={subscriptionTypes}/>
-        </div>
-        <div className="mt-4">
+        </div> */}
+        {/* <div className="mt-4">
           <AdminDashBoardTable/>
-        </div>
-        <div class="m-6 ">
-        <div class="bg-[#F4F5FA] p-10 rounded-xl overflow-x-scroll">
-            <BooktheViewingComponent/>
-        </div>
-        </div>
-        <div className="mt-8 m-2 md:m-20 lg:m-20 lg-mb-32 w-full md:w-5/6 lg:w-5/6 h-2/5 border-2 flex justify-center items-center bg-neutral-200 border-slate-200">
-          <p className="1-xl text-slate-400">
-            Content / Advertisement Comes Here
-          </p>
-        </div>
+        </div> */}
+    
       </div>
     </>
   );
