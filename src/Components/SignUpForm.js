@@ -85,9 +85,9 @@ const SignUpForm = () => {
             </span>
             <input
             value={name}
-            onChange={(e)=>{setName(e.target.value)}}
+           
               class="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none"
-              value={name}
+             
               onChange={(evt)=>{
                 setName(evt.target.value)
               }}

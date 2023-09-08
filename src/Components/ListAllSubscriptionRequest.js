@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Mail } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
-const ListAllSubscriptionRequest = ({iseditable,adminData}) => {
+const ListAllSubscriptionRequest = ({iseditable,requestList}) => {
 
   return (
     <>
@@ -54,19 +54,21 @@ const ListAllSubscriptionRequest = ({iseditable,adminData}) => {
           <th className="p-3 text-sm text-slate-500">Subscription type</th>
           {iseditable&&<th className="p-3 text-sm text-slate-500">ACTIONS</th>}
         </tr>
-        {adminData.map((data, index) => (
+        {requestList.map((data, index) => (
           <tr
             key={index}
             className={
-              "border-b text-center border-slate-200 border-solid hover:bg-gray-300"
+              "border-b text-center border-slate-200 border-solid "
             }
           >
             <td className="p-3 text-blue-400">{index+1}</td>
-            <td className="p-3">{data.admin_id.name}</td>
-            <td className="p-3">Admin</td>
-            <td className="p-3">{data.admin_id.email1}</td>
-            <td className="p-3">{data.admin_id.acra_no}</td>
-            <td className="p-3 text-red-700">{'10-90-2020'}</td>
+            <td className="p-3">{data.NameofSubscriber}</td>
+            <td className="p-3">{data.email}</td>
+            <td className="p-3">{data.Phone_no}</td>
+            <td className="p-3">{data.Company_Name}</td>
+            <td className="p-3">{data.typeofsubscription}</td>
+            
+            
             {iseditable && (
               <td className="p-3 flex">
                 {" "}

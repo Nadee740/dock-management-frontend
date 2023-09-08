@@ -16,6 +16,7 @@ const LandingPage = () => {
         .then((res) => {
             if(res.data.status=="ok")
             {
+                console.log(res.data)
             setSubscriptionTypes(res.data.data);
             setLoading(false);
             }

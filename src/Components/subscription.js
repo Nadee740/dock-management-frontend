@@ -50,7 +50,7 @@ const SubscriptionAdminDashboard = ({subscriptionTypes}) => {
                             </ul>
                         </div>
 
-                        <Link to="/request/subscription" class="bg-[#F4F5FA] px-4 py-3 rounded-full  border border-[#F0F0F6] shadow-xl mt-4">
+                        <Link to={"/request/subscription/"+type.typeofsubscription} class="bg-[#F4F5FA] px-4 py-3 rounded-full  border border-[#F0F0F6] shadow-xl mt-4">
                             Contact for Details
                         </Link>
                     </div>

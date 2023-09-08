@@ -106,7 +106,7 @@ function App() {
           <Routes>
           {user==null && <>
            <Route path="/" element={<LandingPage/>} />
-           <Route path="/request/subscription" element={<SubscriptionRequestPage/>} />
+           <Route path="/request/subscription/:subscriptiontype" element={<SubscriptionRequestPage/>} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
            
