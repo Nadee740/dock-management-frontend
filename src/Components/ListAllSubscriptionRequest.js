@@ -72,24 +72,14 @@ const ListAllSubscriptionRequest = ({iseditable,requestList}) => {
             {iseditable && (
               <td className="p-3 flex">
                 {" "}
-                <button
-                  className="h-7 flex items-center bg-blue-500 text-white p-2 rounded-md text-md mr-5"
-                  onClick={() => {}}
-                >
-                  <FontAwesomeIcon
-                    icon={faEye}
-                    className="mt-1 mr-1"
-                    size="sm"
-                  />
-                  View
-                </button>
-                <button
+                <Link
+                to={"/superadmin/change/subscription/status/"+data._id}
                   className="h-7 flex items-center bg-green-500 text-white p-2 rounded-md text-md mr-5"
                   onClick={() => {}}
                 >
                  <FontAwesomeIcon icon={faEdit} className="mt-1 mr-1" size="sm"/>
                   Edit
-                </button>
+                </Link>
               </td>
             )}
            
