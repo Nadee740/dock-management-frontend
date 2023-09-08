@@ -15,6 +15,7 @@ const SignUp = () => {
               .then(function (response) {
                 if (response.data != "") {
                    setBuildings(response.data.data)
+                   console.log(response.data.data)
                   setLoading(false);
                 } else {
                     throw new Error(response.data.msg)

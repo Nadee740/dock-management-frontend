@@ -34,8 +34,15 @@ const SignUpForm = ({buildings}) => {
             password,
             acra_no,
             phone,
+            companyName,
+            subscription_pin:subscriptionPin,
+            building_name:buildingName,
+            buildingAddress
+
+
         }
     axios.post(`${baseUrl}/create-admin`,data).then((res)=>{
+      console.log(res.data)
           if(res.data.status=="ok")
           {
             setModalHeading("Sign up success");
@@ -72,7 +79,7 @@ const SignUpForm = ({buildings}) => {
             onChange={(e)=>{
                 setCompanyName(e.target.value)
             }} className="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none" data-te-select-init>
-            <option value="">--- Choose Building ---</option>
+            <option value="">--- Choose Company ---</option>
            {buildings.map((data,index)=>(
             <option value={data.Company_Name}>{data.Company_Name}</option>
            ))}
