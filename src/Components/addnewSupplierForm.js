@@ -52,28 +52,53 @@ const AddNewSupplierForm= ({suppliergroup,company}) => {
                   </div>
             <div className="mb-2">
                 <label class="text-black dark:text-gray-200" for="acra">ACRA / UN Reg. No</label>
-                <input placeholder="ACRA / UN Reg. No" id="acrar" type="text" class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring border-2 border-slate-400"/>
+                <input placeholder="ACRA / UN Reg. No" id="acrar" type="text"
+                value={acra_no}
+                onChange={(e)=>{
+                    setAcraNo(e.target.value)
+                }}
+                 class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring border-2 border-slate-400"/>
             </div>
          
 
             <div className="mb-2">
                 <label class="text-blackdark:text-gray-200" for="name">Full Name</label>
-                <input placeholder="Full Name" id="name" type="text" class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"/>
+                <input placeholder="Full Name" id="name" type="text" 
+                value={fullname}
+                onChange={(e)=>{
+                  setFullName(e.target.value)
+                }}
+                class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"/>
             </div>
 
             <div className="mb-2">
                 <label class="text-blackdark:text-gray-200" for="email1">Email Address 1</label>
-                <input placeholder="Email address 1" id="drivernumber" type="text" class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"/>
+                <input placeholder="Email address 1" id="drivernumber" type="text" 
+                value={email1}
+                onChange={(e)=>{
+                  setEmail1(e.target.value)
+                }}
+                class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"/>
             </div>
 
 
             <div className="mb-2">
                 <label class="text-blackdark:text-gray-200" for="email2">Email Address 2</label>
-                <input placeholder="Email Address 2" id="email2" type="text" class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"/>
+                <input placeholder="Email Address 2" id="email2" type="text" 
+                value={email2}
+                onChange={(e)=>{
+                  setEmail2(e.target.value)
+                }}
+                class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"/>
             </div>
             <div className="mb-2">
                 <label class="text-blackdark:text-gray-200" for="phonenumberf">Phone Number</label>
-                <input placeholder="Phone Number" id="phonenumber" type="text" class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"/>
+                <input placeholder="Phone Number" id="phonenumber" type="text" 
+                value={phone}
+                onChange={(e)=>{
+                  setPhone(e.target.value)
+                }}
+                class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"/>
             </div>
             <div className="mb-2">
                 <label class="text-blackdark:text-gray-200" for="password">Password</label>
