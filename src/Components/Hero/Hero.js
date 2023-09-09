@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Heroimage from "../../images/warehouselandingpageimg/landingpageimg.jpg"
+import Dockimage from "../../images/dock2/15923.jpg"
 import {faUserGroup } from "@fortawesome/free-solid-svg-icons";
 const Hero = () => {
   return (
@@ -38,9 +39,8 @@ const Hero = () => {
   </div>
   
   <div class="col-span-7 md:col-span-7 lg:col-span-7  pl-8 pr-8 ">
-  {/* <p>hyy</p> */}
   <div className="w-full h-3/4 flex items-center justify-center">
-  <img src={Heroimage} alt="Image" class="w-3/4 sm:h-3/4"/>
+  <img src={Dockimage} alt="Image" class="w-3/4 sm:h-3/4"/>
   </div>
   </div>
 </div>

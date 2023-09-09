@@ -68,6 +68,7 @@ const SideNavBar = ({UserLinks}) => {
         setAccountDetails(null)
         setToken(null);
         localStorage.clear();
+        window.location='/'
         setLoading(false);
       } else {
           throw new Error("something went wrong")
