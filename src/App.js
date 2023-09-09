@@ -101,7 +101,7 @@ function App() {
 
   return (
     <div className="App">
-      <UserContext.Provider value={{ user,setUser,accountDetails,Token,setToken, loading, setLoading }}>
+      <UserContext.Provider value={{ user,setUser,accountDetails,setAccountDetails,Token,setToken, loading, setLoading }}>
         {/* <SideNavBar/> */}
         <BrowserRouter>
           <Routes>

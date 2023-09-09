@@ -1,11 +1,20 @@
 import { faBars, faDashboard, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AdminLinks } from "../Pages/Admin/AdminLinks";
 import { Link } from "react-router-dom";
+import { UserContext } from "../Contexts/UserContexts";
+import AlertDialog from "./AlertDialogue";
+import ConfirmDialog from "./ConfirmDialog";
+import axios from "axios";
+import { baseUrl } from "../utils/baseurl";
 
 const SideNavBar = ({UserLinks}) => {
- 
+    const {setLoading,Token,setUser,setAccountDetails,setToken}=useContext(UserContext);
+    const [open1,setOpen1]=useState(false);
+    const [open2,setOpen2]=useState(false);
+    const [modalHeading,setModalHeading]=useState("");
+    const [modalText,setModalText]=useState("")
   const [activeIndex,setActiveIndex]=useState(0)
   const [isSubmenuVisible, setIsSubmenuVisible] = useState(false);
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
@@ -39,6 +48,39 @@ const SideNavBar = ({UserLinks}) => {
 
     setIsSidebarVisible(!isSidebarVisible);
   };
+  const SubmitButton=()=>{
+       setOpen2(true);
+        setModalHeading("Alert")
+        setModalText("Are You Sure You Want To Logout");
+  }
+  
+  const Logout=()=>{
+    setLoading(true)
+    axios
+    .get(`${baseUrl}/user/logout`, {
+      headers: {
+        Authorization: `Bearer ${Token}`,
+      },
+    })
+    .then(function (response) {
+      if (response.status="ok") {
+        setUser(null);
+        setAccountDetails(null)
+        setToken(null);
+        localStorage.clear();
+        setLoading(false);
+      } else {
+          throw new Error("something went wrong")
+      }
+    })
+    .catch(function (error) {
+      setLoading(false);
+      console.log("FAILED!!! ", error);
+    });
+  }
+
+
+
     return isMobile && !isSidebarVisible? <FontAwesomeIcon className="absolute text-white text-3xl top-5 left-4 cursor-pointer" icon={faBars} size="xs" onClick={()=>{
         toggleSidebar()
     }}/>
@@ -110,15 +152,34 @@ const SideNavBar = ({UserLinks}) => {
           </>)
           })}
          
-         
-       
+
           <div
             class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
           >
+                   
+       <button onClick={SubmitButton}>
+
             <i class="bi bi-box-arrow-in-right"></i>
             <span class="text-[15px] ml-4 text-gray-200 font-bold">Logout</span>
+            </button>
           </div>
+          
+
+          <AlertDialog
+        open={open1}
+        setOpen={setOpen1}
+        modalHeading={modalHeading}
+        modalText={modalText}
+      />
+      <ConfirmDialog
+        open={open2}
+        setOpen={setOpen2}
+        modalHeading={modalHeading}
+        modalText={modalText}
+        confirmFunction={Logout}
+      />
         </div>
+      
     
       
       </body>
