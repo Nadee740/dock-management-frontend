@@ -87,8 +87,12 @@ const AddNewSecuriyForm = () => {
 
     const SubmitButton=(e)=>{
         e.preventDefault();
-       
-        if(company==-1 || building==-1)
+        let b=password==retypePassword;
+        if(b==false){
+         setModalHeading("Passwords don't match");
+         setOpen1(true);
+        }
+         else if(company==-1 || building==-1)
         {
             setModalHeading("Please Fill All Columns");
             setOpen1(true);
@@ -97,7 +101,7 @@ const AddNewSecuriyForm = () => {
         else{
             setOpen2(true);
             setModalHeading("Alert")
-            setModalText("Are You Sure You Want To Create Admin With Provided Details");
+            setModalText("Are You Sure You Want To Create Security With Provided Details");
         }
     
     }
@@ -108,7 +112,7 @@ const AddNewSecuriyForm = () => {
             name,email1,email2,password,acra_no,phone,
             company_id:company,
             building_id:building,
-            retypePassword
+            
           
           };
           const token=localStorage.getItem("EZTOken")
@@ -318,7 +322,7 @@ const AddNewSecuriyForm = () => {
             Submit
           </button>
           <button type="button" class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
-           <Link to="/"> Cancel</Link>
+           <Link to="/list-all-security"> Cancel</Link>
           </button>
         </div>
       </form>

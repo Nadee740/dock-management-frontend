@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Mail } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
-const ListAllWareHouse = ({ iseditable }) => {
+const ListAllWareHouse = ({ warehouseData,iseditable }) => {
   const datas = [
     {
       s_no: "SGX1234",
