@@ -40,9 +40,6 @@ const SecurityDashBoard = () => {
         setLoading(false);
     },[])
 
-    const handleQRScan=async()=>{
-        
-    }
 
   return (
     <>

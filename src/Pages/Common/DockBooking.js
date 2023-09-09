@@ -83,11 +83,10 @@ const DockBooking = ({ bookingDetail }) => {
 
   useEffect(() => {
     setLoading(true);
-    const token = localStorage.getItem("EZTOken");
     axios
       .get(`${baseUrl}/get-companies`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${Token}`,
         },
       })
       .then(function (response) {
@@ -109,11 +108,10 @@ const DockBooking = ({ bookingDetail }) => {
 
   useEffect(() => {
     setLoading(true);
-    const token = localStorage.getItem("EZTOken");
     axios
       .get(`${baseUrl}/get-buildings`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${Token}`,
         },
       })
       .then(function (response) {
@@ -135,11 +133,10 @@ const DockBooking = ({ bookingDetail }) => {
 
   useEffect(() => {
     setLoading(true);
-    const token = localStorage.getItem("EZTOken");
     axios
       .get(`${baseUrl}/get-vehicles`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${Token}`,
         },
       })
       .then(function (response) {
@@ -161,11 +158,10 @@ const DockBooking = ({ bookingDetail }) => {
 
   useEffect(() => {
     setLoading(true);
-    const token = localStorage.getItem("EZTOken");
     axios
       .get(`${baseUrl}/get-dock-type`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${Token}`,
         },
       })
       .then(function (response) {
@@ -187,11 +183,10 @@ const DockBooking = ({ bookingDetail }) => {
 
   useEffect(() => {
     setLoading(true);
-    const token = localStorage.getItem("EZTOken");
     axios
       .get(`${baseUrl}/get-docks-by-docktype/${dock_type_id}`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${Token}`,
         },
       })
       .then(function (response) {
