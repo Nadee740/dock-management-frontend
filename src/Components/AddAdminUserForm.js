@@ -55,8 +55,12 @@ const AddAdminUserForm = () => {
     },[])
     const SubmitButton=(e)=>{
         e.preventDefault();
-       
-        if(role==-1 || company==-1)
+        let b=password==retypePassword;
+        if(b==false){
+         setModalHeading("Passwords don't match");
+         setOpen1(true);
+        }
+         else if(role==-1 || company==-1)
         {
             setModalHeading("Please Fill All Columns");
             setOpen1(true);
@@ -73,7 +77,8 @@ const AddAdminUserForm = () => {
     const submitData=async()=>{
         setLoading(true)
         const data = {
-            name,email1,email2,password,acra_no,phone,role,company
+            name,email1,email2,password,acra_no,phone,role,
+            company_id:company
           
           };
           axios.post(`${baseUrl}/add-admin`,data,{
@@ -82,6 +87,8 @@ const AddAdminUserForm = () => {
             }
           })
           .then((res) => {
+          
+            
             if(res.data.status=="ok")
             {
                setModalHeading("Admin Added Successfully")
@@ -158,7 +165,7 @@ const AddAdminUserForm = () => {
            
             </select>
           </div>
-          <div className="mb-2 pt-2 ">
+         {/* <div className="mb-2 pt-2 ">
           <label class="text-black dark:text-gray-200" for="building">
             Alloted Building
           </label>
@@ -178,7 +185,7 @@ const AddAdminUserForm = () => {
             </label>
           </div>
           <div class="flex items-center m-4">
-            <input
+             <input
               id="default-radio-1"
               type="radio"
               value=""
@@ -192,7 +199,7 @@ const AddAdminUserForm = () => {
               Inflight Catering Centre 1 (ICC1)
             </label>
           </div>
-        </div>
+        </div> */}
           <div className="mb-2">
             <label class="text-black dark:text-gray-200" for="acra">
               ACRA / UN Reg. No
