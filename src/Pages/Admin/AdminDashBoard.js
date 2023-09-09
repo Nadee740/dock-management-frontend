@@ -95,7 +95,7 @@ const AdminDashBoard = () => {
     <>
       <div className="w-full admin-dashboard">
         <div className="m-2 flex flex-row-reverse">
-          <p className="text-1xl text-white">Nadeem Admin</p>
+          <p className="text-1xl text-white">admin</p>
           <FontAwesomeIcon
             id="avatarButton"
             type="button"

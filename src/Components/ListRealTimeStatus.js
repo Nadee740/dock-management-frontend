@@ -1,4 +1,8 @@
 import { Mail } from "@mui/icons-material";
+import { baseUrl } from "../utils/baseurl";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../Contexts/UserContexts";
+import axios from "axios";
 
 const ListRealTimeStatus = ({iseditable}) => {
     const datas=[{
@@ -11,7 +15,60 @@ booked_time:"123455",
 actual_in_out:"09/09/2002",
 status:"1"
 
-}]
+},
+{
+  job_order_no:"2",
+  booking_mode:"40 Footer",
+  company:"ss00012",
+  vehicle_driver:"24 footer",
+  dock_type:"8888",
+  booked_time:"123455",
+  actual_in_out:"09/09/2002",
+  status:"1"
+  
+  },
+  {
+    job_order_no:"1",
+    booking_mode:"40 Footer",
+    company:"ss00012",
+    vehicle_driver:"24 footer",
+    dock_type:"8888",
+    booked_time:"123455",
+    actual_in_out:"09/09/2002",
+    status:"1"
+    
+    }]
+const {setLoading,Token}=useContext(UserContext)
+const [bookingData,setBookingData]=useState()
+useEffect(()=>{
+  setLoading(true);
+  console.log("hii")
+  axios.get(`${baseUrl}/dock/current/booking/users`,{
+    headers: {
+      Authorization: `Bearer ${Token}`,
+    },
+  })
+  .then((response)=>{
+    console.log(response.data)
+    if(response.data.status=="ok"){
+      setBookingData(response.data.data);
+      setLoading(false);
+    }
+    else{
+      setBookingData("")
+      setLoading(false)
+      throw new Error(response.data.msg)
+    }
+   
+  })
+  .catch((err)=>{
+    setLoading(false);
+    console.log(err)
+
+  })
+},[])
+  
+
   return (
     <>
       <div className="flex items-center justify-between w-4/12 p-4">
@@ -62,7 +119,7 @@ status:"1"
           <th className="p-3 text-sm text-slate-500">Status</th>
           {iseditable&&<th className="p-3 text-sm text-slate-500">Actual In/Out Time</th>}
         </tr>
-        {datas.map((data, index) => (
+        {bookingData&&bookingData.map((data, index) => (
           <tr
             key={index}
             className={
@@ -70,13 +127,15 @@ status:"1"
             }
           >
             <td className="p-3 text-blue-400">{data.job_order_no}</td>
-            <td className="p-3">{data.booking_mode}</td>
-            <td className="p-3">{data.company}</td>
-            <td className="p-3">{data.vehicle_driver}</td>
-            <td className="p-3">{data.dock_type}</td>
-            <td className="p-3">{data.booked_time}</td>
+            <td className="p-3">{data.dock_id.mode}</td>
+            <td className="p-3">{data.delivery_company_id.company_name}</td>
+            <td className="p-3">{data.vehicle_id.vehicle_type}</td>
+            <td className="p-3">{data.vehicle_id.vehicle_no} & {data.vehicle_id.driver_name}</td>
+            <td className="p-3">{data.dock_type_id.dock_type}</td>
+            <td className="p-3">{data.timeslot}</td>
+            <td className="p-3">{data.status}</td>
             <td className="p-3 text-red-700">{data.actual_in_out}</td>
-            <td className="p-3 text-red-700">{data.status}</td>
+     
             {iseditable&& <td className="p-3"> <button
           className="h-7 bg-orange-500 text-white p-2 rounded-lg font-bold text-sm mr-5"
           onClick={() => {}}
