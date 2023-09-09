@@ -19,8 +19,36 @@ const AddNewDockForm = () => {
     const [mode,setMode]=useState();
     const [dock_type,setDockType]=useState();
     const [price,setPrice]=useState();
+    const [listDockTypes,setList_dock_types]=useState([])
     const [list_Buildings,setList_buildings]=useState([]);
+    useEffect(()=>{
+      setLoading(true);
+      const token = localStorage.getItem("EZTOken");
+      axios
+    .get(`${baseUrl}/get-dock-type`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then(function (response) {
+      
 
+      console.log("success", response, "response.data");
+      if (response.data != "") {
+       setList_dock_types(response.data.data)
+        setLoading(false);
+      
+      } else {
+        setList_dock_types(null)
+        console.log("errr");
+      }
+    })
+    .catch(function (error) {
+      setLoading(false);
+      console.log("FAILED!!! ", error);
+    });
+
+    },[])
     useEffect(()=>{
     setLoading(true);
         const token = localStorage.getItem("EZTOken");
@@ -71,7 +99,11 @@ const AddNewDockForm = () => {
     const submitData=async()=>{
         setLoading(true)
         const data = {
-            dock_number,building,mode,dock_type,price
+            dock_number,
+            building_id:building,
+            mode,
+            dock_type_id:dock_type,
+            price
           };
           const token=localStorage.getItem("EZTOken")
           axios.post(`${baseUrl}/add-docks`,data,{
@@ -80,6 +112,7 @@ const AddNewDockForm = () => {
             }
           })
           .then((res) => {
+            console.log(res.data);
             if(res.data.status=="ok")
             {
                setModalHeading("Dock Added Successfully")
@@ -91,6 +124,7 @@ const AddNewDockForm = () => {
         
             }
             else{
+              
                 setModalHeading("Something Went wrong ");
                 setModalText("Something Went wrong.Please Try again after sometime");
                 setOpen1(true);
@@ -124,7 +158,7 @@ const AddNewDockForm = () => {
               <option value={-1}>---Choose Building ---</option>
             {
                 list_Buildings.map((b,index)=>{
-                    return <option value={b.building_name}>{b.building_name}</option>
+                    return <option value={b._id}>{b.building_name}</option>
                 })
             }
             </select>
@@ -159,12 +193,11 @@ const AddNewDockForm = () => {
                     setDockType(e.target.value)
                 }} id="mode" class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
                     <option value={-1}>--- Choose Dock Type ---</option>
-                    <option value={"Dry"}>Dry</option>
-                    <option value={"Refrigerated"}>Refrigerated</option>
-                    <option value={"Facility"}>Facility</option>
-                    <option value={"Parking"}>Parking</option>
-                    <option value={"Pork Bay"}>Pork Bay</option>
-                    <option value={"Non-Halal"}>Non-Halal</option>
+                    {
+                listDockTypes.map((d,index)=>{
+                    return <option value={d._id}>{d.dock_type}</option>
+                })
+            }
 
                 </select>
             </div>

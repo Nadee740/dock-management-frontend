@@ -119,7 +119,7 @@ const AdminLinks=[{
                     },
                     {
                         title:"Update Warehouse Details",
-                        to:'/warehouse',
+                        to:'/list-all-warehouses',
                         icon:faBagShopping,
                         clasStyle:"mr-2 text-indigo-500"
                     },

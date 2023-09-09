@@ -2,6 +2,64 @@ import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const AddNewWareHouseForm = () => {
+  const [list_Buildings,setList_buildings]=useState([]);
+  useEffect(()=>{
+    setLoading(true);
+        const token = localStorage.getItem("EZTOken");
+        axios
+      .get(`${baseUrl}/get-buildings`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(function (response) {
+        
+
+        console.log("success", response, "response.data");
+        if (response.data != "") {
+          
+          setList_buildings(response.data.data);
+          setLoading(false);
+        
+        } else {
+          setList_buildings(null);
+          console.log("errr");
+        }
+      })
+      .catch(function (error) {
+        setLoading(false);
+        console.log("FAILED!!! ", error);
+      });
+
+    },[])
+  useEffect(()=>{
+      setLoading(true);
+      const token = localStorage.getItem("EZTOken");
+      axios
+    .get(`${baseUrl}/get-companies`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then(function (response) {
+      
+
+      console.log("success", response, "response.data");
+      if (response.data != "") {
+        console.log(response.data);
+        setCompanies(response.data.data);
+        setLoading(false);
+      
+      } else {
+        setCompanies(null);
+        console.log("errr");
+      }
+    })
+    .catch(function (error) {
+      setLoading(false);
+      console.log("FAILED!!! ", error);
+    });
+  },[])
   return (
     <>
       <div className="flex items-center justify-between  p-4">

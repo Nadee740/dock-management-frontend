@@ -26,7 +26,36 @@ const AddNewSecuriyForm = () => {
     const [retypePassword,setreTypedPassword]=useState('')
     const [company,setCompany]=useState(-1);
     const [building,setBuilding]=useState(-1);
-
+    const [list_Buildings,setList_buildings]=useState([]);
+    useEffect(()=>{
+      setLoading(true);
+          const token = localStorage.getItem("EZTOken");
+          axios
+        .get(`${baseUrl}/get-buildings`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then(function (response) {
+          
+  
+          console.log("success", response, "response.data");
+          if (response.data != "") {
+            
+            setList_buildings(response.data.data);
+            setLoading(false);
+          
+          } else {
+            setList_buildings(null);
+            console.log("errr");
+          }
+        })
+        .catch(function (error) {
+          setLoading(false);
+          console.log("FAILED!!! ", error);
+        });
+  
+      },[])
     useEffect(()=>{
         setLoading(true);
         const token = localStorage.getItem("EZTOken");
@@ -76,7 +105,10 @@ const AddNewSecuriyForm = () => {
     const submitData=async()=>{
         setLoading(true)
         const data = {
-            name,email1,email2,password,acra_no,phone,company,building,retypePassword
+            name,email1,email2,password,acra_no,phone,
+            company_id:company,
+            building_id:building,
+            retypePassword
           
           };
           const token=localStorage.getItem("EZTOken")
@@ -86,6 +118,7 @@ const AddNewSecuriyForm = () => {
             }
           })
           .then((res) => {
+            console.log(res.data)
             if(res.data.status=="ok")
             {
                setModalHeading("Security Created Successfully")
@@ -140,7 +173,7 @@ const AddNewSecuriyForm = () => {
               <option value={-1}>---Choose Company---</option>
        {
         companies.map((c,index)=>{
-            return <option value={c.company_name}>{c.company_name}</option>
+            return <option value={c._id}>{c.company_name}</option>
         })
        }
             </select>
@@ -227,48 +260,26 @@ const AddNewSecuriyForm = () => {
             class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring border-2 border-slate-400"
           />
         </div>
-        <div className="mb-2 pt-2 ">
-          <label class="text-black dark:text-gray-200" for="building">
-            Alloted Building
-          </label>
-          <div id="building" class="flex items-center m-4 ">
-            <input
-              id="default-radio-1"
-              type="radio"
-              value="Inflight Catering Centre 1 (ICC1)"
-             onChange={(e)=>{
+        <div className="mb-2">
+            <label class="text-black dark:text-gray-200" for="Vechicletype">
+              Building Name
+            </label>
+            <select
+            onChange={(e)=>{
                 setBuilding(e.target.value)
-                // setBuilding("Inflight Catering Centre 1 (ICC1)")
-             }}
-              name="default-radio"
-              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-            />
-            <label
-              for="default-radio-1"
-              class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            }}
+              id="Vechicletype"
+              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             >
-              Inflight Catering Centre 1 (ICC1)
-            </label>
+              <option value={-1}>---Choose Building ---</option>
+            {
+                list_Buildings.map((b,index)=>{
+                    return <option value={b._id}>{b.building_name}</option>
+                })
+            }
+            </select>
           </div>
-          <div class="flex items-center m-4">
-          <input
-          onChange={(e)=>{
-                setBuilding("Inflight Catering Centre 2 (ICC2)")
-             }}
-              id="default-radio-1"
-              type="radio"
-              value="Inflight Catering Centre 2 (ICC2)"
-              name="default-radio"
-              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-            />
-            <label
-              for="default-radio-1"
-              class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >
-              Inflight Catering Centre 2 (ICC2)
-            </label>
-          </div>
-        </div>
+            
         <div className="mb-2">
           <label class="text-black dark:text-gray-200" for="password">
             Password

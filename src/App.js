@@ -176,7 +176,7 @@ function App() {
 
                 {/* WareHouse Routes */}
                 <Route
-                  path="/warehouses"
+                  path="/list-all-warehouses"
                   element={<ListAllWareHousesPage iseditable={true} />}
                 />
                 <Route path="/create-warehouse" element={<AddNewWareHouse />} />
