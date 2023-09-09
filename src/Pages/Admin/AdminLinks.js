@@ -29,25 +29,25 @@ const AdminLinks=[{
      subLinks:[
         {
             title:"Past Shipments",
-            to:'/shipments-list',
+            to:'/shipments-list/0',
             icon:faCheck,
             clasStyle:"mr-2 text-gray-700"
         },
         {
             title:"Failed Shipments",
-            to:'/shipments-list',
+            to:'/shipments-list/1',
             icon:faTimes,
             clasStyle:"mr-2 text-green-500"
         },
         {
             title:"Tommorows Shipments",
-            to:'/shipments-list',
+            to:'/shipments-list/3',
             icon:faClock,
             clasStyle:"mr-2 text-orange-500"
         },
         {
             title:"Upcoming Shipments",
-            to:'/shipments-list',
+            to:'/shipments-list/2',
             icon:faCalendar,
             clasStyle:"mr-2 text-blue-500"
         }

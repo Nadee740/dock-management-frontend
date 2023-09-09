@@ -183,7 +183,7 @@ function App() {
 
                 {/* Shipment Routes */}
                 <Route
-                  path="/shipments-list"
+                  path="/shipments-list/:Status"
                   element={<ListAllShipmentsPage iseditable={false} />}
                 />
 

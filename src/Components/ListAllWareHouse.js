@@ -66,26 +66,26 @@ const ListAllWareHouse = ({ warehouseData,iseditable }) => {
           <th className="p-3 text-sm text-slate-500">Email Address 1</th>
           <th className="p-3 text-sm text-slate-500">ACRA / UN</th>
           <th className="p-3 text-sm text-slate-500">Building</th>
-          <th className="p-3 text-sm text-slate-500">CREATED ON</th>
+         
           {iseditable && (
             <th className="p-3 text-sm text-slate-500">Actions</th>
           )}
         </tr>
-        {datas.map((data, index) => (
+        {warehouseData.map((data, index) => (
           <tr
             key={index}
             className={
               "border-b text-center border-slate-200 border-solid hover:bg-gray-300"
             }
           >
-            <td className="p-3 text-blue-400">{data.s_no}</td>
-            <td className="p-3">{data.user_name}</td>
-            <td className="p-3">{data.email_address}</td>
-            <td className="p-3">{data.acra_no}</td>
-            <td className="p-3">{data.building}</td>
-            <td className="p-3 text-red-700">{data.created_on}</td>
+            <td className="p-3 text-blue-400">{index+1}</td>
+            <td className="p-3">{data.staff_id.name}</td>
+            <td className="p-3">{data.staff_id.email1}</td>
+            <td className="p-3">{data.staff_id.acra_no}</td>
+            <td className="p-3">{data.building_id.building_name}</td>
+
             {iseditable && (
-              <td className="flex">
+              <td className="flex items-center">
                 <button
                   className="h-7 flex items-center bg-orange-500 text-white p-2 rounded-md text-md mr-5"
                   onClick={() => {}}

@@ -3,14 +3,17 @@ import { UserContext } from "../../Contexts/UserContexts";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { baseUrl } from "../../utils/baseurl";
+import { useParams } from "react-router-dom";
 const ListAllShipmentsPage = ({iseditable}) => {
+  const params=useParams()
+  const Status=params.Status;
     const {setLoading}=useContext(UserContext);
     const [todayShipments,setTodayShipments]=useState([])
 
     useEffect(()=>{
         setLoading(true);
         const token = localStorage.getItem("EZTOken");
-        axios.get(`${baseUrl}/dock/current/booking/users`, {headers: {
+        axios.get(`${baseUrl}/dock/all/bookings?status=${Status}`, {headers: {
             Authorization: `Bearer ${token}`,
           }},)
         .then((res) => {
