@@ -49,6 +49,7 @@ import WareHouseHome from "./Pages/WareHouse/WarehouseHomePage";
 import SubscriptionRequestPage from "./Pages/SendSubscriptionRequest";
 import ListAllSubscribtionRequestPage from "./Pages/SuperAdmin/ListAllSubscriptionRequestPage";
 import ChangeSubscriptionRequestStatusPage from "./Pages/SuperAdmin/ChangeSubscriptionStatusPage";
+import AddSupplierGroupsPage from "./Pages/Admin/AddSupplierGroupsPage";
 function App() {
   const [user, setUser] = useState(null);
   const [Token,setToken]=useState(null);
@@ -227,6 +228,11 @@ function App() {
                       path="users/listCompanyAdminUsers"
                       element={<ListAllAdminPage iseditable={true} />}
                     />
+                     <Route
+                      path="add/supplier/groups"
+                      element={<AddSupplierGroupsPage/>}
+                    />
+
                     <Route
                       path="Users/addCompanyAdminUsers"
                       element={<AddAdminUser />}
