@@ -7,12 +7,11 @@ import { Link, useSearchParams } from "react-router-dom";
 import { baseUrl } from "../utils/baseurl";
 
 const SubscriptionRequestPage = () => {
-  const [type,setType]=useState();
+  const [type,setType]=useState("premium");
   const [name,setName]=useState();
   const [email,setEmail]=useState();
   const [Phone_no,setPhone]=useState();
   const [company,setCompany]=useState();
-  console.log(type)
   const submit=async()=>{
     const data={
       typeofsubscription:type,
@@ -46,7 +45,7 @@ const SubscriptionRequestPage = () => {
             </h2>
           </div>
           <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-          <form action="submit">
+          <form onSubmit={submit}>
             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
             <div>
                 <label
@@ -133,17 +132,15 @@ const SubscriptionRequestPage = () => {
               </div>
             </div>
             <div class="flex mt-5 md:mt-5 lg:mt-5">
-            <Link to="">
+            <div>
             {/* /booking-confirm/1 */}
               <button 
-              onClick={() => {
-                submit()
-            }}
+              type="submit"
               class="bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
                 Send Request
                 <Mail className="ml-5"/>
               </button>
-              </Link>
+              </div>
             </div>
           </form>
         </section>

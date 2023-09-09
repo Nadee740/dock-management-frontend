@@ -10,7 +10,7 @@ const ChangeSubscriptionRequestStatusPage = () => {
     const params = useParams();
     const _id=params.id;
     const [status,setStatus]=useState(1);
-    const [type,setType]=useState();
+    const [type,setType]=useState("premium");
     const [price,setPrice]=useState();
     const [validity,setValidity]=useState();
     const [noOfadmins,setNoOfadmins]=useState();
