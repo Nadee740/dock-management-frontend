@@ -31,7 +31,7 @@ const LoginForm = () => {
     axios
       .post(`${baseUrl}/user-login`, data)
       .then((res) => {
-      
+      console.log(res.data)
         if(res.data.status==="ok")
         {   localStorage.setItem("EZTOken",res.data.token);
             setUser(res.data.data);
