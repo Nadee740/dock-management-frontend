@@ -9,8 +9,8 @@ import AlertDialog from "./AlertDialogue";
 import ConfirmDialog from "./ConfirmDialog";
 
 const AddNewCompanyForm = () => {
+    const {setLoading,Token}=useContext(UserContext);
     const [building,setBuilding]=useState([]);
-    const {setLoading}=useContext(UserContext);
     const [open1,setOpen1]=useState(false);
     const [open2,setOpen2]=useState(false);
     const [modalHeading,setModalHeading]=useState("");
@@ -20,25 +20,19 @@ const AddNewCompanyForm = () => {
     const [building_address,setBuildingAddress]=useState("");
     useEffect(()=>{
         setLoading(true);
-        const token = localStorage.getItem("EZTOken");
         axios
       .get(`${baseUrl}/get-buildings`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${Token}`,
         },
       })
       .then(function (response) {
-        
-
-        console.log("success", response, "response.data");
         if (response.data != "") {
-          console.log(response.data);
           setBuilding(response.data.data);
           setLoading(false);
         
         } else {
           setBuilding(null);
-          console.log("errr");
         }
       })
       .catch(function (error) {
@@ -67,13 +61,12 @@ const AddNewCompanyForm = () => {
         setLoading(true)
         const data = {
             company_name,
-            building_name,
+            building_id:building_name,
             building_address
           };
-          const token=localStorage.getItem("EZTOken")
           axios.post(`${baseUrl}/add-company`,data,{
             headers:{
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${Token}`
             }
           })
           .then((res) => {
@@ -119,7 +112,7 @@ const AddNewCompanyForm = () => {
                 }} id="buildingname" class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
                     <option value={-1}>---Choose Building ---</option>
                     {building.map((b,index)=>{
-                        return <option value={b.building_name}>{b.building_name}</option>
+                        return <option value={b._id}>{b.building_name}</option>
                     })
                       
                   }
