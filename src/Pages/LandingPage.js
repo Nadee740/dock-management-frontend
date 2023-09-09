@@ -16,7 +16,6 @@ const LandingPage = () => {
         .then((res) => {
             if(res.data.status=="ok")
             {
-                console.log(res.data)
             setSubscriptionTypes(res.data.data);
             setLoading(false);
             }
@@ -35,7 +34,7 @@ const LandingPage = () => {
         <Navbar/>
       <Hero />
       <Features/>
-      <SubscriptionAdminDashboard subscriptionTypes={subscriptionTypes}/>
+      {subscriptionTypes.length>0 && <SubscriptionAdminDashboard subscriptionTypes={subscriptionTypes}/>}
       <Footer/>
         </div>
     );
