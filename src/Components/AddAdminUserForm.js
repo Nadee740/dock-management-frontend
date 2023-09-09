@@ -8,8 +8,9 @@ import AlertDialog from "./AlertDialogue";
 import ConfirmDialog from "./ConfirmDialog";
 import { Link } from "react-router-dom";
 const AddAdminUserForm = () => {
+    const {setLoading,Token}=useContext(UserContext);
     const [companies,setCompanies]=useState([]);
-    const {setLoading}=useContext(UserContext);
+
     const [open1,setOpen1]=useState(false);
     const [open2,setOpen2]=useState(false);
     const [modalHeading,setModalHeading]=useState("");
@@ -27,11 +28,10 @@ const AddAdminUserForm = () => {
     
     useEffect(()=>{
         setLoading(true);
-        const token = localStorage.getItem("EZTOken");
         axios
       .get(`${baseUrl}/get-companies`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${Token}`,
         },
       })
       .then(function (response) {
@@ -76,10 +76,9 @@ const AddAdminUserForm = () => {
             name,email1,email2,password,acra_no,phone,role,company
           
           };
-          const token=localStorage.getItem("EZTOken")
           axios.post(`${baseUrl}/add-admin`,data,{
             headers:{
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${Token}`
             }
           })
           .then((res) => {
