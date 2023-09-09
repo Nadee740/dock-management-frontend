@@ -2,6 +2,10 @@ import { faCar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const AddNewVehicleForm = () => {
+    const submit=(e)=>{
+        e.preventDefault();
+        ///api/create-vehicle
+    }
   return (
     <>
       <div className="flex items-center justify-between  p-4">
@@ -11,7 +15,7 @@ const AddNewVehicleForm = () => {
         </h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-      <form>
+      <form onSubmit={submit}>
         <div class="">
           <div className="mb-2">
             <label class="text-black dark:text-gray-200" for="vehiclenumber">
@@ -91,7 +95,7 @@ const AddNewVehicleForm = () => {
         </div>
 
         <div class="flex justify-end mt-6">
-          <button class="mr-6 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-green-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
+          <button  type="submit" class="mr-6 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-green-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
             Submit
           </button>
           <button class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
