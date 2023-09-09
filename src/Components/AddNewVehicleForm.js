@@ -1,10 +1,53 @@
 import { faCar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useContext, useState } from "react";
+import { UserContext } from "../Contexts/UserContexts";
+import { baseUrl } from "../utils/baseurl";
+import axios from "axios";
 
 const AddNewVehicleForm = () => {
-    const submit=(e)=>{
+  const {setLoading}=useContext(UserContext);
+  const [vehicle_no,setVehicleNo]=useState();
+  const [vehicleType,setVehicleType]=useState();
+  const [driver_name,setDriverName]=useState();
+  const [driver_no,setDriverNo]=useState();
+  const [driver_nric,setDriverNRIC]=useState();
+  const submit=(e)=>{
         e.preventDefault();
         ///api/create-vehicle
+        const data={
+          driver_name,
+          nric_no:driver_nric,
+          driver_no,
+          vehicle_no,
+          vehicle_type:vehicleType
+        }
+        setLoading(true);
+        const token = localStorage.getItem("EZTOken");
+        axios.post(`${baseUrl}/create-vehicle`,data,{
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res)=>{
+          if(res.data.status=="ok"){
+            alert("vehicle created")
+            setDriverNRIC('')
+            setDriverName('')
+            setDriverNo('')
+            setVehicleNo('')
+            setVehicleType('')
+
+          }
+          else{
+            alert("err")
+            console.log(res.data.msg)
+          }
+          setLoading(false);
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
     }
   return (
     <>
@@ -25,6 +68,10 @@ const AddNewVehicleForm = () => {
               placeholder="Vehicle Number"
               id="vehiclenumber"
               type="text"
+              value={vehicle_no}
+            onChange={(e)=>{
+                setVehicleNo(e.target.value)
+            }}
               class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring border-2 border-slate-400"
             />
           </div>
@@ -35,7 +82,7 @@ const AddNewVehicleForm = () => {
             <select
             required
             onChange={(e)=>{
-            
+            setVehicleType(e.target.value)
             }}
               id="Vechicletype"
               class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
@@ -65,6 +112,10 @@ const AddNewVehicleForm = () => {
               placeholder="Driver Name"
               id="drivername"
               type="text"
+              value={driver_name}
+            onChange={(e)=>{
+                setDriverName(e.target.value)
+            }}
               class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
@@ -77,6 +128,10 @@ const AddNewVehicleForm = () => {
               placeholder="Driver Number"
               id="drivernumber"
               type="text"
+              value={driver_no}
+            onChange={(e)=>{
+                setDriverNo(e.target.value)
+            }}
               class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
@@ -89,6 +144,10 @@ const AddNewVehicleForm = () => {
               placeholder="Driver NRIF/FIN"
               id="drivernrif"
               type="text"
+              value={driver_nric}
+            onChange={(e)=>{
+                setDriverNRIC(e.target.value)
+            }}
               class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
