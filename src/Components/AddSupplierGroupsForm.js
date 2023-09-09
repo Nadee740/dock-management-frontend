@@ -59,7 +59,11 @@ const AddSupplierGroupsForm= ({dockTypes,buildings}) => {
     const submitData=async()=>{
         setLoading(true)
         const data = {
-          
+          group_name:groupName,
+          building_id:allotedBuilding._id,
+          timeAlloted:selectedtimeSlots,
+          dock_type_id:selectedDockTypes,
+          multi_entry:singleQRmultiEntry
           };
           axios.post(`${baseUrl}/add/supplier/group`,data,{
             headers:{
@@ -67,16 +71,17 @@ const AddSupplierGroupsForm= ({dockTypes,buildings}) => {
             }
           })
           .then((res) => {
+            console.log(res.data)
             if(res.data.status=="ok")
             {
                setModalHeading("Supplier Group Added Successfully")
-            
+               setOpen1(true)
 
         
             }
             else{
                 setModalHeading("Something Went wrong ");
-                setModalText("Something Went wrong.Please Try again after sometime");
+                setModalText("Something Went wrong. Please Try again after sometime");
                 setOpen1(true);
     
             }
@@ -122,7 +127,8 @@ const AddSupplierGroupsForm= ({dockTypes,buildings}) => {
                     <select
                       required
                       onChange={(e) => {
-                        setAllotedBuilding(e.target.value)
+                       
+                        setAllotedBuilding(JSON.parse(e.target.value))
                       }}
                       class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                     >
@@ -271,7 +277,7 @@ const AddSupplierGroupsForm= ({dockTypes,buildings}) => {
             Submit
           </button>
           <button type="button"  class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
-            <Link to="/">Cancel</Link>
+            <Link to="/supplier/groups">Cancel</Link>
           </button>
         </div>
       </form>
