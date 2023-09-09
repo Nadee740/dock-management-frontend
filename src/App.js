@@ -34,7 +34,6 @@ import ListAllVehiclesPage from "./Pages/Vehicle/ListOfVehicles";
 import ListAllShipmentsPage from "./Pages/Shipments/ListAllShipmentsPage";
 import HelpPage from "./Pages/Common/HelpPage";
 import ListAllSupplierGroupsPage from "./Pages/Supplier/SupplierGroupsPage";
-import AddNewSupplierGroups from "./Pages/Supplier/AddNewSupplierGroupsPage";
 import BackdropLoading from "./Components/BackDropLoading";
 import axios from "axios";
 import { baseUrl } from "./utils/baseurl";
@@ -161,12 +160,6 @@ function App() {
                   exact
                   element={<ListAllSupplierGroupsPage iseditable={true} />}
                 />
-                <Route path="/create-supplier" element={<AddNewSupplier />} />
-                <Route
-                  path="/supplier/groups/add"
-                  exact
-                  element={<AddNewSupplierGroups />}
-                />
 
                 {/* Security Routes */}
                 <Route
@@ -236,6 +229,10 @@ function App() {
                     <Route
                       path="Users/addCompanyAdminUsers"
                       element={<AddAdminUser />}
+                    />
+                       <Route
+                      path="users/add/supplier"
+                      element={<AddNewSupplier />}
                     />
                     <Route path="docks" element={<ListAllDocksPage />} />
                     <Route path="add-new-dock" element={<AddNewDock />} />
