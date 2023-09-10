@@ -52,6 +52,7 @@ import AddSupplierGroupsPage from "./Pages/Admin/AddSupplierGroupsPage";
 import UpdateVehiclePage from "./Pages/Vehicle/UpdateVehiclePage";
 import EditSupplierGroupsPage from "./Pages/Admin/EditSupplierGroups";
 import UpdateSecurityPage from "./Pages/Security/UpdateSecurityPage";
+import EditAdminUser from "./Pages/Admin/EditAdminUser";
 import EditCompanyPage from "./Pages/Company/EditCompanyPage";
 import EditWareHouse from "./Pages/WareHouse/EditWareHousePage";
 import EditDockPage from "./Pages/Docks/EditDockPage";
@@ -214,6 +215,7 @@ function App() {
                       path="Users/addCompanyAdminUsers"
                       element={<AddAdminUser />}
                     />
+                  
                     
                   </Route>
 
@@ -246,6 +248,10 @@ function App() {
                     <Route
                       path="Users/addCompanyAdminUsers"
                       element={<AddAdminUser />}
+                    />
+                    <Route
+                      path="users/edit/company/AdminUser/:id"
+                      element={<EditAdminUser/>}
                     />
                        <Route
                       path="users/add/supplier"
