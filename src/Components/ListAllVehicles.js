@@ -14,46 +14,8 @@ const ListAllVehicles = ({vehicleData, iseditable }) => {
       drivers_fin: "NA",
       created_by: "111111",
     },
-    {
-        vehicles_no: "SGX1234",
-        vehicle_type: "40 Footer",
-        driver_name: "Lim Kim",
-        driver_no: "77777777",
-        drivers_fin: "NA",
-        created_by: "111111",
-      },
-      {
-        vehicles_no: "SGX1234",
-        vehicle_type: "40 Footer",
-        driver_name: "Lim Kim",
-        driver_no: "77777777",
-        drivers_fin: "NA",
-        created_by: "111111",
-      },
-      {
-        vehicles_no: "SGX1234",
-        vehicle_type: "40 Footer",
-        driver_name: "Lim Kim",
-        driver_no: "77777777",
-        drivers_fin: "NA",
-        created_by: "111111",
-      },
-      {
-        vehicles_no: "SGX1234",
-        vehicle_type: "40 Footer",
-        driver_name: "Lim Kim",
-        driver_no: "77777777",
-        drivers_fin: "NA",
-        created_by: "111111",
-      },
-      {
-        vehicles_no: "SGX1234",
-        vehicle_type: "40 Footer",
-        driver_name: "Lim Kim",
-        driver_no: "77777777",
-        drivers_fin: "NA",
-        created_by: "111111",
-      },
+   
+     
   ];
   return (
     <>
@@ -106,7 +68,6 @@ const ListAllVehicles = ({vehicleData, iseditable }) => {
           <th className="p-3 text-sm text-slate-500">DRIVER Name</th>
           <th className="p-3 text-sm text-slate-500">DRIVER No</th>
           <th className="p-3 text-sm text-slate-500">DRIVERS NRIC/FIN</th>
-          <th className="p-3 text-sm text-slate-500">CREATED BY</th>
           {iseditable && (
             <th className="p-3 text-sm text-slate-500">Actions</th>
           )}
@@ -131,7 +92,7 @@ const ListAllVehicles = ({vehicleData, iseditable }) => {
                   onClick={() => {}}
                 >
                   <FontAwesomeIcon icon={faPenToSquare} className="mt-1 mr-1" size="sm"/>
-                  Edit
+                 <Link to={"/update-vehicle/"+data._id}>Edit</Link> 
                 </button>
                 <button
                   className="h-7 flex items-center bg-red-500 text-white p-2 rounded-md text-md mr-5"

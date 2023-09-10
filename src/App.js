@@ -49,6 +49,7 @@ import SubscriptionRequestPage from "./Pages/SendSubscriptionRequest";
 import ListAllSubscribtionRequestPage from "./Pages/SuperAdmin/ListAllSubscriptionRequestPage";
 import ChangeSubscriptionRequestStatusPage from "./Pages/SuperAdmin/ChangeSubscriptionStatusPage";
 import AddSupplierGroupsPage from "./Pages/Admin/AddSupplierGroupsPage";
+import UpdateVehiclePage from "./Pages/Vehicle/UpdateVehiclePage";
 function App() {
   const [user, setUser] = useState(null);
   const [Token,setToken]=useState(null);
@@ -142,6 +143,7 @@ function App() {
                   element={<ListAllVehiclesPage iseditable={true} />}
                 />
                 <Route path="/add-vehicle" element={<AddNewVehiclePage />} />
+                <Route path="/update-vehicle/:id" element={<UpdateVehiclePage />} />
 
                 {/* CompanyROutes */}
                 <Route
