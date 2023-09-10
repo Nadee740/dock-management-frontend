@@ -81,13 +81,13 @@ const ListAllAdmin = ({iseditable,adminData}) => {
                   />
                   View
                 </button>
-                <button
+                <Link
                   className="h-7 flex items-center bg-green-500 text-white p-2 rounded-md text-md mr-5"
-                  onClick={() => {}}
+                  to="/admin/users/edit/company/AdminUser/1"
                 >
                  <FontAwesomeIcon icon={faEdit} className="mt-1 mr-1" size="sm"/>
                   Edit
-                </button>
+                </Link>
               </td>
             )}
            

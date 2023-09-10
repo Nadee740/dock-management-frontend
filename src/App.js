@@ -52,6 +52,7 @@ import AddSupplierGroupsPage from "./Pages/Admin/AddSupplierGroupsPage";
 import UpdateVehiclePage from "./Pages/Vehicle/UpdateVehiclePage";
 import EditSupplierGroupsPage from "./Pages/Admin/EditSupplierGroups";
 import UpdateSecurityPage from "./Pages/Security/UpdateSecurityPage";
+import EditAdminUser from "./Pages/Admin/EditAdminUser";
 function App() {
   const [user, setUser] = useState(null);
   const [Token,setToken]=useState(null);
@@ -207,6 +208,7 @@ function App() {
                       path="Users/addCompanyAdminUsers"
                       element={<AddAdminUser />}
                     />
+                  
                     
                   </Route>
 
@@ -239,6 +241,10 @@ function App() {
                     <Route
                       path="Users/addCompanyAdminUsers"
                       element={<AddAdminUser />}
+                    />
+                    <Route
+                      path="users/edit/company/AdminUser/:id"
+                      element={<EditAdminUser/>}
                     />
                        <Route
                       path="users/add/supplier"
