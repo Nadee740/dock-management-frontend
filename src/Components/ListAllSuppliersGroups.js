@@ -6,19 +6,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const ListAllSupplierGroups = ({suppliergrpData,iseditable }) => {
-   
-  const datas = [
 
-    {
-        group_name: "SGX1234",
-        building_name: "40 Footer",
-        alloted_time: ["10:30","10:30","10:30","10:30","10:30","10:30"],
-        dock_types: ["aaa","bbb","ccc","aaa","bbb","ccc","aaa","bbb","ccc"],
-        single_qr_multi_entry: false,
-      }
-     
- 
-  ];
   return (
     <>
       <div className="flex items-center justify-between p-4">
@@ -93,14 +81,15 @@ const ListAllSupplierGroups = ({suppliergrpData,iseditable }) => {
             })}</td>
             <td className="p-3 text-red-700">{data.multi_entry?"Allowed":"Not Allowed"}</td>
             {true && (
-              <td className="flex items-center">
-                <button
+              <td className="p-3 text-red-700 ">
+              <div className="flex">
+              <Link
                   className="h-7 flex items-center bg-orange-500 text-white p-2 rounded-md text-md mr-5"
-                  onClick={() => {}}
+                  to={"/admin/edit/supplier/groups/"+data._id}
                 >
                   <FontAwesomeIcon icon={faPenToSquare} className="mt-1 mr-1" size="sm"/>
                   Edit
-                </button>
+                </Link>
                 <button
                   className="h-7 flex items-center bg-red-500 text-white p-2 rounded-md text-md mr-5"
                   onClick={() => {}}
@@ -108,6 +97,8 @@ const ListAllSupplierGroups = ({suppliergrpData,iseditable }) => {
                  <FontAwesomeIcon icon={faTrash} className="mt-1 mr-1" size="sm"/>
                   delete
                 </button>
+              </div>
+                
               </td>
             )}
           </tr>

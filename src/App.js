@@ -50,6 +50,7 @@ import ListAllSubscribtionRequestPage from "./Pages/SuperAdmin/ListAllSubscripti
 import ChangeSubscriptionRequestStatusPage from "./Pages/SuperAdmin/ChangeSubscriptionStatusPage";
 import AddSupplierGroupsPage from "./Pages/Admin/AddSupplierGroupsPage";
 import UpdateVehiclePage from "./Pages/Vehicle/UpdateVehiclePage";
+import EditSupplierGroupsPage from "./Pages/Admin/EditSupplierGroups";
 function App() {
   const [user, setUser] = useState(null);
   const [Token,setToken]=useState(null);
@@ -157,11 +158,7 @@ function App() {
                   path="/supplier-list"
                   element={<ListAllSuppliersPage iseditable={true} />}
                 />
-                <Route
-                  path="/supplier/groups"
-                  exact
-                  element={<ListAllSupplierGroupsPage iseditable={true} />}
-                />
+             
 
                 {/* Security Routes */}
                 <Route
@@ -227,6 +224,15 @@ function App() {
                       path="add/supplier/groups"
                       element={<AddSupplierGroupsPage/>}
                     />
+                       <Route
+                      path="edit/supplier/groups/:id"
+                      element={<EditSupplierGroupsPage/>}
+                    />
+                  <Route
+                  path="supplier/groups"
+                  exact
+                  element={<ListAllSupplierGroupsPage iseditable={true} />}
+                />
 
                     <Route
                       path="Users/addCompanyAdminUsers"
