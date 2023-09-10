@@ -51,6 +51,7 @@ import ChangeSubscriptionRequestStatusPage from "./Pages/SuperAdmin/ChangeSubscr
 import AddSupplierGroupsPage from "./Pages/Admin/AddSupplierGroupsPage";
 import UpdateVehiclePage from "./Pages/Vehicle/UpdateVehiclePage";
 import EditSupplierGroupsPage from "./Pages/Admin/EditSupplierGroups";
+import UpdateSecurityPage from "./Pages/Security/UpdateSecurityPage";
 function App() {
   const [user, setUser] = useState(null);
   const [Token,setToken]=useState(null);
@@ -166,6 +167,7 @@ function App() {
                   element={<ListAllSecurityPage iseditable={true} />}
                 />
                 <Route path="/create-security" element={<AddNewSecurity />} />
+                <Route path="/update-security/:id" element={<UpdateSecurityPage />} />
 
                 {/* WareHouse Routes */}
                 <Route
