@@ -1,37 +1,32 @@
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { baseUrl } from "../utils/baseurl";
 import { UserContext } from "../Contexts/UserContexts";
 import AlertDialog from "./AlertDialogue";
 import ConfirmDialog from "./ConfirmDialog";
 import { Link } from "react-router-dom";
 
-const AddNewSupplierForm= ({suppliergroup,company}) => {
-    const [compantSelected,setCompanySelected]=useState('');
-    const [acra_no,setAcraNo]=useState('');
+const EditSupplierForm= ({suppliergroup,company,supplierData}) => {
+    const [companySelected,setCompanySelected]=useState(supplierData.company_id._id);
+    const [acra_no,setAcraNo]=useState(supplierData.supplier_id.acra_no);
     const {setLoading}=useContext(UserContext);
-    const [fullname,setFullName]=useState('');
-    const [email1,setEmail1]=useState('');
-    const [email2,setEmail2]=useState('');
-    const [phone,setPhone]=useState('');
-    const [password,setPassword]=useState('');
-    const [confirmPassword,setConfirmPassword]=useState('');
-    const [role,setRole]=useState('');
-    const [supplier_groupselected,setSupplierGroupSelected]=useState('');
+    const [fullname,setFullName]=useState(supplierData.supplier_id.name);
+    const [email1,setEmail1]=useState(supplierData.supplier_id.email1);
+    const [email2,setEmail2]=useState(supplierData.supplier_id.email2);
+    const [phone,setPhone]=useState(supplierData.supplier_id.phone);
+    const [role,setRole]=useState(supplierData.role);
+    const [supplier_groupselected,setSupplierGroupSelected]=useState(supplierData.group_id._id);
     const [open1,setOpen1]=useState(false);
     const [open2,setOpen2]=useState(false);
     const [modalHeading,setModalHeading]=useState("");
     const [modalText,setModalText]=useState("")
+    const roleList=['Admin','Supplier','Company','SubContractor']
+   
     const SubmitButton=(e)=>{
       e.preventDefault();
-     let b=password==confirmPassword;
-     if(b==false){
-      setModalHeading("Passwords don't match");
-      setOpen1(true);
-     }
-      else if(compantSelected==-1 ||supplier_groupselected==-1)
+    if(companySelected==-1 ||supplier_groupselected==-1)
       {
           setModalHeading("Please Fill All Columns");
           setOpen1(true);
@@ -40,7 +35,7 @@ const AddNewSupplierForm= ({suppliergroup,company}) => {
       else{
           setOpen2(true);
           setModalHeading("Alert")
-          setModalText("Are You Sure You Want To Create Supplier  With Provided Details");
+          setModalText("Are You Sure You Want To Update Supplier  With Provided Details");
       }
   
   }
@@ -50,16 +45,16 @@ const AddNewSupplierForm= ({suppliergroup,company}) => {
         setLoading(true)
         const data = {
             name:fullname,
-            email1,email2,password,
+            email1,email2,
             acra_no,phone,
-            company_id:compantSelected,
+            company_id:companySelected,
             group_id:supplier_groupselected,
             role
             
           
           };
           const token=localStorage.getItem("EZTOken")
-          axios.post(`${baseUrl}/create-supplier`,data,{
+          axios.post(`${baseUrl}/update-supplier/${supplierData._id}`,data,{
             headers:{
                 'Authorization': `Bearer ${token}`
             }
@@ -68,24 +63,10 @@ const AddNewSupplierForm= ({suppliergroup,company}) => {
             console.log(res.data)
             if(res.data.status=="ok")
             {
-              setModalHeading("Supplier Created Successfully")
+              setModalHeading("Supplier Updated Successfully")
               setModalText("")
-               setFullName("");
-               setEmail1("")
-               setEmail2('');
-               setAcraNo('');
-               setPhone('');
-               setPassword('')
-               setConfirmPassword('');
-               setCompanySelected('');
-               setRole('');
-               setSupplierGroupSelected('');
                setOpen1(true)
-               
-           
-              
-
-        
+            
             }
             else{
               setModalHeading("Something Went wrong");
@@ -102,7 +83,7 @@ const AddNewSupplierForm= ({suppliergroup,company}) => {
     }
     return ( <>
          <div className="flex items-center justify-between  p-4">
-        <h2 className="text-2xl font-medium"><FontAwesomeIcon icon={faUser}className="mr-5" />Add Supplier</h2>
+        <h2 className="text-2xl font-medium"><FontAwesomeIcon icon={faUser}className="mr-5" />Edit Supplier</h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       <form onSubmit={SubmitButton}>
@@ -125,11 +106,7 @@ const AddNewSupplierForm= ({suppliergroup,company}) => {
                         <option value={-1}>---Choose Company---</option>
                     
                       {company.map((c, index) => {
-                        return (
-                          <option value={c._id}>
-                            {c.company_name}
-                          </option>
-                        );
+                         return <>{companySelected===c._id?<option selected value={c._id}>{c.company_name}</option>:<option value={c._id}>{c.company_name}</option>}</>
                       })}
                     </select>
                   </div>
@@ -183,25 +160,7 @@ const AddNewSupplierForm= ({suppliergroup,company}) => {
                 }}
                 class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"/>
             </div>
-            <div className="mb-2">
-                <label class="text-blackdark:text-gray-200" for="password">Password</label>
-                <input placeholder="Password" id="password" type="text" 
-                value={password}
-                onChange={(e)=>{
-                  setPassword(e.target.value)
-                }}
-                class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"/>
-            </div>
-            <div className="mb-2">
-                <label class="text-blackdark:text-gray-200" for="repass">ReType Password</label>
-                <input placeholder="ReType Password" id="phonenumber" type="password" 
-                
-                 value={confirmPassword}
-                 onChange={(e)=>{
-                   setConfirmPassword(e.target.value)
-                 }}
-                class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"/>
-            </div>
+            
             <div className="mb-2">
                 <label class="text-black dark:text-gray-200" for="Vechicletype">Supplier</label>
                 <select 
@@ -210,10 +169,15 @@ const AddNewSupplierForm= ({suppliergroup,company}) => {
                 }}
                 id="Vechicletype" class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
                     <option value={-1}>---Choose Role---</option>
-                    <option value={'Admin'}>Admin</option>
-                    <option value={'Supplier'}>Supplier</option>
-                    <option value={'Company'}>Company</option>
-                    <option value={'SubContractor'}>SubContractor</option>
+                    {
+                        roleList.map((role_name,index)=>{
+                            return <>
+                            {role===role_name?<option selected value={role_name}>{role_name}</option>:<option value={role_name}>{role_name}</option>}
+                            </> 
+                        })
+                    }
+                   
+                   
                 </select>
             </div>
             <div>
@@ -234,11 +198,8 @@ const AddNewSupplierForm= ({suppliergroup,company}) => {
                         <option value={-1}>---Supplier Group---</option>
                     
                       {suppliergroup.map((c, index) => {
-                        return (
-                          <option value={c._id}>
-                            {c.group_name}
-                          </option>
-                        );
+                        return <>{supplier_groupselected===c._id?<option selected value={c._id}>{c.group_name}</option>:<option value={c._id}>{c.group_name}</option>}</>
+                        
                       })}
                     </select>
                   </div>
@@ -275,4 +236,4 @@ const AddNewSupplierForm= ({suppliergroup,company}) => {
     </> );
 }
  
-export default AddNewSupplierForm;
+export default EditSupplierForm;

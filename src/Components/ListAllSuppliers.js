@@ -129,7 +129,7 @@ const ListAllSuppliers = ({suppliersData,iseditable}) => {
           Assign Group
         </button>
         <Link
-          to="/create-supplier"
+          to="/admin/users/add/supplier"
           className="p-3 ring-slate-200 bg-green-400 ring-2 rounded-xl outline-none"
         >
         <FontAwesomeIcon className="mr-2" icon={faAdd}/>
@@ -178,11 +178,11 @@ const ListAllSuppliers = ({suppliersData,iseditable}) => {
             }
           >
             <td className="p-3 text-blue-400">{index+1}</td>
-            <td className="p-3">{data.supplier.supplier_id.name}</td>
-            <td className="p-3">{data.supplier.supplier_id.email1}</td>
+            <td className="p-3">{data.supplier_id.name}</td>
+            <td className="p-3">{data.supplier_id.email1}</td>
             <td className="p-3">data.vehicle_type</td>
             <td className="p-3">data.vehicle_no</td>
-            <td className="p-3">{data.supplier.supplier_id.acra_no}</td>
+            <td className="p-3">{data.supplier_id.acra_no}</td>
             <td className="p-3 text-red-700">{'18-09-2002'}</td>
             {iseditable&&  <td className="flex">
                 <button
@@ -190,7 +190,7 @@ const ListAllSuppliers = ({suppliersData,iseditable}) => {
                   onClick={() => {}}
                 >
                   <FontAwesomeIcon icon={faPenToSquare} className="mt-1 mr-1" size="sm"/>
-                  Edit
+                  <Link to={"/admin/edit/supplier/"+data._id}>Edit</Link>
                 </button>
                 <button
                   className="h-7 flex items-center bg-red-500 text-white p-2 rounded-md text-md mr-5"

@@ -55,6 +55,7 @@ import UpdateSecurityPage from "./Pages/Security/UpdateSecurityPage";
 import EditCompanyPage from "./Pages/Company/EditCompanyPage";
 import EditWareHouse from "./Pages/WareHouse/EditWareHousePage";
 import EditDockPage from "./Pages/Docks/EditDockPage";
+import EditSupplierPage from "./Pages/Supplier/EditSupplierPage";
 function App() {
   const [user, setUser] = useState(null);
   const [Token,setToken]=useState(null);
@@ -249,6 +250,10 @@ function App() {
                        <Route
                       path="users/add/supplier"
                       element={<AddNewSupplier />}
+                    />
+                    <Route
+                      path="edit/supplier/:id"
+                      element={<EditSupplierPage />}
                     />
                     <Route path="docks" element={<ListAllDocksPage />} />
                     <Route path="add-new-dock" element={<AddNewDock />} />
