@@ -77,7 +77,7 @@ const ListAllCompany = ({ iseditable,companyDetails }) => {
                   onClick={() => {}}
                 >
                   <FontAwesomeIcon icon={faPenToSquare} className="mt-1 mr-1" size="sm"/>
-                  Edit
+                 <Link to={"/edit/company/"+data._id}>Edit</Link>
                 </button>
               </td>
             )}

@@ -51,7 +51,6 @@ const ListAllSecurity = ({iseditable,securityData}) => {
           <th className="p-3 text-sm text-slate-500">EMAIL ADDRESS</th>
           <th className="p-3 text-sm text-slate-500">ACRA / UN</th>
           <th className="p-3 text-sm text-slate-500">BUILDING</th>
-          <th className="p-3 text-sm text-slate-500">CREATED ON</th>
           {iseditable&&<th className="p-3 text-sm text-slate-500">ACTIONS</th>}
         </tr>
         {securityData.map((data, index) => (
@@ -65,8 +64,7 @@ const ListAllSecurity = ({iseditable,securityData}) => {
             <td className="p-3">{data.security_id.name}</td>
             <td className="p-3">{data.security_id.email1}</td>
             <td className="p-3">{data.security_id.acra_no}</td>
-            {/* <td className="p-3">{data.building_id.building_name}</td> */}
-            <td className="p-3">{'10-10-2020'}</td>
+            <td className="p-3">{data.building_id.building_name}</td>
             {iseditable&& (
               <td className="flex">
                 <button
