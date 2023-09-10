@@ -2,7 +2,7 @@
 import AddNewSecuriyForm from "../../Components/AddNewSecurityForm";
 
 
-const AddNewCompany = () => {
+const AddNewSecurity = () => {
   return (
     <div className="w-full admin-dashboard">
       <div className="flex flex-row w-full w-full items-center p-3 justify-between">
@@ -14,4 +14,4 @@ const AddNewCompany = () => {
   );
 };
 
-export default AddNewCompany;
+export default AddNewSecurity;
