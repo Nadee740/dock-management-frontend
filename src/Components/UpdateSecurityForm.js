@@ -31,6 +31,7 @@ const UpdateSecurityForm = ({securityData}) => {
         setCompany(securityData.company_id._id)
     },[])
     useEffect(()=>{
+      
       setLoading(true);
           const token = localStorage.getItem("EZTOken");
           axios
@@ -148,7 +149,7 @@ const UpdateSecurityForm = ({securityData}) => {
       <div className="flex items-center justify-between  p-4">
         <h2 className="text-2xl font-medium">
           <FontAwesomeIcon icon={faBuilding} className="mr-5" />
-          Add New Security
+          Update Security
         </h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>

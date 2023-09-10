@@ -53,6 +53,7 @@ import UpdateVehiclePage from "./Pages/Vehicle/UpdateVehiclePage";
 import EditSupplierGroupsPage from "./Pages/Admin/EditSupplierGroups";
 import UpdateSecurityPage from "./Pages/Security/UpdateSecurityPage";
 import EditCompanyPage from "./Pages/Company/EditCompanyPage";
+import EditWareHouse from "./Pages/WareHouse/EditWareHousePage";
 function App() {
   const [user, setUser] = useState(null);
   const [Token,setToken]=useState(null);
@@ -169,7 +170,7 @@ function App() {
                   element={<ListAllSecurityPage iseditable={true} />}
                 />
                 <Route path="/create-security" element={<AddNewSecurity />} />
-                <Route path="/update-security/:id" element={<UpdateSecurityPage />} />
+                <Route path="/update/security/:id" element={<UpdateSecurityPage />} />
 
                 {/* WareHouse Routes */}
                 <Route
@@ -177,7 +178,9 @@ function App() {
                   element={<ListAllWareHousesPage iseditable={true} />}
                 />
                 <Route path="/create-warehouse" element={<AddNewWareHouse />} />
+                <Route path="/edit/warehouse/:id" element={<EditWareHouse />} />
 
+              
                 {/* Shipment Routes */}
                 <Route
                   path="/shipments-list/:Status"

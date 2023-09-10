@@ -95,7 +95,7 @@ const EditCompanyForm = ({companyData}) => {
     }
     return ( <>
          <div className="flex items-center justify-between  p-4">
-        <h2 className="text-2xl font-medium"><FontAwesomeIcon icon={faBuilding}className="mr-5" />Add New Company</h2>
+        <h2 className="text-2xl font-medium"><FontAwesomeIcon icon={faBuilding}className="mr-5" />Edit Company</h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       <form onSubmit={SubmitButton} >
@@ -132,8 +132,9 @@ const EditCompanyForm = ({companyData}) => {
 
         <div class="flex justify-end mt-6">
             <button type="submit"  class="mr-6 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-green-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">Update Company</button>
-            <button class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
-                <Link to="/company">Cancel</Link></button>
+            <button type="button"  class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
+            <Link to="/company">Cancel</Link>
+          </button>
         </div>
     </form>
     <AlertDialog
