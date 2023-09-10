@@ -34,7 +34,7 @@ const LandingPage = () => {
         <Navbar/>
       <Hero />
       <Features/>
-      {subscriptionTypes.length>0 && <SubscriptionAdminDashboard subscriptionTypes={subscriptionTypes}/>}
+      {subscriptionTypes && <SubscriptionAdminDashboard subscriptionTypes={subscriptionTypes}/>}
       <Footer/>
         </div>
     );

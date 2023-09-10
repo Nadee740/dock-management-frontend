@@ -274,7 +274,8 @@ function App() {
                    
               </Route>
             )}
-           {authenticating==false && <Route path="*" element={<Page404/>}/>} 
+
+           {authenticating==false && loading==false  && <Route path="*" element={<Page404/>}/>} 
           </Routes>
         </BrowserRouter>
         <BackdropLoading />

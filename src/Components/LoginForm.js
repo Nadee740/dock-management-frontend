@@ -23,7 +23,9 @@ const LoginForm = () => {
       
   }
 
-  const submitData = async () => {
+  const submitData =(e) => {
+    e.preventDefault();
+    setLoading(true)
     const data = {
       email,
       password,
@@ -53,7 +55,7 @@ const LoginForm = () => {
         <h2 className="text-base text-slate-400 ">Sign in with credentials</h2>
       </div>
 
-      <form action="">
+      <form onSubmit={submitData}>
         <div className="flex flex-col mt-2 pb-4">
           <span class="flex shadow-md mb-5 text-xs">
             <span class="bg-indigo-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">
@@ -98,23 +100,20 @@ const LoginForm = () => {
             to="/signup"
             className="rounded-md text-indigo-500 py-2 px-4 w-2/3 md:w-1/3 lg:w-1/3  border-2 border-indigo-500 "
           >
-            <button className="text-sm w-full h-full" onClick={() => {}}>
+            <div className="text-sm w-full h-full">
               Sign Up
-            </button>
+            </div>
           </Link>
-          <Link
-            to="#"
+          <div
             className="rounded-md text-white py-2 ml-8 px-4 w-2/3 md:w-1/3 lg:w-1/3 bg-indigo-500"
           >
             <button
               className="w-full h-full "
-              onClick={() => {
-                submitData();
-              }}
+             type="submit"
             >
               Login
             </button>
-          </Link>
+          </div>
         </div>
       </form>
       <ConfirmDialog
