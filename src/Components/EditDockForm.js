@@ -23,15 +23,12 @@ const EditDockForm = ({dockData}) => {
     const [listDockTypes,setList_dock_types]=useState([])
     const [list_Buildings,setList_buildings]=useState([]);
     const statusList=["open","close"]
-    useEffect(()=>{
-        setLoading(true);
-        setStatus(dockData.status);
-        setLoading(false);
-    },[])
+  
     useEffect(()=>{
       setLoading(true);
       setBuilding(dockData.building_id._id);
       setDockType(dockData.dock_type_id._id);
+      setStatus(dockData.status);
       
       const token = localStorage.getItem("EZTOken");
       axios
