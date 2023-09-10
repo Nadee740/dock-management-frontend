@@ -7,51 +7,48 @@ import { baseUrl } from "../utils/baseurl";
 import AlertDialog from "./AlertDialogue";
 import ConfirmDialog from "./ConfirmDialog";
 import { Link } from "react-router-dom";
-const EditAdminUserForm = ({companies}) => {
+const EditAdminUserForm = ({companies,admin,id}) => {
+    console.log(admin)
     const {setLoading,Token}=useContext(UserContext);
     const [open1,setOpen1]=useState(false);
     const [open2,setOpen2]=useState(false);
     const [modalHeading,setModalHeading]=useState("");
     const [modalText,setModalText]=useState("")
-    const [name,setname]=useState("");
-    const [email1,setEmail1]=useState("");
-    const [email2,setEmail2]=useState("");
+    const [name,setname]=useState(admin.admin_id.name);
+    const [email1,setEmail1]=useState(admin.admin_id.email1);
+    const [email2,setEmail2]=useState(admin.admin_id.email2);
     const [password,setPassword]=useState('');
     const [retypePassword,setreTypedPassword]=useState('')
-    const [acra_no,setAcra_no]=useState("");
-    const [phone,setPhone]=useState('');
+    const [acra_no,setAcra_no]=useState(admin.admin_id.acra_no);
+    const [phone,setPhone]=useState(admin.admin_id.phone);
     const [role,setRole]=useState(-1);
-    const [company,setCompany]=useState(-1);
+    const [company,setCompany]=useState(admin.company_id._id);
 
     const SubmitButton=(e)=>{
         e.preventDefault();
-        let b=password==retypePassword;
-        if(b==false){
-         setModalHeading("Passwords don't match");
-         setOpen1(true);
-        }
-         else if(role==-1 || company==-1)
-        {
-            setModalHeading("Please Fill All Columns");
-            setOpen1(true);
-
-        }
-        else{
+       
             setOpen2(true);
             setModalHeading("Alert")
             setModalText("Are You Sure You Want To Add Admin With Provideed Details");
-        }
+        
     
     }
 
     const submitData=async()=>{
         setLoading(true)
         const data = {
-            name,email1,email2,password,acra_no,phone,role,
+            name,email1,email2,acra_no,phone
+        
+         };
+         const data2={
             company_id:company
-          
-          };
-          axios.post(`${baseUrl}/add-admin`,data,{
+
+         }
+         const finalData={
+            user:data,
+            admin:data2
+         }
+          axios.post(`${baseUrl}/edit/admin?adminid=${id}&&userid=${admin.admin_id._id}`,finalData,{
             headers:{
                 'Authorization': `Bearer ${Token}`
             }
@@ -61,15 +58,8 @@ const EditAdminUserForm = ({companies}) => {
             
             if(res.data.status=="ok")
             {
-               setModalHeading("Admin Added Successfully")
+               setModalHeading("Admin Edited Successfully")
                setModalText("")
-               setname("");
-               setEmail1("")
-               setEmail2('');
-               setAcra_no('');
-               setPhone('');
-               setRole('')
-               setCompany('')
            
                setOpen1(true)
 
@@ -98,7 +88,7 @@ const EditAdminUserForm = ({companies}) => {
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       <form onSubmit={SubmitButton}>
         <div class="">
-          <div className="mb-2">
+          {/* <div className="mb-2">
             <label class="text-black dark:text-gray-200" for="Vechicletype">
               Role
             </label>
@@ -113,7 +103,7 @@ const EditAdminUserForm = ({companies}) => {
               <option value={"Administrator"}>Administrator</option>
               <option value={"Company"}>Company</option>
             </select>
-          </div>
+          </div> */}
           <div className="mb-2">
             <label class="text-black dark:text-gray-200" for="Vechicletype">
               Company
@@ -125,51 +115,16 @@ const EditAdminUserForm = ({companies}) => {
               id="Vechicletype"
               class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             >
-              <option value={-1}>---Choose Company ---</option>
+              <option value={admin.company_id._id}>{admin.company_id.company_name}</option>
               {
                 companies.map((c,index)=>{
-                    return <option value={c._id}>{c.company_name}</option>
+                    return admin.company_id._id!=c._id && <option value={c._id}>{c.company_name}</option>
                 })
               }
               
            
             </select>
           </div>
-         {/* <div className="mb-2 pt-2 ">
-          <label class="text-black dark:text-gray-200" for="building">
-            Alloted Building
-          </label>
-          <div id="building" class="flex items-center m-4 ">
-            <input
-              id="default-radio-1"
-              type="radio"
-              value=""
-              name="default-radio"
-              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-            />
-            <label
-              for="default-radio-1"
-              class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >
-              Inflight Catering Centre 1 (ICC1)
-            </label>
-          </div>
-          <div class="flex items-center m-4">
-             <input
-              id="default-radio-1"
-              type="radio"
-              value=""
-              name="default-radio"
-              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-            />
-            <label
-              for="default-radio-1"
-              class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >
-              Inflight Catering Centre 1 (ICC1)
-            </label>
-          </div>
-        </div> */}
           <div className="mb-2">
             <label class="text-black dark:text-gray-200" for="acra">
               ACRA / UN Reg. No
@@ -248,38 +203,7 @@ const EditAdminUserForm = ({companies}) => {
               class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
-          <div className="mb-2">
-            <label class="text-blackdark:text-gray-200" for="password">
-              Password
-            </label>
-            <input
-            value={password}
-            onChange={(e)=>{
-            setPassword(e.target.value)}}
-              placeholder="Password"
-              id="password"
-              type="password"
-              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-            />
-          </div>
-          <div className="mb-2">
-            <label class="text-blackdark:text-gray-200" for="repass">
-              ReType Password
-            </label>
-            <input
-              value={retypePassword}
-              onChange={(e)=>{
-                setreTypedPassword(e.target.value)
-              }}
-              placeholder="Retype Password"
-              id="phonenumber"
-              type="password"
-              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-            />
-          </div>
-       
-        
-        </div>
+    </div>
 
         <div class="flex justify-end mt-6">
           <button type="submit" class="mr-6 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-green-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">

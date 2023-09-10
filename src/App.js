@@ -53,6 +53,9 @@ import UpdateVehiclePage from "./Pages/Vehicle/UpdateVehiclePage";
 import EditSupplierGroupsPage from "./Pages/Admin/EditSupplierGroups";
 import UpdateSecurityPage from "./Pages/Security/UpdateSecurityPage";
 import EditAdminUser from "./Pages/Admin/EditAdminUser";
+import EditCompanyPage from "./Pages/Company/EditCompanyPage";
+import EditWareHouse from "./Pages/WareHouse/EditWareHousePage";
+import EditDockPage from "./Pages/Docks/EditDockPage";
 function App() {
   const [user, setUser] = useState(null);
   const [Token,setToken]=useState(null);
@@ -154,6 +157,7 @@ function App() {
                   element={<ListAllCompanyPage iseditable={true} />}
                 />
                 <Route path="/company/add" element={<AddNewCompany />} />
+                <Route path="/edit/company/:id" element={<EditCompanyPage />} />
 
                 {/* Supplier Routes */}
                 <Route
@@ -168,7 +172,7 @@ function App() {
                   element={<ListAllSecurityPage iseditable={true} />}
                 />
                 <Route path="/create-security" element={<AddNewSecurity />} />
-                <Route path="/update-security/:id" element={<UpdateSecurityPage />} />
+                <Route path="/update/security/:id" element={<UpdateSecurityPage />} />
 
                 {/* WareHouse Routes */}
                 <Route
@@ -176,7 +180,9 @@ function App() {
                   element={<ListAllWareHousesPage iseditable={true} />}
                 />
                 <Route path="/create-warehouse" element={<AddNewWareHouse />} />
+                <Route path="/edit/warehouse/:id" element={<EditWareHouse />} />
 
+              
                 {/* Shipment Routes */}
                 <Route
                   path="/shipments-list/:Status"
@@ -252,6 +258,7 @@ function App() {
                     />
                     <Route path="docks" element={<ListAllDocksPage />} />
                     <Route path="add-new-dock" element={<AddNewDock />} />
+                    <Route path="edit/dock/:id" element={<EditDockPage />} />
                   </Route>
                   </>
                 )}

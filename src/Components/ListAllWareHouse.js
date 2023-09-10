@@ -91,7 +91,7 @@ const ListAllWareHouse = ({ warehouseData,iseditable }) => {
                   onClick={() => {}}
                 >
                   <FontAwesomeIcon icon={faPenToSquare} className="mt-1 mr-1" size="sm"/>
-                  Edit
+                 <Link to ={"/edit/warehouse/"+data._id}> Edit</Link>
                 </button>
                 <button
                   className="h-7 flex items-center bg-red-500 text-white p-2 rounded-md text-md mr-5"

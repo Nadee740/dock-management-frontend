@@ -8,7 +8,7 @@ import AlertDialog from "./AlertDialogue";
 import ConfirmDialog from "./ConfirmDialog";
 import { Link } from "react-router-dom";
 
-const AddNewWareHouseForm = () => {
+const EditWareHouseForm = ({warehouseData}) => {
   const [list_Buildings,setList_buildings]=useState([]);
   const {setLoading}=useContext(UserContext);
   const [open1,setOpen1]=useState(false);
@@ -17,16 +17,17 @@ const AddNewWareHouseForm = () => {
   const [modalText,setModalText]=useState("")
   const [company,setCompany]=useState(-1);
   const [building,setBuilding]=useState(-1);
-  const [name,setName]=useState('');
-    const [email1,setEmail1]=useState('');
-    const [email2,setEmail2]=useState('');
-    const [acra_no,setAcra_no]=useState('');
-    const[phone,setPhone]=useState('');
-    const [password,setPassword]=useState('');
-    const [retypePassword,setreTypedPassword]=useState('')
+  const [name,setName]=useState(warehouseData.staff_id.name);
+  const [email1,setEmail1]=useState(warehouseData.staff_id.email1);
+  const [email2,setEmail2]=useState(warehouseData.staff_id.email2);
+  const [acra_no,setAcra_no]=useState(warehouseData.staff_id.acra_no);
+  const[phone,setPhone]=useState(warehouseData.staff_id.phone);
   const [companies,setCompanies]=useState([])
   useEffect(()=>{
-    setLoading(true);
+    setLoading(true)
+    setCompany(warehouseData.company_id._id);
+    setBuilding(warehouseData.building_id._id);
+
         const token = localStorage.getItem("EZTOken");
         axios
       .get(`${baseUrl}/get-buildings`, {
@@ -84,12 +85,7 @@ const AddNewWareHouseForm = () => {
   },[])
   const SubmitButton=(e)=>{
     e.preventDefault();
-   let b=password==retypePassword;
-   if(b==false){
-    setModalHeading("Passwords don't match");
-    setOpen1(true);
-   }
-    else if(company==-1 || building==-1)
+   if(company==-1 || building==-1)
     {
         setModalHeading("Please Fill All Columns");
         setOpen1(true);
@@ -98,7 +94,7 @@ const AddNewWareHouseForm = () => {
     else{
         setOpen2(true);
         setModalHeading("Alert")
-        setModalText("Are You Sure You Want To Create Warehouse Checker With Provided Details");
+        setModalText("Are You Sure You Want To Update Warehouse Checker With Provided Details");
     }
 
 }
@@ -106,14 +102,14 @@ const AddNewWareHouseForm = () => {
 const submitData=async()=>{
   setLoading(true)
   const data = {
-      name,email1,email2,password,acra_no,phone,
+      name,email1,email2,acra_no,phone,
       company_id:company,
       building_id:building,
       
     
     };
     const token=localStorage.getItem("EZTOken")
-    axios.post(`${baseUrl}/add-warehouse`,data,{
+    axios.post(`${baseUrl}/update-warehouse/${warehouseData._id}`,data,{
       headers:{
           'Authorization': `Bearer ${token}`
       }
@@ -122,18 +118,10 @@ const submitData=async()=>{
       console.log(res.data)
       if(res.data.status=="ok")
       {
-         setModalHeading("Warehouse Checker Created Successfully")
+         setModalHeading("Warehouse Checker Updated Successfully")
          setModalText("")
-         setName("");
-         setEmail1("")
-         setEmail2('');
-         setAcra_no('');
-         setPhone('');
-         setPassword('')
-         setreTypedPassword('');
-         
-     
-         setOpen1(true)
+        
+        setOpen1(true)
 
   
       }
@@ -156,7 +144,7 @@ const submitData=async()=>{
       <div className="flex items-center justify-between  p-4">
         <h2 className="text-2xl font-medium">
           <FontAwesomeIcon icon={faUser} className="mr-5" />
-          Add Warehouse Checker
+          Edit Warehouse Checker
         </h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
@@ -176,7 +164,7 @@ const submitData=async()=>{
               <option value={-1}>---Choose Company---</option>
        {
         companies.map((c,index)=>{
-            return <option value={c._id}>{c.company_name}</option>
+            return <>{company===c._id?<option selected value={c._id}>{c.company_name}</option>:<option value={c._id}>{c.company_name}</option>}</>
         })
        }
             </select>
@@ -195,7 +183,7 @@ const submitData=async()=>{
               <option value={-1}>---Choose Building ---</option>
             {
                 list_Buildings.map((b,index)=>{
-                    return <option value={b._id}>{b.building_name}</option>
+                    return <>{building===b._id?<option selected value={b._id}>{b.building_name}</option>:<option value={b._id}>{b.building_name}</option>}</>
                 })
             }
             </select>
@@ -280,43 +268,14 @@ const submitData=async()=>{
               class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
-          <div className="mb-2">
-            <label class="text-blackdark:text-gray-200" for="password">
-              Password
-            </label>
-            <input
-              placeholder="Password"
-              id="password"
-              type="text"
-              value={password}
-          onChange={(e)=>{
-            setPassword(e.target.value)
-          }}
-              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-            />
-          </div>
-          <div className="mb-2">
-            <label class="text-blackdark:text-gray-200" for="repass">
-              ReType Password
-            </label>
-            <input
-              placeholder="ReType Password"
-              id="repass"
-              type="password"
-              value={retypePassword}
-          onChange={(e)=>{
-            setreTypedPassword(e.target.value)
-          }}
-              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-            />
-          </div>
-       
+         
+          
         
         </div>
 
         <div class="flex justify-end mt-6">
           <button class="mr-6 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-green-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
-            Submit
+            Update
           </button>
           <button class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
           <Link to="/list-all-warehouses"> Cancel</Link>
@@ -340,4 +299,4 @@ const submitData=async()=>{
   );
 };
 
-export default AddNewWareHouseForm;
+export default EditWareHouseForm;

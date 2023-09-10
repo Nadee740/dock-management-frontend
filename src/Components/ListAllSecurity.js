@@ -51,7 +51,6 @@ const ListAllSecurity = ({iseditable,securityData}) => {
           <th className="p-3 text-sm text-slate-500">EMAIL ADDRESS</th>
           <th className="p-3 text-sm text-slate-500">ACRA / UN</th>
           <th className="p-3 text-sm text-slate-500">BUILDING</th>
-          <th className="p-3 text-sm text-slate-500">CREATED ON</th>
           {iseditable&&<th className="p-3 text-sm text-slate-500">ACTIONS</th>}
         </tr>
         {securityData.map((data, index) => (
@@ -65,8 +64,7 @@ const ListAllSecurity = ({iseditable,securityData}) => {
             <td className="p-3">{data.security_id.name}</td>
             <td className="p-3">{data.security_id.email1}</td>
             <td className="p-3">{data.security_id.acra_no}</td>
-            {/* <td className="p-3">{data.building_id.building_name}</td> */}
-            <td className="p-3">{'10-10-2020'}</td>
+            <td className="p-3">{data.building_id.building_name}</td>
             {iseditable&& (
               <td className="flex">
                 <button
@@ -74,7 +72,7 @@ const ListAllSecurity = ({iseditable,securityData}) => {
                   onClick={() => {}}
                 >
                   <FontAwesomeIcon icon={faPenToSquare} className="mt-1 mr-1" size="sm"/>
-                 <Link to={"/update-security/"+data._id}> Edit</Link>
+                 <Link to={"/update/security/"+data._id}> Edit</Link>
                 </button>
                 <button
                   className="h-7 flex items-center bg-red-500 text-white p-2 rounded-md text-md mr-5"

@@ -7,22 +7,29 @@ import ConfirmDialog from "./ConfirmDialog";
 import AlertDialog from "./AlertDialogue";
 import { Link } from "react-router-dom";
 
-const AddNewDockForm = () => {
+const EditDockForm = ({dockData}) => {
     const {setLoading}=useContext(UserContext)
     const [open1,setOpen1]=useState(false);
     const [open2,setOpen2]=useState(false);
     const [modalHeading,setModalHeading]=useState("");
     const [modalText,setModalText]=useState("")
 
-    const [dock_number,setDock_number]=useState();
+    const [dock_number,setDock_number]=useState(dockData.dock_number);
     const [building,setBuilding]=useState(-1);
-    const [mode,setMode]=useState();
+    const [mode,setMode]=useState(dockData.mode);
     const [dock_type,setDockType]=useState();
-    const [price,setPrice]=useState();
+    const [price,setPrice]=useState(dockData.price);
+    const [status,setStatus]=useState(dockData.status)
     const [listDockTypes,setList_dock_types]=useState([])
     const [list_Buildings,setList_buildings]=useState([]);
+    const statusList=["open","close"]
+  
     useEffect(()=>{
       setLoading(true);
+      setBuilding(dockData.building_id._id);
+      setDockType(dockData.dock_type_id._id);
+      setStatus(dockData.status);
+      
       const token = localStorage.getItem("EZTOken");
       axios
     .get(`${baseUrl}/get-dock-type`, {
@@ -91,22 +98,24 @@ const AddNewDockForm = () => {
         else{
             setOpen2(true);
             setModalHeading("Alert")
-            setModalText("Are You Sure You Want To Add The Dock ");
+            setModalText("Are You Sure You Want To Update The Dock ");
         }
     
     }
 
     const submitData=async()=>{
         setLoading(true)
+        console.log("hiiiii",status)
         const data = {
             dock_number,
             building_id:building,
             mode,
             dock_type_id:dock_type,
-            price
+            price,
+            status
           };
           const token=localStorage.getItem("EZTOken")
-          axios.post(`${baseUrl}/add-docks`,data,{
+          axios.post(`${baseUrl}/update-dock/${dockData._id}`,data,{
             headers:{
                 'Authorization': `Bearer ${token}`
             }
@@ -115,10 +124,9 @@ const AddNewDockForm = () => {
             console.log(res.data);
             if(res.data.status=="ok")
             {
-               setModalHeading("Dock Added Successfully")
+               setModalHeading("Dock Updated Successfully")
                setModalText("")
-               setDock_number("")
-               setPrice("")
+               
                setOpen1(true)
 
         
@@ -139,7 +147,7 @@ const AddNewDockForm = () => {
 
     return ( <>
          <div className="flex items-center justify-between  p-4">
-        <h2 className="text-2xl font-medium"><Mail className="pb-1" size='lg'></Mail> Add New Dock</h2>
+        <h2 className="text-2xl font-medium"><Mail className="pb-1" size='lg'></Mail> Edit Dock</h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       <form onSubmit={SubmitButton}>
@@ -158,19 +166,21 @@ const AddNewDockForm = () => {
               <option value={-1}>---Choose Building ---</option>
             {
                 list_Buildings.map((b,index)=>{
-                    return <option value={b._id}>{b.building_name}</option>
+                    return <>
+                    {building===b._id?<option selected value={b._id}>{b.building_name}</option>:<option value={b._id}>{b.building_name}</option>}
+                    </> 
                 })
             }
             </select>
           </div>
-            <div>
+            <div className="mb-2">
                 <label class="text-black dark:text-gray-200" for="dockno">Dock No</label>
                 <input value={dock_number} onChange={(e)=>{
                     setDock_number(e.target.value)
                 }} placeholder="Dock No" id="dockno" type="text" class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring border-2 border-slate-400"/>
             </div>
 
-            <div>
+            <div className="mb-2">
                 <label class="text-blackdark:text-gray-200" for="price">Price ($)</label>
                 <input 
                 value={price}
@@ -178,24 +188,42 @@ const AddNewDockForm = () => {
                     setPrice(e.target.value)
                 }}  placeholder="Price" id="price" type="number" class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"/>
             </div>
-            <div>
-                <label class="text-white dark:text-gray-200" for="mode">Mode</label>
+            <div className="mb-2">
+                <label class="text-blackdark:text-gray-200" for="mode">Mode</label>
                 <select onChange={(e)=>{
                     setMode(e.target.value)
                 }} id="mode" class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
                     <option value={-1}>--- Choose Mode ---</option>
-                    <option value={"Normal"}>Normal</option>
+                    <option selected value={"Normal"}>Normal</option>
                 </select>
             </div>
-            <div>
-                <label class="text-white dark:text-gray-200" for="mode">Dock Type</label>
+            <div className="mb-2">
+                <label class="text-blackdark:text-gray-200" for="docktype">Dock Type</label>
                 <select onChange={(e)=>{
                     setDockType(e.target.value)
                 }} id="mode" class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
                     <option value={-1}>--- Choose Dock Type ---</option>
                     {
                 listDockTypes.map((d,index)=>{
-                    return <option value={d._id}>{d.dock_type}</option>
+                    return <>
+                        {dock_type===d._id?<option selected value={d._id}>{d.dock_type}</option>:<option value={d._id}>{d.dock_type}</option>}
+                        </> 
+                })
+            }
+
+                </select>
+            </div>
+            <div className="mb-2">
+                <label class="text-blackdark:text-gray-200" for="dockstatus">Status of Dock</label>
+                <select onChange={(e)=>{
+                    setStatus(e.target.value)
+                }} id="mode" class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
+                   
+                    {
+                statusList.map((s,index)=>{
+                    return <>
+                        {status===s?<option selected value={s}>{s}</option>:<option value={s}>{s}</option>}
+                        </> 
                 })
             }
 
@@ -224,4 +252,4 @@ const AddNewDockForm = () => {
     </> );
 }
  
-export default AddNewDockForm;
+export default EditDockForm;

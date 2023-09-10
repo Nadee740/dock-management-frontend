@@ -65,18 +65,18 @@ Status:"Closed"
               "border-b text-center border-slate-200 border-solid hover:bg-gray-300"
             }
           >
-            <td className="p-3 text-blue-400">{index+1}</td>
+            <td className="p-3 text-blue-400">{data.dock_number}</td>
             <td className="p-3">{data.building_id.building_name}</td>
             <td className="p-3">{data.mode}</td>
             <td className="p-3">{data.dock_type_id.dock_type}</td>
             <td className="p-3">{data.price}</td>
-            <td className="p-3 text-red-700">{data.status}</td>
+            <td className="p-3 text-green-700">{data.status}</td>
             <td className="flex"> <button
           className="h-7 flex items-center bg-orange-500 text-white p-2 rounded-md text-md mr-5"
           onClick={() => {}}
         >
             <Mail className="mt-1 mr-1" fontSize="sm"/>
-         Edit
+         <Link to ={"/admin/edit/dock/"+data._id} >Edit</Link>
      
         </button>
         

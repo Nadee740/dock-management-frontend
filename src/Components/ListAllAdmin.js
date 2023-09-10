@@ -83,7 +83,7 @@ const ListAllAdmin = ({iseditable,adminData}) => {
                 </button>
                 <Link
                   className="h-7 flex items-center bg-green-500 text-white p-2 rounded-md text-md mr-5"
-                  to="/admin/users/edit/company/AdminUser/1"
+                  to={"/admin/users/edit/company/AdminUser/"+data._id}
                 >
                  <FontAwesomeIcon icon={faEdit} className="mt-1 mr-1" size="sm"/>
                   Edit
