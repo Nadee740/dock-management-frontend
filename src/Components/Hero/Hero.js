@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Heroimage from "../../images/warehouselandingpageimg/landingpageimg.jpg"
 import Dockimage from "../../images/dock2/15923.jpg"
+import Dockimage3 from "../../images/dock3/17113.jpg"
 import {faUserGroup } from "@fortawesome/free-solid-svg-icons";
 const Hero = () => {
   return (
     <div className="" >
-    <div class="h-1/2  grid grid-cols-1 md:grid-cols-3 lg:grid-cols-10 gap-2">
+        <div class="h-1/2  grid grid-cols-1 md:grid-cols-3 lg:grid-cols-10 gap-2">
   <div class="col-span-3 md:col-span-3 lg:col-span-3 bg-white-300 p-8">
   <div className="lg:mt-5 md:mt-5 ">
   <div className="flex pl-2 ">
@@ -40,10 +41,36 @@ const Hero = () => {
   
   <div class="col-span-7 md:col-span-7 lg:col-span-7  pl-8 pr-8 ">
   <div className="w-full h-3/4 flex items-center justify-center">
-  <img src={Dockimage} alt="Image" class="w-3/4 sm:h-3/4"/>
+  <img src={Heroimage} alt="Image" class="w-3/4 sm:h-3/4"/>
   </div>
   </div>
 </div>
+    <section class="container mx-auto px-6">
+      {/* <h2 class="text-4xl font-bold text-center text-gray-800 mb-8">
+        Features
+      </h2> */}
+            <div class="flex items-center flex-wrap">
+        <div class="w-full md:w-2/5 lg:w-2/5">
+          <img  src={Dockimage}  alt="Reporting" />
+        </div>
+        <div class="w-full md:w-1/2 pl-10">
+          <h4 class="text-3xl text-gray-800 font-bold mb-3">Efficient</h4>
+          <p className="tracking-wide mt-4 text-xl text-slate-600">Effortlessly streamline dock operation with our cutting edge Management software unleash productivity at your warehouse</p>
+        </div>
+      </div>
+
+      <div class="flex items-center flex-wrap mb-20">
+        <div class="w-full md:w-1/2">
+          <h4 class="text-3xl text-gray-800 font-bold mb-3">Automised</h4>
+          <p className="tracking-wide mt-4 text-xl text-slate-600">Effortlessly streamline dock operation with our cutting edge Management software unleash productivity at your warehouse</p>
+        </div>
+        <div class="w-full md:w-1/2">
+          <img  src={Dockimage3}  alt="Syncing" />
+        </div>
+      </div>
+    </section>
+
+
     </div>
   );
 };
