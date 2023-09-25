@@ -23,8 +23,8 @@ const SubscriptionRequestPage = () => {
     }
     axios.post(`${baseUrl}/subscription/request`,data).then((res)=>{
       if(res.data.status=="ok"){
-        console.log(res.data)
         alert("success")
+        window.location='/'
       }
       else{
         alert("failed")

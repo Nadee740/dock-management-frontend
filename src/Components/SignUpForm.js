@@ -24,7 +24,7 @@ const SignUpForm = ({buildings}) => {
     const [modalText,setModalText]=useState("");
     const [modalHeading,setModalHeading]=useState("SuccessFully Logged IN");
     const confirmFunction=()=>{
-        alert("login")
+        window.location='/login'
     }
 
     const submit=async()=>{
@@ -46,7 +46,7 @@ const SignUpForm = ({buildings}) => {
           if(res.data.status=="ok")
           {
             setModalHeading("Sign up success");
-            setModalText("Your Account has been created succesfully");
+            setModalText("Your Account has been created succesfully")
             setOpen(true)
             
           }else{
