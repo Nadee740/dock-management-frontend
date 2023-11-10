@@ -32,7 +32,7 @@ const ListAllSuppliers = ({suppliersData,iseditable}) => {
                               <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                           </svg>
                       </div>
-                      <h1 className='text-center font-bold text-black mb-2'>May 2022 - Messouts</h1>
+                      <h1 className='text-center font-bold text-black mb-2'>Assign Supplier Groups</h1>
                       <div className="grid grid-cols-1 sm:grid-cols-3">
                      
                      <div className="h-60   overflow-y-scroll ">
@@ -101,9 +101,7 @@ const ListAllSuppliers = ({suppliersData,iseditable}) => {
               
                       </div>
      
-                      <div className="flex font-bold mt-6 ml-6"><p>
-                         Total Amount :100
-                      </p></div>
+                      
                      
                       
                       
@@ -155,17 +153,15 @@ const ListAllSuppliers = ({suppliersData,iseditable}) => {
           Excel
         </button>
       </div>
-      <div className="flex items-center justify-between w-4/12 py-4">
-        <p className="font-semibold">No Of Requests :</p>
-        <p className="font-semibold">{10} </p>
-      </div>
+      
       <table className="w-11/12 relative table-auto">
         <tr className="rounded-xl p-3 bg-primary text-center">
           <th className="p-3 text-sm text-slate-500">S. No</th>
           <th className="p-3 text-sm text-slate-500">NAME</th>
           <th className="p-3 text-sm text-slate-500">LOGIN ID</th>
-          <th className="p-3 text-sm text-slate-500">VEHICLE TYPE</th>
-          <th className="p-3 text-sm text-slate-500">VEHICLE NO</th>
+          <th className="p-3 text-sm text-slate-500">COMPANY</th>
+          <th className="p-3 text-sm text-slate-500">ROLE</th>
+          <th className="p-3 text-sm text-slate-500">SUPPLIER GROUP</th>
           <th className="p-3 text-sm text-slate-500">ACRA / UN</th>
           <th className="p-3 text-sm text-slate-500">CREATED ON</th>
           {iseditable&&<th className="p-3 text-sm text-slate-500">ACTIONS</th>}
@@ -180,8 +176,9 @@ const ListAllSuppliers = ({suppliersData,iseditable}) => {
             <td className="p-3 text-blue-400">{index+1}</td>
             <td className="p-3">{data.supplier_id.name}</td>
             <td className="p-3">{data.supplier_id.email1}</td>
-            <td className="p-3">data.vehicle_type</td>
-            <td className="p-3">data.vehicle_no</td>
+            <td className="p-3">{data.company_id.company_name}</td>
+            <td className="p-3">{data.role}</td>
+            <td className="p-3">{data.group_id.group_name}</td>
             <td className="p-3">{data.supplier_id.acra_no}</td>
             <td className="p-3 text-red-700">{'18-09-2002'}</td>
             {iseditable&&  <td className="flex">

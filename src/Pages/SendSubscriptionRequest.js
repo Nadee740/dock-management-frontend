@@ -2,7 +2,7 @@ import { faEdit } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Mail } from "@mui/icons-material";
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { baseUrl } from "../utils/baseurl";
 import { UserContext } from "../Contexts/UserContexts";
@@ -22,6 +22,7 @@ const SubscriptionRequestPage = () => {
   const [modalHeading,setModalHeading]=useState("");
   const [modalText,setModalText]=useState("")
   const [company,setCompany]=useState();
+  const [subscriptionTypes,setSubscriptionTypes]=useState([]);
   const SubmitButton=(e)=>{
     e.preventDefault();
   if(name==""||email==""||Phone_no==""||type=="")
@@ -36,7 +37,31 @@ const SubscriptionRequestPage = () => {
         setModalText("Are You Sure You Want To Send Subscription Request");
     }
 
-}
+  }
+
+ 
+    useEffect(()=>{
+        setLoading(true);
+        axios.get(`${baseUrl}/subscription/get/types`)
+        .then((res) => {
+            if(res.data.status=="ok")
+            {
+              let data=res.data.data.filter((type)=>{
+                 return type.isActive==true
+              })
+              setSubscriptionTypes(data);
+            setLoading(false);
+            }
+            
+        else 
+        throw new Error(res.data.msg)
+        })
+        .catch((err) => {
+           
+            console.log(err)
+
+        });
+    },[])
   const submit=async()=>{
     setLoading(true)
     const data={
@@ -102,10 +127,13 @@ const SubscriptionRequestPage = () => {
               value={type}
               
                 class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
+                  {
+                    subscriptionTypes.map((typesubp)=>(
+                      <option value={typesubp.typeofsubscription}>{typesubp.typeofsubscription}</option>
+                    ))
+                  }
                   
-                  <option value="premium">premium</option>
-                  <option value="standard">standard</option>
-                  <option value="basic">basic</option>
+                  
                   <option value="custom">custom</option>
                 </select>
               </div>

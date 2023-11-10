@@ -34,7 +34,7 @@ const AddSupplierGroupsForm= ({dockTypes,buildings}) => {
     const [modalHeading,setModalHeading]=useState("");
     const [modalText,setModalText]=useState("")
     const [groupName,setGroupName]=useState('');
-    const [allotedBuilding,setAllotedBuilding]=useState(null);
+    const [allotedBuilding,setAllotedBuilding]=useState(-1);
     const [selectedDockTypes,setSelectedDockTypes]=useState([])
     const [singleQRmultiEntry,setSingleQRmultiEntry]=useState(false);
     
@@ -132,7 +132,7 @@ const AddSupplierGroupsForm= ({dockTypes,buildings}) => {
                       }}
                       class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                     >
-                        <option value="">---Choose Building---</option>
+                        <option value={-1}>---Choose Building---</option>
                     
                       {buildings.map((b, index) => {
                         return (

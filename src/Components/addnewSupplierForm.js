@@ -9,7 +9,7 @@ import ConfirmDialog from "./ConfirmDialog";
 import { Link } from "react-router-dom";
 
 const AddNewSupplierForm= ({suppliergroup,company}) => {
-    const [compantSelected,setCompanySelected]=useState('');
+    const [compantSelected,setCompanySelected]=useState(-1);
     const [acra_no,setAcraNo]=useState('');
     const {setLoading}=useContext(UserContext);
     const [fullname,setFullName]=useState('');
@@ -19,7 +19,7 @@ const AddNewSupplierForm= ({suppliergroup,company}) => {
     const [password,setPassword]=useState('');
     const [confirmPassword,setConfirmPassword]=useState('');
     const [role,setRole]=useState('');
-    const [supplier_groupselected,setSupplierGroupSelected]=useState('');
+    const [supplier_groupselected,setSupplierGroupSelected]=useState(-1);
     const [open1,setOpen1]=useState(false);
     const [open2,setOpen2]=useState(false);
     const [modalHeading,setModalHeading]=useState("");
@@ -137,6 +137,7 @@ const AddNewSupplierForm= ({suppliergroup,company}) => {
                 <label class="text-black dark:text-gray-200" for="acra">ACRA / UN Reg. No</label>
                 <input placeholder="ACRA / UN Reg. No" id="acrar" type="text"
                 value={acra_no}
+                required
                 onChange={(e)=>{
                     setAcraNo(e.target.value)
                 }}
@@ -148,6 +149,7 @@ const AddNewSupplierForm= ({suppliergroup,company}) => {
                 <label class="text-blackdark:text-gray-200" for="name">Full Name</label>
                 <input placeholder="Full Name" id="name" type="text" 
                 value={fullname}
+                required
                 onChange={(e)=>{
                   setFullName(e.target.value)
                 }}
@@ -158,6 +160,7 @@ const AddNewSupplierForm= ({suppliergroup,company}) => {
                 <label class="text-blackdark:text-gray-200" for="email1">Email Address 1</label>
                 <input placeholder="Email address 1" id="drivernumber" type="text" 
                 value={email1}
+                required
                 onChange={(e)=>{
                   setEmail1(e.target.value)
                 }}
@@ -178,6 +181,7 @@ const AddNewSupplierForm= ({suppliergroup,company}) => {
                 <label class="text-blackdark:text-gray-200" for="phonenumberf">Phone Number</label>
                 <input placeholder="Phone Number" id="phonenumber" type="text" 
                 value={phone}
+                required
                 onChange={(e)=>{
                   setPhone(e.target.value)
                 }}
@@ -187,6 +191,7 @@ const AddNewSupplierForm= ({suppliergroup,company}) => {
                 <label class="text-blackdark:text-gray-200" for="password">Password</label>
                 <input placeholder="Password" id="password" type="text" 
                 value={password}
+                required
                 onChange={(e)=>{
                   setPassword(e.target.value)
                 }}
@@ -195,7 +200,7 @@ const AddNewSupplierForm= ({suppliergroup,company}) => {
             <div className="mb-2">
                 <label class="text-blackdark:text-gray-200" for="repass">ReType Password</label>
                 <input placeholder="ReType Password" id="phonenumber" type="password" 
-                
+                required
                  value={confirmPassword}
                  onChange={(e)=>{
                    setConfirmPassword(e.target.value)
@@ -205,6 +210,7 @@ const AddNewSupplierForm= ({suppliergroup,company}) => {
             <div className="mb-2">
                 <label class="text-black dark:text-gray-200" for="Vechicletype">Supplier</label>
                 <select 
+                required
                 onChange={(e)=>{
                   setRole(e.target.value)
                 }}

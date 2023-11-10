@@ -99,7 +99,7 @@ const ListAllShipments = ({ iseditable,todayShipments }) => {
                   Edit
                 </button> */}
                 <button
-                  className="h-7 flex items-center bg-red-500 text-white p-2 rounded-md text-md mr-5"
+                  className="h-7 w-24 flex justify-center items-center bg-red-500 text-white p-2 rounded-md mr-5 mt-3"
                   onClick={() => {}}
                 >
                  <FontAwesomeIcon icon={faPrint} className="mt-1 mr-1" size="sm"/>

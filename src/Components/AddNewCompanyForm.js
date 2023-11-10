@@ -7,6 +7,7 @@ import axios from "axios";
 import { baseUrl } from "../utils/baseurl";
 import AlertDialog from "./AlertDialogue";
 import ConfirmDialog from "./ConfirmDialog";
+import { Link } from "react-router-dom";
 
 const AddNewCompanyForm = () => {
     const {setLoading,Token}=useContext(UserContext);
@@ -129,7 +130,9 @@ const AddNewCompanyForm = () => {
 
         <div class="flex justify-end mt-6">
             <button type="submit"  class="mr-6 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-green-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">Submit</button>
-            <button class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">Cancel</button>
+            <button class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
+          <Link to="/company"> Cancel</Link>
+          </button>
         </div>
     </form>
     <AlertDialog

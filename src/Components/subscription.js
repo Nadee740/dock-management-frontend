@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const SubscriptionAdminDashboard = ({subscriptionTypes}) => {
     return (  
         <body>
-    <div class="flex items-center justify-center flex-col mb-10">
+    <div class="flex items-center justify-center flex-col mb-10 ">
         <div class="bg-[#F4F5FA] p-10 rounded-xl">
 
             <div class="flex flex-col justify-center items-center text-center">

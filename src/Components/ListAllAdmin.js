@@ -63,7 +63,7 @@ const ListAllAdmin = ({iseditable,adminData}) => {
           >
             <td className="p-3 text-blue-400">{index+1}</td>
             <td className="p-3">{data.admin_id.name}</td>
-            <td className="p-3">Admin</td>
+            <td className="p-3">{data.role}</td>
             <td className="p-3">{data.admin_id.email1}</td>
             <td className="p-3">{data.admin_id.acra_no}</td>
             <td className="p-3 text-red-700">{'10-90-2020'}</td>
@@ -83,7 +83,7 @@ const ListAllAdmin = ({iseditable,adminData}) => {
                 </button>
                 <Link
                   className="h-7 flex items-center bg-green-500 text-white p-2 rounded-md text-md mr-5"
-                  to={"/admin/users/edit/company/AdminUser/"+data._id}
+                  to={"/superadmin/users/edit/company/AdminUser/"+data._id}
                 >
                  <FontAwesomeIcon icon={faEdit} className="mt-1 mr-1" size="sm"/>
                   Edit

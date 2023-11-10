@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faEdit } from "@fortawesome/free-regular-svg-icons";
 import { faBackward, faCheck } from "@fortawesome/free-solid-svg-icons";
 import CryptoJS from "crypto-js";
+import AlertDialog from "../../Components/AlertDialogue";
 
 const dateConverter = (inputdate) => {
     const date = new Date(inputdate);
@@ -71,7 +72,10 @@ const DockBooking = ({ bookingDetail }) => {
   const d=new Date();
   const today=dateConverter(d);
   const [booked_date_array,setBookedDatesArray]=useState([today]);
-
+  const [open1,setOpen1]=useState(false);
+  const [open2,setOpen2]=useState(false);
+  const [modalHeading,setModalHeading]=useState("");
+  const [modalText,setModalText]=useState("")
 
   const addMinutesToTime = (time, minsAdd) => {
     function z(n) {
@@ -204,7 +208,23 @@ const DockBooking = ({ bookingDetail }) => {
       .catch((err) => {
         console.log(err);
       });
+      setDockName(-1)
   }, [dock_type_id]);
+
+  useEffect(()=>{
+    setLoading(true)
+    const booked_dates = [];
+    let i = 0;
+    while (i < bookforMultipleDays) {
+      const value = new Date(date);
+      value.setDate(value.getDate() + i);
+      booked_dates.push(dateConverter(value));
+      i++;
+    }
+    console.log(booked_date_array);
+    setBookedDatesArray(booked_dates)
+    setLoading(false)
+  },[date,setBookforMultipleDays,bookforMultipleDays])
 
   function encrypt(data, key) {
     let encJson = CryptoJS.AES.encrypt(JSON.stringify(data), key).toString();
@@ -439,11 +459,9 @@ const DockBooking = ({ bookingDetail }) => {
                       class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                     >
                       {building_id ? (
-                        <option value={building_name}>
-                          {building_name.building_name}
-                        </option>
+                        <></>
                       ) : (
-                        <option value="">---Choose Building---</option>
+                        <option value={-1}>---Choose Building---</option>
                       )}
                       {buildingData.map((b, index) => {
                         return (
@@ -490,9 +508,7 @@ const DockBooking = ({ bookingDetail }) => {
                       class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                     >
                       {vehicle_id ? (
-                        <option value={vehicleName}>
-                          {vehicleName.vehicle_no}
-                        </option>
+                        <></>
                       ) : (
                         <option value="">--- Choose Vehicle Number ---</option>
                       )}
@@ -597,12 +613,22 @@ const DockBooking = ({ bookingDetail }) => {
               </div>
             </form>
           )}
-          {step == 1 && (
+          {step == 1 && (<>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                if (selectedtimeSlots.length > 0) setStep(2);
-                else alert("please choose time slot");
+                if(dock_type_id==null||dock_name==-1||date==""){
+                  setModalHeading("Please Fill All Columns");
+                  
+                   setOpen1(true);
+                }
+               else if (selectedtimeSlots.length > 0) setStep(2);
+               
+                else{
+                  setModalHeading("Please choose time slot");
+                  
+                   setOpen1(true);
+                } 
               }}
             >
               <div className="m-3 px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
@@ -620,6 +646,7 @@ const DockBooking = ({ bookingDetail }) => {
                         if (e.target.value != "") {
                           setDock_type_id(JSON.parse(e.target.value)._id);
                           setDocktypeName(JSON.parse(e.target.value));
+                          setDockName(-1)
                         }
                       }}
                       class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
@@ -656,19 +683,17 @@ const DockBooking = ({ bookingDetail }) => {
                           billno == null ||
                           billno == ""
                         }
+                        value={dock_name}
                         onChange={(e) => {
                           set_dock_id(JSON.parse(e.target.value)._id);
                           setDockName(JSON.parse(e.target.value));
                         }}
                         class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                       >
-                        {dock_name ? (
-                          <option value={dock_name}>
-                            {dock_name.dock_number}
-                          </option>
-                        ) : (
-                          <option value="">--- Select Dock ---</option>
-                        )}
+                        {dock_name==-1? (
+                          
+                          <option value={-1}>--- Select Dock ---</option>
+                        ):(<></>)}
                         {dockSData.map((d, index) => {
                           return (
                             <option value={JSON.stringify(d)}>
@@ -706,30 +731,14 @@ const DockBooking = ({ bookingDetail }) => {
                     </label>
                     <select
                       required
+                      value={bookforMultipleDays}
                       onChange={(e) => {
                         setBookforMultipleDays(e.target.value);
-                        const booked_dates = [];
-                        let i = 0;
-                        while (i < e.target.value) {
-                          const value = new Date(date);
-                          value.setDate(value.getDate() + i);
-                          booked_dates.push(dateConverter(value));
-                          i++;
-                        }
-                        setBookedDatesArray(booked_dates)
                       }}
                       class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                     >
-                      {bookforMultipleDays > 1 ? (
-                        <>
-                          <option value={bookforMultipleDays}>
-                            {bookforMultipleDays}
-                          </option>
-                          <option value={1}>Single Day</option>
-                        </>
-                      ) : (
                         <option value={1}>Single Day</option>
-                      )}
+                      {/* )} */}
                       {[2, 3, 4, 5, 6, 7, 8].map((data, index) => {
                         return <option value={data}>{data}&nbsp; Day</option>;
                       })}
@@ -811,7 +820,15 @@ const DockBooking = ({ bookingDetail }) => {
                 </div>
               </div>
             </form>
-          )}
+            <AlertDialog
+        open={open1}
+        setOpen={setOpen1}
+        modalHeading={modalHeading}
+        modalText={modalText}
+      />
+            </>
+          ) 
+          }
 
           {selectedtimeSlots.length > 0 && (
             <>

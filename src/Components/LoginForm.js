@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { baseUrl } from "../utils/baseurl";
 import ConfirmDialog from "./ConfirmDialog";
 import { UserContext } from "../Contexts/UserContexts";
+import AlertDialog from "./AlertDialogue";
 
 const LoginForm = () => {
   ///user-login
@@ -19,9 +20,7 @@ const LoginForm = () => {
   const [open,setOpen]=useState(false);
   const [modalText,setModalText]=useState("");
   const [modalHeading,setModalHeading]=useState("SuccessFully Logged IN");
-  const confirmFunction=()=>{
-      
-  }
+ 
 
   const submitData =(e) => {
     e.preventDefault();
@@ -48,6 +47,7 @@ const LoginForm = () => {
         setModalHeading("Ooops Couldn`t Login");
         setOpen(true)
       });
+      setLoading(false)
   };
   return (
     <div className="bg-slate-100 flex flex-col bg-white w-11/12 md:w-3/4 lg:w-1/3 text-left bg-white p-10 rounded-xl m-auto">
@@ -116,13 +116,13 @@ const LoginForm = () => {
           </div>
         </div>
       </form>
-      <ConfirmDialog
+      <AlertDialog
         open={open}
         setOpen={setOpen}
         modalHeading={modalHeading}
         modalText={modalText}
-        confirmFunction={confirmFunction}
       />
+      
     </div>
   );
 };

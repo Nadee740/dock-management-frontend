@@ -2,16 +2,18 @@ import { faEdit } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Mail } from "@mui/icons-material";
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { baseUrl } from "../../utils/baseurl";
 import AlertDialog from "../../Components/AlertDialogue";
+import { UserContext } from "../../Contexts/UserContexts";
 
 const ChangeSubscriptionRequestStatusPage = () => {
     const params = useParams();
     const _id=params.id;
+    const typesub=params.typesubscription
     const [status,setStatus]=useState(1);
-    const [type,setType]=useState("premium");
+    const [type,setType]=useState();
     const [price,setPrice]=useState();
     const [validity,setValidity]=useState();
     const [noOfadmins,setNoOfadmins]=useState();
@@ -23,7 +25,32 @@ const ChangeSubscriptionRequestStatusPage = () => {
     const [open1,setOpen1]=useState(false);
     const [modalHeading,setModalHeading]=useState("");
     const [modalText,setModalText]=useState("")
+    const [subscriptionTypes,setSubscriptionTypes]=useState([]);
+    const {setLoading}=useContext(UserContext)
 
+    useEffect(()=>{
+      setLoading(true);
+      axios.get(`${baseUrl}/subscription/get/types`)
+      .then((res) => {
+          if(res.data.status=="ok")
+          {
+              let data=res.data.data.filter((type)=>{
+                  return type.isActive==true
+              })
+          setSubscriptionTypes(data);
+          setType(typesub)
+          setLoading(false);
+          }
+          
+      else 
+      throw new Error(res.data.msg)
+      })
+      .catch((err) => {
+        
+          console.log(err)
+
+      });
+  },[])
     const submit=(e)=>{
       e.preventDefault();
       const data={
@@ -37,12 +64,12 @@ const ChangeSubscriptionRequestStatusPage = () => {
         no_of_buildings:buildings,
         no_of_docks:docks
       }
-      console.log(_id,status,data);
+      
       axios.post(`${baseUrl}/subscription/change/request/status?_id=${_id}&&status=${status}`,data).then((res)=>{
         console.log(res.data)
         if(res.data.status=="ok"){
           console.log(res.data)
-          setModalHeading("Subscription Request sent Successfully")
+          setModalHeading("Subscription Status Changed Successfully")
           setModalText("")
            setOpen1(true)
           window.location='/superadmin/list/request/subscriptions'
@@ -90,15 +117,19 @@ const ChangeSubscriptionRequestStatusPage = () => {
                   Type of Subscription
                 </label>
                 <select required 
+                value={type}
                onChange={(e)=>{
                 setType(e.target.value)
             }}
               
                 class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
+                  {
+                    subscriptionTypes.map((type_subsp,index)=>(
+                      <option value={type_subsp.typeofsubscription}>{type_subsp.typeofsubscription}</option>
+                    ))
+                    
+                  }
                   
-                  <option selected value="premium">premium</option>
-                  <option value="standard">standard</option>
-                  <option value="basic">basic</option>
                   <option value="custom">custom</option>
                 </select>
               </div>

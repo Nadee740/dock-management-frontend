@@ -177,7 +177,7 @@ const AdminDashBoard = () => {
             </div>
             <div class="">
               <Link
-                to="/vehicle"
+                to="/vehicle-update"
                 class="flex max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
               >
                 <div className="w-1/2">

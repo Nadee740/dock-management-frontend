@@ -113,7 +113,7 @@ const ListAllSubscriptionRequest = ({iseditable,requestList}) => {
               <td className="p-3 flex">
                 {" "}
                 <Link
-                to={"/superadmin/change/subscription/status/"+data._id}
+                to={"/superadmin/change/subscription/status/"+data._id+"/"+data.typeofsubscription}
                   className="h-7 flex items-center bg-green-500 text-white p-2 rounded-md text-md mr-5"
                   onClick={() => {}}
                 >

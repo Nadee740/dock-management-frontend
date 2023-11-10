@@ -16,7 +16,10 @@ const LandingPage = () => {
         .then((res) => {
             if(res.data.status=="ok")
             {
-            setSubscriptionTypes(res.data.data);
+                let data=res.data.data.filter((type)=>{
+                    return type.isActive==true
+                })
+            setSubscriptionTypes(data);
             setLoading(false);
             }
             
