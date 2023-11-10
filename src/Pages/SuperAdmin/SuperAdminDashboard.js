@@ -130,7 +130,7 @@ const SuperAdminDashBoard = () => {
             </div>
             <div class="">
               <Link
-                to="superadmin/users/list/subscribed/AdminUsers"
+                to="/superadmin/users/list/subscribed/AdminUsers"
                 class="flex max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
               >
                 <div className="w-1/2">

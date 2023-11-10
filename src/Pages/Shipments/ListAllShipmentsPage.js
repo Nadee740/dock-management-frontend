@@ -19,7 +19,7 @@ const ListAllShipmentsPage = ({iseditable}) => {
         .then((res) => {
         if(res.data.status==="ok")
           {  
-            console.log(res.data.data)
+            console.log(res.data)
             setTodayShipments(res.data.data);
           }
         })
@@ -28,7 +28,7 @@ const ListAllShipmentsPage = ({iseditable}) => {
         
         });
         setLoading(false);
-    },[])
+    },[Status])
     return ( <>
         <div className="w-full admin-dashboard overflow-x-scroll">
       <div className="flex flex-row w-full w-full items-center p-3 justify-between">

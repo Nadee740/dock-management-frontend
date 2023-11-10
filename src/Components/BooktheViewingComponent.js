@@ -136,7 +136,7 @@ const BooktheViewingSliderComponent=({dockStatus,building})=>{
         <div class="flex-auto p-4">
                   <div class="flex flex-wrap -mx-2">
                     <div class="flex-none w-full max-w-full px-3">
-          {dockstatus.timeslot.includes(time)?<h3>Available</h3>:<h3>Booked</h3>}
+          {dockstatus.dock.status=='close'?<h3>Closed</h3>:dockstatus.timeslot.includes(time)?<h3>Available</h3>:<h3>Booked</h3>}
           
             </div>
             </div>
@@ -186,7 +186,7 @@ const BooktheViewingComponent = ({buildings}) => {
    
     useEffect(()=>{
     if(buildings.length>0){
-      console.log("huu")
+   
       setBuilding(buildings[0])
       setLoading(true)
        axios

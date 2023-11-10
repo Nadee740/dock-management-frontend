@@ -41,7 +41,7 @@ import LandingPage from "./Pages/LandingPage";
 import SuperAdminDashBoard from "./Pages/SuperAdmin/SuperAdminDashboard";
 import SuperAdminHome from "./Pages/SuperAdmin/SuperAdminHome";
 import ManageSubsriptionPage from "./Pages/SuperAdmin/ManageSubscriptionPage";
-import ListAllSubscribedAdminPage from "./Pages/SuperAdmin/ListAllSubscribedAdminPage";       
+import ListAllSubscribedAdminPage from "./Pages/SuperAdmin/ListAllSubscribedAdminPage";
 import Page404 from './Pages/PageNotFound'
 import WareHouseDashBoard from "./Pages/WareHouse/WarehouseDashboard";
 import WareHouseHome from "./Pages/WareHouse/WarehouseHomePage";
@@ -59,25 +59,25 @@ import EditDockPage from "./Pages/Docks/EditDockPage";
 import EditSupplierPage from "./Pages/Supplier/EditSupplierPage";
 function App() {
   const [user, setUser] = useState(null);
-  const [Token,setToken]=useState(null);
-  const [authenticating,setAuthenticating]=useState(false);
+  const [Token, setToken] = useState(null);
+  const [authenticating, setAuthenticating] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [accountDetails,setAccountDetails]=useState(null);
+  const [accountDetails, setAccountDetails] = useState(null);
 
   useEffect(() => {
-//     setUser({
-//     "_id": "64c4e2c9c7d0e5fc17b300d4",
-//     "name": "Nadeem Haris",
-//     "email1": "nadeemblayparambil@gmail.com",
-//     "email2": "nadeemblayparambil@gmail.com",
-//     "acra_no": "12",
-//     "userType": "supplier",
-//     "phone": "89299292",
-//     "isVerified": true,
-//     "createdAt": "2023-07-29T09:58:33.450Z",
-//     "updatedAt": "2023-09-07T09:14:59.912Z",
-//     "__v": 22})
-// setToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGM0ZTJjOWM3ZDBlNWZjMTdiMzAwZDQiLCJpYXQiOjE2OTQwNzgwOTl9.8jn8WA3R2FT67nREBTNW78NXL5GZNMYYiLIBnJ_mZcg")
+    //     setUser({
+    //     "_id": "64c4e2c9c7d0e5fc17b300d4",
+    //     "name": "Nadeem Haris",
+    //     "email1": "nadeemblayparambil@gmail.com",
+    //     "email2": "nadeemblayparambil@gmail.com",
+    //     "acra_no": "12",
+    //     "userType": "supplier",
+    //     "phone": "89299292",
+    //     "isVerified": true,
+    //     "createdAt": "2023-07-29T09:58:33.450Z",
+    //     "updatedAt": "2023-09-07T09:14:59.912Z",
+    //     "__v": 22})
+    // setToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGM0ZTJjOWM3ZDBlNWZjMTdiMzAwZDQiLCJpYXQiOjE2OTQwNzgwOTl9.8jn8WA3R2FT67nREBTNW78NXL5GZNMYYiLIBnJ_mZcg")
 
     setAuthenticating(true)
     setLoading(true)
@@ -90,14 +90,14 @@ function App() {
       })
       .then(function (response) {
         if (response.data != "") {
-            console.log(response.data)
+          console.log(response.data)
           setUser(response.data.user);
           setAccountDetails(response.data.data)
           setToken(token);
           setAuthenticating(false)
           setLoading(false);
         } else {
-            throw new Error("somethin went wrong")
+          throw new Error("somethin went wrong")
         }
       })
       .catch(function (error) {
@@ -109,25 +109,24 @@ function App() {
 
   return (
     <div className="App">
-      <UserContext.Provider value={{ user,setUser,accountDetails,setAccountDetails,Token,setToken, loading, setLoading }}>
+      <UserContext.Provider value={{ user, setUser, accountDetails, setAccountDetails, Token, setToken, loading, setLoading }}>
         {/* <SideNavBar/> */}
         <BrowserRouter>
           <Routes>
-          {user==null && <>
-           <Route path="/" element={<LandingPage/>} />
-           <Route path="/request/subscription" element={<SubscriptionRequestPage/>} />
-           
+            {user == null &&
+              <>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/request/subscription/:type" element={<SubscriptionRequestPage />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<SignUp />} />
 
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
-           
-            
-            </>
+
+              </>
             }
-          
+
             {user != null && (
               <Route path="/" element={<CommonHome />}>
-              <Route path="/statistics" element={<StatisticsPage />} />
+                <Route path="/statistics" element={<StatisticsPage />} />
                 <Route path="/help" element={<HelpPage />} />
                 <Route
                   path="/booking-confirm/:id"
@@ -139,6 +138,7 @@ function App() {
                   path="/real-time-status"
                   element={<RealTimeStatusPage iseditable={false} />}
                 />
+
 
                 {/* Vehicle Routes */}
                 <Route
@@ -160,12 +160,13 @@ function App() {
                 <Route path="/company/add" element={<AddNewCompany />} />
                 <Route path="/edit/company/:id" element={<EditCompanyPage />} />
 
+
                 {/* Supplier Routes */}
                 <Route
                   path="/supplier-list"
                   element={<ListAllSuppliersPage iseditable={true} />}
                 />
-             
+
 
                 {/* Security Routes */}
                 <Route
@@ -175,6 +176,7 @@ function App() {
                 <Route path="/create-security" element={<AddNewSecurity />} />
                 <Route path="/update/security/:id" element={<UpdateSecurityPage />} />
 
+
                 {/* WareHouse Routes */}
                 <Route
                   path="/list-all-warehouses"
@@ -183,7 +185,7 @@ function App() {
                 <Route path="/create-warehouse" element={<AddNewWareHouse />} />
                 <Route path="/edit/warehouse/:id" element={<EditWareHouse />} />
 
-              
+
                 {/* Shipment Routes */}
                 <Route
                   path="/shipments-list/:Status"
@@ -192,118 +194,118 @@ function App() {
 
                 {/* Protected Routes */}
                 {
-                    user.userType=="superadmin" &&(
-                        <>
-                 <Route path="/" element={<SuperAdminDashBoard/>}></Route>
-                  <Route path="superadmin" element={<SuperAdminHome/>}>
-                    <Route index element={<SuperAdminDashBoard/>} />
-                    <Route
-                      path="manage/subscriptions"
-                      element={<ManageSubsriptionPage />}
-                    />
-                    <Route path="change/subscription/status/:id" element={<ChangeSubscriptionRequestStatusPage/>} />
-                    <Route
-                      path="list/request/subscriptions"
-                      element={<ListAllSubscribtionRequestPage iseditable={true}/>}
-                    />
-                    <Route
-                      path="users/list/subscribed/AdminUsers"
-                      element={<ListAllSubscribedAdminPage
-                       iseditable={true} />}
-                    />
-                    <Route
-                      path="Users/addCompanyAdminUsers"
-                      element={<AddAdminUser />}
-                    />
-                  
-                    
-                  </Route>
-
-                        </>
-                    )
-                }
-                { user.userType==="admin"&& (
+                  user.userType == "superadmin" && (
                     <>
-                    <Route path="/" element={<AdminDashBoard/>}></Route>
-                  <Route path="admin" element={<AdminHome />}>
-                    <Route index element={<AdminDashBoard />} />
-                    <Route
-                      path="users/listCompanyAdminUsers"
-                      element={<ListAllAdminPage iseditable={true} />}
-                    />
-                     <Route
-                      path="add/supplier/groups"
-                      element={<AddSupplierGroupsPage/>}
-                    />
-                       <Route
-                      path="edit/supplier/groups/:id"
-                      element={<EditSupplierGroupsPage/>}
-                    />
-                  <Route
-                  path="supplier/groups"
-                  exact
-                  element={<ListAllSupplierGroupsPage iseditable={true} />}
-                />
+                      <Route path="/" element={<SuperAdminDashBoard />}></Route>
+                      <Route path="superadmin" element={<SuperAdminHome />}>
+                        <Route index element={<SuperAdminDashBoard />} />
+                        <Route
+                          path="manage/subscriptions"
+                          element={<ManageSubsriptionPage />}
+                        />
+                        <Route path="change/subscription/status/:id/:typesubscription" element={<ChangeSubscriptionRequestStatusPage />} />
+                        <Route
+                          path="list/request/subscriptions"
+                          element={<ListAllSubscribtionRequestPage iseditable={true} />}
+                        />
+                         <Route
+                        path="users/edit/company/AdminUser/:id"
+                        element={<EditAdminUser />}
+                      />
+                        <Route
+                          path="users/list/subscribed/AdminUsers"
+                          element={<ListAllSubscribedAdminPage
+                            iseditable={true} />}
+                        />
 
-                    <Route
-                      path="Users/addCompanyAdminUsers"
-                      element={<AddAdminUser />}
-                    />
-                    <Route
-                      path="users/edit/company/AdminUser/:id"
-                      element={<EditAdminUser/>}
-                    />
-                       <Route
-                      path="users/add/supplier"
-                      element={<AddNewSupplier />}
-                    />
-                    <Route
-                      path="edit/supplier/:id"
-                      element={<EditSupplierPage />}
-                    />
-                    <Route path="docks" element={<ListAllDocksPage />} />
-                    <Route path="add-new-dock" element={<AddNewDock />} />
-                    <Route path="edit/dock/:id" element={<EditDockPage />} />
-                  </Route>
+
+                      </Route>
+
+                    </>
+                  )
+                }
+                {user.userType === "admin" && (
+                  <>
+                    <Route path="/" element={<AdminDashBoard />}></Route>
+                    <Route path="admin" element={<AdminHome />}>
+                      <Route index element={<AdminDashBoard />} />
+                      <Route
+                        path="users/listCompanyAdminUsers"
+                        element={<ListAllAdminPage iseditable={true} />}
+                      />
+                      <Route
+                        path="add/supplier/groups"
+                        element={<AddSupplierGroupsPage />}
+                      />
+                      <Route
+                        path="edit/supplier/groups/:id"
+                        element={<EditSupplierGroupsPage />}
+                      />
+                      <Route
+                        path="supplier/groups"
+                        exact
+                        element={<ListAllSupplierGroupsPage iseditable={true} />}
+                      />
+
+                      <Route
+                        path="Users/addCompanyAdminUsers"
+                        element={<AddAdminUser />}
+                      />
+                      <Route
+                        path="users/edit/company/AdminUser/:id"
+                        element={<EditAdminUser />}
+                      />
+                      <Route
+                        path="users/add/supplier"
+                        element={<AddNewSupplier />}
+                      />
+                      <Route
+                        path="edit/supplier/:id"
+                        element={<EditSupplierPage />}
+                      />
+                      <Route path="docks" element={<ListAllDocksPage />} />
+                      <Route path="add-new-dock" element={<AddNewDock />} />
+                      <Route path="edit/dock/:id" element={<EditDockPage />} />
+                    </Route>
                   </>
                 )}
 
-                {user.userType==="supplier" && (
-                    <>
-                    <Route path="/" element={<AdminDashBoard/>}></Route>
-                  <Route path="supplier" element={<SupplierHome />}>
-                    <Route index element={<SupplierDashBoard />} />
-                  </Route>
+                {user.userType === "supplier" && (
+                  <>
+                    <Route path="/" element={<AdminDashBoard />}></Route>
+                    <Route path="supplier" element={<SupplierHome />}>
+                      <Route index element={<SupplierDashBoard />} />
+                    </Route>
                   </>
                 )}
 
                 {user.userType == "security" && (
-                    <>
+                  <>
                     <Route index element={<SecurityDashBoard />} />
-                  <Route path="security" element={<SecurityHome />}>
-             
-                    <Route index element={<SecurityDashBoard />} />
-                  </Route>
-                  
+                    <Route path="security" element={<SecurityHome />}>
+
+                      <Route index element={<SecurityDashBoard />} />
+                    </Route>
+
                   </>
                 )}
                 {
-                    user.userType=="warehouse"&&(
-                      <>
+                  user.userType == "warehouse" && (
+                    <>
                       <Route index element={<WareHouseDashBoard />} />
-                    <Route path="warehouse" element={<WareHouseHome />}>
-               
-                      <Route index element={<WareHouseDashBoard />} />
-                    </Route>
-                    
+                      <Route path="warehouse" element={<WareHouseHome />}>
+
+                        <Route index element={<WareHouseDashBoard />} />
+                      </Route>
+
                     </>
-                    )
+                  )
                 }
-                   
+
               </Route>
             )}
 
-           {authenticating==false && loading==false  && <Route path="*" element={<Page404/>}/>} 
+            {authenticating == false && loading == false && <Route path="*" element={<Page404 />} />}
           </Routes>
         </BrowserRouter>
         <BackdropLoading />

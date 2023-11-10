@@ -4,6 +4,9 @@ import { useContext, useState } from "react";
 import { UserContext } from "../Contexts/UserContexts";
 import { baseUrl } from "../utils/baseurl";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import AlertDialog from "./AlertDialogue";
+import ConfirmDialog from "./ConfirmDialog";
 
 const AddNewVehicleForm = () => {
   const {setLoading}=useContext(UserContext);
@@ -12,9 +15,22 @@ const AddNewVehicleForm = () => {
   const [driver_name,setDriverName]=useState();
   const [driver_no,setDriverNo]=useState();
   const [driver_nric,setDriverNRIC]=useState();
+  const [open1,setOpen1]=useState(false);
+  const [open2,setOpen2]=useState(false);
+  const [modalHeading,setModalHeading]=useState("");
+  const [modalText,setModalText]=useState("")
+  const SubmitButton=(e)=>{
+    e.preventDefault();
+    
+        setOpen2(true);
+        setModalHeading("Alert")
+        setModalText("Are You Sure You Want To Create Vehicle With Provided Details");
+    
+
+}
+
   const submit=(e)=>{
-        e.preventDefault();
-        ///api/create-vehicle
+        
         const data={
           driver_name,
           nric_no:driver_nric,
@@ -31,16 +47,20 @@ const AddNewVehicleForm = () => {
         })
         .then((res)=>{
           if(res.data.status=="ok"){
-            alert("vehicle created")
+            setModalHeading("Vehicle Created Successfully")
+            setModalText("")
             setDriverNRIC('')
             setDriverName('')
             setDriverNo('')
             setVehicleNo('')
             setVehicleType('')
+            setOpen1(true)
 
           }
           else{
-            alert("err")
+            setModalHeading("Something Went wrong");
+          setModalText("Something Went wrong.Please Try again after sometime");
+          setOpen1(true);
             console.log(res.data.msg)
           }
           setLoading(false);
@@ -58,7 +78,7 @@ const AddNewVehicleForm = () => {
         </h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-      <form onSubmit={submit}>
+      <form onSubmit={SubmitButton}>
         <div class="">
           <div className="mb-2">
             <label class="text-black dark:text-gray-200" for="vehiclenumber">
@@ -68,6 +88,7 @@ const AddNewVehicleForm = () => {
               placeholder="Vehicle Number"
               id="vehiclenumber"
               type="text"
+              required
               value={vehicle_no}
             onChange={(e)=>{
                 setVehicleNo(e.target.value)
@@ -112,6 +133,7 @@ const AddNewVehicleForm = () => {
               placeholder="Driver Name"
               id="drivername"
               type="text"
+              required
               value={driver_name}
             onChange={(e)=>{
                 setDriverName(e.target.value)
@@ -144,6 +166,7 @@ const AddNewVehicleForm = () => {
               placeholder="Driver NRIF/FIN"
               id="drivernrif"
               type="text"
+              required
               value={driver_nric}
             onChange={(e)=>{
                 setDriverNRIC(e.target.value)
@@ -158,10 +181,23 @@ const AddNewVehicleForm = () => {
             Submit
           </button>
           <button class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
-            Cancel
+          <Link to="/vehicle-update"> Cancel</Link>
           </button>
         </div>
       </form>
+      <AlertDialog
+        open={open1}
+        setOpen={setOpen1}
+        modalHeading={modalHeading}
+        modalText={modalText}
+      />
+      <ConfirmDialog
+        open={open2}
+        setOpen={setOpen2}
+        modalHeading={modalHeading}
+        modalText={modalText}
+        confirmFunction={submit}
+      />
     </>
   );
 };
