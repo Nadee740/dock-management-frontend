@@ -22,7 +22,7 @@ const ListAllSubscriptionRequest = ({iseditable,requestList}) => {
     }
     else{
       const datas=requestList.filter((list)=>{
-        return list.Status==filter;
+        return filter==1?(list.Status==3||list.Status==filter):list.Status==filter;
       })
       setFilteredList(datas)
     }
@@ -80,9 +80,9 @@ const ListAllSubscriptionRequest = ({iseditable,requestList}) => {
           Excel
         </button>
       </div>
-      <div className="flex items-center justify-between w-4/12 py-4">
+      <div className="flex items-center justify-between w-2/12 py-4">
         <p className="font-semibold">No Of Requests :</p>
-        <p className="font-semibold">{10} </p>
+        <p className="font-semibold">{filteredList.length} </p>
       </div>
       <table className="w-11/12 relative table-auto">
         <tr className="rounded-xl p-3 bg-primary text-center">

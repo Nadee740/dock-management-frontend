@@ -286,6 +286,9 @@ const SignUpForm = ({buildings}) => {
               Sign Up
             </button>
           </Link>
+          <button class="rounded-md text-white py-2 ml-8 px-4 w-2/3 md:w-1/3 lg:w-1/3 bg-indigo-700">
+            <Link to="/"> Cancel</Link>
+          </button>
         </div>
       </form>
       <ConfirmDialog
