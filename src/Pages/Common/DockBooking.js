@@ -47,6 +47,7 @@ const DockBooking = ({ bookingDetail }) => {
   const [dockSData, setDocksData] = useState([]);
 
   const [billType, setBillType] = useState(null);
+  const [billno,setBillNo]=useState(null);
   const [po_no, setPo_no] = useState(null);
   const [do_no, setDo_no] = useState(null);
   const [airway_bill_no, setairwayBill_no] = useState(null);
@@ -221,10 +222,8 @@ const DockBooking = ({ bookingDetail }) => {
       i++;
     }
     const data = {
-      purchase_order_no: po_no,
-      do_no,
-      airway_bill_no,
-      bl_no,
+      bill_no:billno,
+      bill_type:billType,
       delivery_company_id: company_id,
       building_id,
       dock_type_id,
@@ -249,7 +248,7 @@ const DockBooking = ({ bookingDetail }) => {
           const _id = encrypt(id, "keyvalue");
           window.location.href = "/booking-confirm/" + _id;
         } else {
-          alert("error");
+          alert(res.data.msg);
         }
       })
       .catch(function (error) {
@@ -349,66 +348,45 @@ const DockBooking = ({ bookingDetail }) => {
             >
               <div>
                 <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+                 
+
+                  
                   <div>
                     <label
                       class="flex text-black dark:text-gray-200"
-                      for="po_no"
+                      for="company"
                     >
-                      P.O No / W.O No <p className="ml-2 text-red-500">*</p>
+                      Bill Type{" "}
+                      <p className="pl-1 text-red-600">*</p>
+                    </label>
+                    <select
+                      required
+                      onChange={(e) => {
+                        setBillType(e.target.value);
+                      }}
+                      class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                    >
+                      {billType ? (
+                       <></>
+                      ) : (
+                        <option value="">---Choose Bill Type---</option>
+                      )}
+                      <option value="P.O No / W.O No">P.O No / W.O No</option>
+                      <option value="D.o Number">D.o Number</option>
+                      <option value="Airway Bill No">Airway Bill No</option>
+                      <option value=" B/L No">B/L No</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="text-black dark:text-gray-200" for="bl_no">
+                      Bill No{" "}
+                      
                     </label>
                     <input
                       required
-                      value={po_no}
+                      value={billno}
                       onChange={(e) => {
-                        setPo_no(e.target.value);
-                      }}
-                      id="po_no"
-                      type="text"
-                      class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring border-2 border-slate-400"
-                    />
-                  </div>
-
-                  <div>
-                    <label class="text-blackdark:text-gray-200" for="do_">
-                      D.o Number
-                    </label>
-                    <input
-                      value={do_no}
-                      onChange={(e) => {
-                        setDo_no(e.target.value);
-                      }}
-                      id="do_no"
-                      type="text"
-                      class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                    />
-                  </div>
-
-                  <div>
-                    <label
-                      class="text-black dark:text-gray-200"
-                      for="airway_bill"
-                    >
-                      Airway Bill No
-                    </label>
-                    <input
-                      value={airway_bill_no}
-                      onChange={(e) => {
-                        setairwayBill_no(e.target.value);
-                      }}
-                      id="airway_bill"
-                      type="text"
-                      class="border-black-200 block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                    />
-                  </div>
-
-                  <div>
-                    <label class="text-black dark:text-gray-200" for="bl_no">
-                      B/L No
-                    </label>
-                    <input
-                      value={bl_no}
-                      onChange={(e) => {
-                        setbl_no(e.target.value);
+                        setBillNo(e.target.value);
                       }}
                       id="bl_no"
                       type="text"
@@ -647,9 +625,7 @@ const DockBooking = ({ bookingDetail }) => {
                       class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                     >
                       {dock_type_id ? (
-                        <option value={docktype_name}>
-                          {docktype_name.dock_type}
-                        </option>
+                        <></>
                       ) : (
                         <option value="">---Dock Type ---</option>
                       )}
@@ -677,8 +653,8 @@ const DockBooking = ({ bookingDetail }) => {
                           vehicle_id == null ||
                           company_id == null ||
                           building_id == null ||
-                          po_no == null ||
-                          po_no == ""
+                          billno == null ||
+                          billno == ""
                         }
                         onChange={(e) => {
                           set_dock_id(JSON.parse(e.target.value)._id);
@@ -856,7 +832,7 @@ const DockBooking = ({ bookingDetail }) => {
                               NO .
                             </th>
                             <th scope="col" class="px-6 py-3">
-                              PO NUMBER / D O
+                              BILL NUMBER
                             </th>
                             <th scope="col" class="px-6 py-3">
                               DATE
@@ -877,7 +853,7 @@ const DockBooking = ({ bookingDetail }) => {
                                   >
                                     {index * bookforMultipleDays + ind + 1}
                                   </th>
-                                  <td class="px-6 py-4">{po_no}</td>
+                                  <td class="px-6 py-4">{billno}</td>
                                   <td class="px-6 py-4">{el}</td>
                                   <td class="px-6 py-4">{data}</td>
                                 </tr>

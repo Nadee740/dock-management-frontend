@@ -2,10 +2,42 @@ import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faCheck, faPrint, faTruck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import QRCode from "react-qr-code";
+import generatePDF, { Margin, Resolution, usePDF } from "react-to-pdf";
 
-const ConfirmBooking=({bookingDetails,buildingDetails,companyDetails, dockDetails,dockTypeDetails})=>{
+const ConfirmBooking=({bookingDetails,buildingDetails,vehicleDetails,companyDetails, dockDetails,dockTypeDetails})=>{
+  const options = {
+    // default is `save`
+    method: 'open',
+    
+    resolution: Resolution.HIGH,
+    page: {
+       // margin is in MM, default is Margin.NONE = 0
+       margin: Margin.SMALL,
+       // default is 'A4'
+       format: 'letter',
+       // default is 'portrait'
+       orientation: 'landscape',
+    },
+    canvas: {
+       // default is 'image/jpeg' for better size performance
+       mimeType: 'image/png',
+       qualityRatio: 1
+    },
+   
+    overrides: {
+       // see https://artskydj.github.io/jsPDF/docs/jsPDF.html for more options
+       pdf: {
+          compress: true
+       },
+       // see https://html2canvas.hertzen.com/configuration for more options
+       canvas: {
+          useCORS: true
+       }
+    },
+ };
+ const getTargetElement = () => document.getElementById('booking-confirmed-page');
     return(
-        <div id='booking-confirmed-page' >
+        <div id='booking-confirmed-page'>
         <div className="flex items-center justify-between w-4/12 p-4">
         <h2 className="text-2xl font-medium">Booking Confirmed</h2>
       </div>
@@ -31,9 +63,7 @@ const ConfirmBooking=({bookingDetails,buildingDetails,companyDetails, dockDetail
         </button>
         <button
           className="flex w-28 bg-indigo-800 text-white p-2 rounded-lg text-sm mr-5"
-          onClick={() => {
-            
-          }}
+          onClick={() => generatePDF(getTargetElement, {filename: 'page.pdf'},options)}
         >
         <FontAwesomeIcon icon={faPrint } className="m-2"></FontAwesomeIcon>
           <p className="font-bold mt-1 text-md">Print</p>
@@ -60,22 +90,23 @@ const ConfirmBooking=({bookingDetails,buildingDetails,companyDetails, dockDetail
 <hr class="h-px w-72 my-6 bg-gray-200 border-0 dark:bg-gray-700"></hr>
 <div className="flex w-3/4 justify-between "><p className="flex px-2 font-bold">Booked On : </p><p className="flex px-2 ">{booking.data.booked_date} </p></div>
 <hr class="h-px w-72 my-6 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-<div className="flex w-3/4 justify-between "><p className="flex px-2 font-bold">Booking Bill No : </p><p className="flex px-2 ">{booking.data.bl_no}  </p></div>
+<div className="flex w-3/4 justify-between "><p className="flex px-2 font-bold">Booking Bill No : </p><p className="flex px-2 ">{booking.data.bill_no}  </p></div>
 <hr class="h-px w-72 my-6 bg-gray-200 border-0 dark:bg-gray-700"></hr>
 <div className="flex w-3/4 justify-between "><p className="flex px-2 font-bold">Check in / Check Out : </p><p className="flex px-2 ">{booking.data.timeslot} </p></div>
 <hr class="h-px w-72 my-6 bg-gray-200 border-0 dark:bg-gray-700"></hr>
 <div className="flex w-3/4 justify-between "><p className="flex px-2 font-bold">Booking Mode : </p><p className="flex px-2 ">Online </p></div>
 <hr class="h-px w-72 my-6 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-<div className="flex w-3/4 justify-between "><p className="flex px-2 font-bold">Dock Type / Dock No : </p><p className="flex px-2 ">{dockDetails.dock_number} </p></div>
+<div className="flex w-3/4 justify-between "><p className="flex px-2 font-bold">Dock Type / Dock No : </p><p className="flex px-2 ">{dockTypeDetails.dock_type}/{dockDetails.dock_number} </p></div>
 </div>
 <div className="mt-16"> 
 <p className="flex text-xl font-bold"><FontAwesomeIcon className="px-2 py-1" icon={faUser} />Vehicle Information</p>
 <hr class="h-px w-72 my-6 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-<div className="flex w-3/4 justify-between "><p className="flex px-2 font-bold">Vehicle Number: </p><p className="flex px-2 ">Vechicle NO </p></div>
+<div className="flex w-3/4 justify-between "><p className="flex px-2 font-bold">Vehicle Number: </p><p className="flex px-2 ">{vehicleDetails.vehicle_no} </p></div>
 <hr class="h-px w-72 my-6 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-<div className="flex w-3/4 justify-between "><p className="flex px-2 font-bold">Vehicle Type: </p><p className="flex px-2 ">Vandi </p></div>
+<div className="flex w-3/4 justify-between "><p className="flex px-2 font-bold">Vehicle Type: </p><p className="flex px-2 ">{vehicleDetails.vehicle_type}</p></div>
 <hr class="h-px w-72 my-6 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-<div className="flex w-3/4 justify-between "><p className="flex px-2 font-bold">Driver Name: </p><p className="flex px-2 ">driver name </p></div>
+<div className="flex w-3/4 justify-between "><p className="flex px-2 font-bold">Driver Name: </p><p className="flex px-2 ">{vehicleDetails.driver_name}</p></div>
+<hr class="h-px w-72 my-6 bg-gray-200 border-0 dark:bg-gray-700"></hr>
 <p className="flex text-xl font-bold py-4"><FontAwesomeIcon className="px-2 py-1" icon={faTruck} />Delivery Information</p>
 <hr class="h-px w-72 my-6 bg-gray-200 border-0 dark:bg-gray-700"></hr>
 <div className="flex w-3/4 justify-between "><p className="flex px-2 font-bold">Company Delivery To: </p><p className="flex px-2 ">{companyDetails.company_name}</p></div>

@@ -2,30 +2,70 @@ import { faEdit, faEye } from "@fortawesome/free-regular-svg-icons";
 import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Mail } from "@mui/icons-material";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "../Contexts/UserContexts";
 
 const ListAllSubscriptionRequest = ({iseditable,requestList}) => {
+  const [filter,setFilter]=useState(0);
+  const {setLoading}=useContext(UserContext)
+  const [filteredList,setFilteredList]=useState(requestList);
 
+  useEffect(()=>{
+
+    // setLoading(true)
+    // setFilter(4);
+    // setFilteredList(requestList);
+    setLoading(true)
+    if(filter==4){
+      setFilteredList(requestList);
+    }
+    else{
+      const datas=requestList.filter((list)=>{
+        return list.Status==filter;
+      })
+      setFilteredList(datas)
+    }
+   
+    setLoading(false)
+  },[filter,setFilteredList,requestList])
+  const changeData=(e)=>{
+    setFilter(e.target.value)
+   
+  }
   return (
-    <>
-      <div className="flex items-center justify-between p-4">
+   <>
+    { filteredList&&<>
+      <div className="flex items-center justify-between p-4 mb-1">
         <h2 className="text-2xl font-medium">Subscription Request</h2>
+        
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-      {iseditable&&    <div className="flex">
-        <Link
-        to="/admin/Users/addCompanyAdminUsers"
-          className=" flex items-center justify-center text-white p-3 ring-slate-200 bg-green-400 ring-2 rounded-xl outline-none"
-        >
-        <FontAwesomeIcon icon={faPlus} className="mr-1"></FontAwesomeIcon>
-         <p>Add Record</p> 
-        </Link>
-      </div>}
+      <div class="flex space-x-4 mb-6 ">
+        <div class="flex-auto flex space-x-4"> 
+        <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
+      
    
-      <div className="flex items-center p-3 w-4/12 py-4">
+        <div className="flex items-center p-3 w-4/12 py-4">
         <label className=" pr-3 font-semibold">Search</label>
         <input className="p-3 w-52 ring-slate-200 ring-2 rounded-xl outline-none" onChange={(e) => {}} type="text"></input>
       </div>
+{/* dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring  */}
+        </div>
+      
+      <div class="flex flex-wrap">
+        <label class="text-lg h-8 items-center">Filter</label>
+        <select class="block w-full flex-none text-md h-10 px-6 font-semibold rounded-md bg-white-400 text-black mr-5 "
+        onChange={changeData}
+        value={filter}>
+          <option value={0}>Pending request</option>
+          <option value={1}>Accepted</option>
+          <option value={2}>Rejected</option>
+          <option value={4}>All requests</option>
+        </select>
+      </div>
+      </div>
+    
       <div className="flex items-center justify-end mb-5">
         <button
           className="w-28 bg-stone-800 text-white p-2 rounded-lg text-sm mr-5"
@@ -54,7 +94,7 @@ const ListAllSubscriptionRequest = ({iseditable,requestList}) => {
           <th className="p-3 text-sm text-slate-500">Subscription type</th>
           {iseditable&&<th className="p-3 text-sm text-slate-500">ACTIONS</th>}
         </tr>
-        {requestList.map((data, index) => (
+        {filteredList.map((data, index) => (
           <tr
             key={index}
             className={
@@ -86,7 +126,7 @@ const ListAllSubscriptionRequest = ({iseditable,requestList}) => {
           </tr>
         ))}
       </table>
-    </>
+    </>}</>
   );
 };
 

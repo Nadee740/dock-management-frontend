@@ -115,7 +115,7 @@ function App() {
           <Routes>
           {user==null && <>
            <Route path="/" element={<LandingPage/>} />
-           <Route path="/request/subscription" element={<SubscriptionRequestPage/>} />
+           <Route path="/request/subscription/:type" element={<SubscriptionRequestPage/>} />
            
 
             <Route path="/login" element={<Login />} />
@@ -211,11 +211,7 @@ function App() {
                       element={<ListAllSubscribedAdminPage
                        iseditable={true} />}
                     />
-                    <Route
-                      path="Users/addCompanyAdminUsers"
-                      element={<AddAdminUser />}
-                    />
-                  
+                   
                     
                   </Route>
 

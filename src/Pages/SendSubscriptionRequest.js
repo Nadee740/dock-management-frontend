@@ -2,17 +2,43 @@ import { faEdit } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Mail } from "@mui/icons-material";
 import axios from "axios";
-import { useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { baseUrl } from "../utils/baseurl";
+import { UserContext } from "../Contexts/UserContexts";
+import ConfirmDialog from "../Components/ConfirmDialog";
+import AlertDialog from "../Components/AlertDialogue";
 
 const SubscriptionRequestPage = () => {
-  const [type,setType]=useState("premium");
+  const params=useParams();
+  const typedata=params.type;
+  const [type,setType]=useState(typedata);
   const [name,setName]=useState();
   const [email,setEmail]=useState();
   const [Phone_no,setPhone]=useState();
+  const {setLoading}=useContext(UserContext);
+  const [open1,setOpen1]=useState(false);
+  const [open2,setOpen2]=useState(false);
+  const [modalHeading,setModalHeading]=useState("");
+  const [modalText,setModalText]=useState("")
   const [company,setCompany]=useState();
+  const SubmitButton=(e)=>{
+    e.preventDefault();
+  if(name==""||email==""||Phone_no==""||type=="")
+    {
+        setModalHeading("Please Fill All Columns");
+        setOpen1(true);
+
+    }
+    else{
+        setOpen2(true);
+        setModalHeading("Alert")
+        setModalText("Are You Sure You Want To Send Subscription Request");
+    }
+
+}
   const submit=async()=>{
+    setLoading(true)
     const data={
       typeofsubscription:type,
       NameofSubscriber:name,
@@ -22,14 +48,29 @@ const SubscriptionRequestPage = () => {
 
     }
     axios.post(`${baseUrl}/subscription/request`,data).then((res)=>{
-      if(res.data.status=="ok"){
-        alert("success")
-        window.location='/'
+      if(res.data.status=="ok")
+      {
+        setModalHeading("Subscription Request sent Successfully")
+        setModalText("")
+         setOpen1(true)
+         window.location='/'
+      
       }
       else{
-        alert("failed")
+        if(res.data.msg=="01"){
+          setModalHeading("Email Already exists!");
+          setModalText("Email ID already exists. Please use another email ID!");
+        }
+        else{
+          setModalHeading("Something Went wrong");
+          setModalText("Something Went wrong. Please Try again after sometime");
+        }
+       
+        setOpen1(true);
+         console.log("err",res.data.msg)
 
       }
+      setLoading(false)
     })
     .catch((err)=>{
       console.log("failed",err)
@@ -45,7 +86,7 @@ const SubscriptionRequestPage = () => {
             </h2>
           </div>
           <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-          <form onSubmit={submit}>
+          <form onSubmit={SubmitButton}>
             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
             <div>
                 <label
@@ -58,6 +99,7 @@ const SubscriptionRequestPage = () => {
                onChange={(e)=>{
                 setType(e.target.value)
             }}
+              value={type}
               
                 class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
                   
@@ -131,7 +173,7 @@ const SubscriptionRequestPage = () => {
                 />
               </div>
             </div>
-            <div class="flex mt-5 md:mt-5 lg:mt-5">
+            <div class="flex mt-5 md:mt-8 lg:mt-5">
             <div>
             {/* /booking-confirm/1 */}
               <button 
@@ -139,10 +181,29 @@ const SubscriptionRequestPage = () => {
               class="bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
                 Send Request
                 <Mail className="ml-5"/>
-              </button>
+                </button>
+              </div>
+              <div class="flex ml-3 md:ml-5 lg:ml-3"> 
+            
+              <button class="bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
+          <Link to="/"> Cancel </Link>
+          </button>
               </div>
             </div>
           </form>
+          <AlertDialog
+        open={open1}
+        setOpen={setOpen1}
+        modalHeading={modalHeading}
+        modalText={modalText}
+      />
+      <ConfirmDialog
+        open={open2}
+        setOpen={setOpen2}
+        modalHeading={modalHeading}
+        modalText={modalText}
+        confirmFunction={submit}
+      />
         </section>
       </div>
     </div>

@@ -11,6 +11,7 @@ const BookingConfirmPage=()=>{
     const [companyDetails,setCompanyDetails]=useState([]);
     const [dockDetails,setDockDetails]=useState();
     const [building,setBulding]=useState();
+    const [vehicleDetails,setVehicleDetails]=useState();
     const [dockTypeDetails,setDockTypeDetails]=useState();
     
     useEffect(()=>{
@@ -21,6 +22,7 @@ const BookingConfirmPage=()=>{
         setBookingDetails(v.data);
         setCompanyDetails(v.company);
         setBulding(v.building);
+        setVehicleDetails(v.vehicle);
         setDockDetails(v.dock);
         setDockTypeDetails(v.docktype);
         setLoading(false);
@@ -31,7 +33,7 @@ const BookingConfirmPage=()=>{
           <div className="w-full admin-dashboard  overflow-y-scroll">
             <div className="flex flex-row w-full w-full items-center p-3 justify-between">
               <section class=" text-black ml-5 w-full p-6 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800 mt-20 overflow-scroll">
-               {bookingDetails.length && <ConfirmBooking bookingDetails={bookingDetails} buildingDetails={building} companyDetails={companyDetails} dockDetails={dockDetails} dockTypeDetails={dockTypeDetails}/> } 
+               {bookingDetails.length && <ConfirmBooking bookingDetails={bookingDetails} buildingDetails={building} vehicleDetails={vehicleDetails} companyDetails={companyDetails} dockDetails={dockDetails} dockTypeDetails={dockTypeDetails}/> } 
               </section>
             </div>
           </div>

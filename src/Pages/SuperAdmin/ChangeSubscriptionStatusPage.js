@@ -5,6 +5,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { baseUrl } from "../../utils/baseurl";
+import AlertDialog from "../../Components/AlertDialogue";
 
 const ChangeSubscriptionRequestStatusPage = () => {
     const params = useParams();
@@ -19,6 +20,9 @@ const ChangeSubscriptionRequestStatusPage = () => {
     const [noOfWarehouse,setNoOfwarehouse]=useState();
     const [buildings,setBuildings]=useState();
     const [docks,setDocks]=useState();
+    const [open1,setOpen1]=useState(false);
+    const [modalHeading,setModalHeading]=useState("");
+    const [modalText,setModalText]=useState("")
 
     const submit=(e)=>{
       e.preventDefault();
@@ -33,15 +37,21 @@ const ChangeSubscriptionRequestStatusPage = () => {
         no_of_buildings:buildings,
         no_of_docks:docks
       }
+      console.log(_id,status,data);
       axios.post(`${baseUrl}/subscription/change/request/status?_id=${_id}&&status=${status}`,data).then((res)=>{
+        console.log(res.data)
         if(res.data.status=="ok"){
           console.log(res.data)
-          alert("success")
+          setModalHeading("Subscription Request sent Successfully")
+          setModalText("")
+           setOpen1(true)
+          window.location='/superadmin/list/request/subscriptions'
         }
         else{
-          alert("failed")
+          setModalHeading("Something Went wrong");
+          setModalText("Something Went wrong. Please Try again after sometime");
           console.log(res.data)
-  
+          setOpen1(true);
         }
       })
       .catch((err)=>{
@@ -232,6 +242,12 @@ const ChangeSubscriptionRequestStatusPage = () => {
               </div>
             </div>
           </form>
+          <AlertDialog
+        open={open1}
+        setOpen={setOpen1}
+        modalHeading={modalHeading}
+        modalText={modalText}
+      />
         </section>
       </div>
     </div>
