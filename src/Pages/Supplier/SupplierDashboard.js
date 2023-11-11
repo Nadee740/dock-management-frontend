@@ -42,9 +42,11 @@ const SupplierDashBoard = () => {
 </div>
 
         </div>
-        <div className='flex flex-row w-full w-full items-center pl-3 pt-1 justify-between'>
+        {/* <div className='flex flex-row w-full w-full items-center pl-3 pt-1 justify-between'>
        
-        <div class="mt-36 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="mt-36 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"> */}
+          <div className="flex flex-row w-full w-full items-center pl-5 pt-1 justify-between">
+          <div class="mt-36 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
   <div class="">
   <Link to='/dock-booking' class="flex max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     <div className="w-1/2"> <h5 class="mb-2 text-2xl  font-bold tracking-tight text-gray-900 dark:text-white">New Dock Booking</h5></div>

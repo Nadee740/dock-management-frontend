@@ -220,6 +220,10 @@ const AdminDashBoard = () => {
         <div class="bg-[#F4F5FA] m-6 rounded-xl overflow-hidden">
            {buildings && <BooktheViewingComponent buildings={buildings}/>} 
         </div>
+
+
+
+        
         {/* <div className="m-16"> 
         <AdminDashBoardCharts/>
         </div> */}

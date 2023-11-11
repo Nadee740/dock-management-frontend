@@ -2,17 +2,26 @@ import { faEdit, faEye } from "@fortawesome/free-regular-svg-icons";
 import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Mail } from "@mui/icons-material";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const ListAllAdmin = ({iseditable,adminData}) => {
-
+const ListAllAdmin = ({iseditable,adminData,addadmin}) => {
+  const [usertype,setUser]=useState();
+  useEffect(()=>{
+    if(addadmin){
+      setUser("admin")
+    }
+    else{
+      setUser("superadmin")
+    }
+  },[])
   return (
     <>
       <div className="flex items-center justify-between p-4">
         <h2 className="text-2xl font-medium">Admin Users</h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-      {iseditable&&    <div className="flex">
+      {addadmin&&    <div className="flex">
         <Link
         to="/admin/Users/addCompanyAdminUsers"
           className=" flex items-center justify-center text-white p-3 ring-slate-200 bg-green-400 ring-2 rounded-xl outline-none"
@@ -83,7 +92,7 @@ const ListAllAdmin = ({iseditable,adminData}) => {
                 </button>
                 <Link
                   className="h-7 flex items-center bg-green-500 text-white p-2 rounded-md text-md mr-5"
-                  to={"/superadmin/users/edit/company/AdminUser/"+data._id}
+                  to={"/"+usertype+"/users/edit/company/AdminUser/"+data._id}
                 >
                  <FontAwesomeIcon icon={faEdit} className="mt-1 mr-1" size="sm"/>
                   Edit
