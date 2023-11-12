@@ -6,6 +6,33 @@ import { baseUrl } from "../../utils/baseurl";
 const ListAllSuppliersPage = ({ iseditable }) => {
     const {setLoading}=useContext(UserContext);
     const [suppliersData,setSupplier]=useState([])
+    const [suppliergroupData,setSuppliergroupData]=useState();
+    useEffect(()=>{
+      setLoading(true);
+      const token=localStorage.getItem('EZTOken');
+      axios.get(`${baseUrl}/get-supplier-groups`,{
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then( function (response){
+        console.log(response.data);
+        if(response.data!=""){
+          setSuppliergroupData(response.data.data);
+          setLoading(false);
+        }
+        else{
+          setSuppliergroupData(null);
+          setLoading(false);
+        }
+        
+      })
+      .catch(function (err){
+        setLoading(false);
+        console.log("FAILED! ",err);
+      })
+    },[])
+
     useEffect(()=>{
         setLoading(true);
         const token = localStorage.getItem("EZTOken");
@@ -39,7 +66,7 @@ const ListAllSuppliersPage = ({ iseditable }) => {
       <div className="w-full admin-dashboard  overflow-x-scroll">
         <div className="flex flex-row w-full w-full items-center p-3 justify-between">
           <section class=" text-black w-5/6 p-6 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800 mt-20 overflow-x-scroll">
-            <ListAllSuppliers suppliersData={suppliersData} iseditable={iseditable} />
+            {suppliersData&&<ListAllSuppliers suppliersData={suppliersData} iseditable={iseditable} suppliergroupData={suppliergroupData} />}
           </section>
         </div>
       </div>

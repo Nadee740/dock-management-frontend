@@ -5,11 +5,13 @@ import { Mail } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const ListAllAdmin = ({iseditable,adminData,addadmin}) => {
+const ListAllAdmin = ({iseditable,adminData,addadmin,accountDetails}) => {
   const [usertype,setUser]=useState();
+  let noofAdmins=accountDetails.subscription_id.remaining_admins;
   useEffect(()=>{
     if(addadmin){
       setUser("admin")
+    
     }
     else{
       setUser("superadmin")
@@ -21,19 +23,21 @@ const ListAllAdmin = ({iseditable,adminData,addadmin}) => {
         <h2 className="text-2xl font-medium">Admin Users</h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-      {addadmin&&    <div className="flex">
+      {addadmin&& noofAdmins>0&&  <div className="flex items-center justify-between ml-20 w-38 p">
+        
         <Link
-        to="/admin/Users/addCompanyAdminUsers"
-          className=" flex items-center justify-center text-white p-3 ring-slate-200 bg-green-400 ring-2 rounded-xl outline-none"
-        >
-        <FontAwesomeIcon icon={faPlus} className="mr-1"></FontAwesomeIcon>
-         <p>Add Record</p> 
-        </Link>
+            to="/admin/Users/addCompanyAdminUsers"
+            className="p-3  w-48  items-center  ring-slate-200 bg-blue-900 ring-2 rounded-xl outline-none"
+          >
+            
+            <p className="sm:text-md text-white text-center "> Add&nbsp;Admin</p>
+
+          </Link>
       </div>}
    
-      <div className="flex items-center p-3 w-4/12 py-4">
+      <div className="flex items-center p-3 w-9/12 py-4">
         <label className=" pr-3 font-semibold">Search</label>
-        <input className="p-3 w-52 ring-slate-200 ring-2 rounded-xl outline-none" onChange={(e) => {}} type="text"></input>
+        <input className="  w-3/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" onChange={(e) => { }} type="text"></input>
       </div>
       <div className="flex items-center justify-end mb-5">
         <button
@@ -50,8 +54,8 @@ const ListAllAdmin = ({iseditable,adminData,addadmin}) => {
         </button>
       </div>
       <div className="flex items-center justify-between w-4/12 py-4">
-        <p className="font-semibold">No Of Requests :</p>
-        <p className="font-semibold">{10} </p>
+        <p className="font-semibold">No Of Requests : {adminData.length}</p>
+    
       </div>
       <table className="w-11/12 relative table-auto">
         <tr className="rounded-xl p-3 bg-primary text-center">

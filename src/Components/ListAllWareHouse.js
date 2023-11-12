@@ -2,7 +2,9 @@ import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Mail } from "@mui/icons-material";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "../Contexts/UserContexts";
 
 const ListAllWareHouse = ({ warehouseData,iseditable }) => {
   const datas = [
@@ -15,31 +17,30 @@ const ListAllWareHouse = ({ warehouseData,iseditable }) => {
       created_on: "11/11/11",
     },
   ];
+  const {accountDetails}=useContext(UserContext)
+  const noOfWarehouse=accountDetails.subscription_id.remaining_warehouse;
   return (
     <>
       <div className="flex items-center justify-between w-4/12 p-4">
         <h2 className="text-2xl font-medium">List of Warehouse Details</h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-      {iseditable && (
-        <div className="flex items-center justify-between w-4/12 p">
+      {iseditable && noOfWarehouse>0&& (
+        <div className="flex items-center justify-between ml-20 w-38 p">
+          
           <Link
             to="/create-warehouse"
-            className="flex p-3 max-w-42 ring-slate-200 bg-green-400 ring-2 rounded-xl outline-none"
+            className="p-3  w-48  items-center  ring-slate-200 bg-blue-900 ring-2 rounded-xl outline-none"
           >
+            <p className="sm:text-md text-white text-center "> Add&nbsp;Warehouse</p>
 
-           <p className="text-white text-sm font-bold flex">Add Record</p> 
           </Link>
         </div>
       )}
 
-      <div className="flex items-center p-3 w-4/12 py-4">
+      <div className="flex items-center p-3 w-9/12 py-4">
         <label className=" pr-3 font-semibold">Search</label>
-        <input
-          className="p-3 w-52 ring-slate-200 ring-2 rounded-xl outline-none"
-          onChange={(e) => {}}
-          type="text"
-        ></input>
+        <input className="  w-3/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" onChange={(e) => { }} type="text"></input>
       </div>
       <div className="flex items-center justify-end mb-5">
         <button
@@ -56,8 +57,8 @@ const ListAllWareHouse = ({ warehouseData,iseditable }) => {
         </button>
       </div>
       <div className="flex items-center justify-between w-4/12 py-4">
-        <p className="font-semibold">No Of Requests :</p>
-        <p className="font-semibold">{10} </p>
+        <p className="font-semibold">No Of Requests : {warehouseData.length}</p>
+        <p className="font-semibold"> </p>
       </div>
       <table className="w-11/12 relative table-auto">
         <tr className="rounded-xl p-3 bg-primary text-center">
