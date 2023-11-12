@@ -2,40 +2,28 @@ import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faCheck, faPrint, faTruck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import QRCode from "react-qr-code";
-import generatePDF, { Margin, Resolution, usePDF } from "react-to-pdf";
 
-const ConfirmBooking=({bookingDetails,buildingDetails,vehicleDetails,companyDetails, dockDetails,dockTypeDetails})=>{
-  const options = {
-    // default is `save`
-    method: 'open',
-    
-    resolution: Resolution.HIGH,
-    page: {
-       // margin is in MM, default is Margin.NONE = 0
-       margin: Margin.SMALL,
-       // default is 'A4'
-       format: 'letter',
-       // default is 'portrait'
-       orientation: 'landscape',
-    },
-    canvas: {
-       // default is 'image/jpeg' for better size performance
-       mimeType: 'image/png',
-       qualityRatio: 1
-    },
-   
-    overrides: {
-       // see https://artskydj.github.io/jsPDF/docs/jsPDF.html for more options
-       pdf: {
-          compress: true
-       },
-       // see https://html2canvas.hertzen.com/configuration for more options
-       canvas: {
-          useCORS: true
-       }
-    },
- };
- const getTargetElement = () => document.getElementById('booking-confirmed-page');
+const ConfirmBooking=({bookingDetails,buildingDetails,vehicleDetails,companyDetails, dockDetails,dockTypeDetails,response})=>{
+
+    const generatePDF=async()=>{
+        try{
+            if(response!=null){  
+                // const blob = await response.blob();
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(response);
+                link.download = 'output.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }else{
+                throw new Error("Cannot download")
+            }
+          
+        }catch(err){
+            console.log(err)
+        }
+    }
+
     return(
         <div id='booking-confirmed-page'>
         <div className="flex items-center justify-between w-4/12 p-4">
@@ -63,7 +51,7 @@ const ConfirmBooking=({bookingDetails,buildingDetails,vehicleDetails,companyDeta
         </button>
         <button
           className="flex w-28 bg-indigo-800 text-white p-2 rounded-lg text-sm mr-5"
-          onClick={() => generatePDF(getTargetElement, {filename: 'page.pdf'},options)}
+          onClick={() => generatePDF()}
         >
         <FontAwesomeIcon icon={faPrint } className="m-2"></FontAwesomeIcon>
           <p className="font-bold mt-1 text-md">Print</p>
