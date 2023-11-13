@@ -49,10 +49,7 @@ const DockBooking = ({ bookingDetail }) => {
 
   const [billType, setBillType] = useState(null);
   const [billno,setBillNo]=useState(null);
-  const [po_no, setPo_no] = useState(null);
-  const [do_no, setDo_no] = useState(null);
-  const [airway_bill_no, setairwayBill_no] = useState(null);
-  const [bl_no, setbl_no] = useState(null);
+
   const [company_id, setcompany_id] = useState(null);
   const [company_name, setCompanyName] = useState(null);
   const [building_id, setBUilding_id] = useState(null);
@@ -147,7 +144,6 @@ const DockBooking = ({ bookingDetail }) => {
       .then(function (response) {
         console.log("success", response, "response.data");
         if (response.data != "") {
-          console.log(response.data);
           setVehiclesData(response.data.data);
         } else {
           setVehiclesData(null);

@@ -176,7 +176,6 @@ function dateFormater(inputDate) {
   }
 
 const BooktheViewingComponent = ({buildings}) => {
-   console.log(buildings)
     const {setLoading,Token}=useContext(UserContext);
     const date=new Date();
     const [selectedBuilding,setBuilding]=useState(buildings[0]);
@@ -196,13 +195,12 @@ const BooktheViewingComponent = ({buildings}) => {
         },
       })
       .then(function (response) {
-         console.log("success", response, "response.data");
         if (response.data != "") {
           setDockStatus(response.data.data)
           setLoading(false);
         } else {
           setDockStatus("")
-            throw new Error("somethin went wrong")
+            throw new Error("something went wrong")
         }
       })
       .catch(function (error) {

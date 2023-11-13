@@ -17,7 +17,7 @@ const BookingConfirmPage=()=>{
     const handleDownloadPdf = async () => {
         try {
             setLoading(true)
-      const res = await fetch(`${baseUrl}/test/generate-pdf`);
+      const res = await fetch(`${baseUrl}/pdf/generate-pdf`);
      const blob = await res.blob();
           setResponse(blob)
     
