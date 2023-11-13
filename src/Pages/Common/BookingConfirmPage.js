@@ -12,22 +12,20 @@ const BookingConfirmPage=()=>{
     const [dockDetails,setDockDetails]=useState();
     const [building,setBulding]=useState();
     const [vehicleDetails,setVehicleDetails]=useState();
+    const [pdfname,setPdfName]=useState();
     const [dockTypeDetails,setDockTypeDetails]=useState();
     const [response,setResponse]=useState(null)
-    const handleDownloadPdf = async () => {
+    const handleDownloadPdf = async (pdf_name) => {
         try {
             setLoading(true)
-      const res = await fetch(`${baseUrl}/test/generate-pdf`);
+          console.log(pdf_name);
+            const res=await fetch(`${baseUrl}/pdf/get-pdf?name=${pdf_name}`)
+      // const res = await fetch(`${baseUrl}/test/generate-pdf`);
      const blob = await res.blob();
           setResponse(blob)
-    
-          // Create a link element and trigger the download
-        //   const link = document.createElement('a');
-        //   link.href = URL.createObjectURL(blob);
-        //   link.download = 'output.pdf';
-        //   document.body.appendChild(link);
-        //   link.click();
-        //   document.body.removeChild(link);
+          setPdfName(pdf_name)
+
+
         } catch (error) {
           console.error('Error downloading PDF:', error);
         }
@@ -43,7 +41,8 @@ const BookingConfirmPage=()=>{
         setVehicleDetails(v.vehicle);
         setDockDetails(v.dock);
         setDockTypeDetails(v.docktype);
-        handleDownloadPdf().then(()=>{
+   
+        handleDownloadPdf(v.pdf_name).then(()=>{
             setLoading(false);
         }).catch((err)=>{
             console.log(err)
@@ -56,7 +55,7 @@ const BookingConfirmPage=()=>{
           <div className="w-full admin-dashboard  overflow-y-scroll">
             <div className="flex flex-row w-full w-full items-center p-3 justify-between">
               <section class=" text-black ml-5 w-full p-6 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800 mt-20 overflow-scroll">
-               {bookingDetails.length && response&& <ConfirmBooking response={response} bookingDetails={bookingDetails} buildingDetails={building} vehicleDetails={vehicleDetails} companyDetails={companyDetails} dockDetails={dockDetails} dockTypeDetails={dockTypeDetails}/> } 
+               {bookingDetails.length && response&& <ConfirmBooking pdfname={pdfname} response={response} bookingDetails={bookingDetails} buildingDetails={building} vehicleDetails={vehicleDetails} companyDetails={companyDetails} dockDetails={dockDetails} dockTypeDetails={dockTypeDetails}/> } 
               </section>
             </div>
           </div>
