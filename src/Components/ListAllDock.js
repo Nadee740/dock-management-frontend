@@ -41,7 +41,7 @@ const {accountDetails}=useContext(UserContext)
         </button>
       </div>
       <div className="flex ml-3 items-center justify-between w-4/12 py-4">
-        <p className="font-semibold">No Of Requests : {dockData.length}</p>
+        <p className="font-semibold">No Of Docks : {dockData.length}</p>
 
       </div>
       <table className="w-11/12 relative table-auto">

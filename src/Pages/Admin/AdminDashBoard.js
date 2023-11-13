@@ -76,7 +76,7 @@ const AdminDashBoard = () => {
         .then((res) => {
             if(res.data.status=="ok")
             {   
-                
+                console.log(res.data.data);
                 setShipments(res.data.data);
                 setLoading(false);
             }

@@ -121,7 +121,7 @@ const BooktheViewingSliderComponent=({dockStatus,building})=>{
        
         {timeSlots.map((time,index)=>(
           <div>
-              <div className="m-2 flex bg-blue border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" >
+              <div className="m-2 flex bg-blue border  rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" >
         <div class="flex-auto p-4">
                   <div class="flex flex-wrap -mx-2">
                     <div class="flex-none w-full max-w-full px-3">

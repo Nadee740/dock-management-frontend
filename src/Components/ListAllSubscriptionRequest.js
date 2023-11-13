@@ -46,9 +46,9 @@ const ListAllSubscriptionRequest = ({iseditable,requestList}) => {
         <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       
    
-        <div className="flex items-center p-3 w-4/12 py-4">
+        <div className="flex items-center p-3 w-9/12 py-4">
         <label className=" pr-3 font-semibold">Search</label>
-        <input className="p-3 w-52 ring-slate-200 ring-2 rounded-xl outline-none" onChange={(e) => {}} type="text"></input>
+        <input className="  w-4/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" onChange={(e) => { }} type="text"></input>
       </div>
 {/* dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring  */}
         </div>
@@ -81,8 +81,8 @@ const ListAllSubscriptionRequest = ({iseditable,requestList}) => {
         </button>
       </div>
       <div className="flex items-center justify-between w-2/12 py-4">
-        <p className="font-semibold">No Of Requests :</p>
-        <p className="font-semibold">{filteredList.length} </p>
+        <p className="font-semibold">No Of Requests : {filteredList.length}</p>
+    
       </div>
       <table className="w-11/12 relative table-auto">
         <tr className="rounded-xl p-3 bg-primary text-center">

@@ -2,6 +2,7 @@ import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faCheck, faPrint, faTruck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import QRCode from "react-qr-code";
+import { Link } from "react-router-dom";
 
 const ConfirmBooking=({bookingDetails,buildingDetails,vehicleDetails,companyDetails, dockDetails,dockTypeDetails,response})=>{
 
@@ -42,13 +43,13 @@ const ConfirmBooking=({bookingDetails,buildingDetails,vehicleDetails,companyDeta
        <p className="text-md">Below booking details email to your registered email address</p>
       </div>
       <div className="flex items-center justify-end mb-5">
-      <button
-          className="flex bg-green-400 text-white p-2 rounded-lg text-sm mr-5"
-          onClick={() => {}}
+      <Link
+          className="flex bg-green-400 text-white p-2 rounded-lg text-sm mr-5 pr-3"
+          to={'/dock-booking'}
         >
         <FontAwesomeIcon icon={faCheck } className="m-2"></FontAwesomeIcon>
           <p className="font-bold mt-1 text-md">Next Booking</p>
-        </button>
+        </Link>
         <button
           className="flex w-28 bg-indigo-800 text-white p-2 rounded-lg text-sm mr-5"
           onClick={() => generatePDF()}

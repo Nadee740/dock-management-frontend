@@ -17,13 +17,13 @@ const AdminLinks=[{
 },
 {
     title:"Real Time Status",
-    to:"/shipments-list",
+    to:"/shipments-list/2",
     icon:faClock,
     color:"#24691b",
     subLinks:false
 },
 {
-    title:"Todays Shipments",
+    title:"Shipments Details",
     icon:faTruckFast,
     color:"#5b3dc7",
      subLinks:[

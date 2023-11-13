@@ -57,7 +57,7 @@ const ListAllWareHouse = ({ warehouseData,iseditable }) => {
         </button>
       </div>
       <div className="flex items-center justify-between w-4/12 py-4">
-        <p className="font-semibold">No Of Requests : {warehouseData.length}</p>
+        <p className="font-semibold">No Of Warehouse : {warehouseData.length}</p>
         <p className="font-semibold"> </p>
       </div>
       <table className="w-11/12 relative table-auto">

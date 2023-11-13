@@ -9,29 +9,26 @@ const ListAllSupplierGroups = ({suppliergrpData,iseditable }) => {
 
   return (
     <>
-      <div className="flex items-center justify-between p-4">
+      <div className="flex items-center justify-between w-4/12 p-4">
         <h2 className="text-2xl font-medium">Supplier Groups</h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       {iseditable && (
-        <div className="flex items-center justify-between ">
+       <div className="flex items-center justify-between ml-20 w-38 p">
+          
           <Link
-          to="/admin/add/supplier/groups"
-            className="flex p-3 ring-slate-200 bg-green-400 ring-2 rounded-xl outline-none"
+            to="/admin/add/supplier/groups"
+            className="p-3  w-48  items-center  ring-slate-200 bg-blue-900 ring-2 rounded-xl outline-none"
           >
-           <FontAwesomeIcon icon={faPlus} className="text-white mr-2 mt-1"/>
-           <p className="text-white text-sm font-bold flex">Add Groups</p> 
+            <p className="sm:text-md text-white text-center "> Add&nbsp;Groups</p>
+
           </Link>
         </div>
       )}
 
-      <div className="flex items-center p-3 w-4/12 py-4">
+      <div className="flex items-center p-3 w-9/12 py-4">
         <label className=" pr-3 font-semibold">Search</label>
-        <input
-          className="p-3 w-52 ring-slate-200 ring-2 rounded-xl outline-none"
-          onChange={(e) => {}}
-          type="text"
-        ></input>
+        <input className="  w-3/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" onChange={(e) => { }} type="text"></input>
       </div>
       <div className="flex items-center justify-end mb-5">
         <button
@@ -48,8 +45,8 @@ const ListAllSupplierGroups = ({suppliergrpData,iseditable }) => {
         </button>
       </div>
       <div className="flex items-center justify-between w-4/12 py-4">
-        <p className="font-semibold">No Of Requests :</p>
-        <p className="font-semibold">{10} </p>
+        <p className="font-semibold">No Of Supplier Groups : {suppliergrpData.length}</p>
+    
       </div>
       <table className="w-11/12 relative table-auto">
         <tr className="rounded-xl p-3 bg-primary text-center">
