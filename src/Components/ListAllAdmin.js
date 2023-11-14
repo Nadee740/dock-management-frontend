@@ -2,14 +2,17 @@ import { faEdit, faEye } from "@fortawesome/free-regular-svg-icons";
 import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Mail } from "@mui/icons-material";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "../Contexts/UserContexts";
 
-const ListAllAdmin = ({iseditable,adminData,addadmin,accountDetails}) => {
+const ListAllAdmin = ({iseditable,adminData,addadmin}) => {
   const [usertype,setUser]=useState();
-  let noofAdmins=accountDetails.subscription_id.remaining_admins;
+  const {accountDetails}=useContext(UserContext);
+  let noofAdmins;
   useEffect(()=>{
     if(addadmin){
+      noofAdmins=accountDetails.subscription_id.remaining_admins;
       setUser("admin")
     
     }
