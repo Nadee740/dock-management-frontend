@@ -9,10 +9,10 @@ import { UserContext } from "../Contexts/UserContexts";
 const ListAllAdmin = ({iseditable,adminData,addadmin}) => {
   const [usertype,setUser]=useState();
   const {accountDetails}=useContext(UserContext);
-  let noofAdmins;
+ const [noofAdmins,setnoadmin]=useState(0);
   useEffect(()=>{
     if(addadmin){
-      noofAdmins=accountDetails.subscription_id.remaining_admins;
+      setnoadmin(accountDetails.subscription_id.remaining_admins);
       setUser("admin")
     
     }
