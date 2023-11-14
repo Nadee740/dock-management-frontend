@@ -26,20 +26,7 @@ const DockBooking = ({ bookingDetail }) => {
   const [step, setStep] = useState(0);
   const { setLoading, Token } = useContext(UserContext);
 
-  const times = [
-    "00:00 ",
-    "00:30 ",
-    "01:00 ",
-    "01:30 ",
-    "02:00 ",
-    "02:30 ",
-    "03:00 ",
-    "03:30 ",
-    "04:00 ",
-    "04:30 ",
-    "05:00 ",
-    "05:30 ",
-  ];
+
   const [timeSlots, setTimeSlots] = useState([]);
   const [companyData, setCompanyData] = useState([]);
   const [buildingData, setBuildingData] = useState([]);
@@ -67,21 +54,19 @@ const DockBooking = ({ bookingDetail }) => {
   const [bookforMultipleDays, setBookforMultipleDays] = useState(1);
   const [selectedtimeSlots, setSelectedTimeSlots] = useState([]);
   const d=new Date();
+  d.setDate(d.getDate()+1);
   const today=dateConverter(d);
   const [booked_date_array,setBookedDatesArray]=useState([today]);
+  const [availableTimeslots,setAvailableTimeslots]=useState([]);
   const [open1,setOpen1]=useState(false);
   const [open2,setOpen2]=useState(false);
   const [modalHeading,setModalHeading]=useState("");
   const [modalText,setModalText]=useState("")
 
-  const addMinutesToTime = (time, minsAdd) => {
-    function z(n) {
-      return (n < 10 ? "0" : "") + n;
-    }
-    var bits = time.split(":");
-    var mins = bits[0] * 60 + +bits[1] + +minsAdd;
-    return z(((mins % (24 * 60)) / 60) | 0) + ":" + z(mins % 60);
-  };
+  const get_min=()=>{
+    console.log(today);
+    return today;
+  }
 
   useEffect(() => {
     setLoading(true);
@@ -134,17 +119,20 @@ const DockBooking = ({ bookingDetail }) => {
   }, []);
   useEffect(()=>{
     
-   
-      setLoading(true)
+   console.log(dock_id);
+   if(date && dock_type_id && dock_id)
+     {
+       setLoading(true)
        axios
-      .get(`${baseUrl}/dock/available/building?date=${date[0]}&&building_id=${ building_id}`, {
+      .get(`${baseUrl}/dock/available/dock-building?date=${dateConverter(date)}&&days=${bookforMultipleDays}&&dock_id=${dock_id}`, {
         headers: {
           Authorization: `Bearer ${Token}`,
         },
       })
       .then(function (response) {
         if (response.data != "") {
-         
+           console.log(response.data.data)
+          setAvailableTimeslots(response.data.data[0].timeslot)
           setLoading(false);
         } else {
         
@@ -155,8 +143,9 @@ const DockBooking = ({ bookingDetail }) => {
         setLoading(false);
         console.log("FAILED!!! ", error);
       });
+    }
     
-    },[])
+    },[bookforMultipleDays,date,dock_id])
 
 
   useEffect(() => {
@@ -185,6 +174,7 @@ const DockBooking = ({ bookingDetail }) => {
 
   useEffect(() => {
     setLoading(true);
+    // console.log(booked_date_array)
     axios
       .get(`${baseUrl}/get-dock-type`, {
         headers: {
@@ -210,6 +200,7 @@ const DockBooking = ({ bookingDetail }) => {
 
   useEffect(() => {
     setLoading(true);
+    setAvailableTimeslots([])
     axios
       .get(`${baseUrl}/get-docks-by-docktype/${dock_type_id}`, {
         headers: {
@@ -223,6 +214,7 @@ const DockBooking = ({ bookingDetail }) => {
           setDocksData(response.data.data);
           setLoading(false);
         } else {
+
           setDocksData(null);
           console.log("errr");
         }
@@ -740,6 +732,7 @@ const DockBooking = ({ bookingDetail }) => {
                       }}
                       id="date"
                       type="date"
+                      min={get_min()}
                       class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                     />
                   </div>
@@ -767,9 +760,9 @@ const DockBooking = ({ bookingDetail }) => {
                     </select>
                   </div>
                 </div>
-                {date && dock_type_id && dock_id && (
+                {date && dock_type_id && dock_id && availableTimeslots && (
                   <div class="w-2/3 grid grid-cols-1 gap-2 mt-4 sm:grid-cols-5  ">
-                    {times.map((element, index) => {
+                    {availableTimeslots.map((element, index) => {
                       return (
                         <div
                           id={index}
@@ -781,7 +774,7 @@ const DockBooking = ({ bookingDetail }) => {
                                 setSelectedTimeSlots([
                                   ...new Set([
                                     ...selectedtimeSlots,
-                                    element + addMinutesToTime(element, 30),
+                                    element 
                                   ]),
                                 ]);
                                 console.log(selectedtimeSlots);
@@ -790,7 +783,7 @@ const DockBooking = ({ bookingDetail }) => {
                                   selectedtimeSlots.filter(
                                     (elem) =>
                                       elem !=
-                                      element + addMinutesToTime(element, 30)
+                                      element 
                                   )
                                 );
                               }
@@ -804,7 +797,7 @@ const DockBooking = ({ bookingDetail }) => {
                             for="vue-checkbox-list"
                             class=" py-2 ml-1 text-sm font-medium text-gray-900 dark:text-gray-300"
                           >
-                            {element + addMinutesToTime(element, 30)}
+                            {element }
                           </label>
                         </div>
                       );
