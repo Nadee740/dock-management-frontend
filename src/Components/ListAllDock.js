@@ -1,52 +1,48 @@
 import { Mail } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import { UserContext } from "../Contexts/UserContexts";
+import { useContext } from "react";
 
 const ListAllDocks = ({dockData}) => {
-    const datas=[{
-dock_no:"Dock C3",
-Building_Name:"ICCS-APS",
-Mode:"Normal",
-Type:"Chilled",
-Price:0,
-Status:"Closed"
-
-}]
+  
+const {accountDetails}=useContext(UserContext)
+  const noOfDocks=accountDetails.subscription_id.remaining_docks;
   return (
     <>
       <div className="flex items-center justify-between p-4">
         <h2 className="text-2xl font-medium">List of Docks</h2>
       </div>
-      <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-      <div className="flex items-center justify-between w-4/12 p">
+      <hr class="h-px my-8  bg-gray-200 border-0 dark:bg-gray-700"></hr>
+    { noOfDocks>0&& <div className="flex items-center justify-between ml-20 w-38 p">
           <Link
           to="/admin/add-new-dock"
-            className="p-3 ring-slate-200 bg-green-400 ring-2 rounded-xl outline-none"
+            className="p-3  w-48  items-center  ring-slate-200 bg-blue-900 ring-2 rounded-xl outline-none"
           >
-          <p className="sm:text-md text-white">Add&nbsp;Dock</p>
+          <p className="sm:text-md text-white text-center ">Add&nbsp;Dock</p>
             
           </Link>
-        </div>
-      <div className="flex items-center p-3 w-4/12 py-4">
+        </div>}
+      <div className="flex items-center p-3 w-9/12 py-4">
         <label className=" pr-3 font-semibold">Search</label>
-        <input className="p-3 w-52 ring-slate-200 ring-2 rounded-xl outline-none" onChange={(e) => {}} type="text"></input>
+        <input className="  w-3/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" onChange={(e) => { }} type="text"></input>
       </div>
       <div className="flex items-center justify-end mb-5">
         <button
-          className="w-28 bg-stone-800 text-white p-2 rounded-lg text-sm mr-5"
+          className="w-28 bg-stone-800 text-white p-2 rounded-lg text-sm mr-10"
           onClick={() => {}}
         >
           Copy
         </button>
         <button
-          className="w-28 bg-stone-800 text-white p-2 rounded-lg text-sm mr-5"
+          className="w-28 bg-stone-800 text-white p-2 rounded-lg text-sm mr-20"
           onClick={() => {}}
         >
           Excel
         </button>
       </div>
-      <div className="flex items-center justify-between w-4/12 py-4">
-        <p className="font-semibold">No Of Requests :</p>
-        <p className="font-semibold">{10} </p>
+      <div className="flex ml-3 items-center justify-between w-4/12 py-4">
+        <p className="font-semibold">No Of Docks : {dockData.length}</p>
+
       </div>
       <table className="w-11/12 relative table-auto">
         <tr className="rounded-xl p-3 bg-primary text-center">

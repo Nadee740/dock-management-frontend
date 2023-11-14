@@ -132,6 +132,32 @@ const DockBooking = ({ bookingDetail }) => {
         console.log("FAILED!!! ", error);
       });
   }, []);
+  useEffect(()=>{
+    
+   
+      setLoading(true)
+       axios
+      .get(`${baseUrl}/dock/available/building?date=${date[0]}&&building_id=${ building_id}`, {
+        headers: {
+          Authorization: `Bearer ${Token}`,
+        },
+      })
+      .then(function (response) {
+        if (response.data != "") {
+     
+          setLoading(false);
+        } else {
+        
+            throw new Error("something went wrong")
+        }
+      })
+      .catch(function (error) {
+        setLoading(false);
+        console.log("FAILED!!! ", error);
+      });
+    
+    },[])
+
 
   useEffect(() => {
     setLoading(true);

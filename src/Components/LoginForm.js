@@ -1,5 +1,5 @@
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
-import { faLockOpen } from "@fortawesome/free-solid-svg-icons";
+import { faLock, faLockOpen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Email, Lock } from "@mui/icons-material";
 import axios from "axios";
@@ -76,7 +76,7 @@ const LoginForm = () => {
         <div className="flex flex-col mt-2  pb-4">
           <span class="flex shadow-md mb-5 text-xs">
             <span class="bg-indigo-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">
-              <FontAwesomeIcon size="lg" icon={faLockOpen} />
+              <FontAwesomeIcon size="lg" icon={faLock} />
             </span>
             <input
               value={password}

@@ -231,7 +231,7 @@ function App() {
                       <Route index element={<AdminDashBoard />} />
                       <Route
                         path="users/listCompanyAdminUsers"
-                        element={<ListAllAdminPage iseditable={true} addadmin={true}/>}
+                        element={<ListAllAdminPage iseditable={true} addadmin={true} accountDetails={accountDetails}/>}
                       />
                       <Route
                         path="add/supplier/groups"

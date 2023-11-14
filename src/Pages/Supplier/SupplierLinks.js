@@ -16,7 +16,7 @@ const SupplierLinks=[{
     subLinks:false
 },
 {
-    title:"Todays Shipments",
+    title:"Shipments Details",
     icon:faTruckFast,
     color:"#5b3dc7",
      subLinks:[

@@ -11,11 +11,7 @@ import { UserContext } from "../Contexts/UserContexts";
 import axios from "axios";
 import { baseUrl } from "../utils/baseurl";
 
-const BooktheViewingSliderComponent=({dockStatus,building})=>{
-    console.log(building)
-
-
-    
+const BooktheViewingSliderComponent=({dockStatus,building})=>{    
     const timeSlots=[
       '00:00 00:30', '00:30 01:00', '01:00 01:30',
       '01:30 02:00', '02:00 02:30', '02:30 03:00',
@@ -121,7 +117,7 @@ const BooktheViewingSliderComponent=({dockStatus,building})=>{
        
         {timeSlots.map((time,index)=>(
           <div>
-              <div className="m-2 flex bg-blue border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" >
+              <div className="m-2 flex bg-blue border  rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" >
         <div class="flex-auto p-4">
                   <div class="flex flex-wrap -mx-2">
                     <div class="flex-none w-full max-w-full px-3">
@@ -185,11 +181,11 @@ const BooktheViewingComponent = ({buildings}) => {
    
     useEffect(()=>{
     if(buildings.length>0){
-   
-      setBuilding(buildings[0])
+        
+    setBuilding(buildings[0])
       setLoading(true)
        axios
-      .get(`${baseUrl}/dock/available/building?date=${today}&&building_id=${selectedBuilding._id}`, {
+      .get(`${baseUrl}/dock/available/building?date=${today}&&days=${1}&&building_id=${selectedBuilding._id}`, {
         headers: {
           Authorization: `Bearer ${Token}`,
         },
