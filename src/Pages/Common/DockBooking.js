@@ -26,20 +26,7 @@ const DockBooking = ({ bookingDetail }) => {
   const [step, setStep] = useState(0);
   const { setLoading, Token } = useContext(UserContext);
 
-  const times = [
-    "00:00 ",
-    "00:30 ",
-    "01:00 ",
-    "01:30 ",
-    "02:00 ",
-    "02:30 ",
-    "03:00 ",
-    "03:30 ",
-    "04:00 ",
-    "04:30 ",
-    "05:00 ",
-    "05:30 ",
-  ];
+
   const [timeSlots, setTimeSlots] = useState([]);
   const [companyData, setCompanyData] = useState([]);
   const [buildingData, setBuildingData] = useState([]);
@@ -67,6 +54,7 @@ const DockBooking = ({ bookingDetail }) => {
   const [bookforMultipleDays, setBookforMultipleDays] = useState(1);
   const [selectedtimeSlots, setSelectedTimeSlots] = useState([]);
   const d=new Date();
+  d.setDate(d.getDate()+1);
   const today=dateConverter(d);
   const [booked_date_array,setBookedDatesArray]=useState([today]);
   const [availableTimeslots,setAvailableTimeslots]=useState([]);
@@ -75,14 +63,10 @@ const DockBooking = ({ bookingDetail }) => {
   const [modalHeading,setModalHeading]=useState("");
   const [modalText,setModalText]=useState("")
 
-  const addMinutesToTime = (time, minsAdd) => {
-    function z(n) {
-      return (n < 10 ? "0" : "") + n;
-    }
-    var bits = time.split(":");
-    var mins = bits[0] * 60 + +bits[1] + +minsAdd;
-    return z(((mins % (24 * 60)) / 60) | 0) + ":" + z(mins % 60);
-  };
+  const get_min=()=>{
+    console.log(today);
+    return today;
+  }
 
   useEffect(() => {
     setLoading(true);
@@ -140,7 +124,7 @@ const DockBooking = ({ bookingDetail }) => {
      {
        setLoading(true)
        axios
-      .get(`${baseUrl}/dock/available/dock-building?date=${dateConverter(date)}&&building_id=${ building_id}&&days=${bookforMultipleDays}&&dock_id=${dock_id}`, {
+      .get(`${baseUrl}/dock/available/dock-building?date=${dateConverter(date)}&&days=${bookforMultipleDays}&&dock_id=${dock_id}`, {
         headers: {
           Authorization: `Bearer ${Token}`,
         },
@@ -190,6 +174,7 @@ const DockBooking = ({ bookingDetail }) => {
 
   useEffect(() => {
     setLoading(true);
+    // console.log(booked_date_array)
     axios
       .get(`${baseUrl}/get-dock-type`, {
         headers: {
@@ -747,6 +732,7 @@ const DockBooking = ({ bookingDetail }) => {
                       }}
                       id="date"
                       type="date"
+                      min={get_min()}
                       class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                     />
                   </div>
