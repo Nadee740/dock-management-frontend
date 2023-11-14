@@ -69,6 +69,7 @@ const DockBooking = ({ bookingDetail }) => {
   const d=new Date();
   const today=dateConverter(d);
   const [booked_date_array,setBookedDatesArray]=useState([today]);
+  const [availableTimeslots,setAvailableTimeslots]=useState([]);
   const [open1,setOpen1]=useState(false);
   const [open2,setOpen2]=useState(false);
   const [modalHeading,setModalHeading]=useState("");
@@ -134,17 +135,20 @@ const DockBooking = ({ bookingDetail }) => {
   }, []);
   useEffect(()=>{
     
-   
-      setLoading(true)
+   console.log(dock_id);
+   if(date && dock_type_id && dock_id)
+     {
+       setLoading(true)
        axios
-      .get(`${baseUrl}/dock/available/building?date=${date[0]}&&building_id=${ building_id}`, {
+      .get(`${baseUrl}/dock/available/dock-building?date=${dateConverter(date)}&&building_id=${ building_id}&&days=${bookforMultipleDays}&&dock_id=${dock_id}`, {
         headers: {
           Authorization: `Bearer ${Token}`,
         },
       })
       .then(function (response) {
         if (response.data != "") {
-     
+           console.log(response.data.data)
+          setAvailableTimeslots(response.data.data[0].timeslot)
           setLoading(false);
         } else {
         
@@ -155,8 +159,9 @@ const DockBooking = ({ bookingDetail }) => {
         setLoading(false);
         console.log("FAILED!!! ", error);
       });
+    }
     
-    },[])
+    },[bookforMultipleDays,date,dock_id])
 
 
   useEffect(() => {
@@ -210,6 +215,7 @@ const DockBooking = ({ bookingDetail }) => {
 
   useEffect(() => {
     setLoading(true);
+    setAvailableTimeslots([])
     axios
       .get(`${baseUrl}/get-docks-by-docktype/${dock_type_id}`, {
         headers: {
@@ -223,6 +229,7 @@ const DockBooking = ({ bookingDetail }) => {
           setDocksData(response.data.data);
           setLoading(false);
         } else {
+
           setDocksData(null);
           console.log("errr");
         }
@@ -767,9 +774,9 @@ const DockBooking = ({ bookingDetail }) => {
                     </select>
                   </div>
                 </div>
-                {date && dock_type_id && dock_id && (
+                {date && dock_type_id && dock_id && availableTimeslots && (
                   <div class="w-2/3 grid grid-cols-1 gap-2 mt-4 sm:grid-cols-5  ">
-                    {times.map((element, index) => {
+                    {availableTimeslots.map((element, index) => {
                       return (
                         <div
                           id={index}
@@ -781,7 +788,7 @@ const DockBooking = ({ bookingDetail }) => {
                                 setSelectedTimeSlots([
                                   ...new Set([
                                     ...selectedtimeSlots,
-                                    element + addMinutesToTime(element, 30),
+                                    element 
                                   ]),
                                 ]);
                                 console.log(selectedtimeSlots);
@@ -790,7 +797,7 @@ const DockBooking = ({ bookingDetail }) => {
                                   selectedtimeSlots.filter(
                                     (elem) =>
                                       elem !=
-                                      element + addMinutesToTime(element, 30)
+                                      element 
                                   )
                                 );
                               }
@@ -804,7 +811,7 @@ const DockBooking = ({ bookingDetail }) => {
                             for="vue-checkbox-list"
                             class=" py-2 ml-1 text-sm font-medium text-gray-900 dark:text-gray-300"
                           >
-                            {element + addMinutesToTime(element, 30)}
+                            {element }
                           </label>
                         </div>
                       );
