@@ -144,7 +144,7 @@ const DockBooking = ({ bookingDetail }) => {
       })
       .then(function (response) {
         if (response.data != "") {
-     
+         
           setLoading(false);
         } else {
         
