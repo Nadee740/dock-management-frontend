@@ -23,6 +23,7 @@ import BooktheViewingComponent from "../../Components/BooktheViewingComponent";
 import { UserContext } from "../../Contexts/UserContexts";
 import axios from "axios";
 import { baseUrl } from "../../utils/baseurl";
+import AlertDialog from "../../Components/AlertDialogue";
 const ManageSubsriptionPage = () => {
   const { setLoading } = useContext(UserContext);
   const [subscriptionselected, setSubscriptionSelcted] = useState(null);
@@ -35,6 +36,9 @@ const ManageSubsriptionPage = () => {
   const [isActive,setIsActive]=useState();
   const [subscriptionTypes, setSubscriptionTypes] = useState([]);
   const [indexed,setIndexex]=useState({})
+  const [open,setOpen]=useState(false);
+  const [modalText,setModalText]=useState("");
+  const [modalHeading,setModalHeading]=useState("");
   useEffect(() => {
     let obj={}
     setLoading(true);
@@ -80,17 +84,26 @@ const ManageSubsriptionPage = () => {
     .post(`${baseUrl}/superadmin/update/subscription/type?type=${subscriptionselected}`,data)
     .then((res) => {
         if(res.data.status=="ok"){
+            console.log(res.data);
             setLoading(false);
-            alert("updated succesfully");
+            setModalHeading("Successfully changed subscription")
+            setModalText("")
+            setOpen(true)
         }
         else
         throw new Error(res.data.msg)
 
     }).catch((err)=>{
-        setLoading(false)
+      setModalHeading("Something Went wrong ");
+      setModalText("Something Went wrong.Please Try again after sometime");
+      setOpen(true);
         console.log(err);
-        alert("oops something went wrong");
+        
 
+    })
+    .finally(()=>{
+    
+      setLoading(false)
     })
   }
   return (
@@ -403,6 +416,12 @@ const ManageSubsriptionPage = () => {
                 </button>
               </div>
             </form>
+            <AlertDialog
+        open={open}
+        setOpen={setOpen}
+        modalHeading={modalHeading}
+        modalText={modalText}
+      />
           </section>
         </div>
         <div className="h-16"></div>

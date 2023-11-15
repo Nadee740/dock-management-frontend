@@ -53,6 +53,7 @@ const ChangeSubscriptionRequestStatusPage = () => {
   },[])
     const submit=(e)=>{
       e.preventDefault();
+      
       const data={
         typeofsubscription:type,
         price,
@@ -69,9 +70,7 @@ const ChangeSubscriptionRequestStatusPage = () => {
         console.log(res.data)
         if(res.data.status=="ok"){
           console.log(res.data)
-          setModalHeading("Subscription Status Changed Successfully")
-          setModalText("")
-           setOpen1(true)
+      
           window.location='/superadmin/list/request/subscriptions'
         }
         else{
@@ -83,7 +82,11 @@ const ChangeSubscriptionRequestStatusPage = () => {
       })
       .catch((err)=>{
         console.log("failed",err)
+        setModalHeading("Something Went wrong ");
+        setModalText("Something Went wrong.Please Try again after sometime");
+        setOpen1(true);
       })
+      
     }
   return (
     <div className="w-full admin-dashboard">

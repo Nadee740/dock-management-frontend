@@ -193,7 +193,7 @@ const AdminDashBoardTable = ({shipments}) => {
                     </td>
                     <td class="px-4 py-4 text-sm whitespace-nowrap">
                       <div class="flex items-center">
-                        <p>{shipment.timeslot}</p>
+                        <p>{shipment.job_order_no}</p>
                       </div>
                     </td>
 

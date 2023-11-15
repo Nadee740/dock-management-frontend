@@ -90,11 +90,14 @@ const AddNewSecuriyForm = () => {
         let b=password==retypePassword;
         if(b==false){
          setModalHeading("Passwords don't match");
+         setModalText("Enter correct password");
          setOpen1(true);
         }
          else if(company==-1 || building==-1)
         {
-            setModalHeading("Please Fill All Columns");
+          setModalHeading("Alert");
+          setModalText("Please Fill All Columns")
+         
             setOpen1(true);
 
         }
@@ -147,9 +150,16 @@ const AddNewSecuriyForm = () => {
     
             }
        
-           setLoading(false)
+      
           }).catch((err)=>{
+            setModalHeading("Something Went wrong ");
+            setModalText("Something Went wrong.Please Try again after sometime");
+            setOpen1(true);
             console.log(err)
+          })
+          .finally(()=>{
+          
+            setLoading(false)
           })
     }
   return (

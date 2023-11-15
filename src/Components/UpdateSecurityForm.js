@@ -142,6 +142,13 @@ const UpdateSecurityForm = ({securityData}) => {
            setLoading(false)
           }).catch((err)=>{
             console.log(err)
+            setModalHeading("Something Went wrong ");
+            setModalText("Something Went wrong.Please Try again after sometime");
+            setOpen1(true);
+          })
+          .finally(()=>{
+          
+            setLoading(false)
           })
     }
   return (

@@ -44,10 +44,15 @@ const LoginForm = () => {
         }
       })
       .catch((err) => {
-        setModalHeading("Ooops Couldn`t Login");
+        setModalHeading("Something Went wrong ");
+        setModalText("Something Went wrong.Please Try again after sometime");
         setOpen(true)
-      });
-      setLoading(false)
+      })
+      .finally(()=>{
+        setLoading(false)
+           
+      })
+  
   };
   return (
     <div className="bg-slate-100 flex flex-col bg-white w-11/12 md:w-3/4 lg:w-1/3 text-left bg-white p-10 rounded-xl m-auto">

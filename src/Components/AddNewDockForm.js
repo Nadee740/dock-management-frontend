@@ -125,16 +125,25 @@ const AddNewDockForm = () => {
             }
             else{
               
-                setModalHeading("Something Went wrong ");
+                setModalHeading("Something Went wrong! ");
                 setModalText("Something Went wrong.Please Try again after sometime");
                 setOpen1(true);
     
             }
-       
-           setLoading(false)
+            setLoading(false)
+         
           }).catch((err)=>{
+            
+            setModalHeading("Something Went wrong ");
+            setModalText("Something Went wrong.Please Try again after sometime");
+            setOpen1(true);
             console.log(err)
           })
+          .finally(()=>{
+           
+            setLoading(false)
+          })
+        
     }
 
     return ( <>
