@@ -145,7 +145,7 @@ const DockBooking = ({ bookingDetail }) => {
       });
     }
     
-    },[bookforMultipleDays,date,dock_id])
+    },[bookforMultipleDays,date,dock_id,dock_name])
 
 
   useEffect(() => {
@@ -761,12 +761,12 @@ const DockBooking = ({ bookingDetail }) => {
                   </div>
                 </div>
                 {date && dock_type_id && dock_id && availableTimeslots && (
-                  <div class="w-2/3 grid grid-cols-1 gap-2 mt-4 sm:grid-cols-5  ">
+                  <div class="w-5/6 grid grid-cols-1 gap-2 mt-2 sm:grid-cols-5   ">
                     {availableTimeslots.map((element, index) => {
                       return (
                         <div
                           id={index}
-                          class="bg-green-400 flex items-center pl-3 rounded-lg"
+                          class="border-solid border-2 flex items-center pl-3 rounded-lg"
                         >
                           <input
                             onChange={(e) => {
@@ -791,11 +791,11 @@ const DockBooking = ({ bookingDetail }) => {
                             id="vue-checkbox-list"
                             type="checkbox"
                             value=""
-                            class=" h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                            class="text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                           />
                           <label
                             for="vue-checkbox-list"
-                            class=" py-2 ml-1 text-sm font-medium text-gray-900 dark:text-gray-300"
+                            class=" py-1 ml-1 text-xs font-small text-gray-900 dark:text-gray-300"
                           >
                             {element }
                           </label>

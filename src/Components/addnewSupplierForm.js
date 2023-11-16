@@ -29,11 +29,13 @@ const AddNewSupplierForm= ({suppliergroup,company}) => {
      let b=password==confirmPassword;
      if(b==false){
       setModalHeading("Passwords don't match");
+      setModalText("Enter correct password");
       setOpen1(true);
      }
       else if(compantSelected==-1 ||supplier_groupselected==-1)
       {
-          setModalHeading("Please Fill All Columns");
+        setModalHeading("Alert");
+        setModalText("Please Fill All Columns")
           setOpen1(true);
   
       }
@@ -94,10 +96,16 @@ const AddNewSupplierForm= ({suppliergroup,company}) => {
                console.log("err",res.data.msg)
     
             }
-       
-           setLoading(false)
+  
           }).catch((err)=>{
+            setModalHeading("Something Went wrong ");
+            setModalText("Something Went wrong.Please Try again after sometime");
+            setOpen1(true);
             console.log(err)
+          })
+          .finally(()=>{
+         
+            setLoading(false)
           })
     }
     return ( <>

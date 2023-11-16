@@ -132,9 +132,15 @@ const submitData=async()=>{
 
       }
  
-     setLoading(false)
     }).catch((err)=>{
+      setModalHeading("Something Went wrong ");
+      setModalText("Something Went wrong.Please Try again after sometime");
+      setOpen1(true);
       console.log(err)
+    })
+    .finally(()=>{
+     
+            setLoading(false)
     })
 }
 
