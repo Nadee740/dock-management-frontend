@@ -295,7 +295,7 @@ const DockBooking = ({ bookingDetail }) => {
       <div className="flex flex-row w-full w-full items-center p-3 justify-between">
         <section class="h-max text-black w-5/6 p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800 mt-20">
           <div className="flex items-center justify-between  p-4 ">
-            <h2 className="text-2xl font-medium">
+            <h2 className="text-3xl font-medium heading-class">
               <FontAwesomeIcon icon={faEdit} /> Add New Booking
             </h2>
           </div>

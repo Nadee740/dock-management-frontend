@@ -5,22 +5,10 @@ import { Mail } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 const ListAllVehicles = ({vehicleData, iseditable }) => {
-  const datas = [
-    {
-      vehicles_no: "SGX1234",
-      vehicle_type: "40 Footer",
-      driver_name: "Lim Kim",
-      driver_no: "77777777",
-      drivers_fin: "NA",
-      created_by: "111111",
-    },
-   
-     
-  ];
   return (
     <>
       <div className="flex items-center justify-between w-4/12 p-4">
-        <h2 className="text-2xl font-medium">List of Vehicles</h2>
+        <h2 className="text-4xl font-medium heading-class">List of Vehicles</h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       {iseditable && (
@@ -36,9 +24,10 @@ const ListAllVehicles = ({vehicleData, iseditable }) => {
         </div>
       )}
 
+      
       <div className="flex items-center p-3 w-9/12 py-4">
-        <label className=" pr-3 font-semibold">Search</label>
-        <input className="  w-3/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" onChange={(e) => { }} type="text"></input>
+        <input className="  w-4/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" placeholder="Search Vehicle" onChange={(e) => { }} type="text"></input>
+      
       </div>
       <div className="flex items-center justify-end mb-5">
         <button

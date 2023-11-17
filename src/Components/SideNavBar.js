@@ -118,7 +118,7 @@ const SideNavBar = ({UserLinks}) => {
             class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
           ><Link to={link.to}>
             <FontAwesomeIcon icon={link.icon}></FontAwesomeIcon>
-            <span class="text-[15px] ml-4 text-gray-200 font-bold">{link.title}</span>
+            <span class="text-[15px] ml-4 text-gray-200 font-bold heading-class">{link.title}</span>
             </Link>
           </div>):(<>
             <div
@@ -127,7 +127,7 @@ const SideNavBar = ({UserLinks}) => {
           >
                <FontAwesomeIcon icon={link.icon}></FontAwesomeIcon>
             <div class="flex justify-between w-full items-center">
-              <span class="text-[15px] ml-4 text-gray-200 font-bold">{link.title}</span>
+              <span class="text-[15px] ml-4 text-gray-200 font-bold heading-class">{link.title}</span>
               <span class="text-sm rotate-180" id="arrow">
                 <i class="bi bi-chevron-up"></i>
               </span>
@@ -142,7 +142,7 @@ const SideNavBar = ({UserLinks}) => {
                 
                 <Link className="flex transition-transform transition-duration: 15000ms; " to={item.to}>
                 <FontAwesomeIcon className="p-2 mt-1" icon={item.icon}></FontAwesomeIcon>
-                <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
+                <h1 class="heading-class cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
               {item.title}
             </h1>
             </Link> )
@@ -162,7 +162,7 @@ const SideNavBar = ({UserLinks}) => {
        <button className="" onClick={SubmitButton}>
 
             <i class="bi bi-box-arrow-in-right"></i>
-            <span class="text-[15px] ml-4 text-gray-200 font-bold">Logout</span>
+            <span class="text-[15px] ml-4 text-gray-200 font-bold heading-class">Logout</span>
             </button>
           </div>
           

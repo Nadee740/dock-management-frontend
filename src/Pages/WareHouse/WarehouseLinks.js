@@ -1,27 +1,8 @@
 const {
-    faSquarePlus,
     faClock,
-    faPenToSquare,
-    faUser,
-    faBuilding,
-    faQuestionCircle,
-    faCalendar,
+    faQuestionCircle
   } = require("@fortawesome/free-regular-svg-icons");
   const {
-    faTv,
-    faTruckFast,
-    faCheck,
-    faTruck,
-    faPlug,
-    faPlus,
-    faUsers,
-    faUserLock,
-    faUserAstronaut,
-    faShip,
-    faUserGroup,
-    faBagShopping,
-    faChartPie,
-    faTimes,
     faSearch,
   } = require("@fortawesome/free-solid-svg-icons");
   

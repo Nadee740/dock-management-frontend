@@ -183,7 +183,7 @@ const ListAllSuppliers = ({ suppliersData, iseditable, suppliergroupData }) => {
   return (
     <>
       <div className="flex items-center justify-between p-4">
-        <h2 className="text-2xl font-medium">List of Suppliers</h2>
+        <h2 className="text-4xl font-medium heading-class">List of Suppliers</h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       {iseditable && noOfSupplier > 0 && <div className="flex items-center">
@@ -204,9 +204,9 @@ const ListAllSuppliers = ({ suppliersData, iseditable, suppliergroupData }) => {
         </Link>
       </div>}
       {modal && modal}
-      <div className="flex items-center  w-9/12 py-9">
-        <label className=" pr-3 mr-3 font-semibold">Search</label>
-        <input className="  w-3/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" onChange={(e) => { }} type="text"></input>
+     
+      <div className="flex items-center p-3 w-9/12 py-2">
+        <input className="  w-4/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" placeholder="Search Supplier" onChange={(e) => { }} type="text"></input>
       </div>
       <div className="flex items-center justify-end mb-5">
         <button

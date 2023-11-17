@@ -10,7 +10,7 @@ const ListAllSupplierGroups = ({suppliergrpData,iseditable }) => {
   return (
     <>
       <div className="flex items-center justify-between w-4/12 p-4">
-        <h2 className="text-2xl font-medium">Supplier Groups</h2>
+        <h2 className="text-4xl font-medium heading-class">Supplier Groups</h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       {iseditable && (

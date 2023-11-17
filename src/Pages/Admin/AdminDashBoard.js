@@ -162,7 +162,7 @@ const AdminDashBoard = () => {
               >
                 <div className="w-1/2">
                   {" "}
-                  <h5 class="mb-2 text-2xl  font-bold tracking-tight text-gray-900 dark:text-white">
+                  <h5 class="mb-2 text-2xl  font-bold tracking-tight text-gray-900 dark:text-white heading-class">
                     New Dock Booking
                   </h5>
                 </div>
@@ -182,7 +182,7 @@ const AdminDashBoard = () => {
               >
                 <div className="w-1/2">
                   {" "}
-                  <h5 class="mb-2 text-2xl  font-bold  tracking-tight text-gray-900 dark:text-white">
+                  <h5 class="mb-2 text-2xl  font-bold  tracking-tight text-gray-900 dark:text-white heading-class">
                     Manage Vehicles
                   </h5>
                 </div>
@@ -202,7 +202,7 @@ const AdminDashBoard = () => {
               >
                 <div className="w-1/2">
                   {" "}
-                  <h5 class="mb-2 text-2xl  font-bold   tracking-tight text-gray-900 dark:text-white">
+                  <h5 class="mb-2 text-2xl  font-bold   tracking-tight text-gray-900 dark:text-white heading-class">
                     Manage Supplier
                   </h5>
                 </div>

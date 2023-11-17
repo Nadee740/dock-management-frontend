@@ -34,9 +34,9 @@ const ListAllSecurityPage = ({ iseditable }) => {
     },[])
   return (
     <>
-      <div className="w-full admin-dashboard  overflow-hidden">
+      <div className="w-full admin-dashboard">
         <div className="flex flex-row w-full items-center p-3 justify-between">
-        <section class="text-black w-5/6 p-6 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800 mt-20 overflow-scroll">
+        <section class="text-black w-5/6 p-6 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800 mt-5 overflow-x-scroll">
             <ListAllSecurity securityData={securityData} iseditable={iseditable} />
           </section>
         </div>

@@ -7,7 +7,7 @@ const ListAllCompany = ({ iseditable,companyDetails }) => {
   return (
     <>
       <div className="flex items-center justify-between w-4/12 p-4">
-        <h2 className="text-2xl font-medium">List of Companies</h2>
+        <h2 className="text-4xl font-medium heading-class">List of Companies</h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       {iseditable && (
@@ -23,9 +23,9 @@ const ListAllCompany = ({ iseditable,companyDetails }) => {
         </div>
       )}
 
+      
       <div className="flex items-center p-3 w-9/12 py-4">
-        <label className=" pr-3 font-semibold">Search</label>
-        <input className="  w-3/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" onChange={(e) => { }} type="text"></input>
+        <input className="  w-4/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" placeholder="Search Company" onChange={(e) => { }} type="text"></input>
       </div>
       <div className="flex items-center justify-end mb-5">
         <button

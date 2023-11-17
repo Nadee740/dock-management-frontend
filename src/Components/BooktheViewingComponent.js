@@ -72,8 +72,8 @@ const BooktheViewingSliderComponent=({dockStatus,building})=>{
     return(
         <div className="" >
     <div className="flex items-center justify-center w-full m-2">
-        <h2 className="font-bold text-2xl" >
-        {building.building_name}
+        <h2 className="font-bold text-2xl heading-class" >
+        {building.building_name.toUpperCase()}
         </h2>
     </div>
     <div className="m-2 flex justify-center overflow-x-scroll">
@@ -208,7 +208,6 @@ const BooktheViewingComponent = ({buildings}) => {
     return(
         <div className="" >
         <div className="m-2 w-1/2"> 
-        <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
 {buildings && <select id="countries" 
  onChange={(e)=>{
   

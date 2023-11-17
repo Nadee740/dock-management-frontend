@@ -14,7 +14,7 @@ const
     return (
       <>
         <div className="flex items-center justify-between w-4/12 p-4">
-          <h2 className="text-2xl font-medium">List of Security Check</h2>
+          <h2 className="text-4xl font-medium heading-class">List of Security </h2>
         </div>
         <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
         {iseditable && noOfsecurity > 0 && <div className="flex items-center justify-between ml-20 w-38 p">
@@ -28,10 +28,10 @@ const
           </Link>
         </div>}
 
-        <div className="flex items-center p-3 w-9/12 py-4">
-          <label className=" pr-3 font-semibold">Search</label>
-          <input className="  w-3/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" onChange={(e) => { }} type="text"></input>
-        </div>
+        
+      <div className="flex items-center p-3 w-9/12 py-4">
+        <input className="  w-4/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" placeholder="Search Security" onChange={(e) => { }} type="text"></input>
+      </div>
         <div className="flex items-center justify-end mb-5">
           <button
             className="w-28 bg-stone-800 text-white p-2 rounded-lg text-sm mr-5"

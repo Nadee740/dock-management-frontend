@@ -37,7 +37,7 @@ const ListAllSubscriptionRequest = ({iseditable,requestList}) => {
    <>
     { filteredList&&<>
       <div className="flex items-center justify-between p-4 mb-1">
-        <h2 className="text-2xl font-medium">Subscription Request</h2>
+        <h2 className="text-4xl font-medium heading-class">Subscription Request</h2>
         
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
@@ -46,9 +46,8 @@ const ListAllSubscriptionRequest = ({iseditable,requestList}) => {
         <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       
    
-        <div className="flex items-center p-3 w-9/12 py-4">
-        <label className=" pr-3 font-semibold">Search</label>
-        <input className="  w-4/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" onChange={(e) => { }} type="text"></input>
+        <div className="flex items-center p-3 w-9/12 py-2">
+        <input className="  w-4/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" placeholder="Search Subscription ..." onChange={(e) => { }} type="text"></input>
       </div>
 {/* dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring  */}
         </div>

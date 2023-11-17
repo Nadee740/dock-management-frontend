@@ -57,6 +57,7 @@ import EditCompanyPage from "./Pages/Company/EditCompanyPage";
 import EditWareHouse from "./Pages/WareHouse/EditWareHousePage";
 import EditDockPage from "./Pages/Docks/EditDockPage";
 import EditSupplierPage from "./Pages/Supplier/EditSupplierPage";
+import BackToTop from "./Components/ScrollToTop";
 function App() {
   const [user, setUser] = useState(null);
   const [Token, setToken] = useState(null);
@@ -111,6 +112,7 @@ function App() {
     <div className="App">
       <UserContext.Provider value={{ user, setUser, accountDetails, setAccountDetails, Token, setToken, loading, setLoading }}>
         {/* <SideNavBar/> */}
+        <BackToTop/>
         <BrowserRouter>
           <Routes>
             {user == null &&

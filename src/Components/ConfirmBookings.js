@@ -28,7 +28,7 @@ const ConfirmBooking=({bookingDetails,buildingDetails,vehicleDetails,companyDeta
     return(
         <div id='booking-confirmed-page'>
         <div className="flex items-center justify-between w-4/12 p-4">
-        <h2 className="text-2xl font-medium">Booking Confirmed</h2>
+        <h2 className="text-3xl font-medium heading-class">Booking Confirmed</h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
    

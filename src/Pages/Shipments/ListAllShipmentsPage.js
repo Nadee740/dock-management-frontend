@@ -4,7 +4,33 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { baseUrl } from "../../utils/baseurl";
 import { useParams } from "react-router-dom";
+import BackToTop from "../../Components/ScrollToTop";
 const ListAllShipmentsPage = ({iseditable}) => {
+    const [showButton, setShowButton] = useState(false);
+
+    const handleScroll = () => {
+      if (
+        document.body.scrollTop > 20 ||
+        document.documentElement.scrollTop > 20
+      ) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+    };
+  
+    const backToTop = () => {
+      document.documentElement.style.scrollBehavior = "smooth";
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    };
+  
+    useEffect(() => {
+      window.addEventListener("scroll", handleScroll);
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }, []);
   const params=useParams()
   const Status=params.Status;
     const {setLoading}=useContext(UserContext);
@@ -40,9 +66,10 @@ const ListAllShipmentsPage = ({iseditable}) => {
         setLoading(false);
     },[Status])
     return ( <>
-        <div className="w-full admin-dashboard overflow-x-scroll">
+        <div className="w-full admin-dashboard">
       <div className="flex flex-row w-full w-full items-center p-3 justify-between">
-      <section class="text-black w-5/6 p-6 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800 mt-20 overflow-x-scroll">
+      <section class="text-black w-5/6 p-6 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800 mt-5 overflow-x-scroll">
+
       {todayShipments && <ListAllShipments todayShipments={todayShipments} iseditable={false} name={name} />}
       </section>
       </div>

@@ -1,26 +1,13 @@
-import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faPrint, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Mail } from "@mui/icons-material";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 const ListAllShipments = ({ iseditable,todayShipments ,name}) => {
-    console.log(name)
-   
   return (
     <>
-      <div className="flex items-center justify-between p-4">
-        <h2 className="text-2xl  text-black font-medium">{name}</h2>
-      </div>
-      <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-     
+      <div className="flex items-center justify-between p-4 ">
 
-      <div className="flex items-center p-3 w-9/12 py-4">
-        <label className=" pr-3 font-semibold">Search</label>
-        <input className="  w-3/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" onChange={(e) => { }} type="text"></input>
-      </div>
-      <div className="flex items-center justify-end mb-5">
+        <h2 className="text-3xl  text-black font-medium heading-class">{name}</h2>
+        <div className="flex items-center justify-end mb-5">
         <button
           className="w-28 bg-stone-800 text-white p-2 rounded-lg text-sm mr-5"
           onClick={() => {}}
@@ -34,7 +21,14 @@ const ListAllShipments = ({ iseditable,todayShipments ,name}) => {
           Excel
         </button>
       </div>
-      <div className="flex items-center justify-between w-4/12 py-4">
+      </div>
+      <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
+     
+
+      <div className="flex items-center p-3 w-9/12 py-2">
+        <input className="  w-4/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" placeholder="Search shipment" onChange={(e) => { }} type="text"></input>
+      </div>
+      <div className="flex items-center justify-between w-4/12 py-2">
         <p className="font-semibold">No Of Shipments :  {todayShipments.length}</p>
   
       </div>

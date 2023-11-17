@@ -5,39 +5,6 @@ import { UserContext } from "../Contexts/UserContexts";
 import axios from "axios";
 
 const ListRealTimeStatus = ({iseditable}) => {
-    const datas=[{
-job_order_no:"1",
-booking_mode:"40 Footer",
-company:"ss00012",
-vehicle_driver:"24 footer",
-dock_type:"8888",
-booked_time:"123455",
-actual_in_out:"09/09/2002",
-status:"1"
-
-},
-{
-  job_order_no:"2",
-  booking_mode:"40 Footer",
-  company:"ss00012",
-  vehicle_driver:"24 footer",
-  dock_type:"8888",
-  booked_time:"123455",
-  actual_in_out:"09/09/2002",
-  status:"1"
-  
-  },
-  {
-    job_order_no:"1",
-    booking_mode:"40 Footer",
-    company:"ss00012",
-    vehicle_driver:"24 footer",
-    dock_type:"8888",
-    booked_time:"123455",
-    actual_in_out:"09/09/2002",
-    status:"1"
-    
-    }]
 const {setLoading,Token}=useContext(UserContext)
 const [bookingData,setBookingData]=useState()
 useEffect(()=>{
@@ -72,7 +39,7 @@ useEffect(()=>{
   return (
     <>
       <div className="flex items-center justify-between w-4/12 p-4">
-        <h2 className="text-2xl font-medium">Real Time</h2>
+        <h2 className="text-3xl font-medium heading-class">Real Time</h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       {iseditable&&    <div className="flex items-center justify-between w-4/12 p">
@@ -85,9 +52,9 @@ useEffect(()=>{
         </button>
       </div>}
    
-      <div className="flex items-center p-3 w-4/12 py-4">
-        <label className=" pr-3 font-semibold">Search</label>
-        <input className="p-3 w-52 ring-slate-200 ring-2 rounded-xl outline-none" onChange={(e) => {}} type="text"></input>
+      
+      <div className="flex items-center p-3 w-9/12 py-2">
+        <input className="  w-4/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" placeholder="Search Status" onChange={(e) => { }} type="text"></input>
       </div>
       <div className="flex items-center justify-end mb-5">
         <button

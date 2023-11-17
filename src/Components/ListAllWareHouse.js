@@ -7,22 +7,12 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../Contexts/UserContexts";
 
 const ListAllWareHouse = ({ warehouseData,iseditable }) => {
-  const datas = [
-    {
-      s_no: "SGX1234",
-      user_name: "40 Footer",
-      email_address: "Lim Kim",
-      acra_no: "77777777",
-      building: "NA",
-      created_on: "11/11/11",
-    },
-  ];
   const {accountDetails}=useContext(UserContext)
   const noOfWarehouse=accountDetails.subscription_id.remaining_warehouse;
   return (
     <>
       <div className="flex items-center justify-between w-4/12 p-4">
-        <h2 className="text-2xl font-medium">List of Warehouse Details</h2>
+        <h2 className="text-4xl font-medium heading-class">List of Warehouse Details</h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       {iseditable && noOfWarehouse>0&& (
@@ -38,9 +28,9 @@ const ListAllWareHouse = ({ warehouseData,iseditable }) => {
         </div>
       )}
 
-      <div className="flex items-center p-3 w-9/12 py-4">
-        <label className=" pr-3 font-semibold">Search</label>
-        <input className="  w-3/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" onChange={(e) => { }} type="text"></input>
+    
+      <div className="flex items-center p-3 w-9/12 py-2">
+        <input className="  w-4/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" placeholder="Search Warehouse" onChange={(e) => { }} type="text"></input>
       </div>
       <div className="flex items-center justify-end mb-5">
         <button

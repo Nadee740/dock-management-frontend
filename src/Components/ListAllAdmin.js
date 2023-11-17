@@ -23,7 +23,7 @@ const ListAllAdmin = ({iseditable,adminData,addadmin}) => {
   return (
     <>
       <div className="flex items-center justify-between p-4">
-        <h2 className="text-2xl font-medium">Admin Users</h2>
+        <h2 className="text-4xl font-medium heading-class">Admin Users</h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       {addadmin&& noofAdmins>0&&  <div className="flex items-center justify-between ml-20 w-38 p">
@@ -39,8 +39,7 @@ const ListAllAdmin = ({iseditable,adminData,addadmin}) => {
       </div>}
    
       <div className="flex items-center p-3 w-9/12 py-4">
-        <label className=" pr-3 font-semibold">Search</label>
-        <input className="  w-3/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" onChange={(e) => { }} type="text"></input>
+        <input className="  w-4/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" placeholder="Search Admin " onChange={(e) => { }} type="text"></input>
       </div>
       <div className="flex items-center justify-end mb-5">
         <button
