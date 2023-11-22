@@ -14,8 +14,8 @@ import AddNewDock from "./Pages/Docks/AddNewDock";
 import ListAllSuppliersPage from "./Pages/Supplier/ListAllSuppliersPage";
 import RealTimeStatusPage from "./Pages/Common/RealTimeStatusPage";
 import AddNewVehiclePage from "./Pages/Vehicle/AddNewVehiclePage";
-import ListAllCompanyPage from "./Pages/Company/ListAllCompanyPage";
-import AddNewCompany from "./Pages/Company/AddNewCompany";
+
+
 import ListAllAdminPage from "./Pages/Admin/ListAllAdminPage";
 import AddAdminUser from "./Pages/Admin/AddAdminUser";
 import AddNewSupplier from "./Pages/Supplier/AddNewSupplier";
@@ -60,6 +60,8 @@ import EditSupplierPage from "./Pages/Supplier/EditSupplierPage";
 import BackToTop from "./Components/ScrollToTop";
 import ListAllSupplierRequestPage from "./Pages/Admin/SupplierApprovalPage";
 import SupplierRequestPage from "./Pages/Admin/SupplierRequestPage";
+import AddNewBuilding from "./Pages/Company/AddNewBuilding";
+import ListAllBuildingPage from "./Pages/Company/ListAllBuildingPage";
 function App() {
   const [user, setUser] = useState(null);
   const [Token, setToken] = useState(null);
@@ -158,11 +160,11 @@ function App() {
 
                 {/* CompanyROutes */}
                 <Route
-                  path="/company"
-                  element={<ListAllCompanyPage iseditable={true} />}
+                  path="/building"
+                  element={<ListAllBuildingPage iseditable={true} />}
                 />
-                <Route path="/company/add" element={<AddNewCompany />} />
-                <Route path="/edit/company/:id" element={<EditCompanyPage />} />
+                <Route path="/building/add" element={<AddNewBuilding />} />
+                <Route path="/edit/building/:id" element={<EditCompanyPage />} />
 
 
                 {/* Supplier Routes */}

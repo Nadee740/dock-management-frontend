@@ -15,7 +15,7 @@ const EditCompanyPage = () => {
     useEffect(()=>{
         setLoading(true);
         const token = localStorage.getItem("EZTOken");
-        axios.get(`${baseUrl}/get-company/${_id}`, {
+        axios.get(`${baseUrl}/get-building/${_id}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },

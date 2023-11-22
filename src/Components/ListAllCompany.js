@@ -3,21 +3,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Mail } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
-const ListAllCompany = ({ iseditable,companyDetails }) => {
+const ListAllBuilding = ({ iseditable,buildingDetails }) => {
   return (
     <>
       <div className="flex items-center justify-between w-4/12 p-4">
-        <h2 className="text-4xl font-medium heading-class">List of Companies</h2>
+        <h2 className="text-4xl font-medium heading-class">List of Buildings</h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       {iseditable && (
        <div className="flex items-center justify-between ml-20 w-38 p">
           
           <Link
-            to="/company/add"
+            to="/building/add"
             className="p-3  w-48  items-center  ring-slate-200 bg-blue-900 ring-2 rounded-xl outline-none"
           >
-            <p className="sm:text-md text-white text-center "> Add&nbsp;Company</p>
+            <p className="sm:text-md text-white text-center "> Add&nbsp;Building</p>
 
           </Link>
         </div>
@@ -25,7 +25,7 @@ const ListAllCompany = ({ iseditable,companyDetails }) => {
 
       
       <div className="flex items-center p-3 w-9/12 py-4">
-        <input className="  w-4/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" placeholder="Search Company" onChange={(e) => { }} type="text"></input>
+        <input className="  w-4/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" placeholder="Search Building" onChange={(e) => { }} type="text"></input>
       </div>
       <div className="flex items-center justify-end mb-5">
         <button
@@ -42,20 +42,19 @@ const ListAllCompany = ({ iseditable,companyDetails }) => {
         </button>
       </div>
       <div className="flex items-center justify-between w-4/12 py-4">
-        <p className="font-semibold">No Of Companies : {companyDetails.length}</p>
+        <p className="font-semibold">No Of Buildings : {buildingDetails.length}</p>
 
       </div>
       <table className="w-11/12 relative table-auto">
         <tr className="rounded-xl p-3 bg-primary text-center">
           <th className="p-3 text-sm text-slate-500">S. No</th>
-          <th className="p-3 text-sm text-slate-500">COMPANY NAME</th>
           <th className="p-3 text-sm text-slate-500"> BUILDING NAME</th>
           <th className="p-3 text-sm text-slate-500">BUILDING ADDRESS</th>
           {iseditable && (
             <th className="p-3 text-sm text-slate-500">ACTIONS</th>
           )}
         </tr>
-        {companyDetails.map((data, index) => (
+        {buildingDetails.map((data, index) => (
           <tr
             key={index}
             className={
@@ -63,8 +62,7 @@ const ListAllCompany = ({ iseditable,companyDetails }) => {
             }
           >
             <td className="p-3 text-blue-400">{index+1}</td>
-            <td className="p-3">{data.company_name}</td>
-            <td className="p-3">{data.building_id.building_name}</td>
+            <td className="p-3">{data.building_name}</td>
             <td className="p-3">{data.building_address}</td>
             {iseditable && (
               <td className="flex">
@@ -74,7 +72,7 @@ const ListAllCompany = ({ iseditable,companyDetails }) => {
                   onClick={() => {}}
                 >
                   <FontAwesomeIcon icon={faPenToSquare} className="mt-1 mr-1" size="sm"/>
-                 <Link to={"/edit/company/"+data._id}>Edit</Link>
+                 <Link to={"/edit/building/"+data._id}>Edit</Link>
                 </button>
               </td>
             )}
@@ -85,4 +83,4 @@ const ListAllCompany = ({ iseditable,companyDetails }) => {
   );
 };
 
-export default ListAllCompany;
+export default ListAllBuilding;

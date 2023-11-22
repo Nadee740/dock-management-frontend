@@ -1,16 +1,16 @@
 import { useContext, useEffect, useState } from "react";
-import ListAllCompany from "../../Components/ListAllCompany";
 import axios from "axios";
 import { baseUrl } from "../../utils/baseurl";
 import { UserContext } from "../../Contexts/UserContexts";
-const ListAllCompanyPage = ({ iseditable }) => {
+import ListAllBuilding from "../../Components/ListAllCompany";
+const ListAllBuildingPage = ({ iseditable }) => {
     const {setLoading}=useContext(UserContext);
-    const [companyData,setCompanyData]=useState([]);
+    const [buildingData,setBuildingData]=useState([]);
     useEffect(()=>{
         setLoading(true);
         const token = localStorage.getItem("EZTOken");
         axios
-      .get(`${baseUrl}/get-companies`, {
+      .get(`${baseUrl}/get-buildings`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -21,9 +21,9 @@ const ListAllCompanyPage = ({ iseditable }) => {
         console.log("success", response, "response.data");
         if (response.data != "") {
           console.log(response.data);
-          setCompanyData(response.data.data);
+          setBuildingData(response.data.data);
         } else {
-          setCompanyData(null);
+          setBuildingData(null);
           console.log("errr");
         }
       })
@@ -37,7 +37,7 @@ const ListAllCompanyPage = ({ iseditable }) => {
       <div className="w-full admin-dashboard ">
         <div className="flex flex-row w-full w-full items-center p-3 justify-between">
           <section class=" text-black w-5/6 p-6 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800 mt-5 overflow-x-scroll">
-            {companyData &&<ListAllCompany companyDetails={companyData} iseditable={iseditable} />}
+            {buildingData &&<ListAllBuilding buildingDetails={buildingData} iseditable={iseditable} />}
           </section>
         </div>
       </div>
@@ -45,4 +45,4 @@ const ListAllCompanyPage = ({ iseditable }) => {
   );
 };
 
-export default ListAllCompanyPage;
+export default ListAllBuildingPage;
