@@ -1,6 +1,5 @@
 import { faEdit } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Mail } from "@mui/icons-material";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
@@ -8,6 +7,7 @@ import { baseUrl } from "../utils/baseurl";
 import { UserContext } from "../Contexts/UserContexts";
 import ConfirmDialog from "../Components/ConfirmDialog";
 import AlertDialog from "../Components/AlertDialogue";
+
 
 const SubscriptionRequestPage = () => {
   const params=useParams();
@@ -22,7 +22,9 @@ const SubscriptionRequestPage = () => {
   const [modalHeading,setModalHeading]=useState("");
   const [modalText,setModalText]=useState("")
   const [company,setCompany]=useState();
+  const [acra_no,setAcra_No]=useState('');
   const [subscriptionTypes,setSubscriptionTypes]=useState([]);
+  const [confirm_animation_open,set_confirm_animation_open]=useState(false)
   const SubmitButton=(e)=>{
     e.preventDefault();
   if(name==""||email==""||Phone_no==""||type=="")
@@ -70,15 +72,16 @@ const SubscriptionRequestPage = () => {
       email,
       Phone_no,
       Company_Name:company,
+      acra_no:acra_no
 
     }
     axios.post(`${baseUrl}/subscription/request`,data).then((res)=>{
       if(res.data.status=="ok")
       {
-        setModalHeading("Subscription Request sent Successfully")
-        setModalText("")
+        setModalHeading("Subscription Request sent Successfully .")
+        setModalText("Thanks for showing interest in VEZ . Please wait while we process your request and reach back")
          setOpen1(true)
-         window.location='/'
+        //  window.location='/'
       
       }
       else{
@@ -110,7 +113,7 @@ const SubscriptionRequestPage = () => {
       <div className="flex flex-row w-full w-full items-center p-3 justify-between">
         <section class="h-max text-black w-5/6 p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800 mt-20">
           <div className="flex items-center justify-between  p-4 ">
-            <h2 className="text-2xl font-medium">
+            <h2 className="text-2xl font-medium heading-class">
               <FontAwesomeIcon icon={faEdit} className="mr-1"></FontAwesomeIcon> Subscription Request
             </h2>
           </div>
@@ -204,20 +207,34 @@ const SubscriptionRequestPage = () => {
                   class="border-black-200 block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                 />
               </div>
+              <div>
+                <label class="text-black dark:text-gray-200" for="company_Name">
+                  Acra No :
+                </label>
+                <input
+                required
+                  id="acra_no"
+                  type="text"
+                  value={acra_no}
+                  onChange={(e)=>{
+                    setAcra_No(e.target.value)
+                  }}
+                  class="border-black-200 block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                />
+              </div>
             </div>
             <div class="flex mt-5 md:mt-8 lg:mt-5">
             <div>
-            {/* /booking-confirm/1 */}
               <button 
               type="submit"
-              class="bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
+              class="heading-class bg-green-600 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-green-500 focus:outline-none focus:bg-gray-600">
                 Send Request
-                <Mail className="ml-5"/>
+
                 </button>
               </div>
               <div class="flex ml-3 md:ml-5 lg:ml-3"> 
             
-              <button class="bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
+              <button type="button" class=" heading-class bg-green-600 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-green-500 focus:outline-none focus:bg-gray-600">
           <Link to="/"> Cancel </Link>
           </button>
               </div>

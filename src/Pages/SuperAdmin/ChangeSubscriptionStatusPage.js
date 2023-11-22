@@ -26,8 +26,26 @@ const ChangeSubscriptionRequestStatusPage = () => {
     const [modalHeading,setModalHeading]=useState("");
     const [modalText,setModalText]=useState("")
     const [subscriptionTypes,setSubscriptionTypes]=useState([]);
+    const [name,set_name]=useState("")
+    const [email,set_email]=useState("")
+    const [phone_no,set_phone_no]=useState("");
+    const [acra_no,set_acra_no]=useState("")
     const {setLoading}=useContext(UserContext)
+    useEffect(()=>{
+        setLoading(true);
+        axios.get(`${baseUrl}/subscription/request?id=${_id}`).then((res)=>{
+            const user_data=res.data.data[0];
+            console.log("request data = ",user_data)
+            set_name(user_data.NameofSubscriber);
+            set_email(user_data.email);
+            set_acra_no(user_data.acra_no)
+        }).catch((err)=>{
 
+        }).finally(()=>{
+           setLoading(false)
+        })
+
+    },[])
     useEffect(()=>{
       setLoading(true);
       axios.get(`${baseUrl}/subscription/get/types`)
@@ -138,17 +156,66 @@ const ChangeSubscriptionRequestStatusPage = () => {
               </div>
 
               <div>
-                <label class="text-blackdark:text-gray-200" for="emailAddress">
+                <label class="text-blackdark:text-gray-200" for="price">
                   Price
                 </label>
                 <input
                 required
-                  id="number"
+                placeholder="Price"
+                  id="price"
                   type="text"
                   value={price}
                   onChange={(e)=>{
                     setPrice(e.target.value)
                   }}
+                  class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                />
+              </div>
+              <div>
+                <label class="text-blackdark:text-gray-200" for="name">
+                  Name
+                </label>
+                <input
+                required
+                placeholder="Name"
+                  id="name"
+                  type="text"
+                  value={name}
+                //   onChange={(e)=>{
+                //     set_name(e.target.value)
+                //   }}
+                  class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                />
+              </div>
+              <div>
+                <label class="text-blackdark:text-gray-200" for="email">
+                  Email
+                </label>
+                <input
+                required
+                placeholder="Email"
+                  id="email"
+                  type="text"
+                  value={email}
+                //   onChange={(e)=>{
+                //     set_email(e.target.value)
+                //   }}
+                  class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                />
+              </div>
+              <div>
+                <label class="text-blackdark:text-gray-200" for="acra_no">
+                  ACRA / NO
+                </label>
+                <input
+                required
+                placeholder="ACRA NO"
+                  id="acra_no"
+                  type="text"
+                  value={acra_no}
+                //   onChange={(e)=>{
+                //     set_acra_no(e.target.value)
+                //   }}
                   class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                 />
               </div>
