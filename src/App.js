@@ -60,6 +60,7 @@ import EditSupplierPage from "./Pages/Supplier/EditSupplierPage";
 import BackToTop from "./Components/ScrollToTop";
 import ListAllSupplierRequestPage from "./Pages/Admin/SupplierApprovalPage";
 import SupplierRequestPage from "./Pages/Admin/SupplierRequestPage";
+import ChangePassword from "./Pages/ChangePassword";
 function App() {
   const [user, setUser] = useState(null);
   const [Token, setToken] = useState(null);
@@ -142,6 +143,7 @@ function App() {
                   path="/real-time-status"
                   element={<RealTimeStatusPage iseditable={false} />}
                 />
+                <Route path="/change-password" element={<ChangePassword/>}/>
 
 
                 {/* Vehicle Routes */}
