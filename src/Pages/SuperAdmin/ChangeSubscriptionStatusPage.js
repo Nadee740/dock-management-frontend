@@ -28,6 +28,7 @@ const ChangeSubscriptionRequestStatusPage = () => {
     const [subscriptionTypes,setSubscriptionTypes]=useState([]);
     const [name,set_name]=useState("")
     const [email,set_email]=useState("")
+    const [role,setRole]=useState(-1)
     const [phone_no,set_phone_no]=useState("");
     const [acra_no,set_acra_no]=useState("")
     const {setLoading}=useContext(UserContext)
@@ -219,6 +220,22 @@ const ChangeSubscriptionRequestStatusPage = () => {
                   class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                 />
               </div>
+              <div className="mb-2">
+            <label class="text-black dark:text-gray-200" for="Vechicletype">
+              Role
+            </label>
+            <select
+            onChange={(e)=>{
+                setRole(e.target.value)
+            }}
+              id="Vechicletype"
+              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+            >
+              <option value={-1}>---Choose Role ---</option>
+              <option value={"Administrator"}>Administrator</option>
+              <option value={"Company"}>Company</option>
+            </select>
+          </div>
 
               <div>
                 <label class="text-black dark:text-gray-200" for="password">
