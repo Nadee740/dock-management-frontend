@@ -124,13 +124,13 @@ const AdminLinks=[{
                         clasStyle:"mr-2 text-indigo-500"
                     },
                 ]},
-                // {
-                //     title:"Approval Pending",
-                //     to:"/shipments-list",
-                //     icon:faCheck,
-                //     color:"#72d123",
-                //     subLinks:false
-                // },
+                {
+                    title:"Approval Pending",
+                    to:"/admin/list/supplier/request",
+                    icon:faCheck,
+                    color:"#72d123",
+                    subLinks:false
+                },
                 {
                     title:"Status & Reports",
                     to:"/statistics",

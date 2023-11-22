@@ -6,15 +6,15 @@ import { UserContext } from '../Contexts/UserContexts';
 import axios from 'axios';
 import { baseUrl } from '../utils/baseurl';
 const SignUp = () => {
-    const [building,setBuildings]=useState([])
+    const [companies,setCompanies]=useState([])
     const {setLoading}=useContext(UserContext)
     useEffect(() => {
             setLoading(true)
             axios
-              .get(`${baseUrl}/subscription/get/buildings`)
+              .get(`${baseUrl}/get/all/company`)
               .then(function (response) {
                 if (response.data != "") {
-                   setBuildings(response.data.data)
+                   setCompanies(response.data.data)
                    console.log(response.data.data)
                   setLoading(false);
                 } else {
@@ -32,7 +32,7 @@ const SignUp = () => {
        <div className='pt-20 pb-20 flex flex-col items-center'>
         <h2 className='text-3xl text-white pl-5  font-bold'>New Supplier Registration</h2>
        </div>
-       {building && <SignUpForm buildings={building}/>}
+       {companies && <SignUpForm companies={companies}/>}
       </div>
     );
 }

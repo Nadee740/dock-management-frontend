@@ -58,6 +58,8 @@ import EditWareHouse from "./Pages/WareHouse/EditWareHousePage";
 import EditDockPage from "./Pages/Docks/EditDockPage";
 import EditSupplierPage from "./Pages/Supplier/EditSupplierPage";
 import BackToTop from "./Components/ScrollToTop";
+import ListAllSupplierRequestPage from "./Pages/Admin/SupplierApprovalPage";
+import SupplierRequestPage from "./Pages/Admin/SupplierRequestPage";
 function App() {
   const [user, setUser] = useState(null);
   const [Token, setToken] = useState(null);
@@ -248,7 +250,14 @@ function App() {
                         exact
                         element={<ListAllSupplierGroupsPage iseditable={true} />}
                       />
-
+                      <Route
+                        path="list/supplier/request"
+                        element={<ListAllSupplierRequestPage iseditable={true}/>}
+                      />
+                      <Route
+                        path="change/request/supplier/:id"
+                        element={<SupplierRequestPage/>}
+                      />
                       <Route
                         path="Users/addCompanyAdminUsers"
                         element={<AddAdminUser />}
