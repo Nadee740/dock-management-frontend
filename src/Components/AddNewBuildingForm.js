@@ -9,51 +9,50 @@ import AlertDialog from "./AlertDialogue";
 import ConfirmDialog from "./ConfirmDialog";
 import { Link } from "react-router-dom";
 
-const AddNewCompanyForm = () => {
+const AddNewBuildingForm = () => {
     const {setLoading,Token}=useContext(UserContext);
-    const [building,setBuilding]=useState([]);
+    const [building,setBuilding]=useState();
     const [open1,setOpen1]=useState(false);
     const [open2,setOpen2]=useState(false);
     const [modalHeading,setModalHeading]=useState("");
     const [modalText,setModalText]=useState("")
-    const [company_name,setCompanyname]=useState("");
-    const [building_name,setSelectedBuilding]=useState(-1);
+   
     const [building_address,setBuildingAddress]=useState("");
-    useEffect(()=>{
-        setLoading(true);
-        axios
-      .get(`${baseUrl}/get-buildings`, {
-        headers: {
-          Authorization: `Bearer ${Token}`,
-        },
-      })
-      .then(function (response) {
-        if (response.data != "") {
-          setBuilding(response.data.data);
-          setLoading(false);
+    // useEffect(()=>{
+    //     setLoading(true);
+    //     axios
+    //   .get(`${baseUrl}/get-buildings`, {
+    //     headers: {
+    //       Authorization: `Bearer ${Token}`,
+    //     },
+    //   })
+    //   .then(function (response) {
+    //     if (response.data != "") {
+    //       setBuilding(response.data.data);
+    //       setLoading(false);
         
-        } else {
-          setBuilding(null);
-        }
-      })
-      .catch(function (error) {
-        setLoading(false);
-        console.log("FAILED!!! ", error);
-      });
-    },[])
+    //     } else {
+    //       setBuilding(null);
+    //     }
+    //   })
+    //   .catch(function (error) {
+    //     setLoading(false);
+    //     console.log("FAILED!!! ", error);
+    //   });
+    // },[])
     const SubmitButton=(e)=>{
         e.preventDefault();
        
-        if(building_name==-1)
+        if(building=="")
         {
-            setModalHeading("Please choose building name");
+            setModalHeading("Please fill building name");
             setOpen1(true);
 
         }
         else{
             setOpen2(true);
             setModalHeading("Alert")
-            setModalText("Are You Sure You Want To Add The Company");
+            setModalText("Are You Sure You Want To Add The Building");
         }
     
     }
@@ -61,11 +60,11 @@ const AddNewCompanyForm = () => {
     const submitData=async()=>{
         setLoading(true)
         const data = {
-            company_name,
-            building_id:building_name,
+         
+            building_name:building,
             building_address
           };
-          axios.post(`${baseUrl}/add-company`,data,{
+          axios.post(`${baseUrl}/add-building`,data,{
             headers:{
                 'Authorization': `Bearer ${Token}`
             }
@@ -73,9 +72,9 @@ const AddNewCompanyForm = () => {
           .then((res) => {
             if(res.data.status=="ok")
             {
-               setModalHeading("Company Added Successfully")
+               setModalHeading("Building Added Successfully")
                setModalText("")
-               setCompanyname("")
+               setBuilding("")
                setBuildingAddress("")
                setOpen1(true)
 
@@ -101,18 +100,19 @@ const AddNewCompanyForm = () => {
     }
     return ( <>
          <div className="flex items-center justify-between  p-4">
-        <h2 className="text-2xl font-medium"><FontAwesomeIcon icon={faBuilding}className="mr-5" />Add New Company</h2>
+        <h2 className="text-2xl font-medium"><FontAwesomeIcon icon={faBuilding}className="mr-5" />Add New Building</h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       <form onSubmit={SubmitButton} >
         <div class="">
             <div className="mb-2">
-                <label class="text-black dark:text-gray-200" for="companyname">Company Name</label>
-                <input required value={company_name}  onChange={(e)=>{
-                    setCompanyname(e.target.value)
-                }} placeholder="Company Name" id="companyname" type="text" class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring border-2 border-slate-400"/>
+                <label class="text-black dark:text-gray-200" for="companyname">Building Name</label>
+                <input required value={building}  onChange={(e)=>{
+                    setBuilding(e.target.value)
+                }} placeholder="Building Name" id="companyname" type="text" class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring border-2 border-slate-400"/>
             </div>
-            <div className="mb-2">
+            
+            {/* <div className="mb-2">
                 <label class="text-black dark:text-gray-200" for="buildingname">Building Name</label>
                 <select  onChange={(e)=>{
                     setSelectedBuilding(e.target.value)
@@ -125,7 +125,7 @@ const AddNewCompanyForm = () => {
                   }
                     
                 </select>
-            </div>
+            </div> */}
              </div>
              <div >
                 <label class="text-black dark:text-gray-200" for="buildingaddress">Building Address</label>
@@ -137,7 +137,7 @@ const AddNewCompanyForm = () => {
         <div class="flex justify-end mt-6">
             <button type="submit"  class="mr-6 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-green-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">Submit</button>
             <button class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
-          <Link to="/company"> Cancel</Link>
+          <Link to="/building"> Cancel</Link>
           </button>
         </div>
     </form>
@@ -157,4 +157,4 @@ const AddNewCompanyForm = () => {
     </> );
 }
  
-export default AddNewCompanyForm;
+export default AddNewBuildingForm;

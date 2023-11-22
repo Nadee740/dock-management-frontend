@@ -88,8 +88,8 @@ const AdminLinks=[{
                 color:"#5b3dc7",
                  subLinks:[
                     {
-                        title:"Update Company Details",
-                        to:'/company',
+                        title:"Update Building Details",
+                        to:'/building',
                         icon:faBuilding,
                         clasStyle:"mr-2 text-indigo-500"
                     },
