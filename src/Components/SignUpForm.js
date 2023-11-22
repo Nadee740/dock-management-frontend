@@ -7,10 +7,12 @@ import ConfirmDialog from "./ConfirmDialog";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBuilding, faEdit } from "@fortawesome/free-regular-svg-icons";
 import { faPassport } from "@fortawesome/free-solid-svg-icons";
-const SignUpForm = ({buildings}) => {
+import { useEffect } from "react";
+import AlertDialog from "./AlertDialogue";
+const SignUpForm = ({companies}) => {
     const [buildingName,setBuildingName]=useState();
     const [buildingAddress,setBuildingAddress]=useState();
-    const [companyName,setCompanyName]=useState();
+    const [company,setCompany]=useState();
     const [subscriptionPin,setSubscriptionPin]=useState();
     const [name,setName]=useState();
     const [email1,setEmail1]=useState();
@@ -23,6 +25,9 @@ const SignUpForm = ({buildings}) => {
     const [open,setOpen]=useState(false);
     const [modalText,setModalText]=useState("");
     const [modalHeading,setModalHeading]=useState("SuccessFully Logged IN");
+    // useEffect(()=>{
+    //   if(companyName)
+    // },[])
     const confirmFunction=()=>{
         window.location='/login'
     }
@@ -34,29 +39,30 @@ const SignUpForm = ({buildings}) => {
             password,
             acra_no,
             phone,
-            companyName,
-            subscription_pin:subscriptionPin,
-            building_name:buildingName,
-            buildingAddress
+            company_id:company._id,
+            subscription_id:company.subscription_id
+
+          
+          
 
 
         }
-    axios.post(`${baseUrl}/create-admin`,data).then((res)=>{
+    axios.post(`${baseUrl}/supplier/request`,data).then((res)=>{
       console.log(res.data)
           if(res.data.status=="ok")
           {
-            setModalHeading("Sign up success");
-            setModalText("Your Account has been created succesfully")
+            setModalHeading("Sign Up Request success");
+            setModalText("Your Request has been sent succesfully")
             setOpen(true)
             
           }else{
             setModalHeading("Request Failed");
-            setModalText("You dont have an active subscription to create account with us");
+            setModalText("Something Went wrong. Please Try again after sometime");
             setOpen(true)
           }
       }).catch((err)=>{
         setModalHeading("Something Went wrong ");
-            setModalText("Something Went wrong.Please Try again after sometime");
+            setModalText("Something Went wrong. Please Try again after sometime");
             setOpen(true);
         console.log(err);
       })
@@ -78,17 +84,17 @@ const SignUpForm = ({buildings}) => {
             <select 
             required
             onChange={(e)=>{
-                setCompanyName(e.target.value)
+                setCompany(JSON.parse(e.target.value))
             }} className="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none" data-te-select-init>
             <option value="">--- Choose Company ---</option>
-           {buildings.map((data,index)=>(
-            <option value={data.Company_Name}>{data.Company_Name}</option>
+           {companies.map((data,index)=>(
+            <option value={JSON.stringify(data)}>{data.company_name}</option>
            ))}
             </select>
 
           </span>
         </div>
-        <div className="flex flex-col mt-2 ">
+        {/* <div className="flex flex-col mt-2 ">
           <span class="flex shadow-md mb-5 text-xs">
             <span class="bg-indigo-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">
               <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
@@ -141,7 +147,7 @@ const SignUpForm = ({buildings}) => {
               placeholder="Subscription Pin"
             />
           </span>
-        </div>
+        </div> */}
         <div className="flex flex-col mt-2 ">
           <span class="flex shadow-md mb-5 text-xs">
             <span class="bg-indigo-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">
@@ -292,12 +298,11 @@ const SignUpForm = ({buildings}) => {
           </button>
         </div>
       </form>
-      <ConfirmDialog
-        open={open}
-        setOpen={setOpen}
-        modalHeading={modalHeading}
-        modalText={modalText}
-        confirmFunction={confirmFunction}
+      <AlertDialog
+       open={open}
+       setOpen={setOpen}
+       modalHeading={modalHeading}
+       modalText={modalText}
       />
     </div>
   );
