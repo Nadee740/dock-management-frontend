@@ -11,7 +11,7 @@ import { UserContext } from "../Contexts/UserContexts";
 import axios from "axios";
 import { baseUrl } from "../utils/baseurl";
 
-const BooktheViewingSliderComponent=({dockStatus,building})=>{    
+const BooktheViewingSliderComponent=({dockStatus,building,name})=>{    
     const timeSlots=[
       '00:00 00:30', '00:30 01:00', '01:00 01:30',
       '01:30 02:00', '02:00 02:30', '02:30 03:00',
@@ -73,7 +73,7 @@ const BooktheViewingSliderComponent=({dockStatus,building})=>{
         <div className="" >
     <div className="flex items-center justify-center w-full m-2">
         <h2 className="font-bold text-2xl heading-class" >
-        {building.building_name.toUpperCase()}
+        {name.toUpperCase()}
         </h2>
     </div>
     <div className="m-2 flex justify-center overflow-x-scroll">
@@ -132,7 +132,7 @@ const BooktheViewingSliderComponent=({dockStatus,building})=>{
         <div class="flex-auto p-4">
                   <div class="flex flex-wrap -mx-2">
                     <div class="flex-none w-full max-w-full px-3">
-          {dockstatus.dock.status=='close'?<h3>Closed</h3>:(dockstatus.timeslot.includes(time)?<h3>Available</h3>:<h3>Booked</h3>)}
+          {dockstatus.dock.status=='close'?<h3>Closed</h3>:(dockstatus.bookedslot.includes(time)?<h3>Booked</h3>:<h3>Available</h3>)}
           
             </div>
             </div>
@@ -177,6 +177,7 @@ const BooktheViewingComponent = ({buildings}) => {
     const [selectedBuilding,setBuilding]=useState(buildings[0]);
     const [dockStatus,setDockStatus]=useState();
     const today=dateFormater(date);
+    const [name,setName]=useState(buildings[0].building_name);
    
    
     useEffect(()=>{
@@ -192,6 +193,7 @@ const BooktheViewingComponent = ({buildings}) => {
       })
       .then(function (response) {
         if (response.data != "") {
+          console.log(response.data);
           setDockStatus(response.data.data)
           setLoading(false);
         } else {
@@ -204,7 +206,7 @@ const BooktheViewingComponent = ({buildings}) => {
         console.log("FAILED!!! ", error);
       });
     }
-    },[])
+    },[selectedBuilding,setBuilding])
     return(
         <div className="" >
         <div className="m-2 w-1/2"> 
@@ -212,8 +214,9 @@ const BooktheViewingComponent = ({buildings}) => {
  onChange={(e)=>{
   
   setBuilding(JSON.parse(e.target.value))
+  setName(JSON.parse(e.target.value).building_name)
 }}
-class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-3/5 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
   
   
   {buildings.map((building,index)=>(
@@ -228,7 +231,7 @@ class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:
 </select>}
 
 </div>
-       {buildings.length>0 && dockStatus && <BooktheViewingSliderComponent dockStatus={dockStatus} building={selectedBuilding}/>} 
+       {buildings.length>0 && dockStatus && <BooktheViewingSliderComponent dockStatus={dockStatus} building={selectedBuilding} name={name}/>} 
         
  </div>
 )

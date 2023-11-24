@@ -51,9 +51,19 @@ const SignUpForm = ({companies}) => {
       console.log(res.data)
           if(res.data.status=="ok")
           {
+            setAcra_no("");
+            setCompany("")
+            setEmail1("")
+            setEmail2("")
+            setName("")
+            setPassword("")
+            setRetypePassword("")
+            setPhone("")
             setModalHeading("Sign Up Request success");
             setModalText("Your Request has been sent succesfully")
             setOpen(true)
+           
+            
             
           }else{
             setModalHeading("Request Failed");
