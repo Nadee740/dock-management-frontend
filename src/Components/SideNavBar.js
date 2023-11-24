@@ -82,7 +82,7 @@ const SideNavBar = ({UserLinks}) => {
 
 
 
-    return isMobile && !isSidebarVisible? <FontAwesomeIcon className="absolute text-white text-3xl top-5 left-4 cursor-pointer" icon={faBars} size="xs" onClick={()=>{
+    return isMobile && !isSidebarVisible? <FontAwesomeIcon className="absolute text-black text-3xl top-5 left-4 cursor-pointer" icon={faBars} size="xs" onClick={()=>{
         toggleSidebar()
     }}/>
  :( 

@@ -7,75 +7,112 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import AlertDialog from "./AlertDialogue";
 import ConfirmDialog from "./ConfirmDialog";
+import { useEffect } from "react";
 
 const AddNewVehicleForm = () => {
-  const {setLoading}=useContext(UserContext);
-  const [vehicle_no,setVehicleNo]=useState();
-  const [vehicleType,setVehicleType]=useState();
-  const [driver_name,setDriverName]=useState();
-  const [driver_no,setDriverNo]=useState();
-  const [driver_nric,setDriverNRIC]=useState();
-  const [open1,setOpen1]=useState(false);
-  const [open2,setOpen2]=useState(false);
-  const [modalHeading,setModalHeading]=useState("");
-  const [modalText,setModalText]=useState("")
-  const SubmitButton=(e)=>{
-    e.preventDefault();
-    
-        setOpen2(true);
-        setModalHeading("Alert")
-        setModalText("Are You Sure You Want To Create Vehicle With Provided Details");
-    
-
-}
-
-  const submit=(e)=>{
-        
-        const data={
-          driver_name,
-          nric_no:driver_nric,
-          driver_no,
-          vehicle_no,
-          vehicle_type:vehicleType
+  const { setLoading, Token, user } = useContext(UserContext);
+  console.log(user)
+  const [vehicle_no, setVehicleNo] = useState();
+  const [vehicleType, setVehicleType] = useState();
+  const [driver_name, setDriverName] = useState();
+  const [driver_no, setDriverNo] = useState();
+  const [driver_nric, setDriverNRIC] = useState();
+  const [suppliers_list,set_supplier_list]=useState([])
+  const [selected_supplier,setSelectedSupplier]=useState("invalid")
+  const [open1, setOpen1] = useState(false);
+  const [open2, setOpen2] = useState(false);
+  const [modalHeading, setModalHeading] = useState("");
+  const [modalText, setModalText] = useState("");
+  useEffect(()=>{
+    axios.get(`${baseUrl}/get-suppliers`,{
+        headers: {
+          Authorization: `Bearer ${Token}`,
+        },
+      })
+      .then( function (response){
+        if(response.data!=""){
+          set_supplier_list(response.data.data);
+          console.log(response.data.data)
         }
-        setLoading(true);
-        const token = localStorage.getItem("EZTOken");
-        axios.post(`${baseUrl}/create-vehicle`,data,{
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((res)=>{
-          if(res.data.status=="ok"){
-            setModalHeading("Vehicle Created Successfully")
-            setModalText("")
-            setDriverNRIC('')
-            setDriverName('')
-            setDriverNo('')
-            setVehicleNo('')
-            setVehicleType('')
-            setOpen1(true)
+        else{
+          set_supplier_list(null);
+        
+        }
+        
+      })
+      .catch(function (err){
+        
+        console.log("FAILED! ",err);
+      }).finally(()=>{
+        setLoading(false);
+      })
+  },[])
 
-          }
-          else{
-            setModalHeading("Something Went wrong");
+  const SubmitButton = (e) => {
+    e.preventDefault();
+    console.log(user.userType)
+    console.log(selected_supplier)
+    if(user.userType == "admin"  && selected_supplier=="invalid")
+    {
+        setModalHeading("Invalid")
+        setModalText("please select supplier ")
+        setOpen1(true)
+        return;
+    }
+    if(user.userType=="supplier"){
+        setSelectedSupplier(user._id)
+    }
+    setOpen2(true);
+    setModalHeading("Confirm ");
+    setModalText(
+      "Are You Sure You Want To Create Vehicle With Provided Details"
+    );
+  };
+
+  const submit = (e) => {
+    const data = {
+     supplier_id:selected_supplier,
+      driver_name,
+      nric_no: driver_nric,
+      driver_no,
+      vehicle_no,
+      vehicle_type: vehicleType,
+    };
+    setLoading(true);
+    const token = localStorage.getItem("EZTOken");
+    axios
+      .post(`${baseUrl}/create-vehicle`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        if (res.data.status == "ok") {
+          setModalHeading("Vehicle Created Successfully");
+          setModalText("Your vehicle have been created successfully . Thanks For Using our Service");
+          setDriverNRIC("");
+          setDriverName("");
+          setDriverNo("");
+          setVehicleNo("");
+          setVehicleType("");
+          setOpen1(true);
+        } else {
+          setModalHeading("Something Went wrong");
           setModalText("Something Went wrong.Please Try again after sometime");
           setOpen1(true);
-            console.log(res.data.msg)
-          }
-   
-        })
-        .catch((err)=>{
-          setModalHeading("Something Went wrong ");
-            setModalText("Something Went wrong.Please Try again after sometime");
-            setOpen1(true);
-          console.log(err)
-        })
-        .finally(()=>{
-        
-          setLoading(false)
-        })
-    }
+          console.log(res.data.msg);
+        }
+      })
+      .catch((err) => {
+        setModalHeading("Something Went wrong ");
+        setModalText("Something Went wrong.Please Try again after sometime");
+        setOpen1(true);
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
   return (
     <>
       <div className="flex items-center justify-between  p-4">
@@ -87,6 +124,28 @@ const AddNewVehicleForm = () => {
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       <form onSubmit={SubmitButton}>
         <div class="">
+          {user.userType == "admin" && (
+            <div className="mb-2">
+              <label class="text-black dark:text-gray-200" for="Vechicletype">
+                Supplier
+              </label>
+              <select
+                required
+                onChange={(e) => {
+                  setSelectedSupplier(e.target.value)
+                }}
+                id="Vechicletype"
+                class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              >
+                <option value={"invalid"} >---Select Supplier ---</option>
+                
+                {suppliers_list.map((supplier,index)=>(
+                    <option value={supplier.supplier_id._id}>{supplier.supplier_id.name}</option>
+                ))}
+
+              </select>
+            </div>
+          )}
           <div className="mb-2">
             <label class="text-black dark:text-gray-200" for="vehiclenumber">
               Vehicle Number
@@ -97,9 +156,9 @@ const AddNewVehicleForm = () => {
               type="text"
               required
               value={vehicle_no}
-            onChange={(e)=>{
-                setVehicleNo(e.target.value)
-            }}
+              onChange={(e) => {
+                setVehicleNo(e.target.value);
+              }}
               class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring border-2 border-slate-400"
             />
           </div>
@@ -108,10 +167,10 @@ const AddNewVehicleForm = () => {
               Vehicle Type
             </label>
             <select
-            required
-            onChange={(e)=>{
-            setVehicleType(e.target.value)
-            }}
+              required
+              onChange={(e) => {
+                setVehicleType(e.target.value);
+              }}
               id="Vechicletype"
               class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             >
@@ -142,9 +201,9 @@ const AddNewVehicleForm = () => {
               type="text"
               required
               value={driver_name}
-            onChange={(e)=>{
-                setDriverName(e.target.value)
-            }}
+              onChange={(e) => {
+                setDriverName(e.target.value);
+              }}
               class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
@@ -158,9 +217,9 @@ const AddNewVehicleForm = () => {
               id="drivernumber"
               type="text"
               value={driver_no}
-            onChange={(e)=>{
-                setDriverNo(e.target.value)
-            }}
+              onChange={(e) => {
+                setDriverNo(e.target.value);
+              }}
               class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
@@ -175,20 +234,23 @@ const AddNewVehicleForm = () => {
               type="text"
               required
               value={driver_nric}
-            onChange={(e)=>{
-                setDriverNRIC(e.target.value)
-            }}
+              onChange={(e) => {
+                setDriverNRIC(e.target.value);
+              }}
               class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
         </div>
 
         <div class="flex justify-end mt-6">
-          <button  type="submit" class="mr-6 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-green-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
+          <button
+            type="submit"
+            class="mr-6 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-green-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
+          >
             Submit
           </button>
           <button class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
-          <Link to="/vehicle-update"> Cancel</Link>
+            <Link to="/vehicle-update"> Cancel</Link>
           </button>
         </div>
       </form>

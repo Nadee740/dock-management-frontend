@@ -223,7 +223,7 @@ const ListAllSuppliers = ({ suppliersData, iseditable, suppliergroupData }) => {
         </button>
       </div>
       </div>
-      <div className="flex items-center justify-between w-4/12 py-4">
+      <div className="flex items-center justify-between w-4/12 py-4 ml-3">
         <p className="font-semibold">No Of Suppliers : {suppliersData.length}</p>
     
       </div>

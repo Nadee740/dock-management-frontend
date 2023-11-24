@@ -10,24 +10,21 @@ import CryptoJS from "crypto-js";
 import AlertDialog from "../../Components/AlertDialogue";
 
 const dateConverter = (inputdate) => {
-    const date = new Date(inputdate);
-    let month = (date.getMonth() + 1).toString();
-    let day = date.getDate().toString();
-    let year = date.getFullYear();
-    if (month.length < 2) {
-      month = "0" + month;
-    }
-    if (day.length < 2) {
-      day = "0" + day;
-    }
-    return [year, month, day].join("-");
-  };
+  const date = new Date(inputdate);
+  let month = (date.getMonth() + 1).toString();
+  let day = date.getDate().toString();
+  let year = date.getFullYear();
+  if (month.length < 2) {
+    month = "0" + month;
+  }
+  if (day.length < 2) {
+    day = "0" + day;
+  }
+  return [year, month, day].join("-");
+};
 const DockBooking = ({ bookingDetail }) => {
   const [step, setStep] = useState(0);
-  const { setLoading, Token } = useContext(UserContext);
-
-
-  const [timeSlots, setTimeSlots] = useState([]);
+  const { setLoading, Token, user } = useContext(UserContext);
   const [companyData, setCompanyData] = useState([]);
   const [buildingData, setBuildingData] = useState([]);
   const [vehiclesData, setVehiclesData] = useState([]);
@@ -35,7 +32,7 @@ const DockBooking = ({ bookingDetail }) => {
   const [dockSData, setDocksData] = useState([]);
 
   const [billType, setBillType] = useState(null);
-  const [billno,setBillNo]=useState(null);
+  const [billno, setBillNo] = useState(null);
 
   const [company_id, setcompany_id] = useState(null);
   const [company_name, setCompanyName] = useState(null);
@@ -48,25 +45,25 @@ const DockBooking = ({ bookingDetail }) => {
   const [driver_nrif, setDriver_nrif] = useState(null);
   const [dock_type_id, setDock_type_id] = useState(null);
   const [docktype_name, setDocktypeName] = useState(null);
+  const [suppliers_list, set_supplier_list] = useState([]);
   const [dock_id, set_dock_id] = useState(null);
   const [dock_name, setDockName] = useState(null);
   const [date, setDate] = useState("");
   const [bookforMultipleDays, setBookforMultipleDays] = useState(1);
   const [selectedtimeSlots, setSelectedTimeSlots] = useState([]);
-  const d=new Date();
-  d.setDate(d.getDate()+1);
-  const today=dateConverter(d);
-  const [booked_date_array,setBookedDatesArray]=useState([today]);
-  const [availableTimeslots,setAvailableTimeslots]=useState([]);
-  const [open1,setOpen1]=useState(false);
-  const [open2,setOpen2]=useState(false);
-  const [modalHeading,setModalHeading]=useState("");
-  const [modalText,setModalText]=useState("")
+  const d = new Date();
+  d.setDate(d.getDate() + 1);
+  const today = dateConverter(d);
+  const [booked_date_array, setBookedDatesArray] = useState([today]);
+  const [availableTimeslots, setAvailableTimeslots] = useState([]);
+  const [open1, setOpen1] = useState(false);
+  const [modalHeading, setModalHeading] = useState("");
+  const [modalText, setModalText] = useState("");
 
-  const get_min=()=>{
+  const get_min = () => {
     console.log(today);
     return today;
-  }
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -117,36 +114,35 @@ const DockBooking = ({ bookingDetail }) => {
         console.log("FAILED!!! ", error);
       });
   }, []);
-  useEffect(()=>{
-    
-   console.log(dock_id);
-   if(date && dock_type_id && dock_id)
-     {
-       setLoading(true)
-       axios
-      .get(`${baseUrl}/dock/available/dock-building?date=${dateConverter(date)}&&days=${bookforMultipleDays}&&dock_id=${dock_id}`, {
-        headers: {
-          Authorization: `Bearer ${Token}`,
-        },
-      })
-      .then(function (response) {
-        if (response.data != "") {
-           console.log(response.data.data)
-          setAvailableTimeslots(response.data.data[0].timeslot)
+  useEffect(() => {
+    if (date && dock_type_id && dock_id) {
+      setLoading(true);
+      axios
+        .get(
+          `${baseUrl}/dock/available/dock-building?date=${dateConverter(
+            date
+          )}&&days=${bookforMultipleDays}&&dock_id=${dock_id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${Token}`,
+            },
+          }
+        )
+        .then(function (response) {
+          if (response.data != "") {
+            console.log(response.data.data);
+            setAvailableTimeslots(response.data.data[0].timeslot);
+            setLoading(false);
+          } else {
+            throw new Error("something went wrong");
+          }
+        })
+        .catch(function (error) {
           setLoading(false);
-        } else {
-        
-            throw new Error("something went wrong")
-        }
-      })
-      .catch(function (error) {
-        setLoading(false);
-        console.log("FAILED!!! ", error);
-      });
+          console.log("FAILED!!! ", error);
+        });
     }
-    
-    },[bookforMultipleDays,date,dock_id,dock_name])
-
+  }, [bookforMultipleDays, date, dock_id, dock_name]);
 
   useEffect(() => {
     setLoading(true);
@@ -200,7 +196,7 @@ const DockBooking = ({ bookingDetail }) => {
 
   useEffect(() => {
     setLoading(true);
-    setAvailableTimeslots([])
+    setAvailableTimeslots([]);
     axios
       .get(`${baseUrl}/get-docks-by-docktype/${dock_type_id}`, {
         headers: {
@@ -214,7 +210,6 @@ const DockBooking = ({ bookingDetail }) => {
           setDocksData(response.data.data);
           setLoading(false);
         } else {
-
           setDocksData(null);
           console.log("errr");
         }
@@ -222,11 +217,11 @@ const DockBooking = ({ bookingDetail }) => {
       .catch((err) => {
         console.log(err);
       });
-      setDockName(-1)
+    setDockName(-1);
   }, [dock_type_id]);
 
-  useEffect(()=>{
-    setLoading(true)
+  useEffect(() => {
+    setLoading(true);
     const booked_dates = [];
     let i = 0;
     while (i < bookforMultipleDays) {
@@ -236,9 +231,9 @@ const DockBooking = ({ bookingDetail }) => {
       i++;
     }
     console.log(booked_date_array);
-    setBookedDatesArray(booked_dates)
-    setLoading(false)
-  },[date,setBookforMultipleDays,bookforMultipleDays])
+    setBookedDatesArray(booked_dates);
+    setLoading(false);
+  }, [date, setBookforMultipleDays, bookforMultipleDays]);
 
   function encrypt(data, key) {
     let encJson = CryptoJS.AES.encrypt(JSON.stringify(data), key).toString();
@@ -256,8 +251,8 @@ const DockBooking = ({ bookingDetail }) => {
       i++;
     }
     const data = {
-      bill_no:billno,
-      bill_type:billType,
+      bill_no: billno,
+      bill_type: billType,
       delivery_company_id: company_id,
       building_id,
       dock_type_id,
@@ -276,7 +271,6 @@ const DockBooking = ({ bookingDetail }) => {
         if (res.data.status === "ok") {
           console.log(res.data);
           const val = JSON.stringify(res.data);
-          // const encodeddata= encrypt(res.data,"keyvalue");
           sessionStorage.setItem("bookingdata", val);
           const id = res.data.data[0].data._id;
           const _id = encrypt(id, "keyvalue");
@@ -382,16 +376,12 @@ const DockBooking = ({ bookingDetail }) => {
             >
               <div>
                 <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-                 
-
-                  
                   <div>
                     <label
                       class="flex text-black dark:text-gray-200"
                       for="company"
                     >
-                      Bill Type{" "}
-                      <p className="pl-1 text-red-600">*</p>
+                      Bill Type <p className="pl-1 text-red-600">*</p>
                     </label>
                     <select
                       required
@@ -401,7 +391,7 @@ const DockBooking = ({ bookingDetail }) => {
                       class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                     >
                       {billType ? (
-                       <></>
+                        <></>
                       ) : (
                         <option value="">---Choose Bill Type---</option>
                       )}
@@ -414,7 +404,6 @@ const DockBooking = ({ bookingDetail }) => {
                   <div>
                     <label class="text-black dark:text-gray-200" for="bl_no">
                       Bill No{" "}
-                      
                     </label>
                     <input
                       required
@@ -444,7 +433,7 @@ const DockBooking = ({ bookingDetail }) => {
                       class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                     >
                       {company_id ? (
-                       <></>
+                        <></>
                       ) : (
                         <option value="">---Choose Company---</option>
                       )}
@@ -617,7 +606,7 @@ const DockBooking = ({ bookingDetail }) => {
                     type="submit"
                     class="bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
                   >
-                    Next Step
+                    Next 
                     <FontAwesomeIcon
                       className="ml-2 text-green-500"
                       icon={faCheckCircle}
@@ -627,223 +616,217 @@ const DockBooking = ({ bookingDetail }) => {
               </div>
             </form>
           )}
-          {step == 1 && (<>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                if(dock_type_id==null||dock_name==-1||date==""){
-                  setModalHeading("Please Fill All Columns");
-                  
-                   setOpen1(true);
-                }
-               else if (selectedtimeSlots.length > 0) setStep(2);
-               
-                else{
-                  setModalHeading("Please choose time slot");
-                  
-                   setOpen1(true);
-                } 
-              }}
-            >
-              <div className="m-3 px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                <div class=" grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2 px-6 pt-5 pb-6 ">
-                  <div>
-                    <label
-                      class="flex text-black dark:text-gray-200"
-                      for="passwordConfirmation"
-                    >
-                      Dock Type <p className="pl-1 text-red-600">*</p>
-                    </label>
-                    <select
-                      required
-                      onChange={(e) => {
-                        if (e.target.value != "") {
-                          setDock_type_id(JSON.parse(e.target.value)._id);
-                          setDocktypeName(JSON.parse(e.target.value));
-                          setDockName(-1)
-                        }
-                      }}
-                      class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                    >
-                      {dock_type_id ? (
-                        <></>
-                      ) : (
-                        <option value="">---Dock Type ---</option>
-                      )}
-                      {docktypes.map((d, index) => {
-                        return (
-                          <option value={JSON.stringify(d)}>
-                            {d.dock_type}
-                          </option>
-                        );
-                      })}
-                    </select>
-                  </div>
-                  <div>
-                    <label
-                      class="flex text-black dark:text-gray-200"
-                      for="passwordConfirmation"
-                    >
-                      Select Dock<p className="pl-1 text-red-600">*</p>
-                    </label>
-                    {
+          {step == 1 && (
+            <>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (dock_type_id == null || dock_name == -1 || date == "") {
+                    setModalHeading("Please Fill All Columns");
+
+                    setOpen1(true);
+                  } else if (selectedtimeSlots.length > 0) setStep(2);
+                  else {
+                    setModalHeading("Please choose time slot");
+
+                    setOpen1(true);
+                  }
+                }}
+              >
+                <div className="m-3 px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                  <div class=" grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2 px-6 pt-5 pb-6 ">
+                    <div>
+                      <label
+                        class="flex text-black dark:text-gray-200"
+                        for="passwordConfirmation"
+                      >
+                        Dock Type <p className="pl-1 text-red-600">*</p>
+                      </label>
                       <select
                         required
-                        disabled={
-                          dock_type_id == null ||
-                          vehicle_id == null ||
-                          company_id == null ||
-                          building_id == null ||
-                          billno == null ||
-                          billno == ""
-                        }
-                        value={dock_name}
                         onChange={(e) => {
-                          set_dock_id(JSON.parse(e.target.value)._id);
-                          setDockName(JSON.parse(e.target.value));
+                          if (e.target.value != "") {
+                            setDock_type_id(JSON.parse(e.target.value)._id);
+                            setDocktypeName(JSON.parse(e.target.value));
+                            setDockName(-1);
+                          }
                         }}
                         class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                       >
-                        {dock_name==-1? (
-                          
-                          <option value={-1}>--- Select Dock ---</option>
-                        ):(<></>)}
-                        {dockSData.map((d, index) => {
+                        {dock_type_id ? (
+                          <></>
+                        ) : (
+                          <option value="">---Dock Type ---</option>
+                        )}
+                        {docktypes.map((d, index) => {
                           return (
                             <option value={JSON.stringify(d)}>
-                              {d.dock_number}
+                              {d.dock_type}
                             </option>
                           );
                         })}
                       </select>
-                    }
-                  </div>
-                  <div>
-                    <label
-                      class="text-black dark:text-gray-200"
-                      for="passwordConfirmation"
-                    >
-                      Date
-                    </label>
-                    <input
-                      value={date}
-                      onChange={(e) => {
-                        setDate(e.target.value);
-                      }}
-                      id="date"
-                      type="date"
-                      min={get_min()}
-                      class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      class="flex text-black dark:text-gray-200"
-                      for="passwordConfirmation"
-                    >
-                      Book for multiple days
-                      <p className="pl-1 text-red-600">*</p>
-                    </label>
-                    <select
-                      required
-                      value={bookforMultipleDays}
-                      onChange={(e) => {
-                        setBookforMultipleDays(e.target.value);
-                      }}
-                      class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                    >
-                        <option value={1}>Single Day</option>
-                      {/* )} */}
-                      {[2, 3, 4, 5, 6, 7, 8].map((data, index) => {
-                        return <option value={data}>{data}&nbsp; Day</option>;
-                      })}
-                    </select>
-                  </div>
-                </div>
-                {date && dock_type_id && dock_id && availableTimeslots && (
-                  <div class="w-5/6 grid grid-cols-1 gap-2 mt-2 sm:grid-cols-5   ">
-                    {availableTimeslots.map((element, index) => {
-                      return (
-                        <div
-                          id={index}
-                          class="border-solid border-2 flex items-center pl-3 rounded-lg"
+                    </div>
+                    <div>
+                      <label
+                        class="flex text-black dark:text-gray-200"
+                        for="passwordConfirmation"
+                      >
+                        Select Dock<p className="pl-1 text-red-600">*</p>
+                      </label>
+                      {
+                        <select
+                          required
+                          disabled={
+                            dock_type_id == null ||
+                            vehicle_id == null ||
+                            company_id == null ||
+                            building_id == null ||
+                            billno == null ||
+                            billno == ""
+                          }
+                          value={dock_name}
+                          onChange={(e) => {
+                            set_dock_id(JSON.parse(e.target.value)._id);
+                            setDockName(JSON.parse(e.target.value));
+                          }}
+                          class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                         >
-                          <input
-                            onChange={(e) => {
-                              if (e.target.checked) {
-                                setSelectedTimeSlots([
-                                  ...new Set([
-                                    ...selectedtimeSlots,
-                                    element 
-                                  ]),
-                                ]);
-                                console.log(selectedtimeSlots);
-                              } else if (!e.target.checked) {
-                                setSelectedTimeSlots(
-                                  selectedtimeSlots.filter(
-                                    (elem) =>
-                                      elem !=
-                                      element 
-                                  )
-                                );
-                              }
-                            }}
-                            id="vue-checkbox-list"
-                            type="checkbox"
-                            value=""
-                            class="text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                          />
-                          <label
-                            for="vue-checkbox-list"
-                            class=" py-1 ml-1 text-xs font-small text-gray-900 dark:text-gray-300"
+                          {dock_name == -1 ? (
+                            <option value={-1}>--- Select Dock ---</option>
+                          ) : (
+                            <></>
+                          )}
+                          {dockSData.map((d, index) => {
+                            return (
+                              <option value={JSON.stringify(d)}>
+                                {d.dock_number}
+                              </option>
+                            );
+                          })}
+                        </select>
+                      }
+                    </div>
+                    <div>
+                      <label
+                        class="text-black dark:text-gray-200"
+                        for="passwordConfirmation"
+                      >
+                        Date
+                      </label>
+                      <input
+                        value={date}
+                        onChange={(e) => {
+                          setDate(e.target.value);
+                        }}
+                        id="date"
+                        type="date"
+                        min={get_min()}
+                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                      />
+                    </div>
+                    <div>
+                      <label
+                        class="flex text-black dark:text-gray-200"
+                        for="passwordConfirmation"
+                      >
+                        Book for multiple days
+                        <p className="pl-1 text-red-600">*</p>
+                      </label>
+                      <select
+                        required
+                        value={bookforMultipleDays}
+                        onChange={(e) => {
+                          setBookforMultipleDays(e.target.value);
+                        }}
+                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                      >
+                        <option value={1}>Single Day</option>
+                        {/* )} */}
+                        {[2, 3, 4, 5, 6, 7, 8].map((data, index) => {
+                          return <option value={data}>{data}&nbsp; Day</option>;
+                        })}
+                      </select>
+                    </div>
+                  </div>
+                  {date && dock_type_id && dock_id && availableTimeslots && (
+                    <div class="w-5/6 grid grid-cols-1 gap-2 mt-2 sm:grid-cols-5   ">
+                      {availableTimeslots.map((element, index) => {
+                        return (
+                          <div
+                            id={index}
+                            class="border-solid border-2 flex items-center pl-3 rounded-lg"
                           >
-                            {element }
-                          </label>
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
-                <div className=" w-full grid grid-cols-2 text-center items-center ">
-                  <div class="flex mt-5 m-5 md:mt-5 lg:mt-5">
-                    <button
-                      onClick={() => {
-                        setStep(0);
-                      }}
-                      type="button"
-                      class="bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
-                    >
-                      Previous Step
-                      <FontAwesomeIcon
-                        className="ml-2 text-green-500"
-                        icon={faBackward}
-                      ></FontAwesomeIcon>
-                    </button>
-                  </div>
-                  <div class="flex m-5  mt-5 md:mt-5 lg:mt-5">
-                    <button
-                      type="submit"
-                      class="bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
-                    >
-                      Next Step
-                      <FontAwesomeIcon
-                        className="ml-2 text-green-500"
-                        icon={faCheckCircle}
-                      ></FontAwesomeIcon>
-                    </button>
+                            <input
+                              onChange={(e) => {
+                                if (e.target.checked) {
+                                  setSelectedTimeSlots([
+                                    ...new Set([...selectedtimeSlots, element]),
+                                  ]);
+                                  console.log(selectedtimeSlots);
+                                } else if (!e.target.checked) {
+                                  setSelectedTimeSlots(
+                                    selectedtimeSlots.filter(
+                                      (elem) => elem != element
+                                    )
+                                  );
+                                }
+                              }}
+                              id="vue-checkbox-list"
+                              type="checkbox"
+                              value=""
+                              class="text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                            />
+                            <label
+                              for="vue-checkbox-list"
+                              class=" py-1 ml-1 text-xs font-small text-gray-900 dark:text-gray-300"
+                            >
+                              {element}
+                            </label>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                  <div className=" w-full grid grid-cols-2 text-center items-center ">
+                    <div class="flex mt-5 m-5 md:mt-5 lg:mt-5">
+                      <button
+                        onClick={() => {
+                          setStep(0);
+                        }}
+                        type="button"
+                        class="bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
+                      >
+                        Previous
+                        <FontAwesomeIcon
+                          className="ml-2 text-green-500"
+                          icon={faBackward}
+                        ></FontAwesomeIcon>
+                      </button>
+                    </div>
+                    <div class="flex m-5  mt-5 md:mt-5 lg:mt-5">
+                      <button
+                        type="submit"
+                        class="bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
+                      >
+                        Next
+                        <FontAwesomeIcon
+                          className="ml-2 text-green-500"
+                          icon={faCheckCircle}
+                        ></FontAwesomeIcon>
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </form>
-            <AlertDialog
-        open={open1}
-        setOpen={setOpen1}
-        modalHeading={modalHeading}
-        modalText={modalText}
-      />
+              </form>
+              <AlertDialog
+                open={open1}
+                setOpen={setOpen1}
+                modalHeading={modalHeading}
+                modalText={modalText}
+              />
             </>
-          ) 
-          }
+          )}
 
           {selectedtimeSlots.length > 0 && (
             <>
@@ -901,7 +884,7 @@ const DockBooking = ({ bookingDetail }) => {
                         <button
                           onClick={() => {
                             setSelectedTimeSlots([]);
-                            setStep(step-1);
+                            setStep(step - 1);
                           }}
                           type="button"
                           class="bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600"

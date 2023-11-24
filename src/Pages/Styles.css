@@ -42,7 +42,10 @@
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     display: inline-block; /* Display text containers inline */
   }
-
+  .slick-prev:before,
+  .slick-next:before {
+    color: black !important;
+  }
   .heading-class{
     font-family: 'Poppins';
   }

@@ -12,8 +12,6 @@ import {
   faUserGroup,
 } from "@fortawesome/free-solid-svg-icons";
 import { useContext, useEffect, useState } from "react";
-import AdminDashBoardCharts from "../../Components/DashboardCharts";
-import SubscriptionAdminDashboard from "../../Components/subscription";
 import AdminDashBoardTable from "../../Components/AdminDashboardTable";
 import BooktheViewingComponent from "../../Components/BooktheViewingComponent";
 import { UserContext } from "../../Contexts/UserContexts";
@@ -94,7 +92,11 @@ const AdminDashBoard = () => {
   return (
     <>
       <div className="w-full admin-dashboard">
-        <div className="m-2 flex flex-row-reverse">
+        <div    type="button"
+            data-dropdown-toggle="userDropdown"
+            data-dropdown-placement="bottom-start"
+            size="lg"
+            icon={faUser} className="m-2 flex flex-row-reverse">
           <p className="text-1xl text-white">admin</p>
           <FontAwesomeIcon
             id="avatarButton"
