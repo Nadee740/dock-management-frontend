@@ -6,21 +6,17 @@ import confirm_animation from '../animations/confirm_animation.json'
     return ( 
     <Modal
     className="mt-10"
-    sx={{
-        top: '50%',
-          left: '50%',
-          position: 'absolute',
-    }}
+    style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
        aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     open={open}
     >
           <Box
         sx={{
-       
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
           width: 400,
           bgcolor: 'background.paper',
           borderRadius: 8,
