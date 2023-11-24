@@ -32,7 +32,6 @@ const LoginForm = () => {
     axios
       .post(`${baseUrl}/user-login`, data)
       .then((res) => {
-      console.log(res.data)
         if(res.data.status==="ok")
         {   localStorage.setItem("EZTOken",res.data.token);
             setUser(res.data.data);
@@ -46,8 +45,8 @@ const LoginForm = () => {
         }
       })
       .catch((err) => {
-        setModalHeading("Something Went wrong ");
-        setModalText("Something Went wrong.Please Try again after sometime");
+        setModalHeading("Invalid Credential ");
+        setModalText("Seems like You entered an invalid Credential .Sign Up if you do not have an account with us .");
         setOpen(true)
       })
       .finally(()=>{

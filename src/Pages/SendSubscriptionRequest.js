@@ -7,6 +7,7 @@ import { baseUrl } from "../utils/baseurl";
 import { UserContext } from "../Contexts/UserContexts";
 import ConfirmDialog from "../Components/ConfirmDialog";
 import AlertDialog from "../Components/AlertDialogue";
+import ConfirmModal from "../Components/ConfirmPopup";
 
 
 const SubscriptionRequestPage = () => {
@@ -23,8 +24,13 @@ const SubscriptionRequestPage = () => {
   const [modalText,setModalText]=useState("")
   const [company,setCompany]=useState();
   const [acra_no,setAcra_No]=useState('');
+  const [open_confirm,setOpen_confirm]=useState(false)
+  const [message,set_message]=useState("")
   const [subscriptionTypes,setSubscriptionTypes]=useState([]);
-  const [confirm_animation_open,set_confirm_animation_open]=useState(false)
+  const handleClose=()=>{
+    setOpen_confirm(false)
+    window.location='/'
+}
   const SubmitButton=(e)=>{
     e.preventDefault();
   if(name==""||email==""||Phone_no==""||type=="")
@@ -78,10 +84,8 @@ const SubscriptionRequestPage = () => {
     axios.post(`${baseUrl}/subscription/request`,data).then((res)=>{
       if(res.data.status=="ok")
       {
-        setModalHeading("Subscription Request sent Successfully .")
-        setModalText("Thanks for showing interest in VEZ . Please wait while we process your request and reach back")
-         setOpen1(true)
-        //  window.location='/'
+        set_message("Your request has been sent Successfully . Please wait while we process your request and reach back to you ")
+        setOpen_confirm(true)
       
       }
       else{
@@ -252,6 +256,11 @@ const SubscriptionRequestPage = () => {
         modalHeading={modalHeading}
         modalText={modalText}
         confirmFunction={submit}
+      />
+      <ConfirmModal
+        open={open_confirm}
+        onClose={handleClose}
+        message={message}
       />
         </section>
       </div>
