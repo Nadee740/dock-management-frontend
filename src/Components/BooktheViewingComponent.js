@@ -1,9 +1,5 @@
-import { faCoins } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Slider from "react-slick";
 
-
-
+import Slider from "react-slick"
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useContext, useEffect, useRef, useState } from "react";
@@ -35,7 +31,6 @@ const BooktheViewingSliderComponent=({dockStatus,building})=>{
   const settings = {
     dots: false,
     infinite: true,
-    //className: "center",
     speed: 500,
     centerPadding: "6px",
     slidesToShow: 3, 
@@ -86,7 +81,7 @@ const BooktheViewingSliderComponent=({dockStatus,building})=>{
         <div class="flex-auto p-4">
                   <div class="flex flex-wrap -mx-2">
                     <div class="flex-none w-full max-w-full px-3">
-            <h3 >Docks 
+            <h3 className="heading-class text-black" >Docks 
               </h3>
           </div>
           </div>
@@ -99,7 +94,7 @@ const BooktheViewingSliderComponent=({dockStatus,building})=>{
         <div class="flex-auto p-4">
                   <div class="flex flex-wrap -mx-2">
                     <div class="flex-none w-full max-w-full px-3">
-            <h3 >{dockstatus.dock.dock_number}
+            <h3 className="heading-class text-black" >{dockstatus.dock.dock_number}
               </h3>
           </div>
           </div>
@@ -117,19 +112,32 @@ const BooktheViewingSliderComponent=({dockStatus,building})=>{
        
         {timeSlots.map((time,index)=>(
           <div>
-              <div className="m-2 flex bg-blue border  rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" >
+              <div className="m-2 flex border bg-white rounded-lg shadow dark:bg-violet-800 dark:border-gray-700 dark:hover:bg-gray-700" >
         <div class="flex-auto p-4">
                   <div class="flex flex-wrap -mx-2">
                     <div class="flex-none w-full max-w-full px-3">
-            <h3 >{time}
+            <h3 className="heading-class font-" >{time}
               </h3>
           </div>
           </div>
             </div>
             </div>
-            {dockStatus.map((dockstatus,ind)=>(
-              <div className=" m-2 flex bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" >
-        <div class="flex-auto p-4">
+            {dockStatus.map((dockstatus,ind)=>{
+                let classname
+                if(dockstatus.dock.status=='close'){
+                    classname="m-2 flex bg-orange-600 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700";
+                }
+                else if(dockstatus.timeslot.includes(time))
+                {
+                    classname="m-2 flex bg-green-600 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700";
+                } 
+                else {
+                    classname="m-2 flex bg-red-600 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700";
+                }
+                return (
+
+              <div className={classname} >
+        <div class="flex-auto p-4 heading-class text-white">
                   <div class="flex flex-wrap -mx-2">
                     <div class="flex-none w-full max-w-full px-3">
           {dockstatus.dock.status=='close'?<h3>Closed</h3>:(dockstatus.timeslot.includes(time)?<h3>Available</h3>:<h3>Booked</h3>)}
@@ -138,7 +146,7 @@ const BooktheViewingSliderComponent=({dockStatus,building})=>{
             </div>
             </div>
         </div>
-            ))}
+            )})}
           
         
         

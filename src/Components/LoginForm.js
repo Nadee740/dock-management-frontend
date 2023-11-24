@@ -14,7 +14,7 @@ const LoginForm = () => {
   ///user-login
 
 
-  const {user,setUser,setLoading}=useContext(UserContext)
+  const {user,setUser,setLoading,setAuthenticating}=useContext(UserContext)
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [open,setOpen]=useState(false);
@@ -36,6 +36,8 @@ const LoginForm = () => {
         if(res.data.status==="ok")
         {   localStorage.setItem("EZTOken",res.data.token);
             setUser(res.data.data);
+            setLoading(true)
+            setAuthenticating(true)
             window.location.href="/"
         }
         else{

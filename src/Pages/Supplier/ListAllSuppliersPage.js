@@ -4,19 +4,18 @@ import { UserContext } from "../../Contexts/UserContexts";
 import axios from "axios";
 import { baseUrl } from "../../utils/baseurl";
 const ListAllSuppliersPage = ({ iseditable }) => {
+    const {Token}=useContext(UserContext)
     const {setLoading}=useContext(UserContext);
     const [suppliersData,setSupplier]=useState([])
     const [suppliergroupData,setSuppliergroupData]=useState();
     useEffect(()=>{
       setLoading(true);
-      const token=localStorage.getItem('EZTOken');
       axios.get(`${baseUrl}/get-supplier-groups`,{
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${Token}`,
         },
       })
       .then( function (response){
-        console.log(response.data);
         if(response.data!=""){
           setSuppliergroupData(response.data.data);
           setLoading(false);
@@ -35,11 +34,10 @@ const ListAllSuppliersPage = ({ iseditable }) => {
 
     useEffect(()=>{
         setLoading(true);
-        const token = localStorage.getItem("EZTOken");
         axios
       .get(`${baseUrl}/get-suppliers`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${Token}`,
         },
       })
       .then(function (response) {
