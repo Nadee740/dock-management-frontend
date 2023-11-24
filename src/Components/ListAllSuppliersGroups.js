@@ -26,11 +26,10 @@ const ListAllSupplierGroups = ({suppliergrpData,iseditable }) => {
         </div>
       )}
 
-      <div className="flex items-center p-3 w-9/12 py-4">
-        <label className=" pr-3 font-semibold">Search</label>
-        <input className="  w-3/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" onChange={(e) => { }} type="text"></input>
-      </div>
-      <div className="flex items-center justify-end mb-5">
+<div className="flex  items-center pt-4 w-full sm:max-md:block">
+        <input className="  w-2/6 ml-4 mr-6 h-10 ring-slate-200 ring-2 rounded-lg outline-none" placeholder="Search Supplier Group" onChange={(e) => { }} type="text"></input>
+   
+      <div className="flex w-4/6 mt-3 ml-9 justify-end mb-5">
         <button
           className="w-28 bg-stone-800 text-white p-2 rounded-lg text-sm mr-5"
           onClick={() => {}}
@@ -43,6 +42,7 @@ const ListAllSupplierGroups = ({suppliergrpData,iseditable }) => {
         >
           Excel
         </button>
+      </div>
       </div>
       <div className="flex items-center justify-between w-4/12 py-4">
         <p className="font-semibold">No Of Supplier Groups : {suppliergrpData.length}</p>

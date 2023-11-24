@@ -93,12 +93,12 @@ const ListAllSupplierRequest = ({iseditable,requestList}) => {
           Excel
         </button>
       </div>
-      <div className="flex items-center justify-between w-4/12 py-4 ml-4">
+      <div className="flex items-center justify-between w-4/12 py-4 ml-7">
         <p className="font-semibold">No Of Requests : {filteredList.length}</p>
        
       </div>
       <div>
-      <p className="font-semibold text-red-700 ml-4">You can add {remaining_suppliers} more suppliers</p>
+      <p className="font-semibold text-red-700 ml-7">You can add {remaining_suppliers} more suppliers</p>
     
       </div>
       <table className="w-11/12 relative table-auto pt-6">

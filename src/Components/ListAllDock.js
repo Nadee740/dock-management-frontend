@@ -22,25 +22,25 @@ const {accountDetails}=useContext(UserContext)
             
           </Link>
         </div>}
-    
-        <div className="flex items-center p-3 w-9/12 py-4">
-        <input className="  w-4/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" placeholder="Search Dock" onChange={(e) => { }} type="text"></input>
-      </div>
-      <div className="flex items-center justify-end mb-5">
+        <div className="flex  items-center pt-4 w-full sm:max-md:block">
+        <input className="w-2/6 ml-4 mr-6 h-10 ring-slate-200 ring-2 rounded-lg outline-none" placeholder="Search Docks" onChange={(e) => { }} type="text"></input>
+   
+      <div className="flex w-4/6 mt-3 ml-9 justify-end mb-5">
         <button
-          className="w-28 bg-stone-800 text-white p-2 rounded-lg text-sm mr-10"
+          className="w-28 bg-stone-800 text-white p-2 rounded-lg text-sm mr-5"
           onClick={() => {}}
         >
           Copy
         </button>
         <button
-          className="w-28 bg-stone-800 text-white p-2 rounded-lg text-sm mr-20"
+          className="w-28 bg-stone-800 text-white p-2 rounded-lg text-sm mr-5"
           onClick={() => {}}
         >
           Excel
         </button>
       </div>
-      <div className="flex ml-3 items-center justify-between w-4/12 py-4">
+      </div>
+      <div className="flex ml-3 items-center justify-between w-4/12 py-4 ml-7">
         <p className="font-semibold">No Of Docks : {dockData.length}</p>
 
       </div>
