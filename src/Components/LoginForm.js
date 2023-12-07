@@ -1,14 +1,13 @@
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
-import { faLock, faLockOpen } from "@fortawesome/free-solid-svg-icons";
+import { faLock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Email, Lock } from "@mui/icons-material";
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { baseUrl } from "../utils/baseurl";
-import ConfirmDialog from "./ConfirmDialog";
 import { UserContext } from "../Contexts/UserContexts";
 import AlertDialog from "./AlertDialogue";
+import Failed_Popup from "./Failed_Popup";
 
 const LoginForm = () => {
   ///user-login
@@ -20,7 +19,12 @@ const LoginForm = () => {
   const [open,setOpen]=useState(false);
   const [modalText,setModalText]=useState("");
   const [modalHeading,setModalHeading]=useState("SuccessFully Logged IN");
- 
+  const [open_failed_modal,set_open_failed_modal]=useState(false)
+  const [message,set_message]=useState("")
+  
+  const handle_close_failed_pop=()=>{
+    set_open_failed_modal(false)
+  }
 
   const submitData =(e) => {
     e.preventDefault();
@@ -45,9 +49,8 @@ const LoginForm = () => {
         }
       })
       .catch((err) => {
-        setModalHeading("Invalid Credential ");
-        setModalText("Seems like You entered an invalid Credential .Sign Up if you do not have an account with us .");
-        setOpen(true)
+        set_message("Seems like You entered an invalid Credential. \nSign Up if you do not have an account with us .");
+        set_open_failed_modal(true)
       })
       .finally(()=>{
         setLoading(false)
@@ -127,6 +130,13 @@ const LoginForm = () => {
         setOpen={setOpen}
         modalHeading={modalHeading}
         modalText={modalText}
+      />
+      <Failed_Popup
+      open={open_failed_modal}
+      setOpen={set_open_failed_modal}
+      onClose={handle_close_failed_pop}
+      message={message}
+
       />
       
     </div>
