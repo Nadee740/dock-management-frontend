@@ -49,7 +49,7 @@ const LoginForm = () => {
         }
       })
       .catch((err) => {
-        set_message("Seems like You entered an invalid Credential. \nSign Up if you do not have an account with us .");
+        set_message("Seems like You entered an invalid Credential. \nSign Up if you do not have an account with us.");
         set_open_failed_modal(true)
       })
       .finally(()=>{
@@ -59,73 +59,42 @@ const LoginForm = () => {
   
   };
   return (
-    <div className="bg-slate-100 flex flex-col bg-white w-11/12 md:w-3/4 lg:w-1/3 text-left bg-white p-10 rounded-xl m-auto">
-      <div className="w-full flex items-center pb-5 justify-center ">
-        <h2 className="text-base text-slate-400 ">Sign in with credentials</h2>
-      </div>
+    <div className="mb-4 text-center pb-7">
+    <form onSubmit={submitData}>
+   
+        <input
+        value={email}
+        onChange={(e) => {
+        setEmail(e.target.value);
+        }}
+        required
+        className="w-3/6 px-8 py-2 m-4 justify-center rounded-2xl border bg-gray-100 border-gray-200 focus:outline-none"
+        size="lg"
+        type="text"
+        placeholder="Email"
+        />
+        <input
+        value={password}
+        onChange={(e) => {
+        setPassword(e.target.value);
+        }}
+        required
+        className="w-3/6 px-8 py-2 m-3 justify-center rounded-2xl border bg-gray-100 border-gray-200 focus:outline-none"
+        size="lg"
+        type="password"
+        placeholder="Password"
+        />
+        <div className="mb-4 pb-10 ">
+        <button
+        type="submit"
+        className="w-1/4 px-4 py-2 m-5 justify-center rounded-3xl bg-[#31304D]  text-white font-medium hover:bg-violet-400 "
+        >
+        Sign In
+        </button>
+        </div>
 
-      <form onSubmit={submitData}>
-        <div className="flex flex-col mt-2 pb-4">
-          <span class="flex shadow-md mb-5 text-xs">
-            <span class="bg-indigo-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">
-              <FontAwesomeIcon icon={faEnvelope} size="lg" />
-            </span>
-            <input
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-              class="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none"
-              size="lg"
-              type="text"
-              placeholder="User Name (or) Email"
-            />
-          </span>
-        </div>
-        <div className="flex flex-col mt-2  pb-4">
-          <span class="flex shadow-md mb-5 text-xs">
-            <span class="bg-indigo-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">
-              <FontAwesomeIcon size="lg" icon={faLock} />
-            </span>
-            <input
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-              class="field text-sm md:text-lg lg:text-lg text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none"
-              type="password"
-              placeholder="Password"
-            />
-          </span>
-        </div>
-        <div className="flex items-center justify-between mt-2">
-          {/* <p className="text-gray-500">Should contain atleast 8 characters</p> */}
-          <Link to="/forgot-password">
-            <p className="text-slate-400  cursor-pointer">Forgot Password?</p>
-          </Link>
-        </div>
-        <div className="flex items-center justify-center mt-4">
-          <Link
-            to="/signup"
-            className="rounded-md text-indigo-500 py-2 px-4 w-2/3 md:w-1/3 lg:w-1/3  border-2 border-indigo-500 "
-          >
-            <div className="text-sm w-full h-full">
-              Sign Up
-            </div>
-          </Link>
-          <div
-            className="rounded-md text-white py-2 ml-8 px-4 w-2/3 md:w-1/3 lg:w-1/3 bg-indigo-500"
-          >
-            <button
-              className="w-full h-full "
-             type="submit"
-            >
-              Login
-            </button>
-          </div>
-        </div>
-      </form>
-      <AlertDialog
+            </form>
+            <AlertDialog
         open={open}
         setOpen={setOpen}
         modalHeading={modalHeading}
@@ -138,8 +107,7 @@ const LoginForm = () => {
       message={message}
 
       />
-      
-    </div>
+        </div>
   );
 };
 
