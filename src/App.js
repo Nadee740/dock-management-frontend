@@ -64,6 +64,7 @@ import AddNewBuilding from "./Pages/Company/AddNewBuilding";
 import ListAllBuildingPage from "./Pages/Company/ListAllBuildingPage";
 import COnfirmModal from "./Components/ConfirmPopup";
 import ChangePasswordModal from "./Components/ChangePassword";
+
 function App() {
   const [user, setUser] = useState(null);
   const [Token, setToken] = useState(null);
@@ -138,6 +139,7 @@ function App() {
                 />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />
+        
               </>
             )}
 

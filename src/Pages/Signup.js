@@ -27,12 +27,40 @@ const SignUp = () => {
               });
           }, []);
     return (  
-        <div className="signup-page">
-         <TopNavBar/>
-       <div className='pt-20 pb-20 flex flex-col items-center'>
-        <h2 className='heading-class text-3xl text-white pl-5  font-bold'>New Supplier Registration</h2>
-       </div>
-       {companies && <SignUpForm companies={companies}/>}
+        
+          <div className=" h-screen  md:grid md:grid-cols-7 ">
+          <div className="   md:col-span-5 ">
+              
+              <TopNavBar/>
+
+
+              <div className=" flex items-center md-content-center  justify-center mt-10 ">
+              <h2 className='sm:text-1xl text-xl pl-5  text-center mb-2 font-medium italic' >Welcome to Dock Management System !</h2>
+              </div>
+              <div className=" flex items-center md-content-center  justify-center mt-4">
+              <h2 className="text-center text-3xl  font-medium">New Supplier Registration</h2>
+              </div>
+             
+              {companies && <SignUpForm companies={companies}/>}
+              
+          </div>
+          <div className=" bg-[#31304D] md:col-span-2 pb-14 ">
+          <div className=" items-center md-content-center  justify-center mt-14 pt-14 mb-8">
+        <h3 className="text-center text-3xl text-white mt-10  pt-16 font-medium ">Already registered?</h3>
+       
+      </div>
+
+      <div className="mb-4 pb-12 text-center">
+        <button
+         onClick={()=>{
+          window.location='/login'
+         }}
+          className="w-1/4 md:w-2/5 px-4 py-2 mb-5 bg-white justify-center rounded-3xl text-[#31304D] font-medium hover:bg-gray-200"
+        >
+         Login
+        </button>
+      </div>
+          </div>
       </div>
     );
 }

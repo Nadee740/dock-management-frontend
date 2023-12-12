@@ -7,7 +7,15 @@ const ListAllShipments = ({ iseditable,todayShipments ,name}) => {
       <div className="flex items-center justify-between p-4 ">
 
         <h2 className="text-3xl  text-black font-medium heading-class">{name}</h2>
-        <div className="flex items-center justify-end mb-5">
+       
+      </div>
+      <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
+     
+
+      <div className="flex  items-center pt-4 w-full sm:max-md:block">
+        <input className="  w-2/6 ml-4 mr-6 h-10 ring-slate-200 ring-2 rounded-lg outline-none" placeholder="Search Shipment" onChange={(e) => { }} type="text"></input>
+   
+      <div className="flex w-4/6 mt-3 ml-9 justify-end mb-5">
         <button
           className="w-28 bg-stone-800 text-white p-2 rounded-lg text-sm mr-5"
           onClick={() => {}}
@@ -21,12 +29,6 @@ const ListAllShipments = ({ iseditable,todayShipments ,name}) => {
           Excel
         </button>
       </div>
-      </div>
-      <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-     
-
-      <div className="flex items-center p-3 w-9/12 py-2">
-        <input className="  w-4/6 ml-2 ring-slate-200 ring-2 rounded-lg outline-none" placeholder="Search shipment" onChange={(e) => { }} type="text"></input>
       </div>
       <div className="flex items-center justify-between w-4/12 py-2">
         <p className="font-semibold">No Of Shipments :  {todayShipments.length}</p>

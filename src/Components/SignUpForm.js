@@ -67,40 +67,32 @@ const SignUpForm = ({companies}) => {
      
     }
   return (
-    <div className="bg-slate-100 flex flex-col bg-white w-11/12 md:w-3/4 lg:w-1/3 text-left bg-white p-10 rounded-xl m-auto">
-      <div className="w-full flex items-center pb-5 justify-center ">
-        {/* <h2 className="text-base text-slate-400 ">Sign in with credentials</h2> */}
-      </div>
+    <div className="bg-slate-100 flex flex-col bg-white w-9/12 md:w-5/12  text-left bg-white p-6 rounded-xl m-auto">
+   
 
       <form onSubmit={submit}>
-        <div className="flex flex-col mt-2 ">
-          <span class="flex shadow-md mb-5 text-xs">
-            <span class="bg-indigo-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">
-              {" "}
-              <Apartment/>
-            </span>
+        <div className="flex flex-col  ">
+         
+            
             <select 
             required
             onChange={(e)=>{
                 setCompany(JSON.parse(e.target.value))
-            }} className="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none" data-te-select-init>
+            }}  className=" px-8 py-2 mb-3 justify-center rounded-2xl border bg-gray-100 border-gray-200 focus:outline-none" data-te-select-init>
             <option value="">--- Choose Company ---</option>
            {companies.map((data,index)=>(
             <option value={JSON.stringify(data)}>{data.company_name}</option>
            ))}
             </select>
 
-          </span>
+     
         </div>
         <div className="flex flex-col mt-2 ">
-          <span class="flex shadow-md mb-5 text-xs">
-            <span class="bg-indigo-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">
-              <Person/>
-            </span>
+         
             <input
             value={name}
            
-              class="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none"
+            className=" px-8 py-2 mb-3 justify-center rounded-2xl border bg-gray-100 border-gray-200 focus:outline-none"
               required
               onChange={(evt)=>{
                 setName(evt.target.value)
@@ -108,110 +100,91 @@ const SignUpForm = ({companies}) => {
               type="text"
               placeholder="Supplier Name"
             />
-          </span>
+      
         </div>
         <div className="flex flex-col mt-2 ">
-          <span class="flex shadow-md mb-5 text-xs">
-            <span class="bg-indigo-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">
-              <AppRegistration/>
-            </span>
+        
             <input
             value={acra_no}
             onChange={(e)=>{
                 setAcra_no(e.target.value)
             }}
             required
-              class="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none"
+            className=" px-8 py-2 mb-3 justify-center rounded-2xl border bg-gray-100 border-gray-200 focus:outline-none"
               type="text"
               placeholder="Supplier ACRA / UN Reg. No"
             />
-          </span>
+     
         </div>
         <div className="flex flex-col mt-2 ">
-          <span class="flex shadow-md mb-5 text-xs">
-            <span class="bg-indigo-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">
-              <Email/>
-            </span>
+          
             <input
             value={email1}
             onChange={(e)=>{
                 setEmail1(e.target.value)
             }}
             required
-              class="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none"
+            className=" px-8 py-2 mb-3 justify-center rounded-2xl border bg-gray-100 border-gray-200 focus:outline-none"
               type="text"
               placeholder="Email address 1"
             />
-          </span>
+  
         </div>
         <div className="flex flex-col mt-2 ">
-          <span class="flex shadow-md mb-5 text-xs">
-            <span class="bg-indigo-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">
-            <Email/>
-            </span>
+          
             <input
             required
             value={email2}
             onChange={(e)=>{
                 setEmail2(e.target.value)
             }}
-              class="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none"
+            className=" px-8 py-2 mb-3 justify-center rounded-2xl border bg-gray-100 border-gray-200 focus:outline-none"
               type="text"
               placeholder="Email address 2"
             />
-          </span>
+     
         </div>
         <div className="flex flex-col mt-2 ">
-          <span class="flex shadow-md mb-5 text-xs">
-            <span class="bg-indigo-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">
-              <PhoneAndroid/>
-            </span>
+         
             <input
             required
              value={phone}
              onChange={(e)=>{
                 setPhone(e.target.value)
              }}
-              class="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none"
+             className=" px-8 py-2 mb-3 justify-center rounded-2xl border bg-gray-100 border-gray-200 focus:outline-none"
               type="text"
               placeholder="Phone Number"
             />
-          </span>
+       
         </div>
         <div className="flex flex-col mt-2 ">
-          <span class="flex shadow-md mb-5 text-xs">
-            <span class="bg-indigo-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">
-            <LockOpen/>
-            </span>
+         
             <input
             required
             value={password}
             onChange={(e)=>{
                 setPassword(e.target.value)
             }}
-              class="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none"
+            className=" px-8 py-2 mb-3 justify-center rounded-2xl border bg-gray-100 border-gray-200 focus:outline-none"
               type="text"
               placeholder="New Password"
             />
-          </span>
+         
         </div>
         <div className="flex flex-col mt-2 ">
-          <span class="flex shadow-md mb-5 text-xs">
-            <span class="bg-indigo-500 w-28 font-bold text-center text-gray-200 p-3 px-5 rounded-l">
-            <LockOpen/>
-
-            </span>
+          
             <input
             required
             value={retypepassword}
             onChange={(e)=>{
                 setRetypePassword(e.target.value)
             }}
-              class="field text-sm md:text-lg lg:text-lg  text-gray-600 p-2 px-3 rounded-r w-full focus:outline-none"
+            className="px-8 py-2 mb-3 justify-center rounded-2xl border bg-gray-100 border-gray-200 focus:outline-none"
               type="text"
               placeholder="Re-Type Password"
             />
-          </span>
+     
         </div>
   
         <div className="flex items-center justify-between mt-2">
@@ -225,11 +198,11 @@ const SignUpForm = ({companies}) => {
         <div className="flex items-center justify-center mt-4">
           <button
            type="submit"
-            className="rounded-md text-white py-2 ml-8 px-4 w-2/3 md:w-1/3 lg:w-1/3 bg-indigo-500"
+           className=" px-4 py-2  justify-center rounded-3xl bg-[#31304D]  text-white font-medium hover:bg-gray-400 "
           >
-            <button className="w-full h-full ">
+            
               Sign Up
-            </button>
+     
           </button>
         </div>
       </form>

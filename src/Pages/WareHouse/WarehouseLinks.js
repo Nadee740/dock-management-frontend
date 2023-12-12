@@ -16,7 +16,7 @@ const {
     },
     {
       title: "Upcoming Check",
-      to: "/shipments-list",
+      to: "/shipments-list/2",
       icon: faClock,
       color: "#25b922",
       subLinks: false,
