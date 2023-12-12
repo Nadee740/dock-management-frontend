@@ -41,7 +41,7 @@ const LoginForm = () => {
             setUser(res.data.data);
             setLoading(true)
             setAuthenticating(true)
-            window.location.href="/"
+            window.location="/"
         }
         else{
             setModalHeading("Ooops Couldn`t Login");

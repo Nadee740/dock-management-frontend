@@ -1,13 +1,10 @@
-import { Email, Mail } from "@mui/icons-material";
+
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-    faChain,
-    faCoins,
-    faMoneyBill,
+    faBox,
   faTruck,
   faTruckRampBox,
-  faUpDown,
   faUser,
   faUserGroup,
 } from "@fortawesome/free-solid-svg-icons";
@@ -17,7 +14,8 @@ import BooktheViewingComponent from "../../Components/BooktheViewingComponent";
 import { UserContext } from "../../Contexts/UserContexts";
 import axios from "axios";
 import { baseUrl } from "../../utils/baseurl";
-const AdminDashBoard = () => {
+import DashboardGraphComponent from "../../Components/DashBoardGraphComponent";
+const AdminDashBoard_1 = () => {
     const {setLoading,Token}=useContext(UserContext)
     const [subscriptionTypes,setSubscriptionTypes]=useState([]);
     const [shipments,setShipments]=useState();
@@ -74,7 +72,7 @@ const AdminDashBoard = () => {
         .then((res) => {
             if(res.data.status=="ok")
             {   
-                console.log(res.data.data);
+    
                 setShipments(res.data.data);
                 setLoading(false);
             }
@@ -91,7 +89,7 @@ const AdminDashBoard = () => {
 
   return (
     <>
-      <div className="w-full admin-dashboard">
+      <div className="w-full bg-[#F4F5FA] admin-dashboard">
         <div    type="button"
             data-dropdown-toggle="userDropdown"
             data-dropdown-placement="bottom-start"
@@ -155,17 +153,21 @@ const AdminDashBoard = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-row w-full w-full items-center pl-5 pt-1 justify-between">
-          <div class="mt-36 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div class="">
+        <div className="m-5 text-2xl font-bold heading-class">
+            <h2>DASHBOARD</h2>
+        </div>
+        <div className="flex flex-row w-full items-center pl-5 pt-1 justify-between">
+        {/* <div className="heading-class"><h2>Dashboard</h2> </div> */}
+          <div class="w-5/6 mt-5 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div class="m-1">
               <Link
                 to="/dock-booking"
-                class="flex max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+                class="flex max-w-sm  p-6 bg-white border border-gray-200 rounded-2xl shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
               >
                 <div className="w-1/2">
                   {" "}
-                  <h5 class="mb-2 text-2xl  font-bold tracking-tight text-gray-900 dark:text-white heading-class">
-                    New Dock Booking
+                  <h5 class="mb-2 text-lg tracking-tight text-gray-900 dark:text-white heading-class">
+                    Book Dock
                   </h5>
                 </div>
                 <div className=" flex justify-end w-1/2">
@@ -177,49 +179,72 @@ const AdminDashBoard = () => {
                 </div>
               </Link>
             </div>
-            <div class="">
+            <div class="m-1">
               <Link
                 to="/vehicle-update"
-                class="flex max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+                class="flex max-w-sm p-6 bg-white border border-gray-200 rounded-2xl shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
               >
                 <div className="w-1/2">
                   {" "}
-                  <h5 class="mb-2 text-2xl  font-bold  tracking-tight text-gray-900 dark:text-white heading-class">
-                    Manage Vehicles
+                  <h5 class="mb-2 text-lg tracking-tight text-gray-900 dark:text-white heading-class">
+                    Vehicles
                   </h5>
                 </div>
                 <div className=" flex justify-end w-1/2">
                   <FontAwesomeIcon
                     icon={faTruck}
-                    size="2xl"
-                    style={{ color: "#005eff" }}
+                    size="xl"
+                    className="text-violet-500"
                   />
                 </div>
               </Link>
             </div>
-            <div class="b">
+            <div class="m-1">
               <Link
                 to="/supplier-list"
-                class="flex max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+                class="flex max-w-sm p-6 bg-white border border-gray-200 rounded-2xl shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
               >
                 <div className="w-1/2">
                   {" "}
-                  <h5 class="mb-2 text-2xl  font-bold   tracking-tight text-gray-900 dark:text-white heading-class">
-                    Manage Supplier
+                  <h5 class="mb-2 text-lg tracking-tight text-gray-900 dark:text-white heading-class">
+                 Supplier
                   </h5>
                 </div>
                 <div className=" flex justify-end w-1/2">
                   <FontAwesomeIcon
                     icon={faUserGroup}
-                    size="2xl"
-                    style={{ color: "#e85211" }}
+                    size="xl"
+                    className="text-red-600"
+                  />
+                </div>
+              </Link>
+            </div>
+            <div class="m-1">
+              <Link
+                to="/supplier-list"
+                class="flex max-w-sm p-6 bg-white border border-gray-200 rounded-2xl shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+              >
+                <div className="w-1/2">
+                  {" "}
+                  <h5 class="mb-2 text-lg tracking-tight text-gray-900 dark:text-white heading-class">
+                 Shipments
+                  </h5>
+                </div>
+                <div className=" flex justify-end w-1/2">
+                  <FontAwesomeIcon
+                    icon={faBox}
+                    size="xl"
+                    className="text-blue-500"
                   />
                 </div>
               </Link>
             </div>
           </div>
         </div>
-        <div class="bg-[#F4F5FA] m-6 rounded-xl overflow-hidden">
+        <div>
+            <DashboardGraphComponent/>
+        </div>
+        <div class="bg-[#F4F5FA] m-6 rounded-xl border border-gray-300">
            {buildings && <BooktheViewingComponent buildings={buildings}/>} 
         </div>
 
@@ -413,4 +438,4 @@ const AdminDashBoard = () => {
   );
 };
 
-export default AdminDashBoard;
+export default AdminDashBoard_1;

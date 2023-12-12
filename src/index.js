@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 root.render(
   <React.StrictMode>
 
-  <App />
+  <App className="scroll-smooth" />
 
 
   </React.StrictMode>

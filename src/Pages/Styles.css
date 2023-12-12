@@ -11,7 +11,7 @@
     background: linear-gradient(-3deg,  #172b4d 0,50%, #825ee4 50%);
   }
   .admin-dashboard{
-    background: linear-gradient(0deg,  white 70%, #825ee4 30%);
+    /* background: linear-gradient(0deg,  white 70%, #825ee4 30%); */
   }
 
 /* src/App.css */
@@ -50,4 +50,6 @@
     font-family: 'Poppins';
   }
 
-  
+.booking-details-modal :focus{
+    outline: none;
+}

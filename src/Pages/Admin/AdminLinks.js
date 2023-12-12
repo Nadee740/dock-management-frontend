@@ -9,7 +9,7 @@ const AdminLinks=[{
     subLinks:false
 },
  {
-    title:"Dock-Booking",
+    title:"Book Dock",
     to:"/dock-booking",
     icon:faSquarePlus,
     color:"#25b922",
@@ -23,7 +23,7 @@ const AdminLinks=[{
     subLinks:false
 },
 {
-    title:"Shipments Details",
+    title:"Shipments",
     icon:faTruckFast,
     color:"#5b3dc7",
      subLinks:[
@@ -53,7 +53,7 @@ const AdminLinks=[{
         }
     ]},
     {
-        title:"List Vehicles",
+        title:"Vehicles",
         icon:faTruck,
         color:"#5b3dc7",
          subLinks:[
@@ -71,7 +71,7 @@ const AdminLinks=[{
             }
         ]},
         {
-            title:"My Suppliers",
+            title:"Suppliers",
             icon:faUsers,
             color:"#5b3dc7",
              subLinks:[
@@ -88,37 +88,37 @@ const AdminLinks=[{
                 color:"#5b3dc7",
                  subLinks:[
                     {
-                        title:"Update Building Details",
+                        title:"Building Details",
                         to:'/building',
                         icon:faBuilding,
                         clasStyle:"mr-2 text-indigo-500"
                     },
                     {
-                        title:"Update Admin Details",
+                        title:"Admin Details",
                         to:'/admin/users/listCompanyAdminUsers',
                         icon:faUserAstronaut,
                         clasStyle:"mr-2 text-indigo-500"
                     },
                     {
-                        title:"Update Dock Details",
+                        title:"Dock Details",
                         to:'/admin/docks',
                         icon:faShip,
                         clasStyle:"mr-2 text-indigo-500"
                     },
                     {
-                        title:"Update Supplier Details",
+                        title:"Supplier Details",
                         to:'/supplier-list',
                         icon:faUserGroup,
                         clasStyle:"mr-2 text-indigo-500"
                     },
                     {
-                        title:"Update Security Details",
+                        title:"Security Details",
                         to:'/list-all-security',
                         icon:faUserLock,
                         clasStyle:"mr-2 text-indigo-500"
                     },
                     {
-                        title:"Update Warehouse Details",
+                        title:"Warehouse Details",
                         to:'/list-all-warehouses',
                         icon:faBagShopping,
                         clasStyle:"mr-2 text-indigo-500"

@@ -5,6 +5,7 @@ import { baseUrl } from "../../utils/baseurl";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import QrReader from 'react-qr-scanner';
 import {
+    faQrcode,
     faSearch,
   faTruck,
   faTruckRampBox,
@@ -14,12 +15,17 @@ import {
 import qrcodeimg from "../../images/qrcode.jpg"
 import ListAllShipments from "../../Components/ListAllShipments";
 import { UserContext } from "../../Contexts/UserContexts";
+import Failed_Popup from "../../Components/Failed_Popup";
+import ConfirmModal from "../../Components/ConfirmPopup";
+import { TRUE } from "sass";
 
 const SecurityDashBoard = () => {
-    const {setLoading}=useContext(UserContext)
+    const {setLoading,Token}=useContext(UserContext)
     const [readyToScan,setReadytoScan]=useState(false);
     const [todayShipments,setTodayShipments]=useState([])
-
+    const [open_failed_modal,set_open_failed_modal]=useState(false)
+    const [message,set_message]=useState("")
+    const [open_confirm,set_open_confirm]=useState(false)
     useEffect(()=>{
         setLoading(true);
         const token = localStorage.getItem("EZTOken");
@@ -40,6 +46,31 @@ const SecurityDashBoard = () => {
         setLoading(false);
     },[])
 
+    const captureData=(data)=>{
+        setLoading(true)
+        setReadytoScan(false)
+        axios.post(`${baseUrl}/dock/scan/security`,{ciphertext:data},{headers: {
+            Authorization: `Bearer ${Token}`,
+          }}).then((res)=>{
+            set_message(res.data.data.msg)
+            set_open_confirm(true)
+        }).catch((err)=>{
+            set_open_failed_modal(true)
+            set_message(err.response.data.msg)
+            // console.log("erorr",err.response.data.msg)
+
+        }).finally(()=>{
+            setLoading(false)
+        })
+    }
+
+
+    const handle_close_failed_pop=()=>{
+        set_open_failed_modal(false)
+    }
+    const handleClose=()=>{
+        set_open_confirm(false)
+    }
 
   return (
     <>
@@ -115,7 +146,10 @@ const SecurityDashBoard = () => {
             delay={100}
             onScan={(res)=>{
                 if(res!=null)
-                alert(res);
+                {
+                    captureData(JSON.parse(res.text));
+                }
+               
             }}
             ></QrReader>:<img src={qrcodeimg} className="pl-18 h-52 w-52"></img>}
 
@@ -125,7 +159,7 @@ const SecurityDashBoard = () => {
                 <div onClick={()=>{
                     setReadytoScan(!readyToScan)
                 }} className="rounded-md pl-8 p-4 w-full bg-black flex mt-4 ">
-               <FontAwesomeIcon icon={faSearch} className="text-white mr-2 mt-1"></FontAwesomeIcon>
+               <FontAwesomeIcon icon={faQrcode} className="text-white mr-2 mt-1"></FontAwesomeIcon>
                <p className="text-white">{readyToScan?"Close QR CODE scanner":"Click To Scan QR CODE"}</p>
                 </div>
             </div>
@@ -139,6 +173,18 @@ const SecurityDashBoard = () => {
           </section>
         </div>
       </div>
+      <Failed_Popup
+      open={open_failed_modal}
+      setOpen={set_open_failed_modal}
+      onClose={handle_close_failed_pop}
+      message={message}
+
+      />
+      <ConfirmModal
+        open={open_confirm}
+        onClose={handleClose}
+        message={message}
+      />
        
       </div>
      

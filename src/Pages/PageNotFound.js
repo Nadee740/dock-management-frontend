@@ -5,7 +5,7 @@ function Page404() {
     <div className="flex items-center justify-center h-screen">
       <div className="flex flex-col items-center justify-center">
         <img src={PageNotFound} alt="404" className="w-3/5"/> 
-        <h1 className="font-semibold text-lg text-black my-5">Oops.. You are not supposed to be here!!</h1>
+        <h1 className="font-semibold text-lg text-black my-5">Page Not Found !</h1>
         <Link to="/" className="p-3 rounded-lg bg-stone-800 text-white">Go Home</Link>
       </div>
     </div>

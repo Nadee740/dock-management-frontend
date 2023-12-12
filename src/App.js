@@ -99,7 +99,7 @@ function App() {
           setLoading(false);
 
         } else {
-          throw new Error("somethin went wrong");
+          throw new Error("something went wrong");
         }
       })
       .catch(function (error) {

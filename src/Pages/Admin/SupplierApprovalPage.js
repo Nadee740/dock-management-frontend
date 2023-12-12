@@ -41,8 +41,8 @@ const ListAllSupplierRequestPage = ({ iseditable }) => {
   return (
     <>
       <div className="w-full admin-dashboard">
-        <div className="flex flex-row w-full w-full items-center p-3 justify-between">
-          <section class=" text-black w-5/6 p-6 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800 mt-5 overflow-x-scroll">
+        <div className="flex flex-row w-full w-full items-center justify-between">
+          <section class=" text-black w-full p-6 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800  overflow-x-scroll">
           {requestList &&  <ListAllSupplierRequest requestList={requestList} iseditable={iseditable} />}
 
           </section>
