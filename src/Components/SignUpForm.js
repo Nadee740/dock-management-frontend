@@ -67,7 +67,7 @@ const SignUpForm = ({companies}) => {
      
     }
   return (
-    <div className="bg-slate-100 flex flex-col bg-white w-7/12 md:w-5/12  text-left bg-white p-6 rounded-xl m-auto">
+    <div className="bg-slate-100 flex flex-col bg-white w-9/12 md:w-5/12  text-left bg-white p-6 rounded-xl m-auto">
    
 
       <form onSubmit={submit}>
@@ -198,7 +198,7 @@ const SignUpForm = ({companies}) => {
         <div className="flex items-center justify-center mt-4">
           <button
            type="submit"
-           className=" px-4 py-2  justify-center rounded-3xl bg-[#31304D]  text-white font-medium hover:bg-violet-400 "
+           className=" px-4 py-2  justify-center rounded-3xl bg-[#31304D]  text-white font-medium hover:bg-gray-400 "
           >
             
               Sign Up
