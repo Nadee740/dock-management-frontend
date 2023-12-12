@@ -38,7 +38,7 @@ const LoginForm = () => {
       .then((res) => {
         if(res.data.status==="ok")
         {   localStorage.setItem("EZTOken",res.data.token);
-            setUser(res.data.data);
+            // setUser(res.data.data);
             setLoading(true)
             setAuthenticating(true)
             window.location="/"

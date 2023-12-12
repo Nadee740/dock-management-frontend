@@ -69,7 +69,7 @@ const SideNavBar = ({UserLinks}) => {
         setToken(null);
         localStorage.clear();
         window.location='/'
-        setLoading(false);
+     
       } else {
           throw new Error("something went wrong")
       }

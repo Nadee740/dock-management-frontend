@@ -15,30 +15,14 @@ import { UserContext } from "../../Contexts/UserContexts";
 import axios from "axios";
 import { baseUrl } from "../../utils/baseurl";
 import DashboardGraphComponent from "../../Components/DashBoardGraphComponent";
+import { NeumorphicDoughnutChart } from "../../Components/Graphs/DoughNutGraph";
+import LeveledBoxedComponent from "../../Components/Statistics/LevelBoxedComponent";
+import { BarChart } from "../../Components/Graphs/BarGraph";
+import LineChart from "../../Components/Graphs/LineChart";
 const AdminDashBoard_1 = () => {
     const {setLoading,Token}=useContext(UserContext)
-    const [subscriptionTypes,setSubscriptionTypes]=useState([]);
     const [shipments,setShipments]=useState();
     const [buildings,setBuildings]=useState(null);
-    useEffect(()=>{
-        setLoading(true);
-        axios.get(`${baseUrl}/subscription/get/types`)
-        .then((res) => {
-            if(res.data.status=="ok")
-            {
-                setSubscriptionTypes(res.data.data);
-                setLoading(false);
-            }
-          
-        else 
-        throw new Error(res.data.msg)
-        })
-        .catch((err) => {
-            setLoading(false);
-            console.log(err)
-
-        });
-    },[])
     useEffect(()=>{
         setLoading(true);
         axios.get(`${baseUrl}/get-buildings`,{headers: {
@@ -157,7 +141,7 @@ const AdminDashBoard_1 = () => {
             <h2>DASHBOARD</h2>
         </div>
         <div className="flex flex-row w-full items-center pl-5 pt-1 justify-between">
-        {/* <div className="heading-class"><h2>Dashboard</h2> </div> */}
+
           <div class="w-5/6 mt-5 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             <div class="m-1">
               <Link
@@ -221,7 +205,7 @@ const AdminDashBoard_1 = () => {
             </div>
             <div class="m-1">
               <Link
-                to="/supplier-list"
+                to="/shipments-list/2"
                 class="flex max-w-sm p-6 bg-white border border-gray-200 rounded-2xl shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
               >
                 <div className="w-1/2">
@@ -247,6 +231,23 @@ const AdminDashBoard_1 = () => {
         <div class="bg-[#F4F5FA] m-6 rounded-xl border border-gray-300">
            {buildings && <BooktheViewingComponent buildings={buildings}/>} 
         </div>
+        <div className="w-full m-2  grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="flex justify-center items-center w-full">
+            <NeumorphicDoughnutChart />
+          </div>
+          <div>
+            <LeveledBoxedComponent />
+          </div>
+        </div>
+        <div className="w-full m-2  grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <BarChart/>
+          </div>
+          <div>
+            <LineChart />
+          </div>
+        </div>
+      
 
 
 

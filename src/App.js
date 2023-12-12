@@ -64,7 +64,8 @@ import AddNewBuilding from "./Pages/Company/AddNewBuilding";
 import ListAllBuildingPage from "./Pages/Company/ListAllBuildingPage";
 import COnfirmModal from "./Components/ConfirmPopup";
 import ChangePasswordModal from "./Components/ChangePassword";
-
+import Chart from "chart.js/auto";
+import { CategoryScale } from "chart.js";
 function App() {
   const [user, setUser] = useState(null);
   const [Token, setToken] = useState(null);
@@ -72,7 +73,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [accountDetails, setAccountDetails] = useState(null);
   const [show_change_pass_prompt,set_change_pass_prompt]=useState(false)
-
+  Chart.register(CategoryScale);
   const handle_change_password=()=>{
     window.location="/change-password"
 
@@ -314,7 +315,7 @@ function App() {
 
                 {user.userType === "supplier" && (
                   <>
-                    <Route path="/" element={<AdminDashBoard />}></Route>
+                    <Route path="/" element={<SupplierDashBoard/>}></Route>
                     <Route path="supplier" element={<SupplierHome />}>
                       <Route index element={<SupplierDashBoard />} />
                     </Route>

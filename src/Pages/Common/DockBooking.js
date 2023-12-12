@@ -612,8 +612,9 @@ const DockBooking = ({ bookingDetail }) => {
 
                     <button
                       type="submit"
-                      className="ml-6 mr-4 w-24 sm:w-48 bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform  rounded-md hover:bg-green-300 focus:outline-none focus:bg-gray-600"
+                      className="flex items-center justify-center ml-6 mr-4 sm:w-48 bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform  rounded-md hover:bg-green-600 focus:outline-none focus:bg-gray-600"
                     >
+                    <p className="heading-class">Next</p>
                       <FontAwesomeIcon
                         className="ml-4 text-white"
                         icon={faArrowRight}

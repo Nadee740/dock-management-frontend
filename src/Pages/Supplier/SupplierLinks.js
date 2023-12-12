@@ -9,14 +9,14 @@ const SupplierLinks=[{
     subLinks:false
 },
  {
-    title:"Dock-Booking",
+    title:"Book Dock",
     to:"/dock-booking",
     icon:faSquarePlus,
     color:"#25b922",
     subLinks:false
 },
 {
-    title:"Shipments Details",
+    title:"Shipments",
     icon:faTruckFast,
     color:"#5b3dc7",
      subLinks:[
@@ -46,7 +46,7 @@ const SupplierLinks=[{
         }
     ]},
     {
-        title:"List Vehicles",
+        title:"Vehicles",
         icon:faTruck,
         color:"#5b3dc7",
          subLinks:[
@@ -57,7 +57,7 @@ const SupplierLinks=[{
                 clasStyle:"mr-2 text-indigo-500"
             },
             {
-                title:"Add-Vehicle",
+                title:"Add Vehicle",
                 to:'/add-vehicle',
                 icon:faPlus,
                 clasStyle:"mr-2 text-green-500"
