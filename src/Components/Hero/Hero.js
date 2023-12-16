@@ -30,7 +30,7 @@ const Hero = () => {
                       <input class="block p-3 pl-10 w-5/6 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300  focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Enter your email" type="email" id="email" required=""/>
                   </div>
                   <div>
-                      <button type="submit" class="py-3 px-5 sm:w-full text-sm font-medium text-center text-white rounded-lg border cursor-pointer bg-violet-700 border-primary-600 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Subscribe</button>
+                      <button type="submit" class="py-3 px-5 sm:w-full text-sm font-medium text-center text-white rounded-lg border cursor-pointer bg-[#31304D] border-primary-600 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Subscribe</button>
                   </div>
               </div>
           </form>

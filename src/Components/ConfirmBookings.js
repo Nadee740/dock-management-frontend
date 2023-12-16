@@ -40,7 +40,7 @@ const ConfirmBooking=({bookingDetails,buildingDetails,vehicleDetails,companyDeta
        <p className="text-xl font-bold text-green-400">Success ! Your bookings is confirmed . </p>
       </div>
       <div className="flex items-center pl-3 w-full py-2">
-       <p className="text-md">Below booking details email to your registered email address</p>
+       <p className="text-md">Below booking details emailed to your registered email address</p>
       </div>
       <div className="flex items-center justify-end mb-5">
       <Link

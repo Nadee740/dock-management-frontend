@@ -195,10 +195,10 @@ const SignUpForm = ({companies}) => {
 </div>
 
         </div>
-        <div className="flex items-center justify-center mt-4">
+        <div className="flex justify-center mt-4">
           <button
            type="submit"
-           className=" px-4 py-2  justify-center rounded-3xl bg-[#31304D]  text-white font-medium hover:bg-gray-400 "
+           className=" px-4 py-2 w-6/12 justify-center rounded-3xl bg-[#31304D]  text-white font-medium hover:bg-gray-400 "
           >
             
               Sign Up

@@ -34,10 +34,10 @@ const SignUp = () => {
               <TopNavBar/>
 
 
-              <div className=" flex items-center md-content-center  justify-center mt-10 ">
-              <h2 className='sm:text-1xl text-xl pl-5  text-center mb-2 font-medium italic' >Welcome to Dock Management System !</h2>
+              <div className=" flex items-center md-content-center  justify-center  ">
+              <h2 className='sm:text-1xl text-2xl pl-5 text-[#61677A] text-center font-medium italic' >Welcome to Dock Management System !</h2>
               </div>
-              <div className=" flex items-center md-content-center  justify-center mt-4">
+              <div className=" flex items-center md-content-center  justify-center mt-2">
               <h2 className="text-center text-3xl  font-medium">New Supplier Registration</h2>
               </div>
              
@@ -45,8 +45,8 @@ const SignUp = () => {
               
           </div>
           <div className=" bg-[#31304D] md:col-span-2 pb-14 ">
-          <div className=" items-center md-content-center  justify-center mt-14 pt-14 mb-8">
-        <h3 className="text-center text-3xl text-white mt-10  pt-16 font-medium ">Already registered?</h3>
+          <div className=" items-center md-content-center  justify-center mt-16 pt-16 mb-8">
+        <h3 className="text-center text-3xl text-white mt-16  pt-16 font-medium ">Already registered?</h3>
        
       </div>
 

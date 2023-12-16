@@ -87,7 +87,7 @@ const LoginForm = () => {
         <div className="mb-4 pb-10 ">
         <button
         type="submit"
-        className="w-1/4 px-4 py-2 m-5 justify-center rounded-3xl bg-[#31304D]  text-white font-medium hover:bg-violet-400 "
+        className="w-1/4 px-4 py-2 m-5 justify-center rounded-3xl bg-[#31304D]  text-white font-medium hover:bg-gray-400 "
         >
         Sign In
         </button>
