@@ -1,13 +1,31 @@
 
 import { Bar } from "react-chartjs-2";
-export const BarChart = () => {
+export const BarChart = ({data}) => {
+    const labels=[]
+    const datasets=[]
+    const d=new Date();
+    function dateFormater(inputDate) {
+        const date = new Date(inputDate);
+        let month = (date.getMonth() + 1).toString();
+        let year = date.getFullYear();
+        let day = date.getDate().toString();
+        if (month.length < 2) {
+          month = "0" + month;
+        }
+        if (day.length < 2) day = "0" + day;
+        return [year, month, day].join("-");
+      }
+    for(let i=0;i<7;i++){
+        d.setDate(d.getDate() - 1);
+        labels.push(`day ${i+1}`)
+    }
     const chartData = {
-        labels: ["2016", "2017", "2018", "2019", "2020"],
+        labels: labels,
         datasets: [
           {
-            label: "Users Gained",
-            data: [100, 150, 200, 180, 250], // Replace these values with your actual data
-            backgroundColor: "rgba(75,192,192,0.6)", // Adjust the color as needed
+            label: "Delivery for past week",
+            data: [7,8,1,0,2,1,1], 
+            backgroundColor: "rgba(75,192,192,0.6)", 
             borderColor: "rgba(75,192,192,1)",
             borderWidth: 1,
           },
@@ -23,7 +41,6 @@ export const BarChart = () => {
           scales: {
             x: {
               type: 'category',
-              labels: ["2016", "2017", "2018", "2019", "2020"],
               grid: {
                 color: "rgba(0, 0, 0, 0.1)",
               },
@@ -38,7 +55,7 @@ export const BarChart = () => {
           plugins: {
             title: {
               display: true,
-              text: "Deliveries from 2016-2020",
+              text: "Deliveries for past week",
               padding: { top: 10, bottom: 15 },
               font: {
                 size: 16,

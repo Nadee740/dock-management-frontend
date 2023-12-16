@@ -1,19 +1,19 @@
-import { faBox, faBoxesPacking, faCube, faGamepad, faGears, faLocation, faTruck, faTruckRampBox, faUser, faUserGroup } from "@fortawesome/free-solid-svg-icons";
+import { faBox, faBoxesPacking, faCircleXmark, faCross, faCube, faGamepad, faGears, faLocation, faTruck, faTruckRampBox, faUser, faUserGroup } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
 
-const LeveledBoxedComponent = () => {
+
+const LeveledBoxedComponent = ({data}) => {
     return (       
     <div className="flex flex-row w-full items-center pl-5 pt-1 justify-center">
     <div class="w-full sm:4/6 mt-5 grid grid-cols-2 ">
     <div className="m-1 mt-4  w-48">
   <div className="flex heading-class max-w-sm p-6 bg-gray-100 rounded-lg shadow-lg hover:shadow-xl dark:bg-gray-800">
     <div className="">
-      <p className="flex whitespace-nowrap mb-2 text-md tracking-tight text-gray-900 dark:text-white heading-class">
-        Total Count 
+      <p className="flex whitespace-nowrap mb-2 text-sm tracking-tight text-gray-900 dark:text-white heading-class">
+        Total Orders 
       </p>
       <p className="flex whitespace-nowrap mb-2 text-md tracking-tight text-gray-900 dark:text-white heading-class">
-        19
+        {data.total_no_of_orders}
       </p>
     </div>
     <div className="flex justify-end w-1/2">
@@ -28,11 +28,11 @@ const LeveledBoxedComponent = () => {
 <div className="m-1 mt-8  w-48">
   <div className="flex heading-class max-w-sm p-6 bg-gray-100 rounded-lg shadow-lg hover:shadow-xl dark:bg-gray-800">
     <div className="">
-      <p className="flex whitespace-nowrap mb-2 text-md tracking-tight text-gray-900 dark:text-white heading-class">
+      <p className="flex whitespace-nowrap mb-2 text-sm tracking-tight text-gray-900 dark:text-white heading-class">
         Total Delivery
       </p>
       <p className="flex whitespace-nowrap mb-2 text-md tracking-tight text-gray-900 dark:text-white heading-class">
-        20
+        {data.total_no_of_orders_delivered}
       </p>
     </div>
     <div className="flex justify-end w-1/2">
@@ -48,7 +48,7 @@ const LeveledBoxedComponent = () => {
   <div className="flex heading-class max-w-sm p-6 bg-gray-100 rounded-lg shadow-lg hover:shadow-xl dark:bg-gray-800">
     <div className="">
       <p className="flex whitespace-nowrap mb-2 text-sm tracking-tight text-gray-900 dark:text-white heading-class">
-        Average Count 
+        Failed Count 
       </p>
       <p className="flex whitespace-nowrap mb-2 text-md tracking-tight text-gray-900 dark:text-white heading-class">
         23
@@ -56,9 +56,9 @@ const LeveledBoxedComponent = () => {
     </div>
     <div className="flex justify-end w-1/2">
       <FontAwesomeIcon
-        icon={faGamepad}
+        icon={faCircleXmark}
         size="xl"
-        className="text-indigo-600"
+        className="text-red-800"
       />
     </div>
   </div>
@@ -70,7 +70,7 @@ const LeveledBoxedComponent = () => {
         Total Docks 
       </p>
       <p className="flex whitespace-nowrap mb-2 text-md tracking-tight text-gray-900 dark:text-white heading-class">
-        19
+        {data.total_no_of_docks}
       </p>
     </div>
     <div className="flex justify-end w-1/2">
@@ -89,7 +89,7 @@ const LeveledBoxedComponent = () => {
         Late Deliveries
       </p>
       <p className="flex whitespace-nowrap mb-2 text-md tracking-tight text-gray-900 dark:text-white heading-class">
-        19
+        {data.total_no_of_late_orders}
       </p>
     </div>
     <div className="flex justify-end w-1/2">
@@ -105,10 +105,10 @@ const LeveledBoxedComponent = () => {
   <div className="flex heading-class max-w-sm p-6 bg-gray-100 rounded-lg shadow-lg hover:shadow-xl dark:bg-gray-800">
     <div className="">
       <p className="flex whitespace-nowrap mb-2 text-sm tracking-tight text-gray-900 dark:text-white heading-class">
-        Arrived Deliveries
+        No: Suppliers
       </p>
       <p className="flex whitespace-nowrap mb-2 text-md tracking-tight text-gray-900 dark:text-white heading-class">
-        19
+        {data.supplier_count}
       </p>
     </div>
     <div className="flex justify-end w-1/2">

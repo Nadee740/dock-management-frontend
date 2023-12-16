@@ -1,12 +1,17 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 function LineChart() {
+    const labels=[]
+    for(let i=1;i<=3;i++){
+        labels.push(`supplier ${i}`)
+    }
     const chartData = {
-        labels: ["2016", "2017", "2018", "2019", "2020"],
+      
+        labels: labels,
         datasets: [
           {
-            label: "Users Gained",
-            data: [100, 150, 200, 180, 250], // Replace these values with your actual data
+            label: "Delivery made by each supplier",
+            data: [5,2,1], // Replace these values with your actual data
             backgroundColor: "rgba(75,192,192,0.6)", // Adjust the color as needed
             borderColor: "rgba(75,192,192,1)",
             borderWidth: 1,
@@ -23,7 +28,7 @@ function LineChart() {
           plugins: {
             title: {
               display: true,
-              text: "Users Gained between 2016-2020"
+              text: "Delivery made by each supplier"
             },
             legend: {
               display: false
