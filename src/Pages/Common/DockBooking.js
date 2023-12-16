@@ -801,7 +801,7 @@ const DockBooking = ({ bookingDetail }) => {
                       onClick={() => {
                         setStep(step - 1);
                       }}
-                      className="mr-6 w-24 sm:w-48  bg-red-200 px-6 py-2 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-red-500 focus:outline-none focus:bg-gray-600"
+                      className="mr-6 w-24 sm:w-48  bg-red-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-red-500 focus:outline-none focus:bg-gray-600"
                     >
                       <FontAwesomeIcon
                         className="ml-2 text-white"
@@ -888,7 +888,7 @@ const DockBooking = ({ bookingDetail }) => {
                       onClick={() => {
                         setStep(step - 1);
                       }}
-                      className="mr-6 w-24 sm:w-48  bg-red-200 px-6 py-2 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-red-500 focus:outline-none focus:bg-gray-600"
+                      className="mr-6 w-24 sm:w-48  bg-red-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-red-500 focus:outline-none focus:bg-gray-600"
                     >
                       <FontAwesomeIcon
                         className="ml-2 text-white"

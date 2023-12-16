@@ -276,7 +276,7 @@ const BooktheViewingComponent = ({ buildings }) => {
   const [booking_details, set_booking_details] = useState(null);
   useEffect(() => {
     if (buildings.length > 0) {
-      setBuilding(buildings[0]);
+      // setBuilding(buildings[0]);
       setLoading(true);
       axios
         .get(
@@ -303,7 +303,7 @@ const BooktheViewingComponent = ({ buildings }) => {
           console.log("FAILED!!! ", error);
         });
     }
-  }, []);
+  }, [selectedBuilding]);
   return (
     <div className="">
       <div className="m-2 w-1/2">
