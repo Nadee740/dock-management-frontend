@@ -47,12 +47,14 @@ const SecurityDashBoard = () => {
     },[])
 
     const captureData=(data)=>{
+
         setLoading(true)
         setReadytoScan(false)
         axios.post(`${baseUrl}/dock/scan/security`,{ciphertext:data},{headers: {
             Authorization: `Bearer ${Token}`,
           }}).then((res)=>{
-            set_message(res.data.data.msg)
+    
+            set_message(res.data.msg)
             set_open_confirm(true)
         }).catch((err)=>{
             set_open_failed_modal(true)
@@ -147,6 +149,7 @@ const SecurityDashBoard = () => {
             onScan={(res)=>{
                 if(res!=null)
                 {
+                  console.log(JSON.parse(res.text))
                     captureData(JSON.parse(res.text));
                 }
                
@@ -160,7 +163,7 @@ const SecurityDashBoard = () => {
                     setReadytoScan(!readyToScan)
                 }} className="rounded-md pl-8 p-4 w-full bg-black flex mt-4 ">
                <FontAwesomeIcon icon={faQrcode} className="text-white mr-2 mt-1"></FontAwesomeIcon>
-               <p className="text-white">{readyToScan?"Close QR CODE scanner":"Click To Scan QR CODE"}</p>
+               <button className="text-white">{readyToScan?"Close QR CODE scanner":"Click To Scan QR CODE"}</button>
                 </div>
             </div>
           </div>
