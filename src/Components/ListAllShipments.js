@@ -80,7 +80,7 @@ const ListAllShipments = ({ iseditable,todayShipments ,name}) => {
               </button>
                 ):data.status=="10"||data.status=="20"?(
                   <button
-                className="h-7 w-24 flex items-center bg-green-500 text-white p-2 rounded-md mr-5"
+                className="h-7 w-24 flex items-center bg-yellow-300 text-white p-2 rounded-md mr-5"
                 onClick={() => {}}
               >
               <p className="text-sm flex justify-center w-full font-semibold">Late</p>
@@ -93,7 +93,7 @@ const ListAllShipments = ({ iseditable,todayShipments ,name}) => {
               <p className="text-sm flex justify-center w-full font-semibold">WareHouse Cleared</p>
               </button>
                 ):data.status=="06"?(<button
-                  className="h-14 w-24 flex items-center bg-green-500 text-white p-2 rounded-md mr-5"
+                  className="h-15 w-24 flex items-center bg-orange-400 text-white p-2 rounded-md mr-5"
                   onClick={() => {}}
                 >
                 <p className="text-sm flex justify-center w-full font-semibold">W/H Cleared & Waiting</p>
@@ -103,17 +103,17 @@ const ListAllShipments = ({ iseditable,todayShipments ,name}) => {
               >
               <p className="text-sm flex justify-center  w-full font-semibold">Quality Checked</p>
               </button>):data.status=="30"?(<button
-                className="h-7 w-24 flex items-center bg-green-500 text-white p-2 rounded-md mr-5"
+                className="h-14 w-24 flex items-center bg-red-500 text-white p-2 rounded-md mr-5"
                 onClick={() => {}}
               >
-              <p className="text-sm flex justify-center h-2/3 w-full font-semibold">Quality Check Failed</p>
+              <p className="text-sm flex justify-center  w-full font-semibold">Quality Check Failed</p>
               </button>):data.status=="05"?(<button
-                className="h-7 w-24 flex items-center bg-green-500 text-white p-2 rounded-md mr-5"
+                className="h-7 w-24 flex items-center bg-green-700 text-white p-2 rounded-md mr-5"
                 onClick={() => {}}
               >
               <p className="text-sm flex justify-center w-full font-semibold">Unloaded</p>
               </button>):(<button
-                className="h-7 w-24 flex items-center bg-green-500 text-white p-2 rounded-md mr-5"
+                className="h-7 w-24 flex items-center bg-blue-500 text-white p-2 rounded-md mr-5"
                 onClick={() => {}}
               >
               <p className="text-sm flex justify-center w-full font-semibold">W/H Exit</p>

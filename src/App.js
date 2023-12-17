@@ -212,6 +212,7 @@ function App() {
                   path="/list-all-warehouses"
                   element={<ListAllWareHousesPage iseditable={true} />}
                 />
+               
                 <Route path="/create-warehouse" element={<AddNewWareHouse />} />
                 <Route path="/edit/warehouse/:id" element={<EditWareHouse />} />
 
@@ -338,8 +339,10 @@ function App() {
                     <Route index element={<WareHouseDashBoard />} />
                     <Route path="warehouse" element={<WareHouseHome />}>
                       <Route index element={<WareHouseDashBoard />} />
-                      <Route path="quality/check" element={<QualityCheckPage />} />
-                      <Route path="unloading/check" element={<UnloadingCheckPage />} />
+                      <Route path="quality-check"
+                  element={<QualityCheckPage/>}/>
+                      {/* <Route path="quality/check" element={<QualityCheckPage />} /> */}
+                      <Route path="unloading-check" element={<UnloadingCheckPage />} />
                       <Route path="exit" element={<WarehouseExitPage />} />
                     </Route>
                   </>

@@ -6,10 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import QrReader from 'react-qr-scanner';
 import {
     faSearch,
-  faTruck,
-  faTruckRampBox,
-  faUser,
-  faUserGroup,
 } from "@fortawesome/free-solid-svg-icons";
 import qrcodeimg from "../../images/qrcode.jpg"
 import ListAllShipments from "../../Components/ListAllShipments";

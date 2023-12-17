@@ -47,7 +47,6 @@ const SecurityDashBoard = () => {
     },[])
 
     const captureData=(data)=>{
-
         setLoading(true)
         setReadytoScan(false)
         axios.post(`${baseUrl}/dock/scan/security`,{ciphertext:data},{headers: {
