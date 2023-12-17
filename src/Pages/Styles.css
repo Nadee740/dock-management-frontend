@@ -1,0 +1,61 @@
+.login-page{
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(-3deg,  #172b4d 0,50%, #825ee4 50%);
+  
+  }
+
+  .signup-page{
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(-3deg,  #172b4d 0,50%, #825ee4 50%);
+  }
+  .admin-dashboard{
+    /* background: linear-gradient(0deg,  white 70%, #825ee4 30%); */
+  }
+
+/* src/App.css */
+.app {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .text-slider {
+    display: flex;
+    overflow: hidden;
+    width: 80%; /* Adjust the width as needed */
+    max-width: 800px;
+    position: relative;
+    white-space: nowrap; /* Prevent text from wrapping to a new line */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+  }
+  
+  .text-container {
+    flex: 0 0 auto;
+    min-width: 100%;
+    text-align: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    display: inline-block; /* Display text containers inline */
+  }
+  .slick-prev:before,
+  .slick-next:before {
+    color: black !important;
+  }
+  .heading-class{
+    font-family: 'Poppins';
+  }
+
+.booking-details-modal :focus{
+    outline: none;
+}
+
+.neumorphic {
+    @apply ring ring-inset ring-2 ring-gray-100 dark:ring-gray-700;
+    box-shadow: inset 2px 2px 8px rgba(255, 255, 255, 0.15),
+                 inset -2px -2px 8px rgba(0, 0, 0, 0.05);
+  }
