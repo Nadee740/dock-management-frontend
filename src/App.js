@@ -67,6 +67,8 @@ import ChangePasswordModal from "./Components/ChangePassword";
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import QualityCheckPage from "./Pages/WareHouse/QualityCheckPage";
+import UnloadingCheckPage from "./Pages/WareHouse/UnloadingCheckPage";
+import WarehouseExitPage from "./Pages/WareHouse/WarehouseExitPage";
 function App() {
   const [user, setUser] = useState(null);
   const [Token, setToken] = useState(null);
@@ -339,6 +341,9 @@ function App() {
                       <Route index element={<WareHouseDashBoard />} />
                       <Route path="quality-check"
                   element={<QualityCheckPage/>}/>
+                      {/* <Route path="quality/check" element={<QualityCheckPage />} /> */}
+                      <Route path="unloading/check" element={<UnloadingCheckPage />} />
+                      <Route path="exit" element={<WarehouseExitPage />} />
                     </Route>
                   </>
                 )}

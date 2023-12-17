@@ -6,6 +6,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import QrReader from 'react-qr-scanner';
 import {
     faQrcode,
+    faSearch,
+  faTruck,
+  faTruckRampBox,
   faUser,
   faUserGroup,
 } from "@fortawesome/free-solid-svg-icons";
@@ -14,6 +17,7 @@ import ListAllShipments from "../../Components/ListAllShipments";
 import { UserContext } from "../../Contexts/UserContexts";
 import Failed_Popup from "../../Components/Failed_Popup";
 import ConfirmModal from "../../Components/ConfirmPopup";
+import { TRUE } from "sass";
 
 const SecurityDashBoard = () => {
     const {setLoading,Token}=useContext(UserContext)
@@ -142,6 +146,7 @@ const SecurityDashBoard = () => {
             onScan={(res)=>{
                 if(res!=null)
                 {
+                  console.log(JSON.parse(res.text))
                     captureData(JSON.parse(res.text));
                 }
                
@@ -155,7 +160,7 @@ const SecurityDashBoard = () => {
                     setReadytoScan(!readyToScan)
                 }} className="rounded-md pl-8 p-4 w-full bg-black flex mt-4 ">
                <FontAwesomeIcon icon={faQrcode} className="text-white mr-2 mt-1"></FontAwesomeIcon>
-               <p className="text-white">{readyToScan?"Close QR CODE scanner":"Click To Scan QR CODE"}</p>
+               <button className="text-white">{readyToScan?"Close QR CODE scanner":"Click To Scan QR CODE"}</button>
                 </div>
             </div>
           </div>
