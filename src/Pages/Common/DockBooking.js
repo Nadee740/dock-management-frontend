@@ -14,6 +14,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import CryptoJS from "crypto-js";
 import AlertDialog from "../../Components/AlertDialogue";
+import { Step } from "@mui/material";
 
 const dateConverter = (inputdate) => {
   const date = new Date(inputdate);
@@ -303,8 +304,8 @@ const DockBooking = ({ bookingDetail }) => {
             </h2>
           </div>
           <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-
-          <ol class="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base">
+          <div className="w-full items-center justify-center">
+          <ol class="mx-auto flex items-center w-full sm:w-1/2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base">
             <li
               onClick={() => {
                 if (step > 0) setStep(0);
@@ -323,10 +324,12 @@ const DockBooking = ({ bookingDetail }) => {
                     <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                   </svg>
                 ) : (
-                  <span class="mr-2">1</span>
+                  <div className="rounded-xl bg-blue-600 mr-1">
+                  <span class="text-white mr-2 ml-2">1</span>
+                  </div>
                 )}
                 Bill{" "}
-                <span class="hidden sm:inline-flex sm:ml-2">Information</span>
+                <span className="text-blue-600 hidden sm:inline-flex sm:ml-2">Information</span>
               </span>
             </li>
             <li
@@ -336,7 +339,7 @@ const DockBooking = ({ bookingDetail }) => {
               class="text-blue-600 flex md:w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700"
             >
               <span class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
-                {step >= 2 ? (
+                {step > 1 ? (
                   <svg
                     class="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-2.5"
                     aria-hidden="true"
@@ -346,10 +349,22 @@ const DockBooking = ({ bookingDetail }) => {
                   >
                     <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                   </svg>
-                ) : (
-                  <span class="mr-2">2</span>
-                )}
+                ) :step==1?<div className="rounded-xl bg-blue-600 mr-1">
+                  <span class="text-white mr-2 ml-2">2</span>
+                  </div>:
+                  <div className="rounded-xl bg-slate-600 mr-1">
+                  <span class="text-white mr-2 ml-2">2</span>
+                  </div>
+                }
+                {
+                step<1?<div className="flex text-slate-500">
                 Dock <span class="hidden sm:inline-flex sm:ml-2">Info</span>
+                </div>: <div className="flex text-blue-600">
+                Dock <span class="hidden sm:inline-flex sm:ml-2">Info</span>
+                </div>
+                }
+               
+               
               </span>
             </li>
             <li
@@ -359,7 +374,7 @@ const DockBooking = ({ bookingDetail }) => {
               class="text-blue-600 flex items-center"
             >
               <span class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
-                {step >= 3 ? (
+                {step >2 ? (
                   <svg
                     class="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-2.5"
                     aria-hidden="true"
@@ -369,13 +384,18 @@ const DockBooking = ({ bookingDetail }) => {
                   >
                     <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                   </svg>
-                ) : (
-                  <span class="mr-2">3</span>
-                )}
+                ) :step==2?<div className="rounded-xl bg-blue-600 mr-1">
+                  <span class="text-white mr-2 ml-2">3</span>
+                  </div>:
+                  <div className="rounded-xl bg-slate-600 mr-1">
+                  <span class="text-white text-sm mr-2 ml-2">3</span>
+                  </div>
+                }
               </span>
-              Confirmation
+              {step<2?<p className="text-slate-500">Confirmation</p>:<p className="text-blue-600">Confirmation</p>}
             </li>
           </ol>
+          </div>
           {step == 0 && (
             <form
               onSubmit={(e) => {
@@ -608,11 +628,11 @@ const DockBooking = ({ bookingDetail }) => {
                       </div>
                     </div>
                   </div>
-                <div className="w-full flex justify-center p-6">
+                <div className="w-1/2 flex justify-end p-6">
 
                     <button
                       type="submit"
-                      className="flex items-center justify-center ml-6 mr-4 sm:w-48 bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform  rounded-md hover:bg-green-600 focus:outline-none focus:bg-gray-600"
+                      className="flex items-center justify-center ml-6 w-32 bg-blue-600 px-6 py-2 leading-5 text-white transition-colors duration-200 transform  rounded-md hover:bg-blue-400 focus:outline-none focus:bg-gray-600"
                     >
                     <p className="heading-class">Next</p>
                       <FontAwesomeIcon
@@ -757,7 +777,7 @@ const DockBooking = ({ bookingDetail }) => {
                     </div>
                
                   {date && dock_type_id && dock_id && availableTimeslots && (
-                    <div class="w-5/6 grid grid-cols-1 gap-2 mt-2 sm:grid-cols-5   ">
+                    <div class="w-1/2 grid grid-cols-1 gap-2 mt-2 sm:grid-cols-5   ">
                       {availableTimeslots.map((element, index) => {
                         return (
                           <div
@@ -786,7 +806,7 @@ const DockBooking = ({ bookingDetail }) => {
                             />
                             <label
                               for="vue-checkbox-list"
-                              class=" py-1 ml-1 text-xs font-small text-gray-900 dark:text-gray-300"
+                              class=" py-1 ml-1 text-xs text-gray-900 dark:text-gray-300"
                             >
                               {element}
                             </label>
@@ -795,31 +815,40 @@ const DockBooking = ({ bookingDetail }) => {
                       })}
                     </div>
                   )}
-                  <div className="w-full flex justify-center p-6">
-                    <button
+                  <div className="flex ">
+                  <div className="w-1/2 flex justify-start p-6">
+                  <button
                       type="button"
-                      onClick={() => {
-                        setStep(step - 1);
+                      onClick={()=>{
+                        setStep(0)
                       }}
-                      className="mr-6 w-24 sm:w-48  bg-red-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-red-500 focus:outline-none focus:bg-gray-600"
+                      className="flex justify-start mr-4  w-32 border-2 border-blue-500 rounded  text-blue-600 px-2 py-1 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-slate-200 focus:outline-none focus:bg-gray-600"
                     >
+                    
                       <FontAwesomeIcon
-                        className="ml-2 text-white"
+                        className=" text-blue-600 m-1 mt-2"
                         icon={faArrowLeft}
                       ></FontAwesomeIcon>
+                      <p className="m-1 text-blue-600">Previous</p>
                     </button>
 
-                    <button
+                  </div>
+                  <div className="w-1/2 flex justify-end p-6">
+                  <button
                       type="submit"
-                      className="flex sm:justify-center sm:items-center ml-6 mr-4 w-24 sm:w-48 bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-green-600 focus:outline-none focus:bg-gray-600"
+                      className="flex justify-end sm:items-center ml-6 mr-4 w-32 bg-blue-600 px-6 py-2 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-blue-400 focus:outline-none focus:bg-gray-600"
                     >
                     <p>Next</p>
                       <FontAwesomeIcon
-                        className="ml-4 text-white"
+                        className="ml-2 mt-1 text-white"
                         icon={faArrowRight}
                       ></FontAwesomeIcon>
                     </button>
                   </div>
+                   </div>
+              
+                  
+            
                 </div>
               </form>
               <AlertDialog
@@ -835,14 +864,14 @@ const DockBooking = ({ bookingDetail }) => {
             <>
               {step == 2 && (
                 <>
-                  <form onSubmit={submitForm}>
+                  <form className="w-full sm:w-1/2 sm:mx-auto " onSubmit={submitForm}>
                     <div className="flex items-center justify-between  p-4 ">
                       <h2 className="text-2xl font-medium text-blue-600">
                         Booking Confirmation
                       </h2>
                     </div>
 
-                    <div class="relative  ">
+                    <div class="relative mt-5  ">
                       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-x-scroll">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                           <tr>
@@ -881,32 +910,37 @@ const DockBooking = ({ bookingDetail }) => {
                         </tbody>
                       </table>
                     </div>
-
-                    <div className="w-full flex justify-center mt-10">
-                    <button
+                    <div className="flex ">
+                  <div className="w-1/2 flex justify-start p-6">
+                  <button
                       type="button"
-                      onClick={() => {
-                        setStep(step - 1);
+                      onClick={()=>{
+                        setStep(1)
                       }}
-                      className="mr-6 w-24 sm:w-48  bg-red-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-red-500 focus:outline-none focus:bg-gray-600"
+                      className="flex justify-start mr-4  w-32 border-2 border-blue-500 rounded  text-blue-600 px-2 py-1 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-slate-200 focus:outline-none focus:bg-gray-600"
                     >
+                    
                       <FontAwesomeIcon
-                        className="ml-2 text-white"
+                        className=" text-blue-600 m-1 mt-2"
                         icon={faArrowLeft}
                       ></FontAwesomeIcon>
+                      <p className="m-1 text-blue-600">Previous</p>
                     </button>
 
-                    <button
+                  </div>
+                  <div className="w-1/2 flex justify-end p-6">
+                  <button
                       type="submit"
-                      className="flex sm:justify-center sm:items-center ml-6 mr-4 w-24 sm:w-48 bg-green-400 px-6 py-2 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-green-600 focus:outline-none focus:bg-gray-600"
+                      className="flex justify-end sm:items-center ml-6 mr-4 w-32 bg-blue-600 px-6 py-2 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-blue-400 focus:outline-none focus:bg-gray-600"
                     >
                     <p>Confirm</p>
                       <FontAwesomeIcon
-                        className="ml-4 text-white"
-                        icon={faArrowRight}
+                        className="ml-2 mt-1 text-white"
+                        icon={faCheckCircle}
                       ></FontAwesomeIcon>
                     </button>
                   </div>
+                   </div>
                   </form>
                 </>
               )}

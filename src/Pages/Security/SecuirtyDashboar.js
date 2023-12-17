@@ -52,12 +52,11 @@ const SecurityDashBoard = () => {
         axios.post(`${baseUrl}/dock/scan/security`,{ciphertext:data},{headers: {
             Authorization: `Bearer ${Token}`,
           }}).then((res)=>{
-            set_message(res.data.data.msg)
+            set_message(res.data.msg)
             set_open_confirm(true)
         }).catch((err)=>{
             set_open_failed_modal(true)
             set_message(err.response.data.msg)
-            // console.log("erorr",err.response.data.msg)
 
         }).finally(()=>{
             setLoading(false)
