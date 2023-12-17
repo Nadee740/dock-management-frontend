@@ -15,6 +15,23 @@ const BooktheViewingSliderComponent = ({
   setOpen,
   set_booking_details,
 }) => {
+    function getCurrentTimeSlot() {
+        // Get the current date and time
+        const currentDate = new Date();
+        const currentHours = currentDate.getHours();
+        const currentMinutes = currentDate.getMinutes();
+      
+        // Format the current time as "HH:mm"
+        const currentTime = `${String(currentHours).padStart(2, '0')}:${String(currentMinutes).padStart(2, '0')}`;
+      
+        // Find the corresponding time slot
+        const timeSlot = timeSlots.findIndex(slot => {
+          const [start, end] = slot.split(' ');
+          return currentTime >= start && currentTime < end;
+        });
+      
+        return timeSlot;
+      }
   const timeSlots = [
     "00:00 00:30",
     "00:30 01:00",
@@ -65,8 +82,9 @@ const BooktheViewingSliderComponent = ({
     "23:00 23:30",
     "23:30 00:00",
   ];
-  const [is_loading,set_is_loading]=useState(false)
-  const [clicked_index,set_clicked_index]=useState(-1);
+  const [is_loading, set_is_loading] = useState(false);
+  const [clicked_index, set_clicked_index] = useState(-1);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -74,8 +92,7 @@ const BooktheViewingSliderComponent = ({
     centerPadding: "6px",
     slidesToShow: 7,
     slidesToScroll: 1,
-    centerMode: true,
-    initialSlide: 0,
+    initialSlide: getCurrentTimeSlot(),
     responsive: [
       {
         breakpoint: 600,
@@ -102,11 +119,11 @@ const BooktheViewingSliderComponent = ({
     width: "60vw",
   };
 
-  const handleClick = async (timeslot, dock_id,index,ind) => {
+  const handleClick = async (timeslot, dock_id, index, ind) => {
     const date = new Date();
     const today = dateFormater(date);
-    set_clicked_index(index)
-   set_is_loading(true)
+    set_clicked_index(index);
+    set_is_loading(true);
     axios
       .post(`${baseUrl}/dock/get-dock-booking-by-building-date`, {
         date: dateFormater(today),
@@ -121,9 +138,10 @@ const BooktheViewingSliderComponent = ({
       })
       .catch((err) => {
         console.log(err);
-      }).finally(()=>{
-        set_clicked_index(-1)
-        set_is_loading(false)
+      })
+      .finally(() => {
+        set_clicked_index(-1);
+        set_is_loading(false);
       });
   };
   return (
@@ -148,21 +166,30 @@ const BooktheViewingSliderComponent = ({
                   </div>
                 </div>
               </li>
-              {dockStatus.map((dockstatus, index) => (
+              {dockStatus.map((dockstatus, index) => {
+                const dock_status=dockstatus.dock.current_occupied?"Occupied":"Available"
+                const className=dockstatus.dock.current_occupied?"bg-white border-2 text-red-600 border-red-600 rounded-xl":"bg-white text-green-400 border-2 border-green-400 rounded-xl"
+                return(
                 <li>
                   <div className="m-2 flex bg-blue border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                     <div class="flex-auto p-4">
                       <div class="flex flex-wrap -mx-2">
-                        <div class="flex-none w-full max-w-full px-3">
+                        <div class="flex w-full max-w-full px-3">
                           <h3 className="heading-class text-black">
                             {dockstatus.dock.dock_number}
                           </h3>
+                          <div class="flex px-3">
+                            <div className={className}>
+                              <p className="ml-2 mr-2 text-sm">{dock_status}</p>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </li>
-              ))}
+              )
+              })}
             </ul>
           </div>
           <div class="col-span-5 md:col-span-5 ">
@@ -197,14 +224,19 @@ const BooktheViewingSliderComponent = ({
                       }
                       {
                       }
-                      return is_loading && index==clicked_index?  <div>
+                      return is_loading && index == clicked_index ? (
+                        <div>
                           <div className="w-100 items-center justify-center h-12 hover:scale-105 transform transition-transform m-2 flex bg-slate-300 text-slate-800 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                            <Lottie className=""  animationData={loading_animation}/>
+                            <Lottie
+                              className=""
+                              animationData={loading_animation}
+                            />
                           </div>
-                        </div>:(
+                        </div>
+                      ) : (
                         <div
                           onClick={() => {
-                            handleClick(time, dockstatus.dock._id,index,ind);
+                            handleClick(time, dockstatus.dock._id, index, ind);
                           }}
                         >
                           <div className={`relative ${classname} group`}>
@@ -216,7 +248,7 @@ const BooktheViewingSliderComponent = ({
                               </div>
                             </div>
                           </div>
-                        </div> 
+                        </div>
                       );
                     })}
                   </div>
@@ -230,7 +262,6 @@ const BooktheViewingSliderComponent = ({
   );
 };
 {
-    
   /* 
   <div>
                           <div className="w-100 items-center justify-center h-12 hover:scale-105 transform transition-transform m-2 flex bg-slate-300 text-slate-800 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
