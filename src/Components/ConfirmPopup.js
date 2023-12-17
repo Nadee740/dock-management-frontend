@@ -17,7 +17,7 @@ import confirm_animation from '../animations/confirm_animation.json'
     >
           <Box
         sx={{
-          width: 400,
+          width: 350,
           bgcolor: 'background.paper',
           borderRadius: 8,
           p: 2,

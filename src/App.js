@@ -342,7 +342,7 @@ function App() {
                       <Route path="quality-check"
                   element={<QualityCheckPage/>}/>
                       {/* <Route path="quality/check" element={<QualityCheckPage />} /> */}
-                      <Route path="unloading/check" element={<UnloadingCheckPage />} />
+                      <Route path="unloading-check" element={<UnloadingCheckPage />} />
                       <Route path="exit" element={<WarehouseExitPage />} />
                     </Route>
                   </>

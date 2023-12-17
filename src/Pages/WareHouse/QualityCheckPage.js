@@ -16,10 +16,11 @@ import ConfirWQualityCheckStatusModal from "../../Components/Modals/confirmquali
 const QualityCheckPage = () => {
     const {setLoading,Token}=useContext(UserContext)
     const [readyToScan,setReadytoScan]=useState(false);
-    const [open_failed_modal,set_open_failed_modal]=useState(true)
-    const [message,set_message]=useState("Do you want to accept the quality of the Item Delivered ?")
+    const [open_failed_modal,set_open_failed_modal]=useState(false)
+    const [open_quality_check_modal,set_state_quality_check_modal]=useState(false)
+    const [message,set_message]=useState("")
     const [open_confirm,set_open_confirm]=useState(false)
-
+    const [data,setData]=useState(null)
     
     const handle_close_failed_pop=()=>{
         set_open_failed_modal(false)
@@ -27,22 +28,15 @@ const QualityCheckPage = () => {
     const handleClose=()=>{
         set_open_confirm(false)
     }
+    const handleCloseQAcheck=()=>{
+        set_state_quality_check_modal(false);
+    }
 
-    const captureData=(data)=>{
-        setLoading(true)
+    const captureData=()=>{
         setReadytoScan(false)
-        axios.post(`${baseUrl}/dock/scan/security`,{ciphertext:data},{headers: {
-            Authorization: `Bearer ${Token}`,
-          }}).then((res)=>{
-            set_message(res.data.msg)
-            set_open_confirm(true)
-        }).catch((err)=>{
-            set_open_failed_modal(true)
-            set_message(err.response.data.msg)
+        set_message("Do you want to accept the quality of the Item Delivered ?")
+        set_state_quality_check_modal(true);
 
-        }).finally(()=>{
-            setLoading(false)
-        })
     }
 
 
@@ -120,9 +114,17 @@ const QualityCheckPage = () => {
             delay={100}
             onScan={(res)=>{
                 if(res!=null)
-                captureData(JSON.parse(res.text));
+                {   setData(JSON.parse(res.text))
+                    captureData(JSON.parse(res.text));
+                }
+                
             }}
-            ></QrReader>:<img src={qrcodeimg} className="pl-18 h-52 w-52"></img>}
+            onError={()=>{
+                set_message("Invalid Qr code");
+                set_open_failed_modal(true)
+
+            }}
+            ></QrReader>:<img src={qrcodeimg} className="pl-18 h-52 w-52"/>}
 
             </div>
             <div className="md:col-span-3 lg:col-span-3 flew flew-row bg-green">
@@ -137,21 +139,31 @@ const QualityCheckPage = () => {
           </div>
           </section>
         </div>
-        {/* <Failed_Popup
+        <Failed_Popup
       open={open_failed_modal}
       setOpen={set_open_failed_modal}
       onClose={handle_close_failed_pop}
       message={message}
 
-      /> */}
+      />
       <ConfirmModal
         open={open_confirm}
         onClose={handleClose}
         message={message}
       />   
-      <ConfirWQualityCheckStatusModal open={open_failed_modal}
-        onClose={handleClose}
-        message={message}/>  
+      <ConfirWQualityCheckStatusModal 
+      Token={Token}
+      setLoading={setLoading}
+       open={open_quality_check_modal}
+        onClose={handleCloseQAcheck}
+        message={message}
+        set_message={set_message}
+        data={data}  
+        setReadytoScan={setReadytoScan}
+        set_open_confirm={set_open_confirm}
+        set_open_failed_modal={set_open_failed_modal}
+        />
+        
       </div>
      
     </>

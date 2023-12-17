@@ -1,8 +1,31 @@
 
 import { Box, Modal } from "@mui/material";
- const ConfirWQualityCheckStatusModal = ({message,open,setOpen,onClose}) => {
+import axios from "axios";
+import { baseUrl } from "../../utils/baseurl";
+ const ConfirWQualityCheckStatusModal = ({message,open,
+    setOpen,onClose,data,
+    setReadytoScan,setLoading,Token,
+    set_message,set_open_confirm,set_open_failed_modal}) => {
+    const submitQualityStatus=(isvalid)=>{
+        setLoading(true)
+        setReadytoScan(false)
+        axios.post(`${baseUrl}/dock/check/load?isvalid=${isvalid}`,{ciphertext:data},{headers: {
+            Authorization: `Bearer ${Token}`,
+          }}).then((res)=>{
+            set_message("Quality status updated succesfully")
+            set_open_confirm(true)
+        }).catch((err)=>{
+            set_open_failed_modal(true)
+            set_message(err.response.data.msg)
+
+        }).finally(()=>{
+            onClose()
+            setLoading(false)
+        })
+    }
     return ( 
     <Modal
+    onClose={onClose}
     className="mt-10"
     style={{
         display: 'flex',
@@ -35,7 +58,9 @@ import { Box, Modal } from "@mui/material";
             <button
             className="text-red-600 heading-class"
              type="button"
-             onClick={onClose}
+             onClick={()=>{
+                submitQualityStatus(false)
+             }}
             >
              Reject
             </button>
@@ -45,7 +70,9 @@ import { Box, Modal } from "@mui/material";
             <button
             className="text-green-600 heading-class"
              type="button"
-             onClick={onClose}
+             onClick={()=>{
+                submitQualityStatus(true)
+             }}
             >
              Accept
             </button>
