@@ -1,9 +1,10 @@
 const {
     faClock,
-    faQuestionCircle
+    faQuestionCircle,
+    faCheckCircle
   } = require("@fortawesome/free-regular-svg-icons");
   const {
-    faSearch,
+    faSearch, faTruckLoading, faWarehouse,
   } = require("@fortawesome/free-solid-svg-icons");
   
   const WareHouseLinks = [
@@ -17,21 +18,21 @@ const {
     {
         title: "Quality Check",
         to: "warehouse/quality-check",
-        icon: faSearch,
+        icon: faCheckCircle,
         color: "#b0b4ba",
         subLinks: false,
     },
     {
-        title: "Loading Check",
+        title: "Unloading Check",
         to: "warehouse/unloading-check",
-        icon: faSearch,
+        icon: faTruckLoading,
         color: "#b0b4ba",
         subLinks: false,
     },
     {
       title: "Exit Scan",
       to: "warehouse/exit",
-      icon: faClock,
+      icon: faWarehouse,
       color: "#25b922",
       subLinks: false,
     },

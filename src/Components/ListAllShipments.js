@@ -1,7 +1,11 @@
 import { faPrint, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect } from "react";
 
 const ListAllShipments = ({ iseditable,todayShipments ,name}) => {
+  useEffect(()=>{
+
+  },[])
   return (
     <>
       <div className="flex items-center justify-between p-4 ">
@@ -60,19 +64,60 @@ const ListAllShipments = ({ iseditable,todayShipments ,name}) => {
             <td className="p-3">{data.dock_id.dock_number}</td>
             <td className="p-3">{data.booked_date}</td>
             <td className="p-3 text-red-700">{data.timeslot}</td>
-            <td className="p-3 text-red-700">{data.status!="0"?(  
+            <td className="p-3 text-red-700">{data.status=="0"?(  
+               <button
+               className="h-7 w-24 flex items-center bg-orange-500 text-white p-2 rounded-md  "
+               onClick={() => {}}
+             >
+             <p className="text-sm font-semibold">Not&nbsp;Arrived</p>
+             </button>
+               ):data.status=="01"?( 
                 <button
-                  className="h-7 w-24 flex items-center bg-green-500 text-white p-2 rounded-md mr-5"
+                className="h-7 w-24 flex items-center bg-green-500 text-white p-2 rounded-md mr-5"
+                onClick={() => {}}
+              >
+              <p className="text-sm flex justify-center w-full font-semibold">Arrived</p>
+              </button>
+                ):data.status=="10"||data.status=="20"?(
+                  <button
+                className="h-7 w-24 flex items-center bg-yellow-300 text-white p-2 rounded-md mr-5"
+                onClick={() => {}}
+              >
+              <p className="text-sm flex justify-center w-full font-semibold">Late</p>
+              </button>
+                ):data.status=="03"?(
+                  <button
+                className="h-10 w-24 flex items-center bg-green-500 text-white p-2 rounded-md mr-5"
+                onClick={() => {}}
+              >
+              <p className="text-sm flex justify-center w-full font-semibold">WareHouse Cleared</p>
+              </button>
+                ):data.status=="06"?(<button
+                  className="h-15 w-24 flex items-center bg-orange-400 text-white p-2 rounded-md mr-5"
                   onClick={() => {}}
                 >
-                <p className="text-sm flex justify-center w-full font-semibold">Arrived</p>
-                </button>):( 
-                 <button
-                  className="h-7 w-24 flex items-center bg-orange-500 text-white p-2 rounded-md  "
-                  onClick={() => {}}
-                >
-                <p className="text-sm font-semibold">Not&nbsp;Arrived</p>
-                </button>)}</td>
+                <p className="text-sm flex justify-center w-full font-semibold">W/H Cleared & Waiting</p>
+                </button>):data.status=="04"?(<button
+                className="h-9 w-24 flex items-center  bg-green-500 text-white p-2 rounded-md mr-5"
+                onClick={() => {}}
+              >
+              <p className="text-sm flex justify-center  w-full font-semibold">Quality Checked</p>
+              </button>):data.status=="30"?(<button
+                className="h-14 w-24 flex items-center bg-red-500 text-white p-2 rounded-md mr-5"
+                onClick={() => {}}
+              >
+              <p className="text-sm flex justify-center  w-full font-semibold">Quality Check Failed</p>
+              </button>):data.status=="05"?(<button
+                className="h-7 w-24 flex items-center bg-green-700 text-white p-2 rounded-md mr-5"
+                onClick={() => {}}
+              >
+              <p className="text-sm flex justify-center w-full font-semibold">Unloaded</p>
+              </button>):(<button
+                className="h-7 w-24 flex items-center bg-blue-500 text-white p-2 rounded-md mr-5"
+                onClick={() => {}}
+              >
+              <p className="text-sm flex justify-center w-full font-semibold">W/H Exit</p>
+              </button>)}</td>
             {true && (
               <td className="flex">
                 {/* <button
