@@ -15,6 +15,23 @@ const BooktheViewingSliderComponent = ({
   setOpen,
   set_booking_details,
 }) => {
+    function getCurrentTimeSlot() {
+        // Get the current date and time
+        const currentDate = new Date();
+        const currentHours = currentDate.getHours();
+        const currentMinutes = currentDate.getMinutes();
+      
+        // Format the current time as "HH:mm"
+        const currentTime = `${String(currentHours).padStart(2, '0')}:${String(currentMinutes).padStart(2, '0')}`;
+      
+        // Find the corresponding time slot
+        const timeSlot = timeSlots.findIndex(slot => {
+          const [start, end] = slot.split(' ');
+          return currentTime >= start && currentTime < end;
+        });
+      
+        return timeSlot;
+      }
   const timeSlots = [
     "00:00 00:30",
     "00:30 01:00",
@@ -67,6 +84,7 @@ const BooktheViewingSliderComponent = ({
   ];
   const [is_loading, set_is_loading] = useState(false);
   const [clicked_index, set_clicked_index] = useState(-1);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -74,8 +92,7 @@ const BooktheViewingSliderComponent = ({
     centerPadding: "6px",
     slidesToShow: 7,
     slidesToScroll: 1,
-    centerMode: true,
-    initialSlide: 0,
+    initialSlide: getCurrentTimeSlot(),
     responsive: [
       {
         breakpoint: 600,
