@@ -79,6 +79,10 @@ const WareHouseDashBoard = () => {
             <div className=" flex items-center justify-center">
             {readyToScan?<QrReader
             delay={100}
+            onError={()=>{
+                set_message("Please Grant permission to access camera")
+                set_open_failed_modal(true)
+            }}
             onScan={(res)=>{
                 if(res!=null)
                 handleQRScan(JSON.parse(res.text));
