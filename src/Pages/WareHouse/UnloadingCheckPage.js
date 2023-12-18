@@ -58,10 +58,14 @@ const UnloadingCheckPage= () => {
           <div className=" grid grid-cols-1 md:grid-cols-4">
             <div className=" flex items-center justify-center">
             {readyToScan?<QrReader
-            delay={100}
+            delay={50}
             onScan={(res)=>{
                 if(res!=null)
                 handleQRScan(JSON.parse(res.text));
+            }}
+            onError={()=>{
+                set_message("Please Grant permission to access camera")
+                set_open_failed_modal(true)
             }}
             ></QrReader>:<img src={qrcodeimg} className="pl-18 h-52 w-52"></img>}
 

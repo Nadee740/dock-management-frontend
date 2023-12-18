@@ -1,4 +1,4 @@
-import { faCar } from "@fortawesome/free-solid-svg-icons";
+import { faCancel, faCar, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext, useState } from "react";
 import { UserContext } from "../Contexts/UserContexts";
@@ -123,10 +123,10 @@ const AddNewVehicleForm = () => {
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       <form onSubmit={SubmitButton}>
-        <div class="">
+        <div class="flex flex-col w-full sm:justify-center sm:items-center">
           {user.userType == "admin" && (
-            <div className="mb-2">
-              <label class="text-black dark:text-gray-200" for="Vechicletype">
+            <div className="mb-2 sm:w-1/2">
+              <label class="heading-class text-black dark:text-gray-200" for="Vechicletype">
                 Supplier
               </label>
               <select
@@ -135,7 +135,7 @@ const AddNewVehicleForm = () => {
                   setSelectedSupplier(e.target.value)
                 }}
                 id="Vechicletype"
-                class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
               >
                 <option value={"invalid"} >---Select Supplier ---</option>
                 
@@ -146,8 +146,8 @@ const AddNewVehicleForm = () => {
               </select>
             </div>
           )}
-          <div className="mb-2">
-            <label class="text-black dark:text-gray-200" for="vehiclenumber">
+          <div className="mb-2 sm:w-1/2">
+            <label class="heading-class text-black dark:text-gray-200" for="vehiclenumber">
               Vehicle Number
             </label>
             <input
@@ -159,11 +159,11 @@ const AddNewVehicleForm = () => {
               onChange={(e) => {
                 setVehicleNo(e.target.value);
               }}
-              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring border-2 border-slate-400"
+              class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring border-2 border-slate-400"
             />
           </div>
-          <div className="mb-2">
-            <label class="text-black dark:text-gray-200" for="Vechicletype">
+          <div className="mb-2 sm:w-1/2">
+            <label class="heading-class text-black dark:text-gray-200 heading-class" for="Vechicletype">
               Vehicle Type
             </label>
             <select
@@ -172,7 +172,7 @@ const AddNewVehicleForm = () => {
                 setVehicleType(e.target.value);
               }}
               id="Vechicletype"
-              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             >
               <option>---Choose Vehicle Type ---</option>
               <option value="10 Footer">10 Footer</option>
@@ -191,8 +191,8 @@ const AddNewVehicleForm = () => {
             </select>
           </div>
 
-          <div className="mb-2">
-            <label class="text-blackdark:text-gray-200" for="drivername">
+          <div className="mb-2 sm:w-1/2">
+            <label class="heading-class text-blackdark:text-gray-200" for="drivername">
               Driver Name
             </label>
             <input
@@ -204,12 +204,12 @@ const AddNewVehicleForm = () => {
               onChange={(e) => {
                 setDriverName(e.target.value);
               }}
-              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
 
-          <div className="mb-2">
-            <label class="text-blackdark:text-gray-200" for="drivernumber">
+          <div className="mb-2 sm:w-1/2">
+            <label class="heading-class text-blackdark:text-gray-200" for="drivernumber">
               Driver Number
             </label>
             <input
@@ -220,12 +220,12 @@ const AddNewVehicleForm = () => {
               onChange={(e) => {
                 setDriverNo(e.target.value);
               }}
-              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
 
-          <div className="mb-2">
-            <label class="text-blackdark:text-gray-200" for="drivernrif">
+          <div className="mb-2 sm:w-1/2">
+            <label class="heading-class text-blackdark:text-gray-200" for="drivernrif">
               Driver NRIF/FIN
             </label>
             <input
@@ -237,22 +237,42 @@ const AddNewVehicleForm = () => {
               onChange={(e) => {
                 setDriverNRIC(e.target.value);
               }}
-              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
-        </div>
+            
+        <div className="flex justify-between sm:w-1/2 ">
+                  <div className="flex justify-start pr-6 pt-6 pb-6 ">
+                  <button
+                      type="button "
+                      onClick={()=>{
+                      }}
+                      className="flex justify-start mr-4  w-32 border-2 border-blue-500 rounded  text-blue-600 px-2 py-1 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-slate-200 focus:outline-none focus:bg-gray-600"
+                    >
+                    
+                      <FontAwesomeIcon
+                        className=" text-blue-600 m-1 mt-2"
+                        icon={faCancel}
+                      ></FontAwesomeIcon>
+                      <p className="m-1 text-blue-600">Cancel</p>
+                    </button>
 
-        <div class="flex justify-end mt-6">
-          <button
-            type="submit"
-            class="mr-6 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-green-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
-          >
-            Submit
-          </button>
-          <button class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
-            <Link to="/vehicle-update"> Cancel</Link>
-          </button>
+                  </div>
+                  <div className="flex pt-6 pb-6 pl-6 ">
+                  <button
+                      type="submit"
+                      className="flex justify-end sm:items-center ml-6  w-32 bg-blue-600 px-8 py-2 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-blue-400 focus:outline-none focus:bg-gray-600"
+                    >
+                    <p>Submit</p>
+                      <FontAwesomeIcon
+                        className="ml-2 mt-1 text-white"
+                        icon={faCheckCircle}
+                      ></FontAwesomeIcon>
+                    </button>
+                  </div>
+                   </div>
         </div>
+      
       </form>
       <AlertDialog
         open={open1}

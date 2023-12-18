@@ -151,6 +151,10 @@ const SecurityDashBoard = () => {
                 }
                
             }}
+            onError={()=>{
+                set_message("Please Grant permission to access camera")
+                set_open_failed_modal(true)
+            }}
             ></QrReader>:<img src={qrcodeimg} className="pl-18 h-52 w-52"></img>}
 
             </div>
