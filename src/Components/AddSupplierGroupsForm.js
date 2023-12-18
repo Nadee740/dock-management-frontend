@@ -7,6 +7,7 @@ import { baseUrl } from "../utils/baseurl";
 import AlertDialog from "./AlertDialogue";
 import ConfirmDialog from "./ConfirmDialog";
 import { Link } from "react-router-dom";
+import { faCancel, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 const AddSupplierGroupsForm= ({dockTypes,buildings}) => {
     const timeSlots=[
       '00:00 00:30', '00:30 01:00', '01:00 01:30',
@@ -106,9 +107,9 @@ const AddSupplierGroupsForm= ({dockTypes,buildings}) => {
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       <form onSubmit={SubmitButton}>
-        <div class="">
-        <div className="mb-2">
-            <label class="text-blackdark:text-gray-200" for="name">
+        <div class="flex flex-col w-full sm:justify-center sm:items-center">
+        <div className="mb-2 sm:w-1/2">
+            <label class="heading-class text-blackdark:text-gray-200" for="name">
               Group Name
             </label>
             <input
@@ -120,12 +121,12 @@ const AddSupplierGroupsForm= ({dockTypes,buildings}) => {
               placeholder="User Name"
               id="name"
               type="text"
-              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
-          <div>
-                    <label
-                      class="flex text-black dark:text-gray-200"
+          <div className="mb-2 sm:w-1/2">
+        <label
+                      class=" heading-class flex text-black dark:text-gray-200"
                       for="building"
                     >
                       Building Name<p className="pl-1 text-red-600">*</p>
@@ -149,8 +150,16 @@ const AddSupplierGroupsForm= ({dockTypes,buildings}) => {
                       })}
                     </select>
                   </div>
-          <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">Dock Type</h3>
-<div class="w-5/6 grid grid-cols-1 gap-2 mt-2 sm:grid-cols-4  ">
+                  <div className="sm:w-1/2">
+                  <label
+                      class="heading-class flex text-black dark:text-gray-200"
+                      for="building"
+                    >
+                      Dock Type<p className="pl-1 text-red-600">*</p>
+                    </label>
+                  </div>
+               
+                  <div class="w-1/2 grid grid-cols-1 gap-2 mt-2 sm:grid-cols-4  ">
                     {dockTypes.map((element, index) => {
                       return (
                         <div
@@ -192,8 +201,15 @@ const AddSupplierGroupsForm= ({dockTypes,buildings}) => {
                       );
                     })}
                   </div>
-                  <h3 class="mb-4 mt-2 font-semibold text-gray-900 dark:text-white">Alloted time</h3>
-                  <div class="w-5/6 grid grid-cols-1 gap-2 mt-2 sm:grid-cols-5  ">
+                  <div className="sm:w-1/2">
+                  <label
+                      class="heading-class flex text-black dark:text-gray-200"
+                      for="building"
+                    >
+                      Alloted Time<p className="pl-1 text-red-600">*</p>
+                    </label>
+                  </div>
+                  <div class="w-1/2 grid grid-cols-1 gap-2 mt-2 sm:grid-cols-4  ">
                     {timeSlots.map((element, index) => {
                       return (
                         <div
@@ -234,8 +250,8 @@ const AddSupplierGroupsForm= ({dockTypes,buildings}) => {
                       );
                     })}
                   </div>
-          <div className="mb-2 pt-2 ">
-          <label class="text-black dark:text-gray-200" for="building">
+          <div className="mb-2 sm:w-1/2 mt-4">
+          <label class="heading-class text-black dark:text-gray-200" for="building">
             Single QR multi entry
           </label>
           <div id="building" class="flex items-center m-4 ">
@@ -277,16 +293,37 @@ const AddSupplierGroupsForm= ({dockTypes,buildings}) => {
           
           
         </div>
-         </div>
+        <div className="flex justify-between sm:w-1/2 ">
+                  <div className="flex justify-start pr-6 pt-6 pb-6 ">
+                  <button
+                      type="button "
+                      onClick={()=>{
+                      }}
+                      className="flex justify-start mr-4  w-32 border-2 border-blue-500 rounded  text-blue-600 px-2 py-1 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-slate-200 focus:outline-none focus:bg-gray-600"
+                    >
+                    
+                      <FontAwesomeIcon
+                        className=" text-blue-600 m-1 mt-2"
+                        icon={faCancel}
+                      ></FontAwesomeIcon>
+                      <p className="m-1 text-blue-600">Cancel</p>
+                    </button>
 
-        <div class="flex justify-end mt-6">
-          <button type="submit" class="mr-6 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-green-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
-            Submit
-          </button>
-          <button type="button"  class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
-            <Link to="/admin/supplier/groups">Cancel</Link>
-          </button>
-        </div>
+                  </div>
+                  <div className="flex pt-6 pb-6 pl-6 ">
+                  <button
+                      type="submit"
+                      className="flex justify-end sm:items-center ml-6  w-32 bg-blue-600 px-8 py-2 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-blue-400 focus:outline-none focus:bg-gray-600"
+                    >
+                    <p>Submit</p>
+                      <FontAwesomeIcon
+                        className="ml-2 mt-1 text-white"
+                        icon={faCheckCircle}
+                      ></FontAwesomeIcon>
+                    </button>
+                  </div>
+                   </div>
+         </div>
       </form>
       <AlertDialog
         open={open1}

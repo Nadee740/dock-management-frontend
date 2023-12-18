@@ -7,6 +7,7 @@ import { baseUrl } from "../utils/baseurl";
 import AlertDialog from "./AlertDialogue";
 import ConfirmDialog from "./ConfirmDialog";
 import { Link } from "react-router-dom";
+import { faCancel, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 const AddAdminUserForm = () => {
     const {setLoading,Token}=useContext(UserContext);
     const [companies,setCompanies]=useState([]);
@@ -136,9 +137,9 @@ const AddAdminUserForm = () => {
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       <form onSubmit={SubmitButton}>
-        <div class="">
-          <div className="mb-2">
-            <label class="text-black dark:text-gray-200" for="Vechicletype">
+        <div class="flex flex-col w-full sm:justify-center sm:items-center">
+          <div className="mb-2 sm:w-1/2">
+            <label class="heading-class text-black dark:text-gray-200" for="Vechicletype">
               Role
             </label>
             <select
@@ -146,15 +147,15 @@ const AddAdminUserForm = () => {
                 setRole(e.target.value)
             }}
               id="Vechicletype"
-              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             >
               <option value={-1}>---Choose Role ---</option>
               <option value={"Administrator"}>Administrator</option>
               <option value={"Company"}>Company</option>
             </select>
           </div>
-          <div className="mb-2">
-            <label class="text-black dark:text-gray-200" for="Vechicletype">
+          <div className="mb-2 sm:w-1/2">
+            <label class="heading-class text-black dark:text-gray-200" for="Vechicletype">
               Company
             </label>
             <select
@@ -162,7 +163,7 @@ const AddAdminUserForm = () => {
                 setCompany(e.target.value)
             }}
               id="Vechicletype"
-              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             >
               <option value={-1}>---Choose Company ---</option>
               {
@@ -174,43 +175,8 @@ const AddAdminUserForm = () => {
            
             </select>
           </div>
-         {/* <div className="mb-2 pt-2 ">
-          <label class="text-black dark:text-gray-200" for="building">
-            Alloted Building
-          </label>
-          <div id="building" class="flex items-center m-4 ">
-            <input
-              id="default-radio-1"
-              type="radio"
-              value=""
-              name="default-radio"
-              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-            />
-            <label
-              for="default-radio-1"
-              class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >
-              Inflight Catering Centre 1 (ICC1)
-            </label>
-          </div>
-          <div class="flex items-center m-4">
-             <input
-              id="default-radio-1"
-              type="radio"
-              value=""
-              name="default-radio"
-              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-            />
-            <label
-              for="default-radio-1"
-              class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >
-              Inflight Catering Centre 1 (ICC1)
-            </label>
-          </div>
-        </div> */}
-          <div className="mb-2">
-            <label class="text-black dark:text-gray-200" for="acra">
+          <div className="mb-2 sm:w-1/2">
+            <label class="heading-clsas text-black dark:text-gray-200" for="acra">
               ACRA / UN Reg. No
             </label>
             <input
@@ -221,12 +187,12 @@ const AddAdminUserForm = () => {
               placeholder="ACRA / UN Reg. No"
               id="acrar"
               type="text"
-              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring border-2 border-slate-400"
+              class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring border-2 border-slate-400"
             />
           </div>
 
-          <div className="mb-2">
-            <label class="text-blackdark:text-gray-200" for="name">
+          <div className="mb-2 sm:w-1/2">
+            <label class="heading-class text-blackdark:text-gray-200" for="name">
               User Name
             </label>
             <input
@@ -237,12 +203,12 @@ const AddAdminUserForm = () => {
               placeholder="User Name"
               id="name"
               type="text"
-              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
 
-          <div className="mb-2">
-            <label class="text-blackdark:text-gray-200" for="email1">
+          <div className="mb-2 sm:w-1/2">
+            <label class="heading-class text-blackdark:text-gray-200" for="email1">
               Email Address 1
             </label>
             <input
@@ -253,12 +219,12 @@ const AddAdminUserForm = () => {
               placeholder="Email address 1"
               id="drivernumber"
               type="text"
-              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
 
-          <div className="mb-2">
-            <label class="text-blackdark:text-gray-200" for="email2">
+          <div className="mb-2 sm:w-1/2">
+            <label class="heading-class text-blackdark:text-gray-200" for="email2">
               Email Address 2
             </label>
             <input
@@ -269,10 +235,10 @@ const AddAdminUserForm = () => {
               placeholder="Email Address 2"
               id="email2"
               type="text"
-              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
-          <div className="mb-2">
+          <div className="mb-2 sm:w-1/2">
             <label class="text-blackdark:text-gray-200" for="phonenumberf">
               Phone Number
             </label>
@@ -284,11 +250,11 @@ const AddAdminUserForm = () => {
               placeholder="Phone Number"
               id="phonenumber"
               type="text"
-              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
-          <div className="mb-2">
-            <label class="text-blackdark:text-gray-200" for="password">
+          <div className="mb-2 sm:w-1/2">
+            <label class="heading-class text-blackdark:text-gray-200" for="password">
               Password
             </label>
             <input
@@ -298,11 +264,11 @@ const AddAdminUserForm = () => {
               placeholder="Password"
               id="password"
               type="password"
-              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
-          <div className="mb-2">
-            <label class="text-blackdark:text-gray-200" for="repass">
+          <div className="mb-2 sm:w-1/2">
+            <label class="heading-class text-blackdark:text-gray-200" for="repass">
               ReType Password
             </label>
             <input
@@ -313,21 +279,42 @@ const AddAdminUserForm = () => {
               placeholder="Retype Password"
               id="phonenumber"
               type="password"
-              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
-       
+          <div className="flex justify-between sm:w-1/2 ">
+                  <div className="flex justify-start pr-6 pt-6 pb-6 ">
+                  <button
+                      type="button "
+                      onClick={()=>{
+                      }}
+                      className="flex justify-start mr-4  w-32 border-2 border-blue-500 rounded  text-blue-600 px-2 py-1 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-slate-200 focus:outline-none focus:bg-gray-600"
+                    >
+                    
+                      <FontAwesomeIcon
+                        className=" text-blue-600 m-1 mt-2"
+                        icon={faCancel}
+                      ></FontAwesomeIcon>
+                      <p className="m-1 text-blue-600">Cancel</p>
+                    </button>
+
+                  </div>
+                  <div className="flex pt-6 pb-6 pl-6 ">
+                  <button
+                      type="submit"
+                      className="flex justify-end sm:items-center ml-6  w-32 bg-blue-600 px-8 py-2 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-blue-400 focus:outline-none focus:bg-gray-600"
+                    >
+                    <p>Submit</p>
+                      <FontAwesomeIcon
+                        className="ml-2 mt-1 text-white"
+                        icon={faCheckCircle}
+                      ></FontAwesomeIcon>
+                    </button>
+                  </div>
+                   </div>
         
         </div>
 
-        <div class="flex justify-end mt-6">
-          <button type="submit" class="mr-6 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-green-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
-            Submit
-          </button>
-          <button type="button"  class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
-            <Link to="/admin/users/listCompanyAdminUsers">Cancel</Link>
-          </button>
-        </div>
       </form>
       <AlertDialog
         open={open1}
