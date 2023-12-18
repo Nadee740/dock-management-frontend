@@ -263,7 +263,7 @@ const AddNewVehicleForm = () => {
                       type="submit"
                       className="flex justify-end sm:items-center ml-6  w-32 bg-blue-600 px-8 py-2 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-blue-400 focus:outline-none focus:bg-gray-600"
                     >
-                    <p>Next</p>
+                    <p>Submit</p>
                       <FontAwesomeIcon
                         className="ml-2 mt-1 text-white"
                         icon={faCheckCircle}
