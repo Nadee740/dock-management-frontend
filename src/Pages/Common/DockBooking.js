@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, json } from "react-router-dom";
 import { UserContext } from "../../Contexts/UserContexts";
 import axios from "axios";
 import { baseUrl } from "../../utils/baseurl";
@@ -8,13 +7,9 @@ import { faCheckCircle, faEdit } from "@fortawesome/free-regular-svg-icons";
 import {
   faArrowLeft,
   faArrowRight,
-  faBackward,
-  faCheck,
-  faDiagramNext,
 } from "@fortawesome/free-solid-svg-icons";
 import CryptoJS from "crypto-js";
 import AlertDialog from "../../Components/AlertDialogue";
-import { Step } from "@mui/material";
 
 const dateConverter = (inputdate) => {
   const date = new Date(inputdate);
@@ -315,7 +310,7 @@ const DockBooking = ({ bookingDetail }) => {
               <span class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
                 {step >= 1 ? (
                   <svg
-                    class="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-2.5"
+                    className="text-green-400 w-3.5 h-3.5 sm:w-4 sm:h-4 mr-2.5"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
@@ -341,7 +336,7 @@ const DockBooking = ({ bookingDetail }) => {
               <span class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
                 {step > 1 ? (
                   <svg
-                    class="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-2.5"
+                    className="bg-green-400 w-3.5 h-3.5 sm:w-4 sm:h-4 mr-2.5"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
@@ -376,7 +371,7 @@ const DockBooking = ({ bookingDetail }) => {
               <span class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
                 {step >2 ? (
                   <svg
-                    class="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-2.5"
+                    class=" bg-green-400 w-3.5 h-3.5 sm:w-4 sm:h-4 mr-2.5"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
@@ -815,10 +810,10 @@ const DockBooking = ({ bookingDetail }) => {
                       })}
                     </div>
                   )}
-                  <div className="flex ">
-                  <div className="w-1/2 flex justify-start p-6">
+                  <div className="flex justify-between sm:w-1/2  ">
+                  <div className="flex justify-start pr-6 pt-6 pb-6 ">
                   <button
-                      type="button"
+                      type="button "
                       onClick={()=>{
                         setStep(0)
                       }}
@@ -833,10 +828,10 @@ const DockBooking = ({ bookingDetail }) => {
                     </button>
 
                   </div>
-                  <div className="w-1/2 flex justify-end p-6">
+                  <div className="flex pt-6 pb-6 pl-6 ">
                   <button
                       type="submit"
-                      className="flex justify-end sm:items-center ml-6 mr-4 w-32 bg-blue-600 px-6 py-2 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-blue-400 focus:outline-none focus:bg-gray-600"
+                      className="flex justify-end sm:items-center ml-6  w-32 bg-blue-600 px-8 py-2 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-blue-400 focus:outline-none focus:bg-gray-600"
                     >
                     <p>Next</p>
                       <FontAwesomeIcon
