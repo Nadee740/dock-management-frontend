@@ -322,6 +322,7 @@ const BooktheViewingComponent = ({ buildings }) => {
         )
         .then(function (response) {
           if (response.data != "") {
+            console.log(response.data);
             setDockStatus(response.data.data);
             setLoading(false);
           } else {

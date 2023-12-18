@@ -69,6 +69,7 @@ import { CategoryScale } from "chart.js";
 import QualityCheckPage from "./Pages/WareHouse/QualityCheckPage";
 import UnloadingCheckPage from "./Pages/WareHouse/UnloadingCheckPage";
 import WarehouseExitPage from "./Pages/WareHouse/WarehouseExitPage";
+import WarehouseCheckoutPage from "./Pages/WareHouse/WarehouseCheckOutPage";
 function App() {
   const [user, setUser] = useState(null);
   const [Token, setToken] = useState(null);
@@ -344,6 +345,7 @@ function App() {
                       {/* <Route path="quality/check" element={<QualityCheckPage />} /> */}
                       <Route path="unloading-check" element={<UnloadingCheckPage />} />
                       <Route path="exit" element={<WarehouseExitPage />} />
+                      <Route path="checkout" element={<WarehouseCheckoutPage />} />
                     </Route>
                   </>
                 )}

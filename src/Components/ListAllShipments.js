@@ -112,11 +112,21 @@ const ListAllShipments = ({ iseditable,todayShipments ,name}) => {
                 onClick={() => {}}
               >
               <p className="text-sm flex justify-center w-full font-semibold">Unloaded</p>
-              </button>):(<button
+              </button>):data.status=="0E"||data.status=="3E"?(<button
                 className="h-7 w-24 flex items-center bg-blue-500 text-white p-2 rounded-md mr-5"
                 onClick={() => {}}
               >
               <p className="text-sm flex justify-center w-full font-semibold">W/H Exit</p>
+              </button>):data.status=="0F"?(<button
+                className="h-7 w-24 flex items-center bg-blue-500 text-white p-2 rounded-md mr-5"
+                onClick={() => {}}
+              >
+              <p className="text-sm flex justify-center w-full font-semibold">Checkout Success</p>
+              </button>):(<button
+                className="h-7 w-24 flex items-center bg-blue-500 text-white p-2 rounded-md mr-5"
+                onClick={() => {}}
+              >
+              <p className="text-sm flex justify-center w-full font-semibold">Checkout Load Rejected</p>
               </button>)}</td>
             {true && (
               <td className="flex">
