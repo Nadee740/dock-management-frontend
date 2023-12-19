@@ -22,6 +22,7 @@ const SupplierDashBoard = () => {
   const { setLoading, Token } = useContext(UserContext);
   const [shipments, setShipments] = useState();
   const [buildings, setBuildings] = useState(null);
+  const [dashboardStatistics, setDashboardStatistics] = useState(null);
 
   useEffect(() => {
     setLoading(true);
@@ -62,6 +63,26 @@ const SupplierDashBoard = () => {
         console.log(err);
       });
   }, []);
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get(`${baseUrl}/statistics/get-dashboard-statistics`, {
+        headers: {
+          Authorization: `Bearer ${Token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data.data)
+        setDashboardStatistics(res.data.data)
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+  
   return (
     <>
       <div className="w-full admin-dashboard">
@@ -199,22 +220,25 @@ const SupplierDashBoard = () => {
         <div class="bg-[#F4F5FA] m-6 rounded-xl border border-gray-300">
           {buildings && <BooktheViewingComponent buildings={buildings} />}
         </div>
-        <div className="w-full m-2  grid grid-cols-1 sm:grid-cols-2 gap-3">
+        { dashboardStatistics &&  <div className="mt-2">
+        {dashboardStatistics.orders_per_time_slot.length>0 && <div className="w-full m-2  grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="flex justify-center items-center w-full">
+            <NeumorphicDoughnutChart data={dashboardStatistics.orders_per_time_slot} totol_no_of_orders={dashboardStatistics.total_no_of_orders} />
+          </div>
           <div>
-            <BarChart />
+            <LeveledBoxedComponent data={dashboardStatistics}/>
+          </div>
+        </div>}
+        {dashboardStatistics.no_of_orders_per_day.length>0 && <div className="w-full m-2  grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <BarChart data={dashboardStatistics.no_of_orders_per_day}/>
           </div>
           <div>
             <LineChart />
           </div>
-        </div>
-        <div className="w-full m-2  grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div className="flex justify-center items-center w-full">
-            <NeumorphicDoughnutChart />
-          </div>
-          <div>
-            <LeveledBoxedComponent />
-          </div>
-        </div>
+        </div>}
+       
+        </div>}
 
         <div className="mb-20  md:m-20 lg:m-20 w-full md:w-5/6 lg:w-5/6 h-2/5 border-2 flex justify-center items-center bg-neutral-200 border-slate-200">
           <p className="1-xl text-slate-400">

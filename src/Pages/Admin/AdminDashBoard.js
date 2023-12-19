@@ -244,22 +244,23 @@ const AdminDashBoard_1 = () => {
           {buildings && <BooktheViewingComponent buildings={buildings} />}
         </div>
         { dashboardStatistics &&  <div className="mt-2">
-        <div className="w-full m-2  grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {dashboardStatistics.orders_per_time_slot.length>0 && <div className="w-full m-2  grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div className="flex justify-center items-center w-full">
             <NeumorphicDoughnutChart data={dashboardStatistics.orders_per_time_slot} totol_no_of_orders={dashboardStatistics.total_no_of_orders} />
           </div>
           <div>
             <LeveledBoxedComponent data={dashboardStatistics}/>
           </div>
-        </div>
-        <div className="w-full m-2  grid grid-cols-1 sm:grid-cols-2 gap-3">
+        </div>}
+        {dashboardStatistics.no_of_orders_per_day.length>0 && <div className="w-full m-2  grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <BarChart data={dashboardStatistics.no_of_orders_per_day}/>
           </div>
           <div>
             <LineChart />
           </div>
-        </div>
+        </div>}
+       
         </div>}
 
         <div className="mt-4">
