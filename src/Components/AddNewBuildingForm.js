@@ -1,5 +1,5 @@
-import { faBuilding } from "@fortawesome/free-regular-svg-icons";
-import { faCar } from "@fortawesome/free-solid-svg-icons";
+import { faBuilding, faCheckCircle } from "@fortawesome/free-regular-svg-icons";
+import { faCar, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../Contexts/UserContexts";
@@ -104,12 +104,12 @@ const AddNewBuildingForm = () => {
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       <form onSubmit={SubmitButton} >
-        <div class="">
-            <div className="mb-2">
+        <div class="flex flex-col w-full sm:justify-center sm:items-center">
+            <div className="mb-2 sm:w-1/2">
                 <label class="text-black dark:text-gray-200" for="companyname">Building Name</label>
                 <input required value={building}  onChange={(e)=>{
                     setBuilding(e.target.value)
-                }} placeholder="Building Name" id="companyname" type="text" class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring border-2 border-slate-400"/>
+                }} placeholder="Building Name" id="companyname" type="text" class="block w-full  px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"/>
             </div>
             
             {/* <div className="mb-2">
@@ -126,19 +126,44 @@ const AddNewBuildingForm = () => {
                     
                 </select>
             </div> */}
-             </div>
-             <div >
+          
+             <div className="mb-2 sm:w-1/2" >
                 <label class="text-black dark:text-gray-200" for="buildingaddress">Building Address</label>
                 <textarea required value={building_address} onChange={(e)=>{
                     setBuildingAddress(e.target.value)
-                }} id="buildingaddres" type="textarea" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"></textarea>
+                }} id="buildingaddres" type="textarea"  class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring "></textarea>
             </div>
 
-        <div class="flex justify-end mt-6">
-            <button type="submit"  class="mr-6 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-green-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">Submit</button>
-            <button class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
-          <Link to="/building"> Cancel</Link>
-          </button>
+        <div className="flex justify-between sm:w-1/2 ">
+                  <div className="flex justify-start pr-6 pt-6 pb-6 ">
+                  <button
+                      type="cancel"
+                      onClick={()=>{
+                      }}
+                      className="flex justify-start mr-4  w-32 border-2 border-blue-500 rounded  text-blue-600 px-2 py-1 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-slate-200 focus:outline-none focus:bg-gray-600"
+                    >
+                    
+                      <FontAwesomeIcon
+                        className=" text-blue-600 m-1 mt-2"
+                        icon={faXmark}
+                      ></FontAwesomeIcon>
+                      <p className="m-1 text-blue-600"><Link to="/building">Cancel</Link></p>
+                    </button>
+
+                  </div>
+                  <div className="flex pt-6 pb-6 pl-6 ">
+                  <button
+                      type="submit"
+                      className="flex justify-end sm:items-center ml-6  w-32 bg-blue-600 px-8 py-2 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-blue-400 focus:outline-none focus:bg-gray-600"
+                    >
+                    <p>Submit</p>
+                      <FontAwesomeIcon
+                        className="ml-2 mt-1 text-white"
+                        icon={faCheckCircle}
+                      ></FontAwesomeIcon>
+                    </button>
+                  </div>
+                   </div>
         </div>
     </form>
     <AlertDialog

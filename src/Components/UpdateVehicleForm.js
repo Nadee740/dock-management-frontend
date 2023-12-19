@@ -1,4 +1,4 @@
-import { faCar } from "@fortawesome/free-solid-svg-icons";
+import { faCar, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../Contexts/UserContexts";
@@ -7,6 +7,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import AlertDialog from "./AlertDialogue";
 import ConfirmDialog from "./ConfirmDialog";
+import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 
 const UpdateVehicleForm = ({vehicleData}) => {
   const {setLoading}=useContext(UserContext);
@@ -79,8 +80,8 @@ const UpdateVehicleForm = ({vehicleData}) => {
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       <form onSubmit={submit}>
-        <div class="">
-          <div className="mb-2">
+        <div class="flex flex-col w-full sm:justify-center sm:items-center">
+          <div className="mb-2 sm:w-1/2">
             <label class="text-black dark:text-gray-200" for="vehiclenumber">
               Vehicle Number
             </label>
@@ -92,10 +93,10 @@ const UpdateVehicleForm = ({vehicleData}) => {
             onChange={(e)=>{
                 setVehicleNo(e.target.value)
             }}
-              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring border-2 border-slate-400"
+              class="block  w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring border-2 border-slate-400"
             />
           </div>
-          <div className="mb-2">
+          <div className="mb-2 sm:w-1/2">
             <label class="text-black dark:text-gray-200" for="Vechicletype">
               Vehicle Type
             </label>
@@ -105,7 +106,7 @@ const UpdateVehicleForm = ({vehicleData}) => {
             setVehicleType(e.target.value)
             }}
               id="Vechicletype"
-              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             >
               {/* <option>---Choose Vehicle Type ---</option> */}
               {vehicleTypeList.map((type,ind)=>(
@@ -118,7 +119,7 @@ const UpdateVehicleForm = ({vehicleData}) => {
             </select>
           </div>
 
-          <div className="mb-2">
+          <div className="mb-2 sm:w-1/2">
             <label class="text-blackdark:text-gray-200" for="drivername">
               Driver Name
             </label>
@@ -130,11 +131,11 @@ const UpdateVehicleForm = ({vehicleData}) => {
             onChange={(e)=>{
                 setDriverName(e.target.value)
             }}
-              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
 
-          <div className="mb-2">
+          <div className="mb-2 sm:w-1/2">
             <label class="text-blackdark:text-gray-200" for="drivernumber">
               Driver Number
             </label>
@@ -146,11 +147,11 @@ const UpdateVehicleForm = ({vehicleData}) => {
             onChange={(e)=>{
                 setDriverNo(e.target.value)
             }}
-              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
 
-          <div className="mb-2">
+          <div className="mb-2 sm:w-1/2">
             <label class="text-blackdark:text-gray-200" for="drivernrif">
               Driver NRIF/FIN
             </label>
@@ -162,19 +163,42 @@ const UpdateVehicleForm = ({vehicleData}) => {
             onChange={(e)=>{
                 setDriverNRIC(e.target.value)
             }}
-              class="block w-3/5 md:2/5 lg:2/5 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
         </div>
 
-        <div class="flex justify-end mt-6">
-          <button  type="submit" class="mr-6 px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-green-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
-            Update Vehicle
-          </button>
-          <button class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
-          <Link to="/vehicle-update"> Cancel</Link>
-          </button>
-        </div>
+     
+        <div className="flex justify-between sm:w-1/2 ">
+                  <div className="flex justify-start pr-6 pt-6 pb-6 ">
+                  <button
+                      type="cancel"
+                      onClick={()=>{
+                      }}
+                      className="flex justify-start mr-4  w-32 border-2 border-blue-500 rounded  text-blue-600 px-2 py-1 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-slate-200 focus:outline-none focus:bg-gray-600"
+                    >
+                    
+                    <FontAwesomeIcon
+                        className=" text-blue-600 m-1 mt-2"
+                        icon={faXmark}
+                      ></FontAwesomeIcon>
+                      <p className="m-1 text-blue-600"><Link to="/vehicle-update">Cancel</Link></p>
+                    </button>
+
+                  </div>
+                  <div className="flex pt-6 pb-6 pl-6 ">
+                  <button
+                      type="submit"
+                      className="flex justify-end sm:items-center ml-6  w-32 bg-blue-600 px-8 py-2 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-blue-400 focus:outline-none focus:bg-gray-600"
+                    >
+                    <p>Update</p>
+                      <FontAwesomeIcon
+                        className="ml-2 mt-1 text-white"
+                        icon={faCheckCircle}
+                      ></FontAwesomeIcon>
+                    </button>
+                  </div>
+                   </div>
       </form>
       <AlertDialog
         open={open1}

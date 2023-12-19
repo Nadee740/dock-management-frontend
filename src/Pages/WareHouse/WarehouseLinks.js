@@ -36,6 +36,14 @@ const {
       color: "#25b922",
       subLinks: false,
     },
+    {
+      title: "Checkout Scan",
+      to: "warehouse/checkout",
+      icon: faWarehouse,
+      color: "#25b922",
+      subLinks: false,
+    },
+
   
     {
       title: "Help",

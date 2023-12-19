@@ -7,7 +7,7 @@ import { baseUrl } from "../utils/baseurl";
 import AlertDialog from "./AlertDialogue";
 import ConfirmDialog from "./ConfirmDialog";
 import { Link } from "react-router-dom";
-import { faCancel, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCancel, faCheckCircle, faXmark } from "@fortawesome/free-solid-svg-icons";
 const AddSupplierGroupsForm= ({dockTypes,buildings}) => {
     const timeSlots=[
       '00:00 00:30', '00:30 01:00', '01:00 01:30',
@@ -150,7 +150,7 @@ const AddSupplierGroupsForm= ({dockTypes,buildings}) => {
                       })}
                     </select>
                   </div>
-                  <div className="sm:w-1/2">
+                  <div className="mb-2 sm:w-1/2">
                   <label
                       class="heading-class flex text-black dark:text-gray-200"
                       for="building"
@@ -159,7 +159,7 @@ const AddSupplierGroupsForm= ({dockTypes,buildings}) => {
                     </label>
                   </div>
                
-                  <div class="w-1/2 grid grid-cols-1 gap-2 mt-2 sm:grid-cols-4  ">
+                  <div class="mb-2 w-1/2 grid grid-cols-1 gap-2 mt-2 sm:grid-cols-4  ">
                     {dockTypes.map((element, index) => {
                       return (
                         <div
@@ -201,7 +201,7 @@ const AddSupplierGroupsForm= ({dockTypes,buildings}) => {
                       );
                     })}
                   </div>
-                  <div className="sm:w-1/2">
+                  <div className="mb-2 sm:w-1/2">
                   <label
                       class="heading-class flex text-black dark:text-gray-200"
                       for="building"
@@ -209,7 +209,7 @@ const AddSupplierGroupsForm= ({dockTypes,buildings}) => {
                       Alloted Time<p className="pl-1 text-red-600">*</p>
                     </label>
                   </div>
-                  <div class="w-1/2 grid grid-cols-1 gap-2 mt-2 sm:grid-cols-4  ">
+                  <div class="mb-2 w-1/2 grid grid-cols-1 gap-2 mt-2 sm:grid-cols-4  ">
                     {timeSlots.map((element, index) => {
                       return (
                         <div
@@ -296,17 +296,17 @@ const AddSupplierGroupsForm= ({dockTypes,buildings}) => {
         <div className="flex justify-between sm:w-1/2 ">
                   <div className="flex justify-start pr-6 pt-6 pb-6 ">
                   <button
-                      type="button "
+                      type="cancel"
                       onClick={()=>{
                       }}
                       className="flex justify-start mr-4  w-32 border-2 border-blue-500 rounded  text-blue-600 px-2 py-1 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-slate-200 focus:outline-none focus:bg-gray-600"
                     >
                     
-                      <FontAwesomeIcon
+                    <FontAwesomeIcon
                         className=" text-blue-600 m-1 mt-2"
-                        icon={faCancel}
+                        icon={faXmark}
                       ></FontAwesomeIcon>
-                      <p className="m-1 text-blue-600">Cancel</p>
+                      <p className="m-1 text-blue-600"><Link to="/admin/supplier/groups">Cancel</Link></p>
                     </button>
 
                   </div>

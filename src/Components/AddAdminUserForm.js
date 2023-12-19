@@ -7,7 +7,7 @@ import { baseUrl } from "../utils/baseurl";
 import AlertDialog from "./AlertDialogue";
 import ConfirmDialog from "./ConfirmDialog";
 import { Link } from "react-router-dom";
-import { faCancel, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCancel, faCheckCircle, faXmark } from "@fortawesome/free-solid-svg-icons";
 const AddAdminUserForm = () => {
     const {setLoading,Token}=useContext(UserContext);
     const [companies,setCompanies]=useState([]);
@@ -224,9 +224,9 @@ const AddAdminUserForm = () => {
           </div>
 
           <div className="mb-2 sm:w-1/2">
-            <label class="heading-class text-blackdark:text-gray-200" for="email2">
-              Email Address 2
-            </label>
+          <label class=" flex text-black dark:text-gray-200" for="email2">
+            Email Address 2   <p class="text-sm ml-3 text-red-400 pt-1">* Optional</p>
+          </label>
             <input
             value={email2}
             onChange={(e)=>{
@@ -285,17 +285,17 @@ const AddAdminUserForm = () => {
           <div className="flex justify-between sm:w-1/2 ">
                   <div className="flex justify-start pr-6 pt-6 pb-6 ">
                   <button
-                      type="button "
+                      type="cancel"
                       onClick={()=>{
                       }}
                       className="flex justify-start mr-4  w-32 border-2 border-blue-500 rounded  text-blue-600 px-2 py-1 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-slate-200 focus:outline-none focus:bg-gray-600"
                     >
                     
-                      <FontAwesomeIcon
+                    <FontAwesomeIcon
                         className=" text-blue-600 m-1 mt-2"
-                        icon={faCancel}
+                        icon={faXmark}
                       ></FontAwesomeIcon>
-                      <p className="m-1 text-blue-600">Cancel</p>
+                      <p className="m-1 text-blue-600"><Link to="/admin/users/listCompanyAdminUsers">Cancel</Link></p>
                     </button>
 
                   </div>

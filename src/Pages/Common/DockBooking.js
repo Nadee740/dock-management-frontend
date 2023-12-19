@@ -336,7 +336,7 @@ const DockBooking = ({ bookingDetail }) => {
               <span class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
                 {step > 1 ? (
                   <svg
-                    className="bg-green-400 w-3.5 h-3.5 sm:w-4 sm:h-4 mr-2.5"
+                    className="text-green-400 w-3.5 h-3.5 sm:w-4 sm:h-4 mr-2.5"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"

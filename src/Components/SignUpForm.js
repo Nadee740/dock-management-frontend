@@ -130,10 +130,12 @@ const SignUpForm = ({companies}) => {
             />
   
         </div>
-        <div className="flex flex-col mt-2 ">
-          
+        <div className="flex flex-col  ">
+        <label class=" flex items-end justify-end text-black dark:text-gray-200" for="email2">
+            <p class="text-sm ml-3 mr-2 mb-2 text-red-400">* Optional</p>
+          </label>
             <input
-            required
+          
             value={email2}
             onChange={(e)=>{
                 setEmail2(e.target.value)
@@ -167,7 +169,7 @@ const SignUpForm = ({companies}) => {
                 setPassword(e.target.value)
             }}
             className=" px-8 py-2 mb-3 justify-center rounded-2xl border bg-gray-100 border-gray-200 focus:outline-none"
-              type="text"
+            type="password"
               placeholder="New Password"
             />
          
@@ -181,7 +183,7 @@ const SignUpForm = ({companies}) => {
                 setRetypePassword(e.target.value)
             }}
             className="px-8 py-2 mb-3 justify-center rounded-2xl border bg-gray-100 border-gray-200 focus:outline-none"
-              type="text"
+            type="password"
               placeholder="Re-Type Password"
             />
      

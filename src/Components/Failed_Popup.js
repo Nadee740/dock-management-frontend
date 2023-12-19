@@ -31,7 +31,7 @@ import failed_animation from '../animations/failed_animation.json'
        <h2 className="heading-class" id="modal-modal-title">Failed !</h2>
        </div>
        <div className="flex items-center justify-center" >
-       <p className="heading-class" id="modal-modal-title">{message}</p>
+       <p className="heading-class text-[#C70039] text-center" id="modal-modal-title">{message}</p>
        </div>
        <div className="flex items-center justify-center">
        <div className="rounded-md mt-5 mb-5 text-white py-2  w-2/3 md:w-1/3 lg:w-1/3 bg-indigo-500"

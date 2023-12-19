@@ -1,4 +1,4 @@
-import { faCancel, faCar, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCancel, faCar, faCheckCircle, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext, useState } from "react";
 import { UserContext } from "../Contexts/UserContexts";
@@ -159,7 +159,7 @@ const AddNewVehicleForm = () => {
               onChange={(e) => {
                 setVehicleNo(e.target.value);
               }}
-              class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring border-2 border-slate-400"
+              class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring "
             />
           </div>
           <div className="mb-2 sm:w-1/2">
@@ -244,7 +244,7 @@ const AddNewVehicleForm = () => {
         <div className="flex justify-between sm:w-1/2 ">
                   <div className="flex justify-start pr-6 pt-6 pb-6 ">
                   <button
-                      type="button "
+                      type="cancel"
                       onClick={()=>{
                       }}
                       className="flex justify-start mr-4  w-32 border-2 border-blue-500 rounded  text-blue-600 px-2 py-1 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-slate-200 focus:outline-none focus:bg-gray-600"
@@ -252,9 +252,9 @@ const AddNewVehicleForm = () => {
                     
                       <FontAwesomeIcon
                         className=" text-blue-600 m-1 mt-2"
-                        icon={faCancel}
+                        icon={faXmark}
                       ></FontAwesomeIcon>
-                      <p className="m-1 text-blue-600">Cancel</p>
+                      <p className="m-1 text-blue-600"><Link to="/vehicle-update">Cancel</Link></p>
                     </button>
 
                   </div>
