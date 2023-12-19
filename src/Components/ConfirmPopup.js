@@ -24,14 +24,14 @@ import confirm_animation from '../animations/confirm_animation.json'
         }}
       >
          <div className="flex justify-center items-center">
-         <Lottie  className="w-4/6" animationData={confirm_animation}/>
+         <Lottie  className="w-1/2" animationData={confirm_animation}/>
          </div>
       
        <div className="flex items-center justify-center" >
        <h2 className="heading-class" id="modal-modal-title">Success!</h2>
        </div>
        <div className="flex items-center justify-center" >
-       <p className="heading-class text-[#00DFA2] text-center" id="modal-modal-title">{message}</p>
+       <p className="heading-class text-xl text-[#00DFA2] text-center" id="modal-modal-title">{message}</p>
        </div>
        <div className="flex items-center justify-center">
        <div className="rounded-md mt-5 mb-5 text-white py-2  w-2/3 md:w-1/3 lg:w-1/3 bg-indigo-500"

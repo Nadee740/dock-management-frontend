@@ -93,7 +93,7 @@ const UpdateVehicleForm = ({vehicleData}) => {
             onChange={(e)=>{
                 setVehicleNo(e.target.value)
             }}
-              class="block  w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring border-2 border-slate-400"
+              class="block  w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
           <div className="mb-2 sm:w-1/2">
@@ -166,7 +166,7 @@ const UpdateVehicleForm = ({vehicleData}) => {
               class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             />
           </div>
-        </div>
+     
 
      
         <div className="flex justify-between sm:w-1/2 ">
@@ -198,6 +198,7 @@ const UpdateVehicleForm = ({vehicleData}) => {
                       ></FontAwesomeIcon>
                     </button>
                   </div>
+                   </div>
                    </div>
       </form>
       <AlertDialog

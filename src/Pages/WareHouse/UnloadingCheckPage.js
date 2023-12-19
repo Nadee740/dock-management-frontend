@@ -37,7 +37,7 @@ const UnloadingCheckPage= () => {
         }).catch((err)=>{
             set_open_failed_modal(true)
             set_message(err.response.data.msg)
-            // console.log("erorr",err.response.data.msg)
+            console.log("erorr",err.response)
   
         }).finally(()=>{
             setLoading(false)

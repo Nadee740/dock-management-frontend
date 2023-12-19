@@ -14,7 +14,7 @@ const ListAllBuilding = ({ iseditable,buildingDetails }) => {
         <h2 className="text-4xl font-medium heading-class">List of Buildings</h2>
       </div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-      {iseditable &&noOfBuildings>0&& (
+      {iseditable && noOfBuildings>0 && (
        <div className="flex items-center justify-between ml-20 w-38 p">
           
           <Link
