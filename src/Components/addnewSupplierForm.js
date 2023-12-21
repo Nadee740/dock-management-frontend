@@ -215,7 +215,7 @@ const AddNewSupplierForm = ({ suppliergroup, company }) => {
             <input
               placeholder="Password"
               id="password"
-              type="text"
+              type="password"
               value={password}
               required
               onChange={(e) => {
