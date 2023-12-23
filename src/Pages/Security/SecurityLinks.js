@@ -34,6 +34,13 @@ const SecurityLinks = [
     subLinks: false,
   },
   {
+    title: "Scan QR",
+    to: "/qr-details",
+    icon: faSearch,
+    color: "#b0b4ba",
+    subLinks: false,
+  },
+  {
     title: "Upcoming Check",
     to: "/shipments-list/2",
     icon: faClock,

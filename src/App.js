@@ -70,6 +70,7 @@ import QualityCheckPage from "./Pages/WareHouse/QualityCheckPage";
 import UnloadingCheckPage from "./Pages/WareHouse/UnloadingCheckPage";
 import WarehouseExitPage from "./Pages/WareHouse/WarehouseExitPage";
 import WarehouseCheckoutPage from "./Pages/WareHouse/WarehouseCheckOutPage";
+import GetQRBookingDetails from "./Pages/Common/GetQRBookingDetails";
 function App() {
   const [user, setUser] = useState(null);
   const [Token, setToken] = useState(null);
@@ -330,8 +331,11 @@ function App() {
                 {user.userType == "security" && (
                   <>
                     <Route index element={<SecurityDashBoard />} />
+                    <Route path="qr-details"
+                  element={<GetQRBookingDetails/>}/>
                     <Route path="security" element={<SecurityHome />}>
                       <Route index element={<SecurityDashBoard />} />
+                      
                     </Route>
                   </>
                 )}
