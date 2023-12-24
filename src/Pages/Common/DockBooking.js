@@ -10,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import CryptoJS from "crypto-js";
 import AlertDialog from "../../Components/AlertDialogue";
+import { mergeTimeslot } from "../../utils/MergeTimeslots";
 
 const dateConverter = (inputdate) => {
   const date = new Date(inputdate);
@@ -54,7 +55,7 @@ const DockBooking = ({ bookingDetail }) => {
   const [bookforMultipleDays, setBookforMultipleDays] = useState(1);
   const [selectedtimeSlots, setSelectedTimeSlots] = useState([]);
   const d = new Date();
-  d.setDate(d.getDate() + 1);
+  d.setDate(d.getDate());
   const today = dateConverter(d);
   const [booked_date_array, setBookedDatesArray] = useState([today]);
   const [availableTimeslots, setAvailableTimeslots] = useState([]);
@@ -200,7 +201,7 @@ const DockBooking = ({ bookingDetail }) => {
     setLoading(true);
     setAvailableTimeslots([]);
     axios
-      .get(`${baseUrl}/get-docks-by-docktype/${dock_type_id}`, {
+      .get(`${baseUrl}/get-docks-by-docktype?dock_type_id=${dock_type_id}&&building_id=${building_id}`, {
         headers: {
           Authorization: `Bearer ${Token}`,
         },
@@ -209,6 +210,7 @@ const DockBooking = ({ bookingDetail }) => {
         console.log("success", response, "response.data");
         if (response.data != "") {
           console.log(response.data);
+          
           setDocksData(response.data.data);
           setLoading(false);
         } else {
@@ -648,7 +650,12 @@ const DockBooking = ({ bookingDetail }) => {
                     setModalHeading("Please Fill All Columns");
 
                     setOpen1(true);
-                  } else if (selectedtimeSlots.length > 0) setStep(2);
+                  } else if (selectedtimeSlots.length > 0) {
+                   
+                    setSelectedTimeSlots(mergeTimeslot(selectedtimeSlots));
+                    setStep(2);
+
+                  }
                   else {
                     setModalHeading("Please choose time slot");
 
@@ -707,7 +714,7 @@ const DockBooking = ({ bookingDetail }) => {
                             billno == null ||
                             billno == ""
                           }
-                          value={dock_name}
+                
                           onChange={(e) => {
                             set_dock_id(JSON.parse(e.target.value)._id);
                             setDockName(JSON.parse(e.target.value));
@@ -743,7 +750,7 @@ const DockBooking = ({ bookingDetail }) => {
                         }}
                         id="date"
                         type="date"
-                        // min={get_min()}
+                        min={get_min()}
                         class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                       />
                     </div>
@@ -910,6 +917,8 @@ const DockBooking = ({ bookingDetail }) => {
                   <button
                       type="button"
                       onClick={()=>{
+                        setSelectedTimeSlots([])
+            
                         setStep(1)
                       }}
                       className="flex justify-start mr-4  w-32 border-2 border-blue-500 rounded  text-blue-600 px-2 py-1 leading-5 text-white transition-colors duration-200 transform rounded-md hover:bg-slate-200 focus:outline-none focus:bg-gray-600"

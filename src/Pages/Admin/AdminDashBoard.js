@@ -54,6 +54,7 @@ const AdminDashBoard_1 = () => {
       })
       .then((res) => {
         if (res.data.status == "ok") {
+          console.log(res.data);
           setShipments(res.data.data);
           setLoading(false);
         } else throw new Error(res.data.msg);

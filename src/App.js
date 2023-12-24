@@ -223,6 +223,9 @@ function App() {
                   path="/shipments-list/:Status"
                   element={<ListAllShipmentsPage iseditable={false} />}
                 />
+                  {/* QR code */}
+                <Route path="qr-details"
+                  element={<GetQRBookingDetails/>}/>
 
                 {/* Protected Routes */}
                 {user.userType == "superadmin" && (
@@ -331,8 +334,7 @@ function App() {
                 {user.userType == "security" && (
                   <>
                     <Route index element={<SecurityDashBoard />} />
-                    <Route path="qr-details"
-                  element={<GetQRBookingDetails/>}/>
+                    
                     <Route path="security" element={<SecurityHome />}>
                       <Route index element={<SecurityDashBoard />} />
                       

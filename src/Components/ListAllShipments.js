@@ -123,7 +123,7 @@ const ListAllShipments = ({ iseditable,todayShipments ,name}) => {
               >
               <p className="text-sm flex justify-center w-full font-semibold">Checkout Success</p>
               </button>):(<button
-                className="h-14 w-24 flex items-center bg-blue-500 text-white p-2 rounded-md mr-5"
+                className="h-14 w-24 flex items-center bg-[#BF3131] text-white p-2 rounded-md mr-5"
                 onClick={() => {}}
               >
               <p className="text-sm flex justify-center w-full font-semibold">Checkout Load Rejected</p>

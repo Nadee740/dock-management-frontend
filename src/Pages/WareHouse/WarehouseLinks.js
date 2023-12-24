@@ -4,7 +4,7 @@ const {
     faCheckCircle
   } = require("@fortawesome/free-regular-svg-icons");
   const {
-    faSearch, faTruckLoading, faWarehouse, faSignOut,
+    faSearch, faTruckLoading, faWarehouse, faSignOut, faQrcode,
   } = require("@fortawesome/free-solid-svg-icons");
   
   const WareHouseLinks = [
@@ -41,6 +41,13 @@ const {
       to: "warehouse/checkout",
       icon: faSignOut,
       color: "#25b922",
+      subLinks: false,
+    },
+    {
+      title: "Scan QR",
+      to: "/qr-details",
+      icon: faQrcode,
+      color: "#b0b4ba",
       subLinks: false,
     },
 

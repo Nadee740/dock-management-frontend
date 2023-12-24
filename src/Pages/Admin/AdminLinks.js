@@ -1,5 +1,5 @@
 const { faSquarePlus, faClock, faPenToSquare, faUser, faBuilding } = require("@fortawesome/free-regular-svg-icons");
-const { faTimes,faCalendar,faTv, faTruckFast, faCheck, faTruck, faPlug, faPlus, faUsers, faUserLock, faUserAstronaut, faShip, faUserGroup, faBagShopping, faChartPie } = require("@fortawesome/free-solid-svg-icons");
+const { faTimes,faCalendar,faTv, faTruckFast, faCheck, faTruck, faPlug, faPlus, faUsers, faUserLock, faUserAstronaut, faShip, faUserGroup, faBagShopping, faChartPie, faQrcode } = require("@fortawesome/free-solid-svg-icons");
 
 const AdminLinks=[{
     title:"Dashboard",
@@ -52,6 +52,13 @@ const AdminLinks=[{
             clasStyle:"mr-2 text-blue-500"
         }
     ]},
+    {
+        title: "Scan QR",
+        to: "/qr-details",
+        icon: faQrcode,
+        color: "#b0b4ba",
+        subLinks: false,
+      },
     {
         title:"Vehicles",
         icon:faTruck,

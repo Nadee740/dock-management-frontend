@@ -5,6 +5,9 @@ const addMinutesToTime=(time, minsAdd)=> {
     return z(mins%(24*60)/60 | 0) + ':' + z(mins%60);
   }
 
+
+  
+
   module.exports={
     addMinutesToTime
   }

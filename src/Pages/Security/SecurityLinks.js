@@ -23,6 +23,7 @@ const {
   faChartPie,
   faTimes,
   faSearch,
+  faQrcode,
 } = require("@fortawesome/free-solid-svg-icons");
 
 const SecurityLinks = [
@@ -36,7 +37,7 @@ const SecurityLinks = [
   {
     title: "Scan QR",
     to: "/qr-details",
-    icon: faSearch,
+    icon: faQrcode,
     color: "#b0b4ba",
     subLinks: false,
   },
