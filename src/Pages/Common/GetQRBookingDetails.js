@@ -69,7 +69,7 @@ const GetQRBookingDetails = () => {
             onScan={(res)=>{
                 if(res!=null)
                 {   
-                  
+      
                   get_booking_details(JSON.parse(res.text))
                 }
                 
