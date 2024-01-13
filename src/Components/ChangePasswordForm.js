@@ -21,7 +21,7 @@ function ChangePasswordForm() {
         if(newPassword!=retypeNewPassword)
         {
             setModalHeading("Password do not match")
-            setModalText("Please make sur that your passwords match");
+            setModalText("Please make sure that your passwords match");
             setOpen1(true)
             return;
         }
@@ -43,6 +43,8 @@ function ChangePasswordForm() {
             setModalHeading("Password changed ")
             setModalText("Your password changed successfully ")
             setOpen1(true)
+            setNewPassword("")
+            setretypeNewPassword("")
         }).catch((err)=>{
             console.log("error //// ",err);
             setModalHeading("Oops .")

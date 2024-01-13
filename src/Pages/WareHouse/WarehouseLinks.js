@@ -4,7 +4,7 @@ const {
     faCheckCircle
   } = require("@fortawesome/free-regular-svg-icons");
   const {
-    faSearch, faTruckLoading, faWarehouse, faSignOut, faQrcode,
+    faSearch, faTruckLoading, faWarehouse, faSignOut, faQrcode, faLock,
   } = require("@fortawesome/free-solid-svg-icons");
   
   const WareHouseLinks = [
@@ -50,7 +50,13 @@ const {
       color: "#b0b4ba",
       subLinks: false,
     },
-
+    {
+      title:"Change Password",
+      to:"/change-password",
+      icon:faLock,
+      color:"#72d123",
+      subLinks:false
+  },
   
     {
       title: "Help",

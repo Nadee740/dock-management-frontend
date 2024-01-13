@@ -61,7 +61,7 @@ const LoginForm = () => {
   return (
     <div className="mb-4 text-center pb-7">
     <form onSubmit={submitData}>
-   
+      
         <input
         value={email}
         onChange={(e) => {
@@ -84,14 +84,22 @@ const LoginForm = () => {
         type="password"
         placeholder="Password"
         />
-        <div className="mb-4 pb-10 ">
+      
+      <div  className=" flex items-center justify-center md-w-2/3   w-4/5 ">
+        <div className=" flex ">
+          <p className="pr-1 text-sm  font-medium ">Forgot Password? </p>
+        <Link  to='/forgot-password' className=" text-sm  font-medium underline text-red-500"> Click Here</Link>
+        </div>
+        </div>
+        <div className=" pb-4">
         <button
         type="submit"
-        className="w-1/4 px-4 py-2 m-5 justify-center rounded-3xl bg-[#31304D]  text-white font-medium hover:bg-gray-400 "
+        className="w-1/4 px-4 py-2 mt-5 justify-center rounded-3xl bg-[#31304D]  text-white font-medium hover:bg-gray-400 "
         >
         Sign In
         </button>
         </div>
+       
 
             </form>
             <AlertDialog
