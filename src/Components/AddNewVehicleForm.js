@@ -226,10 +226,10 @@ const AddNewVehicleForm = () => {
 
           <div className="mb-2 sm:w-1/2">
             <label class="heading-class text-blackdark:text-gray-200" for="drivernrif">
-              Driver NRIF/FIN
+              Driver NRIC/FIN
             </label>
             <input
-              placeholder="Driver NRIF/FIN"
+              placeholder="Driver NRIC/FIN"
               id="drivernrif"
               type="text"
               required
