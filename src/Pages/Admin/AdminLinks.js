@@ -1,5 +1,5 @@
 const { faSquarePlus, faClock, faPenToSquare, faUser, faBuilding } = require("@fortawesome/free-regular-svg-icons");
-const { faTimes,faCalendar,faTv, faTruckFast, faCheck, faTruck, faPlug, faPlus, faUsers, faUserLock, faUserAstronaut, faShip, faUserGroup, faBagShopping, faChartPie, faQrcode } = require("@fortawesome/free-solid-svg-icons");
+const { faTimes,faCalendar,faTv, faTruckFast, faCheck, faTruck, faPlug, faPlus, faUsers, faUserLock, faUserAstronaut, faShip, faUserGroup, faBagShopping, faChartPie, faQrcode, faLock } = require("@fortawesome/free-solid-svg-icons");
 
 const AdminLinks=[{
     title:"Dashboard",
@@ -145,6 +145,14 @@ const AdminLinks=[{
                     color:"#dcd618",
                     subLinks:false
                 },
+                {
+                    title:"Change Password",
+                    to:"/change-password",
+                    icon:faLock,
+                    color:"#72d123",
+                    subLinks:false
+                },
+               
 
 
 

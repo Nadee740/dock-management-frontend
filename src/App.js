@@ -71,6 +71,7 @@ import UnloadingCheckPage from "./Pages/WareHouse/UnloadingCheckPage";
 import WarehouseExitPage from "./Pages/WareHouse/WarehouseExitPage";
 import WarehouseCheckoutPage from "./Pages/WareHouse/WarehouseCheckOutPage";
 import GetQRBookingDetails from "./Pages/Common/GetQRBookingDetails";
+import ForgotPassword from "./Pages/ForgotPassword";
 function App() {
   const [user, setUser] = useState(null);
   const [Token, setToken] = useState(null);
@@ -145,7 +146,7 @@ function App() {
                 />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />
-        
+                <Route path='/forgot-password' element={<ForgotPassword />} />
               </>
             )}
 

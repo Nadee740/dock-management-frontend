@@ -24,6 +24,7 @@ const {
   faTimes,
   faSearch,
   faQrcode,
+  faLock,
 } = require("@fortawesome/free-solid-svg-icons");
 
 const SecurityLinks = [
@@ -48,7 +49,13 @@ const SecurityLinks = [
     color: "#25b922",
     subLinks: false,
   },
-
+  {
+    title:"Change Password",
+    to:"/change-password",
+    icon:faLock,
+    color:"#72d123",
+    subLinks:false
+},
   {
     title: "Help",
     to: "/#help",
