@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import QRCode from "react-qr-code";
 import { Link } from "react-router-dom";
 
-const ConfirmBooking=({bookingDetails,buildingDetails,vehicleDetails,companyDetails, dockDetails,dockTypeDetails,response,pdfname})=>{
+const ConfirmBooking=({timeLimitToCheck,bookingDetails,buildingDetails,vehicleDetails,companyDetails, dockDetails,dockTypeDetails,response,pdfname})=>{
 
     const generatePDF=async()=>{
         try{
@@ -43,8 +43,8 @@ const ConfirmBooking=({bookingDetails,buildingDetails,vehicleDetails,companyDeta
        <p className="text-md">Below booking details emailed to your registered email address</p>
       </div>
       <div className="flex items-center pl-3 w-full py-2 mb-3">
-       <p className="text-md">Please note that your security clearance window begins 15 minutes
-        prior to your scheduled start time and extends 15 minutes after your designated start time for a seamless and secure entry process.</p>
+       <p className="text-md">Please note that your security clearance window begins {timeLimitToCheck} minutes
+        prior to your scheduled start time and extends {timeLimitToCheck} minutes after your designated start time for a seamless and secure entry process.</p>
       </div>
       <div className="flex items-center justify-end mb-5">
       <Link
