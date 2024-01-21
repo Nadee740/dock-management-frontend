@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBox,
+  faEdit,
   faTruck,
   faTruckRampBox,
   faUser,
@@ -181,18 +182,18 @@ const AdminDashBoard_1 = () => {
             </div>
             <div class="m-1">
               <Link
-                to="/vehicle-update"
+                to="/admin/configure-dock-booking"
                 class="flex max-w-sm p-6 bg-white border border-gray-200 rounded-2xl shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
               >
                 <div className="w-1/2">
                   {" "}
                   <h5 class="mb-2 text-lg tracking-tight text-gray-900 dark:text-white heading-class">
-                    Vehicles
+                    Manage 
                   </h5>
                 </div>
                 <div className=" flex justify-end w-1/2">
                   <FontAwesomeIcon
-                    icon={faTruck}
+                    icon={faEdit}
                     size="xl"
                     className="text-violet-500"
                   />
