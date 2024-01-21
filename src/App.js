@@ -72,6 +72,7 @@ import WarehouseExitPage from "./Pages/WareHouse/WarehouseExitPage";
 import WarehouseCheckoutPage from "./Pages/WareHouse/WarehouseCheckOutPage";
 import GetQRBookingDetails from "./Pages/Common/GetQRBookingDetails";
 import ForgotPassword from "./Pages/ForgotPassword";
+import ConfigureDockBooking from "./Pages/Admin/ConfigureDockBooking";
 function App() {
   const [user, setUser] = useState(null);
   const [Token, setToken] = useState(null);
@@ -136,7 +137,7 @@ function App() {
         <BackToTop />
         <BrowserRouter>
           <Routes>
-            <Route path="/test" element={<COnfirmModal/>} />
+            
             {user == null && (
               <>
                 <Route path="/" element={<LandingPage />} />
@@ -269,6 +270,7 @@ function App() {
                     <Route path="/" element={<AdminDashBoard />}></Route>
                     <Route path="admin" element={<AdminHome />}>
                       <Route index element={<AdminDashBoard />} />
+                      <Route path="configure-dock-booking" element={<ConfigureDockBooking/>}/>
                       <Route
                         path="users/listCompanyAdminUsers"
                         element={
