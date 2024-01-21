@@ -6,7 +6,6 @@ import { baseUrl } from "../../utils/baseurl";
 import { json, useParams } from "react-router-dom";
 import CryptoJS  from "crypto-js";
 const BookingConfirmPage=()=>{
-    const {setLoading}=useContext(UserContext);
     const [bookingDetails,setBookingDetails]=useState([]);
     const [companyDetails,setCompanyDetails]=useState([]);
     const [dockDetails,setDockDetails]=useState();
@@ -15,6 +14,24 @@ const BookingConfirmPage=()=>{
     const [pdfname,setPdfName]=useState();
     const [dockTypeDetails,setDockTypeDetails]=useState();
     const [response,setResponse]=useState(null)
+    const {setLoading,Token}=useContext(UserContext);
+    const [timeLimitToCheck,setTimeLimitToCheck]=useState(15);
+
+    useEffect(()=>{
+        setLoading(true)
+            axios.get(`${baseUrl}/configure-dock/get-configuration`,{
+                headers: {
+                  Authorization: `Bearer ${Token}`,
+                },
+              }).then((res)=>{
+                setTimeLimitToCheck(res.data.data[0].timelimitforchecking)
+            }).catch((err)=>{
+                console.log("error //// ",err);
+
+            }).finally(()=>{
+                setLoading(false)
+            })
+      },[])
     const handleDownloadPdf = async (pdf_name) => {
         try {
             setLoading(true)
@@ -55,7 +72,7 @@ const BookingConfirmPage=()=>{
           <div className="w-full admin-dashboard  overflow-y-scroll">
             <div className="flex flex-row w-full w-full items-center p-3 justify-between">
               <section class=" text-black ml-5 w-full p-6 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800 mt-20 overflow-scroll">
-               {bookingDetails.length && response&& <ConfirmBooking pdfname={pdfname} response={response} bookingDetails={bookingDetails} buildingDetails={building} vehicleDetails={vehicleDetails} companyDetails={companyDetails} dockDetails={dockDetails} dockTypeDetails={dockTypeDetails}/> } 
+               {bookingDetails.length && response&& <ConfirmBooking timeLimitToCheck={timeLimitToCheck} pdfname={pdfname} response={response} bookingDetails={bookingDetails} buildingDetails={building} vehicleDetails={vehicleDetails} companyDetails={companyDetails} dockDetails={dockDetails} dockTypeDetails={dockTypeDetails}/> } 
               </section>
             </div>
           </div>

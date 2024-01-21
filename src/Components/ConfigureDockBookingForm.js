@@ -23,9 +23,7 @@ function ConfigureDockBOokingForm() {
                 setTimeLimitToCheck(res.data.data[0].timelimitforchecking)
             }).catch((err)=>{
                 console.log("error //// ",err);
-                setModalHeading("Could not complete your request .")
-                setModalText("Something went wrong please try again later")
-                setOpen1(true)
+
             }).finally(()=>{
                 setLoading(false)
             })
@@ -69,7 +67,7 @@ function ConfigureDockBOokingForm() {
           
           <div >
                   <label class="text-black dark:text-gray-200" for="timelimit">
-                   Time limit for waiting per delivery
+                   Time limit for waiting per delivery in Minutes
                   </label>
                   <input
                     id="timelimit"
