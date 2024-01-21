@@ -42,6 +42,10 @@ const ConfirmBooking=({bookingDetails,buildingDetails,vehicleDetails,companyDeta
       <div className="flex items-center pl-3 w-full py-2">
        <p className="text-md">Below booking details emailed to your registered email address</p>
       </div>
+      <div className="flex items-center pl-3 w-full py-2 mb-3">
+       <p className="text-md">Please note that your security clearance window begins 15 minutes
+        prior to your scheduled start time and extends 15 minutes after your designated start time for a seamless and secure entry process.</p>
+      </div>
       <div className="flex items-center justify-end mb-5">
       <Link
           className="flex bg-green-400 text-white p-2 rounded-lg text-sm mr-5 pr-3"
