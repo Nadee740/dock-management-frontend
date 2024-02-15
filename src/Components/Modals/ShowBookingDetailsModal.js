@@ -47,7 +47,7 @@ const ShowBookingDetailsModal = ({ open, setOpen, bookingdetails }) => {
                 <p style={{ whiteSpace: 'nowrap' }} class="p-4 ">Booking ID</p>
               </div>
               <div class="col-span-2 md:col-span-2">
-                <p  style={{ whiteSpace: 'nowrap' }}  class="p-4 ">{bookingdetails._id}</p>
+                <p  style={{ whiteSpace: 'nowrap' }}  class="p-4 ">{bookingdetails.job_order_no}</p>
               </div>
             </div>
             <div class="grid grid-cols-3 md:grid-cols-3 space-no">

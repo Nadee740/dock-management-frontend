@@ -33,6 +33,8 @@ const ListAllShipmentsPage = ({iseditable}) => {
           {  
             console.log(res.data)
             setTodayShipments(res.data.data);
+           
+            console.log("hiiiiiii",todayShipments)
           }
         })
         .catch((err) => {

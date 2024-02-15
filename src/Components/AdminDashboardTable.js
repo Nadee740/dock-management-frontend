@@ -198,8 +198,24 @@ const AdminDashBoardTable = ({shipments}) => {
                     </td>
 
                     <td class="px-4 py-4 text-sm whitespace-nowrap">
-                      <div class="w-48 h-1.5 bg-blue-200 overflow-hidden rounded-full">
-                        <div class="bg-blue-500 w-2/3 h-1.5"></div>
+                      <div class="w-48 h-1.5 bg-green-200 overflow-hidden rounded-full">
+                       <>{shipment.percentage_completed==0?(
+                         <div class="bg-green-500 w-0 h-1.5"></div>
+                       ):shipment.percentage_completed==1/6?(
+                        <div class="bg-green-500 w-1/6 h-1.5"></div>
+                       ):shipment.percentage_completed==2/6?(
+                        <div class="bg-green-500 w-2/6 h-1.5"></div>
+                       ):shipment.percentage_completed==3/6?(
+                        <div class="bg-green-500 w-3/6 h-1.5"></div>
+                       ):shipment.percentage_completed==4/6?(
+                        <div class="bg-green-500 w-4/6 h-1.5"></div>
+                       ):shipment.percentage_completed==5/6?(
+                        <div class="bg-green-500 w-5/6 h-1.5"></div>
+                       ):(
+                        <div class="bg-green-500 w-6/6 h-1.5"></div>
+                       )
+                       }</> 
+                       
                       </div>
                     </td>
 

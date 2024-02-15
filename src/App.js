@@ -73,6 +73,7 @@ import WarehouseCheckoutPage from "./Pages/WareHouse/WarehouseCheckOutPage";
 import GetQRBookingDetails from "./Pages/Common/GetQRBookingDetails";
 import ForgotPassword from "./Pages/ForgotPassword";
 import ConfigureDockBooking from "./Pages/Admin/ConfigureDockBooking";
+import GetBookingDetailsPage from "./Pages/Common/GetBookingDetails";
 function App() {
   const [user, setUser] = useState(null);
   const [Token, setToken] = useState(null);
@@ -315,6 +316,10 @@ function App() {
                         element={<AddNewSupplier />}
                       />
                       <Route
+                        path="booking/details"
+                        element={<GetBookingDetailsPage/>}
+                      />
+                      <Route
                         path="edit/supplier/:id"
                         element={<EditSupplierPage />}
                       />
@@ -330,6 +335,10 @@ function App() {
                     <Route path="/" element={<SupplierDashBoard/>}></Route>
                     <Route path="supplier" element={<SupplierHome />}>
                       <Route index element={<SupplierDashBoard />} />
+                      <Route
+                        path="booking/details"
+                        element={<GetBookingDetailsPage/>}
+                      />
                     </Route>
                   </>
                 )}

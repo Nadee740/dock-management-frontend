@@ -12,6 +12,7 @@ import { baseUrl } from "../../utils/baseurl";
         axios.post(`${baseUrl}/dock/check/load?isvalid=${isvalid}`,{ciphertext:data},{headers: {
             Authorization: `Bearer ${Token}`,
           }}).then((res)=>{
+            console.log(res)
             set_message("Quality status updated succesfully")
             set_open_confirm(true)
         }).catch((err)=>{
