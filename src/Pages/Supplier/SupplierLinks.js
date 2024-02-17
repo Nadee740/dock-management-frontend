@@ -1,4 +1,4 @@
-const { faSquarePlus, faClock, faPenToSquare, faUser, faBuilding, faQuestionCircle, faCalendar } = require("@fortawesome/free-regular-svg-icons");
+const { faSquarePlus, faClock, faPenToSquare, faUser, faBuilding, faQuestionCircle, faCalendar, faFile } = require("@fortawesome/free-regular-svg-icons");
 const { faTv, faTruckFast, faCheck, faTruck, faPlug, faPlus, faUsers, faUserLock, faUserAstronaut, faShip, faUserGroup, faBagShopping, faChartPie, faTimes, faQrcode, faLock } = require("@fortawesome/free-solid-svg-icons");
 
 const SupplierLinks=[{
@@ -52,6 +52,7 @@ const SupplierLinks=[{
         color: "#b0b4ba",
         subLinks: false,
       },
+      
     {
         title:"Vehicles",
         icon:faTruck,
@@ -70,6 +71,14 @@ const SupplierLinks=[{
                 clasStyle:"mr-2 text-green-500"
             }
         ]},
+        {
+            title:"Booking Details",
+            to:'/supplier/booking/details',
+            icon:faFile,
+            color: "#b0b4ba",
+            subLinks: false,
+
+        },
         {
             title:"Change Password",
             to:"/change-password",

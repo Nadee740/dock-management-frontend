@@ -1,4 +1,4 @@
-const { faSquarePlus, faClock, faPenToSquare, faUser, faBuilding } = require("@fortawesome/free-regular-svg-icons");
+const { faSquarePlus, faClock, faPenToSquare, faUser, faBuilding, faFile } = require("@fortawesome/free-regular-svg-icons");
 const { faTimes,faCalendar,faTv, faTruckFast, faCheck, faTruck, faPlug, faPlus, faUsers, faUserLock, faUserAstronaut, faShip, faUserGroup, faBagShopping, faChartPie, faQrcode, faLock } = require("@fortawesome/free-solid-svg-icons");
 
 const AdminLinks=[{
@@ -77,6 +77,14 @@ const AdminLinks=[{
                 clasStyle:"mr-2 text-green-500"
             }
         ]},
+        {
+            title:"Booking Details",
+            to:'/admin/booking/details',
+            icon:faFile,
+            color: "#b0b4ba",
+            subLinks: false,
+
+        },
         {
             title:"Suppliers",
             icon:faUsers,
